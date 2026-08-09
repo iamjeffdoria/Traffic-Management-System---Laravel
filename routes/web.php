@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\AdminUserController;
 
 Route::get('/', function () {
     return view('dashboard');
@@ -41,7 +42,8 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
 
 // Superadmin only
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
-    Route::get('/admin/users', function () {
-        return view('admin.users'); // create this view when you build the module
-    })->name('admin.users');
+    Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::post('/admin/users', [AdminUserController::class, 'store'])->name('admin.users.store');
+    Route::put('/admin/users/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
 });

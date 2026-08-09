@@ -15,7 +15,7 @@
 </label>
 
 <!-- Sidebar -->
-<aside class="group/collapse fixed lg:static top-0 left-0 z-40 h-screen bg-gray-900 text-white flex flex-col overflow-hidden
+<aside class="group/collapse fixed top-0 left-0 z-40 h-screen bg-gray-900 text-white flex flex-col overflow-hidden
     w-56 -translate-x-full peer-checked/mobile:translate-x-0 lg:translate-x-0
     lg:has-[#sidebar-collapse:checked]:w-16
     transition-all duration-300 ease-in-out">
