@@ -11,17 +11,19 @@
         <div class="max-w-5xl mx-auto px-6 pt-8 pb-8">
             <p class="text-gray-500">Create and manage admin accounts for each role.</p>
 
-            @if (session('success'))
-            <div class="mt-6 rounded-lg bg-green-50 text-green-700 text-sm px-4 py-3">
-                {{ session('success') }}
-            </div>
-        @endif
+           @if (session('success'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        showToast(@json(session('success')));
+                    });
+                </script>
+            @endif
 
-        @if ($errors->any())
-            <div class="mt-6 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
-                {{ $errors->first() }}
-            </div>
-        @endif
+            @if ($errors->any())
+                <div class="mt-6 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
+                    {{ $errors->first() }}
+                </div>
+            @endif
 
         <!-- Add admin trigger -->
         <div class="mt-8 flex justify-end">
@@ -46,10 +48,30 @@
                             <th class="px-6 py-3 font-medium">Email</th>
                             <th class="px-6 py-3 font-medium">Role</th>
                         </tr>
+                        <tr class="border-t border-gray-200">
+                            <th class="px-6 py-2"></th>
+                            <th class="px-6 py-2">
+                                <input type="text" id="filter-name" oninput="filterAdminTable()" placeholder="Search name..."
+                                    class="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-normal focus:outline-none focus:ring-2 focus:ring-red-600">
+                            </th>
+                            <th class="px-6 py-2">
+                                <input type="text" id="filter-email" oninput="filterAdminTable()" placeholder="Search email..."
+                                    class="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-normal focus:outline-none focus:ring-2 focus:ring-red-600">
+                            </th>
+                            <th class="px-6 py-2">
+                                <select id="filter-role" onchange="filterAdminTable()"
+                                    class="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-normal focus:outline-none focus:ring-2 focus:ring-red-600">
+                                    <option value="">All roles</option>
+                                    <option value="superadmin">Super Admin</option>
+                                    <option value="potpot_admin">Potpot Admin</option>
+                                    <option value="tricycle_admin">Tricycle Admin</option>
+                                </select>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @foreach ($admins as $admin)
-                            <tr>
+                            <tr data-admin-row data-name="{{ $admin->name }}" data-email="{{ $admin->email }}" data-role="{{ $admin->role }}">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-1">
                                         <button type="button" onclick="openModal('edit-modal-{{ $admin->id }}')" title="Edit"
@@ -87,10 +109,26 @@
                 </table>
             </div>
 
+            <!-- Mobile search filters -->
+            <div class="lg:hidden space-y-2 mb-4">
+                <input type="text" id="filter-name-mobile" oninput="filterAdminTable()" placeholder="Search name..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <input type="text" id="filter-email-mobile" oninput="filterAdminTable()" placeholder="Search email..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <select id="filter-role-mobile" onchange="filterAdminTable()"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <option value="">All roles</option>
+                    <option value="superadmin">Super Admin</option>
+                    <option value="potpot_admin">Potpot Admin</option>
+                    <option value="tricycle_admin">Tricycle Admin</option>
+                </select>
+            </div>
+
             <!-- Mobile stacked cards -->
             <div class="lg:hidden space-y-3">
                 @foreach ($admins as $admin)
-                    <div class="rounded-2xl border border-gray-200 p-4">
+                    <div data-admin-row data-name="{{ $admin->name }}" data-email="{{ $admin->email }}" data-role="{{ $admin->role }}"
+                        class="rounded-2xl border border-gray-200 p-4">
                         <div class="flex items-start justify-between gap-3">
                             <div class="min-w-0">
                                 <p class="text-gray-900 font-medium truncate">{{ $admin->name }}</p>

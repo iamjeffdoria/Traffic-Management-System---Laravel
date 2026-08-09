@@ -10,6 +10,7 @@
 <body class="bg-gray-100">
 
     <div class="min-h-screen">
+        <div id="toast-container" class="fixed top-4 right-4 z-[100] space-y-2 w-80 max-w-[calc(100vw-2rem)]"></div>
         @yield('content')
     </div>
 

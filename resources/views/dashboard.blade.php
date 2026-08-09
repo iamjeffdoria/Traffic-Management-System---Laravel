@@ -6,14 +6,17 @@
 
 <!-- Navbar -->
 <nav class="border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-            <div class="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 min-w-0">
+            <div class="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
                 TMS
             </div>
-            <span class="font-semibold text-gray-900 text-lg">Traffic Management System</span>
+            <span class="font-semibold text-gray-900 text-lg truncate">
+                <span class="sm:hidden">Traffic Mgmt</span>
+                <span class="hidden sm:inline">Traffic Management System</span>
+            </span>
         </div>
-        <a href="{{ route('login') }}" class="rounded-full bg-gray-900 text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 transition-colors">
+        <a href="{{ route('login') }}" class="rounded-full bg-gray-900 text-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors whitespace-nowrap shrink-0">
             Admin Login
         </a>
     </div>
