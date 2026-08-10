@@ -3,8 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\TricycleController;
 
 Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect()->route('admin.dashboard');
+    }
+
     return view('dashboard');
 });
 
@@ -38,7 +43,13 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::get('/tricycle', function () {
         return view('admin.tricycle'); // create this view when you build the module
     })->name('tricycle.index');
+
+    Route::get('/admin/tricycles', [TricycleController::class, 'index'])->name('tricycle.list');
+    Route::post('/admin/tricycles', [TricycleController::class, 'store'])->name('tricycle.store');
+    Route::put('/admin/tricycles/{tricycle}', [TricycleController::class, 'update'])->name('tricycle.update');
+    Route::delete('/admin/tricycles/{tricycle}', [TricycleController::class, 'destroy'])->name('tricycle.destroy');
 });
+
 
 // Superadmin only
 Route::middleware(['auth', 'role:superadmin'])->group(function () {

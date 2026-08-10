@@ -5,3 +5,5 @@ import './dropdown.js';
 import './toast.js';
 import './password-strength.js';
 import './table-admin-search.js';
+import './confirm-delete.js';
+import './table-tricycle-search.js';

@@ -71,6 +71,15 @@
                 </svg>
                 <span class="lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tricycle Registration</span>
             </a>
+
+            <a href="{{ route('tricycle.list') }}" title="Tricycle List"
+            class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+            {{ $active === 'tricycle-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                </svg>
+                <span class="lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tricycle List</span>
+            </a>
         @endif
 
         @if (auth()->user()->isSuperadmin())
