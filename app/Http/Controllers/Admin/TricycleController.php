@@ -21,7 +21,9 @@ class TricycleController extends Controller
                 $q->where('address', 'like', '%' . $request->input('address') . '%'))
             ->when($request->filled('status'), fn ($q) =>
                 $q->where('status', $request->input('status')))
-            ->latest()
+            ->when($request->filled('toda'), fn ($q) =>
+                $q->where('toda', $request->input('toda')))
+            ->latest('updated_at')
             ->paginate(25)
             ->withQueryString();
 
@@ -45,7 +47,7 @@ class TricycleController extends Controller
             'chassis_no' => 'required|string|max:255',
             'date_registered' => 'required|date',
             'date_expired' => 'required|date|after_or_equal:date_registered',
-            'toda' => 'nullable|string|max:255',
+            'toda' => 'nullable|in:' . implode(',', array_keys(Tricycle::TODA_OPTIONS)),
             'remarks' => 'nullable|string',
         ]);
 

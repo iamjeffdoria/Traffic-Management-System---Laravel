@@ -9,6 +9,14 @@ class Tricycle extends Model
 {
     use HasFactory;
 
+    public const TODA_OPTIONS = [
+        'PTL 001-A' => 'PTL 001-A',
+        'PSMTL 001-B' => 'PSMTL 001-B',
+        'PST 001-C' => 'PST 001-C',
+        'PCRT-001-D' => 'PCRT-001-D',
+        'PHC 001-E' => 'PHC 001-E',
+    ];
+
     protected $fillable = [
         'body_number',
         'plate_no',

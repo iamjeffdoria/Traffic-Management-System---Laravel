@@ -1,5 +1,5 @@
 @php
-    $hasActiveFilters = request()->filled('body') || request()->filled('plate') || request()->filled('name') || request()->filled('status');
+    $hasActiveFilters = request()->filled('body') || request()->filled('plate') || request()->filled('name') || request()->filled('status') || request()->filled('toda');
     $statusColors = [
         'active' => 'bg-teal-500',
         'renewed' => 'bg-teal-500',

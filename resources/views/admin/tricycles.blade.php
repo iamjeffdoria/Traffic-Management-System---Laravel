@@ -23,14 +23,17 @@
                 </div>
             @endif
 
-            <x-tricycle-toolbar />
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <x-tricycle-toda-filter />
+                <x-tricycle-toolbar />
+            </div>
 
             <x-tricycle-create-modal />
 
             <x-tricycle-delete-confirm-modal />
 
             @php
-                $hasActiveFilters = request()->filled('body') || request()->filled('plate') || request()->filled('name') || request()->filled('address') || request()->filled('status');
+                $hasActiveFilters = request()->filled('body') || request()->filled('plate') || request()->filled('name') || request()->filled('address') || request()->filled('status') || request()->filled('toda');
             @endphp
 
            <form id="tricycle-filter-form" method="GET" action="{{ route('tricycle.list') }}"></form>
@@ -61,23 +64,23 @@
                                 <th class="px-6 py-2"></th>
                                 <th class="px-2 py-2">
                                     <input type="text" name="body" form="tricycle-filter-form" data-filter-scope="desktop" value="{{ request('body') }}" oninput="debouncedFetchFilter()"
-                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-1 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                 </th>
                                 <th class="px-4 py-2">
                                     <input type="text" name="plate" form="tricycle-filter-form" data-filter-scope="desktop" value="{{ request('plate') }}" oninput="debouncedFetchFilter()"
-                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-1.5 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                 </th>
                                 <th class="px-2 py-2">
                                     <input type="text" name="name" form="tricycle-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchFilter()"
-                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-1 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                 </th>
                                 <th class="px-4 py-2">
                                     <input type="text" name="address" form="tricycle-filter-form" data-filter-scope="desktop" value="{{ request('address') }}" oninput="debouncedFetchFilter()"
-                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-1 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                 </th>
                                 <th class="px-1.5 py-2">
                                     <select name="status" form="tricycle-filter-form" data-filter-scope="desktop" onchange="debouncedFetchFilter()"
-                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-1 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                        class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                         <option value="">All statuses</option>
                                         <option value="active" @selected(request('status') === 'active')>Active</option>
                                         <option value="renewed" @selected(request('status') === 'renewed')>Renewed</option>

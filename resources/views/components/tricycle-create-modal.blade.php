@@ -71,8 +71,13 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">TODA</label>
-                <input type="text" name="toda" value="{{ old('toda') }}"
+                <select name="toda"
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <option value="" @selected(old('toda') === null)>No TODA</option>
+                    @foreach (\App\Models\Tricycle::TODA_OPTIONS as $value => $label)
+                        <option value="{{ $value }}" @selected(old('toda') === $value)>{{ $label }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Remarks</label>
