@@ -48,6 +48,10 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::post('/admin/tricycles', [TricycleController::class, 'store'])->name('tricycle.store');
     Route::put('/admin/tricycles/{tricycle}', [TricycleController::class, 'update'])->name('tricycle.update');
     Route::delete('/admin/tricycles/{tricycle}', [TricycleController::class, 'destroy'])->name('tricycle.destroy');
+
+    Route::get('/admin/tricycles/mayors-permit', function () {
+        return view('admin.tricycle-mayors-permit');
+    })->name('tricycle.mayors-permit');
 });
 
 
