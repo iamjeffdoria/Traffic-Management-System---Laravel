@@ -13,11 +13,25 @@ class TricycleMayorsPermitController extends Controller
     {
         $permits = TricycleMayorsPermit::query()
             ->with('tricycle')
+            ->when($request->filled('control_no'), fn ($q) =>
+                $q->where('control_no', 'like', '%' . $request->input('control_no') . '%'))
+            ->when($request->filled('tricycle'), fn ($q) =>
+                $q->whereHas('tricycle', fn ($tq) =>
+                    $tq->where('body_number', 'like', '%' . $request->input('tricycle') . '%')
+                       ->orWhere('name', 'like', '%' . $request->input('tricycle') . '%')))
+            ->when($request->filled('business_name'), fn ($q) =>
+                $q->where('business_name', 'like', '%' . $request->input('business_name') . '%'))
+            ->when($request->filled('status'), fn ($q) =>
+                $q->where('status', $request->input('status')))
             ->latest('updated_at')
             ->paginate(25)
             ->withQueryString();
 
         $tricycles = Tricycle::orderBy('body_number')->get();
+
+        if ($request->ajax()) {
+            return view('admin.partials.tricycle-mayors-permit-ajax-results', compact('permits'));
+        }
 
         return view('admin.tricycle-mayors-permit', compact('permits', 'tricycles'));
     }

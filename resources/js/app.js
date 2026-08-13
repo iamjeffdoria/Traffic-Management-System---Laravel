@@ -7,4 +7,5 @@ import './password-strength.js';
 import './table-admin-search.js';
 import './confirm-delete.js';
 import './table-tricycle-search.js';
+import './table-tricycle-mayors-permit-search.js';
 import './tricycle-mayors-permit-sync.js';
