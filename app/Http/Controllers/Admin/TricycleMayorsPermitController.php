@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\TricycleMayorsPermit;
+use App\Models\Tricycle;
+use Illuminate\Http\Request;
+
+class TricycleMayorsPermitController extends Controller
+{
+    public function index(Request $request)
+    {
+        $permits = TricycleMayorsPermit::query()
+            ->with('tricycle')
+            ->latest('updated_at')
+            ->paginate(25)
+            ->withQueryString();
+
+        $tricycles = Tricycle::orderBy('body_number')->get();
+
+        return view('admin.tricycle-mayors-permit', compact('permits', 'tricycles'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'tricycle_id' => 'required|exists:tricycles,id',
+            'control_no' => 'required|string|max:255|unique:tricycle_mayors_permits,control_no',
+            'status' => 'required|in:active,expired',
+            'business_name' => 'nullable|string|max:255',
+            'motorized_operation' => 'required|string|max:255',
+            'or_no' => 'required|string|max:255',
+            'amount_paid' => 'required|numeric|min:0',
+            'issue_date' => 'required|date',
+            'expiry_date' => 'required|date|after_or_equal:issue_date',
+            'issued_at' => 'required|string|max:255',
+            'mayor' => 'required|string|max:255',
+            'quarter' => 'required|string|max:255',
+        ]);
+
+        TricycleMayorsPermit::create($validated);
+
+        return redirect()->route('tricycle.mayors-permit')->with('success', 'Permit added successfully.');
+    }
+}

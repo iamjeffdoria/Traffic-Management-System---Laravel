@@ -36,4 +36,9 @@ class Tricycle extends Model
         'date_registered' => 'date',
         'date_expired' => 'date',
     ];
+
+    public function mayorsPermits()
+    {
+        return $this->hasMany(TricycleMayorsPermit::class);
+    }
 }
