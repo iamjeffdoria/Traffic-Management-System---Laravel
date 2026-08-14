@@ -37,16 +37,18 @@
             <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto">
                 <table class="w-full text-sm border-collapse table-fixed">
                     <colgroup>
-                        <col class="w-[10%]">
-                        <col class="w-[16%]">
-                        <col class="w-[16%]">
-                        <col class="w-[16%]">
-                        <col class="w-[10%]">
+                        <col class="w-24">
+                        <col class="w-[9%]">
                         <col class="w-[14%]">
-                        <col class="w-[18%]">
+                        <col class="w-[14%]">
+                        <col class="w-[14%]">
+                        <col class="w-[9%]">
+                        <col class="w-[12%]">
+                        <col class="w-[16%]">
                     </colgroup>
                     <thead class="bg-gray-50 text-left text-gray-900">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
+                            <th class="px-6 py-3 font-bold w-24">Actions</th>
                             <th class="px-6 py-3 font-bold">Status</th>
                             <th class="px-6 py-3 font-bold">Control No.</th>
                             <th class="px-6 py-3 font-bold">Tricycle / Owner</th>
@@ -56,6 +58,7 @@
                             <th class="px-6 py-3 font-bold">Mayor / Issued At / Quarter</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
+                            <th class="px-6 py-2"></th>
                             <th class="px-1.5 py-2">
                                 <select name="status" form="tricycle-mayors-permit-filter-form" data-filter-scope="desktop" onchange="debouncedFetchPermitFilter()"
                                     class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
@@ -86,7 +89,7 @@
                             <x-tricycle-mayors-permit-table-row :permit="$permit" />
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
+                                <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
                                     @if ($hasActivePermitFilters)
                                         No permits match your search.
                                         <a href="{{ route('tricycle.mayors-permit') }}" data-ajax-permit-link class="text-red-600 font-medium ml-1">Clear filters</a>
@@ -121,7 +124,7 @@
             </div>
 
             <!-- Mobile stacked cards -->
-            <div id="tricycle-mayors-permit-cards-mobile" class="lg:hidden space-y-3">
+            <div id="tricycle-mayors-permit-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
                 @forelse ($permits as $permit)
                     <x-tricycle-mayors-permit-mobile-card :permit="$permit" />
                 @empty

@@ -5,7 +5,7 @@
 @section('content')
 <div class="lg:flex group/layout">
     <x-sidebar active="tricycle-list" />
-    <<div class="flex-1 min-w-0 lg:ml-56 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
+    <div class="flex-1 min-w-0 lg:ml-56 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
         <x-topbar title="Tricycle List" />
 
         <div class="max-w-7xl mx-auto px-6 py-6">
@@ -132,7 +132,7 @@
                 </select>
             </div>
 
-           <div id="tricycle-cards-mobile" class="lg:hidden space-y-3">
+           <div id="tricycle-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
                 @forelse ($tricycles as $tricycle)
                     <x-tricycle-mobile-card :tricycle="$tricycle" />
                 @empty

@@ -30,7 +30,7 @@
     @endunless
 </div>
 
-<div id="tricycle-cards-mobile" class="lg:hidden space-y-3">
+<div id="tricycle-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2"> 
     @forelse ($tricycles as $tricycle)
         <x-tricycle-mobile-card :tricycle="$tricycle" />
     @empty

@@ -7,7 +7,7 @@
         <x-tricycle-mayors-permit-table-row :permit="$permit" />
     @empty
         <tr>
-            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActivePermitFilters)
                     No permits match your search.
                     <a href="{{ route('tricycle.mayors-permit') }}" data-ajax-permit-link class="text-red-600 font-medium ml-1">Clear filters</a>
@@ -25,7 +25,7 @@
     @endunless
 </div>
 
-<div id="tricycle-mayors-permit-cards-mobile" class="lg:hidden space-y-3">
+<div id="tricycle-mayors-permit-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
     @forelse ($permits as $permit)
         <x-tricycle-mayors-permit-mobile-card :permit="$permit" />
     @empty

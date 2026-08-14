@@ -8,7 +8,7 @@
     ];
 @endphp
 
-<div class="rounded-2xl border border-gray-200 p-4">
+<div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
     <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
             <p class="text-gray-900 font-medium truncate">{{ $tricycle->body_number }} — {{ $tricycle->plate_no }}</p>
