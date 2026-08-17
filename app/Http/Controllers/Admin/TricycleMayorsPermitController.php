@@ -30,7 +30,7 @@ class TricycleMayorsPermitController extends Controller
         $tricycles = Tricycle::orderBy('body_number')->get();
 
         if ($request->ajax()) {
-            return view('admin.partials.tricycle-mayors-permit-ajax-results', compact('permits'));
+            return view('admin.partials.tricycle-mayors-permit-ajax-results', compact('permits', 'tricycles'));
         }
 
         return view('admin.tricycle-mayors-permit', compact('permits', 'tricycles'));
@@ -56,5 +56,27 @@ class TricycleMayorsPermitController extends Controller
         TricycleMayorsPermit::create($validated);
 
         return redirect()->route('tricycle.mayors-permit')->with('success', 'Permit added successfully.');
+    }
+
+    public function update(Request $request, TricycleMayorsPermit $permit)
+    {
+        $validated = $request->validate([
+            'tricycle_id' => 'required|exists:tricycles,id',
+            'control_no' => 'required|string|max:255|unique:tricycle_mayors_permits,control_no,' . $permit->id,
+            'status' => 'required|in:active,expired',
+            'business_name' => 'nullable|string|max:255',
+            'motorized_operation' => 'required|string|max:255',
+            'or_no' => 'required|string|max:255',
+            'amount_paid' => 'required|numeric|min:0',
+            'issue_date' => 'required|date',
+            'expiry_date' => 'required|date|after_or_equal:issue_date',
+            'issued_at' => 'required|string|max:255',
+            'mayor' => 'required|string|max:255',
+            'quarter' => 'required|string|max:255',
+        ]);
+
+        $permit->update($validated);
+
+        return redirect()->route('tricycle.mayors-permit')->with('success', 'Permit updated successfully.');
     }
 }

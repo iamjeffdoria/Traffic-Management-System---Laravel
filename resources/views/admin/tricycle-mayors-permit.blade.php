@@ -61,7 +61,7 @@
                             <th class="px-6 py-2"></th>
                             <th class="px-1.5 py-2">
                                 <select name="status" form="tricycle-mayors-permit-filter-form" data-filter-scope="desktop" onchange="debouncedFetchPermitFilter()"
-                                    class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                     <option value="">All statuses</option>
                                     <option value="active" @selected(request('status') === 'active')>Active</option>
                                     <option value="expired" @selected(request('status') === 'expired')>Expired</option>
@@ -116,7 +116,7 @@
                 <input type="text" name="business_name" form="tricycle-mayors-permit-filter-form" data-filter-scope="mobile" value="{{ request('business_name') }}" oninput="debouncedFetchPermitFilter()" placeholder="Search business name..."
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                 <select name="status" form="tricycle-mayors-permit-filter-form" data-filter-scope="mobile" onchange="debouncedFetchPermitFilter()"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    class="w-full max-w-full truncate rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                     <option value="">All statuses</option>
                     <option value="active" @selected(request('status') === 'active')>Active</option>
                     <option value="expired" @selected(request('status') === 'expired')>Expired</option>
@@ -141,6 +141,12 @@
 
             <div id="tricycle-mayors-permit-pagination-mobile" class="lg:hidden mt-4">
                 {{ $permits->links() }}
+            </div>
+
+            <div id="tricycle-mayors-permit-edit-modals">
+                @foreach ($permits as $permit)
+                    <x-tricycle-mayors-permit-edit-modal :permit="$permit" :tricycles="$tricycles" />
+                @endforeach
             </div>
         </div>
     </div>

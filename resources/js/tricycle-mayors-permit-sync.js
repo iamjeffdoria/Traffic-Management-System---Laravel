@@ -1,16 +1,15 @@
-function syncTricycleMayorsPermitFields() {
-    const select = document.getElementById('tricycle-mayors-permit-select');
-    const nameDisplay = document.getElementById('tricycle-mayors-permit-name-display');
-    const addressDisplay = document.getElementById('tricycle-mayors-permit-address-display');
+// Works for the create modal AND every per-permit edit modal at once —
+// called directly via onchange="syncPermitTricycleFields(this)" on each
+// <select>, so no fixed IDs or per-modal wiring is needed.
+function syncPermitTricycleFields(selectEl) {
+    const container = selectEl.closest('[data-permit-form]');
+    if (!container) return;
 
-    if (!select || !nameDisplay || !addressDisplay) return;
+    const selected = selectEl.options[selectEl.selectedIndex];
+    const nameDisplay = container.querySelector('[data-permit-name-display]');
+    const addressDisplay = container.querySelector('[data-permit-address-display]');
 
-    select.addEventListener('change', () => {
-        const selected = select.options[select.selectedIndex];
-        nameDisplay.value = selected.dataset.name || '';
-        addressDisplay.value = selected.dataset.address || '';
-    });
+    if (nameDisplay) nameDisplay.value = selected.dataset.name || '';
+    if (addressDisplay) addressDisplay.value = selected.dataset.address || '';
 }
-
-document.addEventListener('DOMContentLoaded', syncTricycleMayorsPermitFields);
-window.syncTricycleMayorsPermitFields = syncTricycleMayorsPermitFields;
+window.syncPermitTricycleFields = syncPermitTricycleFields;

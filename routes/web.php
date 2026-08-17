@@ -52,6 +52,7 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
 
     Route::get('/admin/tricycles/mayors-permit', [TricycleMayorsPermitController::class, 'index'])->name('tricycle.mayors-permit');
     Route::post('/admin/tricycles/mayors-permit', [TricycleMayorsPermitController::class, 'store'])->name('tricycle.mayors-permit.store');
+    Route::put('/admin/tricycles/mayors-permit/{permit}', [TricycleMayorsPermitController::class, 'update'])->name('tricycle.mayors-permit.update');
 });
 
 

@@ -48,6 +48,7 @@ function fetchPermitResults(url) {
                 'tricycle-mayors-permit-pagination-desktop',
                 'tricycle-mayors-permit-cards-mobile',
                 'tricycle-mayors-permit-pagination-mobile',
+                'tricycle-mayors-permit-edit-modals',
             ];
 
             targets.forEach((id) => {
