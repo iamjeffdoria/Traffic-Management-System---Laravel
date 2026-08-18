@@ -35,11 +35,17 @@
             {{ $permit->or_no }}
         </span>
     </td>
-    <td class="px-4 py-4 align-top">
+        <td class="px-4 py-4 align-top">
         @if ($permit->tricycle)
-            <p class="text-gray-900 font-medium break-words">{{ $permit->tricycle->body_number }}</p>
-            <p class="text-gray-500 text-xs break-words">{{ $permit->tricycle->plate_no }}</p>
-            <p class="text-gray-700 text-xs mt-1 break-words">{{ $permit->tricycle->name }}</p>
+            <p class="text-gray-900 font-medium break-words">{{ $permit->tricycle->name }}</p>
+            <div class="flex flex-wrap gap-1 mt-1.5">
+                <span class="inline-block max-w-full truncate rounded-full bg-slate-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $permit->tricycle->body_number }}">
+                    {{ $permit->tricycle->body_number }}
+                </span>
+                <span class="inline-block max-w-full truncate rounded-full bg-slate-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $permit->tricycle->plate_no }}">
+                    {{ $permit->tricycle->plate_no }}
+                </span>
+            </div>
         @else
             <p class="text-gray-400 text-xs italic">Tricycle removed</p>
         @endif

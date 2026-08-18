@@ -14,9 +14,9 @@
             </svg>
             Export File
         </button>
-        <button type="button" onclick="openModal('create-tricycle-mayors-permit-modal')"
+        <button type="button" onclick="openModal('create-mtop-modal')"
             class="inline-flex items-center gap-1.5 bg-red-600 text-white px-5 py-2 text-sm font-semibold hover:bg-red-700 transition-colors">
-            + Add Permit
+            + Add MTOP Record
         </button>
     </div>
 </div>

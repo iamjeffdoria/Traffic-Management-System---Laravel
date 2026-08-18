@@ -41,4 +41,14 @@ class Tricycle extends Model
     {
         return $this->hasMany(TricycleMayorsPermit::class);
     }
+
+    public function mtops()
+    {
+        return $this->hasMany(Mtop::class);
+    }
+
+    public function franchises()
+    {
+        return $this->hasMany(Franchise::class);
+    }
 }
