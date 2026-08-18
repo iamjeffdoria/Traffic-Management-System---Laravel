@@ -18,7 +18,7 @@
                     <span class="inline-block rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1">
                         {{ $mtop->tricycle->body_number }}
                     </span>
-                    <span class="inline-block rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1">
+                    <span class="inline-block rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1">
                         {{ $mtop->tricycle->plate_no }}
                     </span>
                 @endif

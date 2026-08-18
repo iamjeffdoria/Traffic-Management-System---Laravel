@@ -36,7 +36,7 @@
         <p class="text-gray-900 font-medium break-words">{{ $franchise->name }}</p>
         <div class="flex flex-wrap gap-1 mt-1.5">
             @if ($franchise->tricycle)
-                <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->tricycle->body_number }}">
+                <span class="inline-block max-w-full truncate rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->tricycle->body_number }}">
                     {{ $franchise->tricycle->body_number }}
                 </span>
             @endif

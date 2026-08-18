@@ -30,7 +30,7 @@
                 <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $mtop->tricycle->body_number }}">
                     {{ $mtop->tricycle->body_number }}
                 </span>
-                <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $mtop->tricycle->plate_no }}">
+                <span class="inline-block max-w-full truncate rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $mtop->tricycle->plate_no }}">
                     {{ $mtop->tricycle->plate_no }}
                 </span>
             </div>

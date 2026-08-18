@@ -19,6 +19,11 @@
                 <span class="inline-block rounded-full {{ $statusColor }} text-white text-xs font-semibold px-2.5 py-1">
                     {{ $franchise->status }}
                 </span>
+                @if ($franchise->tricycle)
+                    <span class="inline-block rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->tricycle->body_number }}">
+                        {{ $franchise->tricycle->body_number }}
+                    </span>
+                @endif
                 <span class="inline-block rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1">
                     {{ $franchise->plate_no }}
                 </span>
