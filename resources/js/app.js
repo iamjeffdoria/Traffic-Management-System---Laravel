@@ -13,3 +13,4 @@ import './mtop-sync.js';
 import './table-mtop-search.js';
 import './franchise-sync.js';
 import './table-franchise-search.js';
+import './print-helper.js';

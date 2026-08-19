@@ -28,7 +28,7 @@ class FranchiseController extends Controller
         $tricycles = Tricycle::orderBy('body_number')->get();
 
         if ($request->ajax()) {
-            return view('admin.partials.franchise-ajax-results', compact('franchises'));
+            return view('admin.partials.franchise-ajax-results', compact('franchises', 'tricycles'));
         }
 
         return view('admin.franchise', compact('franchises', 'tricycles'));
@@ -89,5 +89,12 @@ class FranchiseController extends Controller
         $franchise->delete();
 
         return redirect()->route('tricycle.franchise')->with('success', 'Franchise removed successfully.');
+    }
+
+    public function print(Franchise $franchise)
+    {
+        $franchise->load('tricycle');
+
+        return view('admin.franchise-print', compact('franchise'));
     }
 }

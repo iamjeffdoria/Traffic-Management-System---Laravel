@@ -76,4 +76,11 @@ class MtopController extends Controller
 
         return redirect()->route('tricycle.mtop')->with('success', 'MTOP record removed successfully.');
     }
+
+    public function print(Mtop $mtop)
+    {
+        $mtop->load('tricycle');
+
+        return view('admin.mtop-print', compact('mtop'));
+    }
 }

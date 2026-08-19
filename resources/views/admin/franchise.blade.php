@@ -21,6 +21,8 @@
 
             <x-franchise-create-modal :tricycles="$tricycles" />
 
+            <x-franchise-delete-confirm-modal />
+
             @php
                 $hasActiveFranchiseFilters = request()->filled('authorized_no') || request()->filled('name') || request()->filled('plate') || request()->filled('status');
             @endphp
@@ -134,6 +136,12 @@
                 @unless ($franchises->isEmpty())
                     {{ $franchises->links() }}
                 @endunless
+            </div>
+
+            <div id="franchise-edit-modals">
+                @foreach ($franchises as $franchise)
+                    <x-franchise-edit-modal :franchise="$franchise" :tricycles="$tricycles" />
+                @endforeach
             </div>
         </div>
     </div>

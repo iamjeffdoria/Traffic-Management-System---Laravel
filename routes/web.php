@@ -61,11 +61,13 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::post('/admin/tricycles/mtop', [MtopController::class, 'store'])->name('tricycle.mtop.store');
     Route::put('/admin/tricycles/mtop/{mtop}', [MtopController::class, 'update'])->name('tricycle.mtop.update');
     Route::delete('/admin/tricycles/mtop/{mtop}', [MtopController::class, 'destroy'])->name('tricycle.mtop.destroy');
+    Route::get('/admin/tricycles/mtop/{mtop}/print', [MtopController::class, 'print'])->name('tricycle.mtop.print');
 
     Route::get('/admin/tricycles/franchise', [FranchiseController::class, 'index'])->name('tricycle.franchise');
     Route::post('/admin/tricycles/franchise', [FranchiseController::class, 'store'])->name('tricycle.franchise.store');
     Route::put('/admin/tricycles/franchise/{franchise}', [FranchiseController::class, 'update'])->name('tricycle.franchise.update');
     Route::delete('/admin/tricycles/franchise/{franchise}', [FranchiseController::class, 'destroy'])->name('tricycle.franchise.destroy');
+    Route::get('/admin/tricycles/franchise/{franchise}/print', [FranchiseController::class, 'print'])->name('tricycle.franchise.print');
 });
 
 

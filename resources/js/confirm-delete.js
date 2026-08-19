@@ -57,3 +57,23 @@ function submitPendingPermitDelete() {
     }
 }
 window.submitPendingPermitDelete = submitPendingPermitDelete;
+
+let pendingFranchiseDeleteForm = null;
+
+function confirmFranchiseDelete(formId, name) {
+    pendingFranchiseDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-franchise-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-franchise-confirm-modal');
+}
+window.confirmFranchiseDelete = confirmFranchiseDelete;
+
+function submitPendingFranchiseDelete() {
+    if (pendingFranchiseDeleteForm) {
+        pendingFranchiseDeleteForm.submit();
+        pendingFranchiseDeleteForm = null;
+    }
+}
+window.submitPendingFranchiseDelete = submitPendingFranchiseDelete;

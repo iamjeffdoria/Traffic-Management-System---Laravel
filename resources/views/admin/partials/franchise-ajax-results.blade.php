@@ -45,3 +45,9 @@
         {{ $franchises->links() }}
     @endunless
 </div>
+
+<div id="franchise-edit-modals">
+    @foreach ($franchises as $franchise)
+        <x-franchise-edit-modal :franchise="$franchise" :tricycles="$tricycles" />
+    @endforeach
+</div>

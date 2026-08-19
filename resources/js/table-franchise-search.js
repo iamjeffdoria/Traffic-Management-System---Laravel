@@ -48,6 +48,7 @@ function fetchFranchiseResults(url) {
                 'franchise-pagination-desktop',
                 'franchise-cards-mobile',
                 'franchise-pagination-mobile',
+                'franchise-edit-modals',
             ];
 
             targets.forEach((id) => {
