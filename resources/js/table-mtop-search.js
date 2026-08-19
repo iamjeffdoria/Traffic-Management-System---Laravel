@@ -48,6 +48,7 @@ function fetchMtopResults(url) {
                 'mtop-pagination-desktop',
                 'mtop-cards-mobile',
                 'mtop-pagination-mobile',
+                'mtop-edit-modals',
             ];
 
             targets.forEach((id) => {

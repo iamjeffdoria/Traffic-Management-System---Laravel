@@ -45,3 +45,9 @@
         {{ $mtops->links() }}
     @endunless
 </div>
+
+<div id="mtop-edit-modals">
+    @foreach ($mtops as $mtop)
+        <x-mtop-edit-modal :mtop="$mtop" :tricycles="$tricycles" />
+    @endforeach
+</div>

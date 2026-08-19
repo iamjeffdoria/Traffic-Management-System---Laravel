@@ -27,6 +27,8 @@
 
             <x-mtop-create-modal :tricycles="$tricycles" />
 
+            <x-mtop-delete-confirm-modal />
+
             @php
                 $hasActiveMtopFilters = request()->filled('case_no') || request()->filled('tricycle') || request()->filled('route_operation');
             @endphp
@@ -122,6 +124,12 @@
 
             <div id="mtop-pagination-mobile" class="lg:hidden mt-4">
                 {{ $mtops->links() }}
+            </div>
+
+            <div id="mtop-edit-modals">
+                @foreach ($mtops as $mtop)
+                    <x-mtop-edit-modal :mtop="$mtop" :tricycles="$tricycles" />
+                @endforeach
             </div>
         </div>
     </div>

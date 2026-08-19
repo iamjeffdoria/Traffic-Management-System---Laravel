@@ -55,9 +55,12 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::get('/admin/tricycles/mayors-permit', [TricycleMayorsPermitController::class, 'index'])->name('tricycle.mayors-permit');
     Route::post('/admin/tricycles/mayors-permit', [TricycleMayorsPermitController::class, 'store'])->name('tricycle.mayors-permit.store');
     Route::put('/admin/tricycles/mayors-permit/{permit}', [TricycleMayorsPermitController::class, 'update'])->name('tricycle.mayors-permit.update');
+    Route::delete('/admin/tricycles/mayors-permit/{permit}', [TricycleMayorsPermitController::class, 'destroy'])->name('tricycle.mayors-permit.destroy');
 
     Route::get('/admin/tricycles/mtop', [MtopController::class, 'index'])->name('tricycle.mtop');
     Route::post('/admin/tricycles/mtop', [MtopController::class, 'store'])->name('tricycle.mtop.store');
+    Route::put('/admin/tricycles/mtop/{mtop}', [MtopController::class, 'update'])->name('tricycle.mtop.update');
+    Route::delete('/admin/tricycles/mtop/{mtop}', [MtopController::class, 'destroy'])->name('tricycle.mtop.destroy');
 
     Route::get('/admin/tricycles/franchise', [FranchiseController::class, 'index'])->name('tricycle.franchise');
     Route::post('/admin/tricycles/franchise', [FranchiseController::class, 'store'])->name('tricycle.franchise.store');

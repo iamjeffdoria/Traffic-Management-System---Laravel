@@ -27,6 +27,8 @@
 
             <x-tricycle-mayors-permit-create-modal :tricycles="$tricycles" />
 
+            <x-tricycle-mayors-permit-delete-confirm-modal />
+
             @php
                 $hasActivePermitFilters = request()->filled('control_no') || request()->filled('tricycle') || request()->filled('business_name') || request()->filled('status');
             @endphp
