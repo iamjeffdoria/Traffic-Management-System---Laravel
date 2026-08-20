@@ -11,14 +11,10 @@ class Franchise extends Model
 
     protected $fillable = [
         'tricycle_id',
-        'name',
         'valid_until',
-        'plate_no',
         'denomination',
         'status',
         'authorized_no',
-        'motor_no',
-        'chassis_no',
         'authorized_route',
         'purpose',
         'official_receipt_no',

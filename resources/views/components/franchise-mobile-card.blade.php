@@ -12,7 +12,11 @@
 <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
     <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
-            <p class="text-gray-900 font-medium truncate">{{ $franchise->name }}</p>
+            @if ($franchise->tricycle)
+                <p class="text-gray-900 font-medium truncate">{{ $franchise->tricycle->name }}</p>
+            @else
+                <p class="text-gray-400 text-sm italic">Tricycle removed</p>
+            @endif
             <p class="text-gray-500 text-sm truncate">{{ $franchise->authorized_no }}</p>
             <p class="text-gray-700 text-sm mt-1.5">{{ $franchise->authorized_route }}</p>
             <div class="flex flex-wrap gap-1 mt-2">
@@ -23,10 +27,10 @@
                     <span class="inline-block rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->tricycle->body_number }}">
                         {{ $franchise->tricycle->body_number }}
                     </span>
+                    <span class="inline-block rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1">
+                        {{ $franchise->tricycle->plate_no }}
+                    </span>
                 @endif
-                <span class="inline-block rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1">
-                    {{ $franchise->plate_no }}
-                </span>
                 <span class="inline-block rounded-full bg-teal-600 text-white text-xs font-mono px-2.5 py-1">
                     OR: {{ $franchise->official_receipt_no }}
                 </span>

@@ -16,6 +16,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
             </button>
+            <button type="button" onclick="printFromUrl('{{ route('tricycle.mayors-permit.print', $permit) }}')" title="Print"
+                class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v6H6v-6z" />
+                </svg>
+            </button>
             <form id="delete-permit-form-{{ $permit->id }}" method="POST" action="{{ route('tricycle.mayors-permit.destroy', $permit) }}">
                 @csrf
                 @method('DELETE')

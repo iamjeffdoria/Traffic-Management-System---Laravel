@@ -36,7 +36,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input type="text" name="name" data-franchise-name-display value="{{ $franchise->name }}" readonly required
+                <input type="text" data-franchise-name-display readonly value="{{ $franchise->tricycle->name ?? '' }}"
                     class="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600">
             </div>
             <div>
@@ -47,7 +47,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Plate No.</label>
-                <input type="text" name="plate_no" data-franchise-plate-display value="{{ $franchise->plate_no }}" readonly required
+                <input type="text" data-franchise-plate-display readonly value="{{ $franchise->tricycle->plate_no ?? '' }}"
                     class="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600">
             </div>
             <div>
@@ -73,12 +73,12 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Motor No.</label>
-                <input type="text" name="motor_no" data-franchise-motor-display value="{{ $franchise->motor_no }}" readonly required
+                <input type="text" data-franchise-motor-display readonly value="{{ $franchise->tricycle->engine_motor_no ?? '' }}"
                     class="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Chassis No.</label>
-                <input type="text" name="chassis_no" data-franchise-chassis-display value="{{ $franchise->chassis_no }}" readonly required
+                <input type="text" data-franchise-chassis-display readonly value="{{ $franchise->tricycle->chassis_no ?? '' }}"
                     class="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600">
             </div>
 

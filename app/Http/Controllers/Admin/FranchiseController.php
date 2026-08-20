@@ -38,14 +38,10 @@ class FranchiseController extends Controller
     {
         $validated = $request->validate([
             'tricycle_id' => 'required|exists:tricycles,id',
-            'name' => 'required|string|max:255',
             'valid_until' => 'required|date',
-            'plate_no' => 'required|string|max:255',
             'denomination' => 'nullable|string|max:255',
             'status' => 'required|in:New,Renewed,Expired',
             'authorized_no' => 'required|string|max:255|unique:franchises,authorized_no',
-            'motor_no' => 'required|string|max:255',
-            'chassis_no' => 'required|string|max:255',
             'authorized_route' => 'required|string',
             'purpose' => 'nullable|string',
             'official_receipt_no' => 'required|string|max:255',
@@ -63,14 +59,10 @@ class FranchiseController extends Controller
     {
         $validated = $request->validate([
             'tricycle_id' => 'required|exists:tricycles,id',
-            'name' => 'required|string|max:255',
             'valid_until' => 'required|date',
-            'plate_no' => 'required|string|max:255',
             'denomination' => 'nullable|string|max:255',
             'status' => 'required|in:New,Renewed,Expired',
             'authorized_no' => 'required|string|max:255|unique:franchises,authorized_no,' . $franchise->id,
-            'motor_no' => 'required|string|max:255',
-            'chassis_no' => 'required|string|max:255',
             'authorized_route' => 'required|string',
             'purpose' => 'nullable|string',
             'official_receipt_no' => 'required|string|max:255',

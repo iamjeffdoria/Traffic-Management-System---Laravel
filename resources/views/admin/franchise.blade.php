@@ -43,10 +43,10 @@
                     <thead class="bg-gray-50 text-left text-gray-900">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
                             <th class="px-6 py-3 font-bold w-24">Actions</th>
-                            <th class="px-6 py-3 font-bold">Franchise No.</th>
+                            <th class="px-6 py-3 font-bold">Franchise No. / Status</th>
                             <th class="px-6 py-3 font-bold">Owner / Vehicle</th>
-                            <th class="px-6 py-3 font-bold">Address / Make</th>
-                            <th class="px-6 py-3 font-bold">Status</th>
+                            <th class="px-6 py-3 font-bold">Route / Purpose</th>
+                            <th class="px-6 py-3 font-bold">Amount / OR No.</th>
                             <th class="px-6 py-3 font-bold">Registration / Expiry</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">

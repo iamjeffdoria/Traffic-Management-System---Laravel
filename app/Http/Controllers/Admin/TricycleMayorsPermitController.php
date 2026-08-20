@@ -86,4 +86,11 @@ class TricycleMayorsPermitController extends Controller
 
         return redirect()->route('tricycle.mayors-permit')->with('success', 'Permit removed successfully.');
     }
+
+    public function print(TricycleMayorsPermit $permit)
+    {
+        $permit->load('tricycle');
+
+        return view('admin.tricycle-mayors-permit-print', compact('permit'));
+    }
 }

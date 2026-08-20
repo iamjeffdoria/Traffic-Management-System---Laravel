@@ -43,17 +43,19 @@
         </span>
     </td>
     <td class="px-4 py-4 align-top">
-        <p class="text-gray-900 font-medium break-words">{{ $franchise->name }}</p>
-        <div class="flex flex-wrap gap-1 mt-1.5">
-            @if ($franchise->tricycle)
+        @if ($franchise->tricycle)
+            <p class="text-gray-900 font-medium break-words">{{ $franchise->tricycle->name }}</p>
+            <div class="flex flex-wrap gap-1 mt-1.5">
                 <span class="inline-block max-w-full truncate rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->tricycle->body_number }}">
                     {{ $franchise->tricycle->body_number }}
                 </span>
-            @endif
-            <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->plate_no }}">
-                {{ $franchise->plate_no }}
-            </span>
-        </div>
+                <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $franchise->tricycle->plate_no }}">
+                    {{ $franchise->tricycle->plate_no }}
+                </span>
+            </div>
+        @else
+            <p class="text-gray-400 text-xs italic">Tricycle removed</p>
+        @endif
     </td>
     <td class="px-4 py-4 align-top">
         <p class="text-gray-900 text-sm break-words">{{ $franchise->authorized_route }}</p>
