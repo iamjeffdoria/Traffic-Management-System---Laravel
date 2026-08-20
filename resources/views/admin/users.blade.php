@@ -64,28 +64,28 @@
         <div class="mt-6">
 
             <!-- Desktop table -->
-            <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-hidden">
-                <table class="w-full text-sm">
-                    <thead class="bg-gray-50 text-left text-gray-500">
-                        <tr>
-                            <th class="px-6 py-3 font-medium w-24">Actions</th>
-                            <th class="px-6 py-3 font-medium">Name</th>
-                            <th class="px-6 py-3 font-medium">Email</th>
-                            <th class="px-6 py-3 font-medium">Role</th>
+            <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto">
+                <table class="w-full text-sm border-collapse">
+                    <thead class="bg-gray-50 text-left text-gray-900">
+                        <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
+                            <th class="px-6 py-3 font-bold w-24">Actions</th>
+                            <th class="px-6 py-3 font-bold">Name</th>
+                            <th class="px-6 py-3 font-bold">Email</th>
+                            <th class="px-6 py-3 font-bold">Role</th>
                         </tr>
-                        <tr class="border-t border-gray-200">
+                        <tr class="border-t border-gray-300 divide-x divide-gray-300">
                             <th class="px-6 py-2"></th>
-                            <th class="px-6 py-2">
+                            <th class="px-2 py-2">
                                 <input type="text" id="filter-name" oninput="filterAdminTable()" placeholder="Search name..."
-                                    class="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-normal focus:outline-none focus:ring-2 focus:ring-red-600">
+                                    class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
-                            <th class="px-6 py-2">
+                            <th class="px-2 py-2">
                                 <input type="text" id="filter-email" oninput="filterAdminTable()" placeholder="Search email..."
-                                    class="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-normal focus:outline-none focus:ring-2 focus:ring-red-600">
+                                    class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
-                            <th class="px-6 py-2">
+                            <th class="px-1.5 py-2">
                                 <select id="filter-role" onchange="filterAdminTable()"
-                                    class="w-full rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-normal focus:outline-none focus:ring-2 focus:ring-red-600">
+                                    class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                                     <option value="">All roles</option>
                                     <option value="superadmin">Super Admin</option>
                                     <option value="potpot_admin">Potpot Admin</option>
@@ -94,15 +94,23 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
+                    <tbody class="divide-y divide-gray-300">
+                        @php
+                            $roleColors = [
+                                'superadmin' => 'bg-red-600',
+                                'potpot_admin' => 'bg-blue-600',
+                                'tricycle_admin' => 'bg-teal-600',
+                            ];
+                        @endphp
                         @foreach ($admins as $admin)
-                            <tr data-admin-row data-name="{{ $admin->name }}" data-email="{{ $admin->email }}" data-role="{{ $admin->role }}">
-                                <td class="px-6 py-4">
+                            <tr data-admin-row data-name="{{ $admin->name }}" data-email="{{ $admin->email }}" data-role="{{ $admin->role }}"
+                                class="divide-x divide-gray-300 border-b border-gray-200 hover:bg-gray-50/60 transition-colors">
+                                <td class="px-4 py-4 align-top">
                                     <div class="flex items-center gap-1">
                                         <button type="button" onclick="openModal('edit-modal-{{ $admin->id }}')" title="Edit"
-                                            class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                         </button>
 
@@ -112,18 +120,18 @@
                                                 @method('DELETE')
                                             </form>
                                             <button type="button" onclick="confirmDelete('delete-form-{{ $admin->id }}', '{{ $admin->name }}')" title="Delete"
-                                                class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                class="p-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                             </button>
                                         @endif
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 text-gray-900 font-medium">{{ $admin->name }}</td>
-                                <td class="px-6 py-4 text-gray-500">{{ $admin->email }}</td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-block rounded-full bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1">
+                                <td class="px-4 py-4 align-top text-gray-900 font-semibold">{{ $admin->name }}</td>
+                                <td class="px-4 py-4 align-top text-gray-700 text-sm">{{ $admin->email }}</td>
+                                <td class="px-4 py-4 align-top">
+                                    <span class="inline-block rounded-full {{ $roleColors[$admin->role] ?? 'bg-slate-600' }} text-white text-xs font-semibold px-3 py-1">
                                         {{ str_replace('_', ' ', ucfirst($admin->role)) }}
                                     </span>
                                 </td>

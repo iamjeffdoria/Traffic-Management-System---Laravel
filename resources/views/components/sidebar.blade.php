@@ -60,6 +60,24 @@
                 </svg>
                 <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Potpot Registration</span>
             </a>
+
+            <a href="{{ route('potpot.id-cards') }}" title="ID Cards"
+            class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+            {{ $active === 'potpot-id-cards' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                </svg>
+                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">ID Cards</span>
+            </a>
+
+            <a href="{{ route('potpot.mayors-permit') }}" title="Mayor's Permit - Potpot"
+            class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+            {{ $active === 'potpot-mayors-permit' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Mayor's Permit - Potpot</span>
+            </a>
         @endif
 
         @if (auth()->user()->isTricycleAdmin())
@@ -81,13 +99,13 @@
                 <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tricycle List</span>
             </a>
 
-                        <a href="{{ route('tricycle.mayors-permit') }}" title="Mayor's Permit - Tricycle"
+            <a href="{{ route('tricycle.mayors-permit') }}" title="Mayor's Permit - Tricycle"
             class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
             {{ $active === 'tricycle-mayors-permit' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Mayor's Permit</span>
+                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Mayor's Permit - Tricycle</span>
             </a>
 
             <a href="{{ route('tricycle.mtop') }}" title="MTOP"

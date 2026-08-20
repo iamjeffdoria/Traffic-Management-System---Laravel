@@ -77,3 +77,23 @@ function submitPendingFranchiseDelete() {
     }
 }
 window.submitPendingFranchiseDelete = submitPendingFranchiseDelete;
+
+let pendingPotpotPermitDeleteForm = null;
+
+function confirmPotpotPermitDelete(formId, name) {
+    pendingPotpotPermitDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-potpot-permit-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-potpot-permit-confirm-modal');
+}
+window.confirmPotpotPermitDelete = confirmPotpotPermitDelete;
+
+function submitPendingPotpotPermitDelete() {
+    if (pendingPotpotPermitDeleteForm) {
+        pendingPotpotPermitDeleteForm.submit();
+        pendingPotpotPermitDeleteForm = null;
+    }
+}
+window.submitPendingPotpotPermitDelete = submitPendingPotpotPermitDelete;

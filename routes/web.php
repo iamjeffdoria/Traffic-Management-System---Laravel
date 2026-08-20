@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\TricycleController;
 use App\Http\Controllers\Admin\TricycleMayorsPermitController;
+use App\Http\Controllers\Admin\PotpotMayorsPermitController;
 use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
 
@@ -39,6 +40,16 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::get('/potpot', function () {
         return view('admin.potpot'); // create this view when you build the module
     })->name('potpot.index');
+
+    Route::get('/admin/potpot/id-cards', function () {
+        return view('admin.potpot-id-cards');
+    })->name('potpot.id-cards');
+
+    Route::get('/admin/potpot/mayors-permit', [PotpotMayorsPermitController::class, 'index'])->name('potpot.mayors-permit');
+    Route::post('/admin/potpot/mayors-permit', [PotpotMayorsPermitController::class, 'store'])->name('potpot.mayors-permit.store');
+    Route::put('/admin/potpot/mayors-permit/{permit}', [PotpotMayorsPermitController::class, 'update'])->name('potpot.mayors-permit.update');
+    Route::delete('/admin/potpot/mayors-permit/{permit}', [PotpotMayorsPermitController::class, 'destroy'])->name('potpot.mayors-permit.destroy');
+    Route::get('/admin/potpot/mayors-permit/{permit}/print', [PotpotMayorsPermitController::class, 'print'])->name('potpot.mayors-permit.print');
 });
 
 // Tricycle admin + superadmin only
