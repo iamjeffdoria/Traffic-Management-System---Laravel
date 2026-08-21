@@ -144,6 +144,12 @@
             <div id="potpot-mayors-permit-pagination-mobile" class="lg:hidden mt-4">
                 {{ $permits->links() }}
             </div>
+
+            <div id="potpot-mayors-permit-edit-modals">
+                @foreach ($permits as $permit)
+                    <x-potpot-mayors-permit-edit-modal :permit="$permit" />
+                @endforeach
+            </div>
         </div>
     </div>
 </div>

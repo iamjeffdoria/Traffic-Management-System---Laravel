@@ -48,6 +48,7 @@ function fetchPotpotPermitResults(url) {
                 'potpot-mayors-permit-pagination-desktop',
                 'potpot-mayors-permit-cards-mobile',
                 'potpot-mayors-permit-pagination-mobile',
+                'potpot-mayors-permit-edit-modals',
             ];
 
             targets.forEach((id) => {
