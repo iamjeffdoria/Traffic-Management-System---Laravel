@@ -97,3 +97,23 @@ function submitPendingPotpotPermitDelete() {
     }
 }
 window.submitPendingPotpotPermitDelete = submitPendingPotpotPermitDelete;
+
+let pendingIdCardDeleteForm = null;
+
+function confirmIdCardDelete(formId, name) {
+    pendingIdCardDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-id-card-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-id-card-confirm-modal');
+}
+window.confirmIdCardDelete = confirmIdCardDelete;
+
+function submitPendingIdCardDelete() {
+    if (pendingIdCardDeleteForm) {
+        pendingIdCardDeleteForm.submit();
+        pendingIdCardDeleteForm = null;
+    }
+}
+window.submitPendingIdCardDelete = submitPendingIdCardDelete;

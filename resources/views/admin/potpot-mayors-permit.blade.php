@@ -40,11 +40,11 @@
                 <table class="w-full text-sm border-collapse table-fixed">
                     <colgroup>
                         <col class="w-32">
-                        <col class="w-[9%]">
+                        <col class="w-[12%]">
                         <col class="w-[12%]">
                         <col class="w-[13%]">
                         <col class="w-[11%]">
-                        <col class="w-[14%]">
+                        <col class="w-[11%]">
                         <col class="w-[16%]">
                         <col class="w-[15%]">
                     </colgroup>

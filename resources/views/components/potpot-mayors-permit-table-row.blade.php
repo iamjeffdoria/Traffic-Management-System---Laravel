@@ -35,7 +35,7 @@
         </div>
     </td>
     <td class="px-4 py-4 align-top">
-        <span class="inline-block max-w-full truncate rounded-full {{ $statusColors[$permit->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1">
+        <span class="inline-block rounded-full {{ $statusColors[$permit->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1 whitespace-nowrap">
             {{ ucfirst($permit->status) }}
         </span>
     </td>

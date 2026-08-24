@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TricycleMayorsPermitController;
 use App\Http\Controllers\Admin\PotpotMayorsPermitController;
 use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
+use App\Http\Controllers\Admin\IdCardController;
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -41,9 +42,11 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
         return view('admin.potpot'); // create this view when you build the module
     })->name('potpot.index');
 
-    Route::get('/admin/potpot/id-cards', function () {
-        return view('admin.potpot-id-cards');
-    })->name('potpot.id-cards');
+    Route::get('/admin/potpot/id-cards', [IdCardController::class, 'index'])->name('potpot.id-cards');
+    Route::post('/admin/potpot/id-cards', [IdCardController::class, 'store'])->name('potpot.id-cards.store');
+    Route::put('/admin/potpot/id-cards/{idCard}', [IdCardController::class, 'update'])->name('potpot.id-cards.update');
+    Route::delete('/admin/potpot/id-cards/{idCard}', [IdCardController::class, 'destroy'])->name('potpot.id-cards.destroy');
+    Route::get('/admin/potpot/id-cards/{idCard}/print', [IdCardController::class, 'print'])->name('potpot.id-cards.print');
 
     Route::get('/admin/potpot/mayors-permit', [PotpotMayorsPermitController::class, 'index'])->name('potpot.mayors-permit');
     Route::post('/admin/potpot/mayors-permit', [PotpotMayorsPermitController::class, 'store'])->name('potpot.mayors-permit.store');
