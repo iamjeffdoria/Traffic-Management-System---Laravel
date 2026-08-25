@@ -55,17 +55,17 @@
             font-size: 13px;
             color: #111;
         }
-        .value.address    { top: 70.7%; left: 14%; width: 78%; }
-        .value.dob         { top: 78%;   left: 24%; }
-        .value.gender      { top: 78%;   left: 63%; }
-        .value.height      { top: 83%;   left: 21%; }
-        .value.weight      { top: 83%;   left: 63%; }
-        .value.issued      { top: 88%;   left: 24%; }
-        .value.or-no       { top: 88%;   left: 60%; }
-        .value.expiration  { top: 93%;   left: 24%; }
+        .value.address    { top: 61%; left: 16%; width: 78%; }
+        .value.dob         { top: 67%;   left: 26%; }
+        .value.gender      { top: 67%;   left: 77%; }
+        .value.height      { top: 70.5%;   left: 26%; }
+        .value.weight      { top: 70.5%;   left: 77%; }
+        .value.issued      { top: 75.6%;   left: 26%; }
+        .value.or-no       { top: 75.6%;   left: 77%; }
+        .value.expiration  { top: 80%;   left: 26%; }
         .mayor-name {
             position: absolute;
-            top: 96.3%;
+            top: 87.2%;
             left: 0;
             width: 100%;
             text-align: center;

@@ -52,15 +52,6 @@
         </a>
 
         @if (auth()->user()->isPotpotAdmin())
-            <a href="{{ route('potpot.index') }}" title="Potpot Registration"
-            class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
-            {{ $active === 'potpot' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
-                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4M4 17h12m0 0l-4 4m4-4l-4-4" />
-                </svg>
-                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Potpot Registration</span>
-            </a>
-
             <a href="{{ route('potpot.id-cards') }}" title="ID Cards"
             class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
             {{ $active === 'potpot-id-cards' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
@@ -81,15 +72,6 @@
         @endif
 
         @if (auth()->user()->isTricycleAdmin())
-            <a href="{{ route('tricycle.index') }}" title="Tricycle Registration"
-            class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
-            {{ $active === 'tricycle' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
-                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 17h2v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2h2m12 0a2 2 0 11-4 0m4 0a2 2 0 10-4 0m-8 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-                </svg>
-                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tricycle Registration</span>
-            </a>
-
             <a href="{{ route('tricycle.list') }}" title="Tricycle List"
             class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
             {{ $active === 'tricycle-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
