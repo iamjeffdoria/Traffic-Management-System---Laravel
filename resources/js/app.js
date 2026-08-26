@@ -16,3 +16,4 @@ import './table-franchise-search.js';
 import './print-helper.js';
 import './table-potpot-mayors-permit-search.js';
 import './table-id-card-search.js';
+import './page-loading.js';
