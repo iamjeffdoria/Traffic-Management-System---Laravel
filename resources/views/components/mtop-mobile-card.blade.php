@@ -1,5 +1,25 @@
 @props(['mtop'])
 
+@php
+    $mtopEditData = [
+        'id' => $mtop->id,
+        'tricycle_id' => $mtop->tricycle_id,
+        'tricycle_name' => $mtop->tricycle->name ?? '',
+        'tricycle_address' => $mtop->tricycle->address ?? '',
+        'tricycle_make' => $mtop->tricycle->make_kind ?? '',
+        'tricycle_motor' => $mtop->tricycle->engine_motor_no ?? '',
+        'tricycle_chassis' => $mtop->tricycle->chassis_no ?? '',
+        'tricycle_plate' => $mtop->tricycle->plate_no ?? '',
+        'case_no' => $mtop->case_no,
+        'no_of_units' => $mtop->no_of_units,
+        'route_operation' => $mtop->route_operation,
+        'date' => $mtop->date->format('Y-m-d'),
+        'municipal_treasurer' => $mtop->municipal_treasurer,
+        'officer_in_charge' => $mtop->officer_in_charge,
+        'mayor' => $mtop->mayor,
+    ];
+@endphp
+
 <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
     <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
@@ -30,7 +50,7 @@
             <p class="text-gray-500 text-xs">Treasurer: {{ $mtop->municipal_treasurer }} · Officer: {{ $mtop->officer_in_charge }}</p>
         </div>
         <div class="flex items-center gap-1 shrink-0">
-            <button type="button" onclick="openModal('edit-mtop-modal-{{ $mtop->id }}')" title="Edit"
+            <button type="button" onclick="openMtopEditModal({{ Illuminate\Support\Js::from($mtopEditData) }})" title="Edit"
                 class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

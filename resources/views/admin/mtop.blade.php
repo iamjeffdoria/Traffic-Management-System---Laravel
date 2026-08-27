@@ -127,9 +127,7 @@
             </div>
 
             <div id="mtop-edit-modals">
-                @foreach ($mtops as $mtop)
-                    <x-mtop-edit-modal :mtop="$mtop" :tricycles="$tricycles" />
-                @endforeach
+                <x-mtop-edit-modal :tricycles="$tricycles" />
             </div>
         </div>
     </div>

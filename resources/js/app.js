@@ -20,3 +20,4 @@ import './page-loading.js';
 import './tricycle-edit-modal.js';
 import './franchise-edit-modal.js';
 import './tricycle-mayors-permit-edit-modal.js';
+import './mtop-edit-modal.js';
