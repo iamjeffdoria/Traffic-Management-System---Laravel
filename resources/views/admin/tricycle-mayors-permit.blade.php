@@ -146,9 +146,7 @@
             </div>
 
             <div id="tricycle-mayors-permit-edit-modals">
-                @foreach ($permits as $permit)
-                    <x-tricycle-mayors-permit-edit-modal :permit="$permit" :tricycles="$tricycles" />
-                @endforeach
+                <x-tricycle-mayors-permit-edit-modal :tricycles="$tricycles" />
             </div>
         </div>
     </div>

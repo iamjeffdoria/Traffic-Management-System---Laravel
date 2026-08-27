@@ -19,3 +19,4 @@ import './table-id-card-search.js';
 import './page-loading.js';
 import './tricycle-edit-modal.js';
 import './franchise-edit-modal.js';
+import './tricycle-mayors-permit-edit-modal.js';
