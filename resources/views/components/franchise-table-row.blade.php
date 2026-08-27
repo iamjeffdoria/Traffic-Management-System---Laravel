@@ -7,12 +7,31 @@
         'Expired' => 'bg-red-600',
     ];
     $statusColor = $statusColors[$franchise->status] ?? 'bg-slate-600';
+
+    $franchiseEditData = [
+        'id' => $franchise->id,
+        'tricycle_id' => $franchise->tricycle_id,
+        'tricycle_name' => $franchise->tricycle->name ?? '',
+        'tricycle_plate' => $franchise->tricycle->plate_no ?? '',
+        'tricycle_motor' => $franchise->tricycle->engine_motor_no ?? '',
+        'tricycle_chassis' => $franchise->tricycle->chassis_no ?? '',
+        'valid_until' => $franchise->valid_until->format('Y-m-d'),
+        'denomination' => $franchise->denomination,
+        'status' => $franchise->status,
+        'authorized_no' => $franchise->authorized_no,
+        'authorized_route' => $franchise->authorized_route,
+        'purpose' => $franchise->purpose,
+        'official_receipt_no' => $franchise->official_receipt_no,
+        'amount_paid' => $franchise->amount_paid,
+        'date' => $franchise->date->format('Y-m-d'),
+        'municipal_treasurer' => $franchise->municipal_treasurer,
+    ];
 @endphp
 
 <tr class="divide-x divide-gray-300 border-b border-gray-200 hover:bg-gray-50/60 transition-colors">
     <td class="px-4 py-4 align-top">
         <div class="flex items-center gap-1">
-            <button type="button" onclick="openModal('edit-franchise-modal-{{ $franchise->id }}')" title="Edit"
+            <button type="button" onclick="openFranchiseEditModal({{ Illuminate\Support\Js::from($franchiseEditData) }})" title="Edit"
                 class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

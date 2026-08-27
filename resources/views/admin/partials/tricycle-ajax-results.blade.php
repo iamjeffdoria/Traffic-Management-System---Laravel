@@ -52,7 +52,5 @@
 </div>
 
 <div id="tricycle-edit-modals">
-    @foreach ($tricycles as $tricycle)
-        <x-tricycle-edit-modal :tricycle="$tricycle" />
-    @endforeach
+    <x-tricycle-edit-modal />
 </div>

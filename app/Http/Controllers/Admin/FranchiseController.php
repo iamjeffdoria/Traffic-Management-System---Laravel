@@ -14,11 +14,17 @@ class FranchiseController extends Controller
         $franchises = Franchise::query()
             ->with('tricycle')
             ->when($request->filled('name'), fn ($q) =>
-                $q->where('name', 'like', '%' . $request->input('name') . '%'))
+                $q->whereHas('tricycle', fn ($tq) =>
+                    $tq->where('name', 'like', '%' . $request->input('name') . '%')))
             ->when($request->filled('plate'), fn ($q) =>
-                $q->where('plate_no', 'like', '%' . $request->input('plate') . '%'))
+                $q->whereHas('tricycle', fn ($tq) =>
+                    $tq->where('plate_no', 'like', '%' . $request->input('plate') . '%')))
             ->when($request->filled('authorized_no'), fn ($q) =>
                 $q->where('authorized_no', 'like', '%' . $request->input('authorized_no') . '%'))
+            ->when($request->filled('route'), fn ($q) =>
+                $q->where('authorized_route', 'like', '%' . $request->input('route') . '%'))
+            ->when($request->filled('purpose'), fn ($q) =>
+                $q->where('purpose', 'like', '%' . $request->input('purpose') . '%'))
             ->when($request->filled('status'), fn ($q) =>
                 $q->where('status', $request->input('status')))
             ->latest('updated_at')

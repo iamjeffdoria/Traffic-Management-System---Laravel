@@ -1,5 +1,5 @@
 @php
-    $hasActiveFranchiseFilters = request()->filled('authorized_no') || request()->filled('name') || request()->filled('plate') || request()->filled('status');
+    $hasActiveFranchiseFilters = request()->filled('authorized_no') || request()->filled('name') || request()->filled('route') || request()->filled('purpose') || request()->filled('status');
 @endphp
 
 <tbody id="franchise-tbody-desktop" class="divide-y divide-gray-300">
@@ -47,7 +47,5 @@
 </div>
 
 <div id="franchise-edit-modals">
-    @foreach ($franchises as $franchise)
-        <x-franchise-edit-modal :franchise="$franchise" :tricycles="$tricycles" />
-    @endforeach
+    <x-franchise-edit-modal :tricycles="$tricycles" />
 </div>

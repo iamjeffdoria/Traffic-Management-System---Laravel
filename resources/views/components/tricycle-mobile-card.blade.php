@@ -6,6 +6,22 @@
         'renewed' => 'bg-teal-500',
         'expired' => 'bg-red-600',
     ];
+
+    $tricycleEditData = [
+        'id' => $tricycle->id,
+        'body_number' => $tricycle->body_number,
+        'plate_no' => $tricycle->plate_no,
+        'name' => $tricycle->name,
+        'address' => $tricycle->address,
+        'make_kind' => $tricycle->make_kind,
+        'status' => $tricycle->status,
+        'engine_motor_no' => $tricycle->engine_motor_no,
+        'chassis_no' => $tricycle->chassis_no,
+        'date_registered' => $tricycle->date_registered->format('Y-m-d'),
+        'date_expired' => $tricycle->date_expired->format('Y-m-d'),
+        'toda' => $tricycle->toda,
+        'remarks' => $tricycle->remarks,
+    ];
 @endphp
 
 <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
@@ -49,7 +65,9 @@
             </div>
         </div>
         <div class="flex items-center gap-1 shrink-0">
-            <button type="button" onclick="openModal('edit-tricycle-modal-{{ $tricycle->id }}')" title="Edit"
+            <button type="button"
+                onclick="openTricycleEditModal({{ Illuminate\Support\Js::from($tricycleEditData) }})"
+                title="Edit"
                 class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

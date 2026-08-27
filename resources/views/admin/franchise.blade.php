@@ -24,7 +24,7 @@
             <x-franchise-delete-confirm-modal />
 
             @php
-                $hasActiveFranchiseFilters = request()->filled('authorized_no') || request()->filled('name') || request()->filled('plate') || request()->filled('status');
+                $hasActiveFranchiseFilters = request()->filled('authorized_no') || request()->filled('name') || request()->filled('route') || request()->filled('purpose') || request()->filled('status');
             @endphp
 
             <form id="franchise-filter-form" method="GET" action="{{ route('tricycle.franchise') }}"></form>
@@ -60,7 +60,7 @@
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-2 py-2">
-                                <input type="text" name="plate" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('plate') }}" oninput="debouncedFetchFranchiseFilter()"
+                                <input type="text" name="route" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('route') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search route..."
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-1.5 py-2">
@@ -105,7 +105,9 @@
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                 <input type="text" name="name" form="franchise-filter-form" data-filter-scope="mobile" value="{{ request('name') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search owner name..."
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
-                <input type="text" name="plate" form="franchise-filter-form" data-filter-scope="mobile" value="{{ request('plate') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search plate no..."
+                <input type="text" name="route" form="franchise-filter-form" data-filter-scope="mobile" value="{{ request('route') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search route..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <input type="text" name="purpose" form="franchise-filter-form" data-filter-scope="mobile" value="{{ request('purpose') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search purpose..."
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                 <select name="status" form="franchise-filter-form" data-filter-scope="mobile" onchange="debouncedFetchFranchiseFilter()"
                     class="w-full max-w-full truncate rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
@@ -139,9 +141,7 @@
             </div>
 
             <div id="franchise-edit-modals">
-                @foreach ($franchises as $franchise)
-                    <x-franchise-edit-modal :franchise="$franchise" :tricycles="$tricycles" />
-                @endforeach
+                <x-franchise-edit-modal :tricycles="$tricycles" />
             </div>
         </div>
     </div>
