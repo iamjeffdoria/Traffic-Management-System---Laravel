@@ -45,3 +45,7 @@
         {{ $idCards->links() }}
     @endunless
 </div>
+
+<div id="id-card-edit-modals">
+    <x-id-card-edit-modal />
+</div>

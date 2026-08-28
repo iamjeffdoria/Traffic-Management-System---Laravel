@@ -1,9 +1,26 @@
 @props(['idCard'])
 
+@php
+    $idCardEditData = [
+        'id' => $idCard->id,
+        'full_name' => $idCard->full_name,
+        'id_number' => $idCard->id_number,
+        'gender' => $idCard->gender,
+        'date_of_birth' => $idCard->date_of_birth->format('Y-m-d'),
+        'address' => $idCard->address,
+        'height' => $idCard->height,
+        'weight' => $idCard->weight,
+        'or_number' => $idCard->or_number,
+        'date_issued' => $idCard->date_issued->format('Y-m-d'),
+        'expiry_date' => $idCard->expiry_date->format('Y-m-d'),
+        'photo_url' => $idCard->photo_path ? asset('storage/' . $idCard->photo_path) : null,
+    ];
+@endphp
+
 <tr class="divide-x divide-gray-300 border-b border-gray-200 hover:bg-gray-50/60 transition-colors">
     <td class="px-4 py-4 align-top">
         <div class="flex items-center gap-0.5">
-            <button type="button" title="Edit"
+            <button type="button" onclick="openIdCardEditModal({{ Illuminate\Support\Js::from($idCardEditData) }})" title="Edit"
                 class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

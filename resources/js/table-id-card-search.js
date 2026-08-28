@@ -48,6 +48,7 @@ function fetchIdCardResults(url) {
                 'id-card-pagination-desktop',
                 'id-card-cards-mobile',
                 'id-card-pagination-mobile',
+                'id-card-edit-modals',
             ];
 
             targets.forEach((id) => {

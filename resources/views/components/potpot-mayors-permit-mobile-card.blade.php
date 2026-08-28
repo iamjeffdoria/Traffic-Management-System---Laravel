@@ -5,6 +5,23 @@
         'active' => 'bg-teal-500',
         'expired' => 'bg-red-600',
     ];
+
+    $potpotPermitEditData = [
+        'id' => $permit->id,
+        'name' => $permit->name,
+        'address' => $permit->address,
+        'control_no' => $permit->control_no,
+        'status' => $permit->status,
+        'business_name' => $permit->business_name,
+        'motorized_operation' => $permit->motorized_operation,
+        'or_no' => $permit->or_no,
+        'amount_paid' => $permit->amount_paid,
+        'issue_date' => $permit->issue_date->format('Y-m-d'),
+        'expiry_date' => $permit->expiry_date->format('Y-m-d'),
+        'issued_at' => $permit->issued_at,
+        'mayor' => $permit->mayor,
+        'quarter' => $permit->quarter,
+    ];
 @endphp
 
 <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
@@ -42,7 +59,7 @@
             <p class="text-gray-500 text-xs mt-1.5">{{ $permit->mayor }} · {{ $permit->issued_at }}</p>
         </div>
         <div class="flex items-center gap-1 shrink-0">
-            <button type="button" onclick="openModal('edit-potpot-mayors-permit-modal-{{ $permit->id }}')" title="Edit"
+            <button type="button" onclick="openPotpotPermitEditModal({{ Illuminate\Support\Js::from($potpotPermitEditData) }})" title="Edit"
                 class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

@@ -47,7 +47,5 @@
 </div>
 
 <div id="potpot-mayors-permit-edit-modals">
-    @foreach ($permits as $permit)
-        <x-potpot-mayors-permit-edit-modal :permit="$permit" />
-    @endforeach
+    <x-potpot-mayors-permit-edit-modal />
 </div>

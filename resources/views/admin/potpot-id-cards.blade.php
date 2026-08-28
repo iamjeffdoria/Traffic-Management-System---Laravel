@@ -29,6 +29,10 @@
 
             <x-id-card-delete-confirm-modal />
 
+            <div id="id-card-edit-modals">
+                <x-id-card-edit-modal />
+            </div>
+
             @php
                 $hasActiveIdCardFilters = request()->filled('full_name') || request()->filled('id_number');
             @endphp
