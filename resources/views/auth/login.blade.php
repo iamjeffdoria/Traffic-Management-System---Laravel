@@ -3,65 +3,19 @@
 @section('title', 'Admin Login')
 
 @section('content')
-<div class="min-h-screen flex">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-6 py-12">
+    <div class="w-full max-w-sm">
 
-    <!-- Left: Branding panel -->
-    <div class="hidden lg:flex lg:w-1/2 relative bg-gray-900 overflow-hidden">
-        <!-- Signature route-line motif -->
-        <svg class="absolute inset-0 w-full h-full opacity-[0.15]" viewBox="0 0 600 800" fill="none" preserveAspectRatio="xMidYMid slice">
-            <path d="M-50 650 C 100 650, 150 500, 280 480 S 450 350, 480 200 S 400 50, 550 -50"
-                stroke="white" stroke-width="2" stroke-dasharray="1 14" stroke-linecap="round" />
-            <path d="M-50 750 C 120 720, 200 600, 320 560 S 480 420, 500 280 S 550 100, 650 20"
-                stroke="white" stroke-width="2" stroke-dasharray="1 14" stroke-linecap="round" />
-            <circle cx="280" cy="480" r="5" fill="white" />
-            <circle cx="480" cy="200" r="5" fill="white" />
-            <circle cx="320" cy="560" r="5" fill="white" />
-            <circle cx="500" cy="280" r="5" fill="white" />
-        </svg>
-
-        <div class="relative z-10 flex flex-col justify-between p-12 w-full">
-            <div class="flex items-center gap-2">
-                <div class="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-sm">
-                    TMS
-                </div>
-                <span class="font-semibold text-white text-lg">Traffic Management System</span>
+        <div class="flex flex-col items-center gap-3 mb-8">
+            <div class="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-sm">
+                TMS
             </div>
-
-            <div class="max-w-md">
-                <span class="inline-block rounded-full bg-white/10 text-red-400 text-xs font-semibold px-4 py-1.5 mb-6">
-                    Municipal admin access
-                </span>
-                <h1 class="text-4xl font-bold text-white tracking-tight leading-tight">
-                    Every permit,
-                    <br />
-                    <span class="text-red-500">every route, one system.</span>
-                </h1>
-                <p class="mt-5 text-gray-400 leading-relaxed">
-                    Sign in to manage tricycle and pedicab registrations, issue permits,
-                    and keep your municipality's records up to date.
-                </p>
-            </div>
-
-            <p class="text-xs text-gray-500">
-                &copy; {{ date('Y') }} Traffic Management System. All rights reserved.
-            </p>
+            <span class="font-semibold text-gray-900 text-lg">Traffic Management System</span>
         </div>
-    </div>
 
-    <!-- Right: Form panel -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-white">
-        <div class="w-full max-w-sm">
-
-            <!-- Mobile-only logo (hidden on lg since the left panel shows it there) -->
-            <div class="lg:hidden flex items-center gap-2 mb-10">
-                <div class="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-sm">
-                    TMS
-                </div>
-                <span class="font-semibold text-gray-900 text-lg">Traffic Management System</span>
-            </div>
-
-            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Welcome back</h2>
-            <p class="mt-2 text-sm text-gray-500">Sign in with your admin credentials to continue.</p>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm px-8 py-8">
+            <h2 class="text-2xl font-bold text-gray-900 tracking-tight text-center">Welcome back</h2>
+            <p class="mt-2 text-sm text-gray-500 text-center">Sign in with your admin credentials to continue.</p>
 
             @if ($errors->any())
                 <div class="mt-6 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
@@ -109,12 +63,15 @@
                     Log In
                 </button>
             </form>
-
-            <p class="mt-8 text-center text-xs text-gray-400">
-                Trouble signing in? Contact your system administrator.
-            </p>
         </div>
-    </div>
 
+        <p class="mt-8 text-center text-xs text-gray-400">
+            Trouble signing in? Contact your system administrator.
+        </p>
+
+        <p class="mt-6 text-center text-xs text-gray-400">
+            &copy; {{ date('Y') }} Traffic Management System. All rights reserved.
+        </p>
+    </div>
 </div>
 @endsection
