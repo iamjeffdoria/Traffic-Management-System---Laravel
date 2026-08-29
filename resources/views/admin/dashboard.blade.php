@@ -150,7 +150,7 @@
                 </a>
             </div>
 
-            <!-- Recent activity -->
+            <!-- Recent activity + status breakdown -->
             <div class="grid lg:grid-cols-3 gap-4 mt-8">
                 <div class="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6">
                     <h2 class="text-sm font-semibold text-gray-900 mb-4">Recent Activity</h2>
@@ -219,4 +219,97 @@
                                 <span class="text-gray-600">Renewed</span>
                                 <span class="font-medium text-gray-900">21%</span>
                             </div>
-                            <div class="h-2 rounded-full bg-gray-100
+                            <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 21%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-600">Expired</span>
+                                <span class="font-medium text-gray-900">11%</span>
+                            </div>
+                            <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
+                                <div class="h-full bg-red-500 rounded-full" style="width: 11%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming renewals + TODA breakdown -->
+            <div class="grid lg:grid-cols-3 gap-4 mt-6">
+                <div class="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-sm font-semibold text-gray-900">Upcoming Renewals</h2>
+                        <a href="{{ route('tricycle.list') }}" class="text-xs text-red-600 font-medium">View all →</a>
+                    </div>
+                    <div class="divide-y divide-gray-100">
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">BOD-27173 — PL-3138</p>
+                                <p class="text-xs text-gray-500">Faye Ziemann</p>
+                            </div>
+                            <span class="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                                Expires Sep-03-26
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">BOD-19629 — KW-3102</p>
+                                <p class="text-xs text-gray-500">Claudia Roob</p>
+                            </div>
+                            <span class="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                                Expires Sep-07-26
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Franchise FR-84021</p>
+                                <p class="text-xs text-gray-500">Prof. Pete Stroman</p>
+                            </div>
+                            <span class="inline-block rounded-full bg-red-100 text-red-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                                Expires Sep-12-26
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">MTOP Case CN-3305</p>
+                                <p class="text-xs text-gray-500">Bernita Erdman</p>
+                            </div>
+                            <span class="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                                Expires Sep-18-26
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                    <h2 class="text-sm font-semibold text-gray-900 mb-4">Tricycles by TODA</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">PTL 001-A</span>
+                            <span class="text-xs font-medium text-gray-900">142</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">PSMTL 001-B</span>
+                            <span class="text-xs font-medium text-gray-900">98</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">PST 001-C</span>
+                            <span class="text-xs font-medium text-gray-900">76</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">PCRT-001-D</span>
+                            <span class="text-xs font-medium text-gray-900">54</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">PHC 001-E</span>
+                            <span class="text-xs font-medium text-gray-900">30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
