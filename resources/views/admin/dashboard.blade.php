@@ -11,6 +11,17 @@
         <div class="max-w-7xl mx-auto px-6 pt-8 pb-8">
             <p class="text-gray-500 text-sm mb-6">Welcome back, {{ auth()->user()->name }}.</p>
 
+            <!-- Alerts banner -->
+            <div class="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 flex items-center gap-3 mb-6">
+                <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                </svg>
+                <p class="text-sm text-amber-800">
+                    <span class="font-semibold">86 records</span> are expiring within the next 30 days across all modules.
+                </p>
+                <a href="{{ route('tricycle.list') }}" class="ml-auto text-xs font-semibold text-amber-800 whitespace-nowrap hover:underline">Review now →</a>
+            </div>
+
             <!-- Stat cards -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="rounded-2xl border border-gray-200 bg-white p-6">
@@ -305,6 +316,114 @@
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-gray-600">PHC 001-E</span>
                             <span class="text-xs font-medium text-gray-900">30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly registrations trend -->
+            <div class="rounded-2xl border border-gray-200 bg-white p-6 mt-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-sm font-semibold text-gray-900">Registrations This Year</h2>
+                    <span class="text-xs text-gray-400">Tricycles + Franchises + Permits</span>
+                </div>
+                <div class="flex items-end gap-3 h-40">
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 40%"></div>
+                        <span class="text-[10px] text-gray-400">Jan</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 55%"></div>
+                        <span class="text-[10px] text-gray-400">Feb</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 48%"></div>
+                        <span class="text-[10px] text-gray-400">Mar</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 70%"></div>
+                        <span class="text-[10px] text-gray-400">Apr</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 62%"></div>
+                        <span class="text-[10px] text-gray-400">May</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 80%"></div>
+                        <span class="text-[10px] text-gray-400">Jun</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 75%"></div>
+                        <span class="text-[10px] text-gray-400">Jul</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-2">
+                        <div class="w-full bg-red-600 rounded-t-lg" style="height: 95%"></div>
+                        <span class="text-[10px] text-gray-900 font-medium">Aug</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin team + system snapshot -->
+            <div class="grid lg:grid-cols-3 gap-4 mt-6">
+                <div class="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-sm font-semibold text-gray-900">Admin Team</h2>
+                        @if (auth()->user()->isSuperadmin())
+                            <a href="{{ route('admin.users') }}" class="text-xs text-red-600 font-medium">Manage →</a>
+                        @endif
+                    </div>
+                    <div class="divide-y divide-gray-100">
+                        <div class="flex items-center justify-between py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-red-600 text-white text-xs font-semibold flex items-center justify-center">S</div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Super Admin</p>
+                                    <p class="text-xs text-gray-500">superadmin@tms.gov</p>
+                                </div>
+                            </div>
+                            <span class="inline-block rounded-full bg-gray-900 text-white text-xs font-semibold px-2.5 py-1">Superadmin</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-semibold flex items-center justify-center">P</div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Potpot Officer</p>
+                                    <p class="text-xs text-gray-500">potpot@tms.gov</p>
+                                </div>
+                            </div>
+                            <span class="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-1">Potpot Admin</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white text-xs font-semibold flex items-center justify-center">T</div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Tricycle Officer</p>
+                                    <p class="text-xs text-gray-500">tricycle@tms.gov</p>
+                                </div>
+                            </div>
+                            <span class="inline-block rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold px-2.5 py-1">Tricycle Admin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                    <h2 class="text-sm font-semibold text-gray-900 mb-4">System Snapshot</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">Total records</span>
+                            <span class="text-sm font-semibold text-gray-900">3,842</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">Admin accounts</span>
+                            <span class="text-sm font-semibold text-gray-900">3</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">Last backup</span>
+                            <span class="text-sm font-semibold text-gray-900">Today, 3:00 AM</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-600">System version</span>
+                            <span class="text-sm font-semibold text-gray-900">v2.1.0</span>
                         </div>
                     </div>
                 </div>
