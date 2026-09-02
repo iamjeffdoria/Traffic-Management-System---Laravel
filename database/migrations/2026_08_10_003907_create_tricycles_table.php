@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('make_kind');
             $table->string('status')->default('active'); // e.g. active, renewed, expired
-            $table->string('engine_motor_no');
-            $table->string('chassis_no');
+            $table->string('engine_motor_no')->nullable();
+            $table->string('chassis_no')->nullable();
             $table->date('date_registered');
             $table->date('date_expired');
             $table->string('toda')->nullable();

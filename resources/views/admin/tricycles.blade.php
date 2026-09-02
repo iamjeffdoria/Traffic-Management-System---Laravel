@@ -30,6 +30,8 @@
 
             <x-tricycle-create-modal />
 
+            <x-tricycle-import-modal />
+
             <x-tricycle-delete-confirm-modal />
 
             @php
