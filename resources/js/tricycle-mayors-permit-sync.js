@@ -13,3 +13,15 @@ function syncPermitTricycleFields(selectEl) {
     if (addressDisplay) addressDisplay.value = selected.dataset.address || '';
 }
 window.syncPermitTricycleFields = syncPermitTricycleFields;
+
+function onTricycleSearchSelect(optionEl, root) {
+    const container = root.closest('[data-permit-form]');
+    if (!container) return;
+
+    const nameDisplay = container.querySelector('[data-permit-name-display]');
+    const addressDisplay = container.querySelector('[data-permit-address-display]');
+
+    if (nameDisplay) nameDisplay.value = optionEl.dataset.name || '';
+    if (addressDisplay) addressDisplay.value = optionEl.dataset.address || '';
+}
+window.onTricycleSearchSelect = onTricycleSearchSelect;
