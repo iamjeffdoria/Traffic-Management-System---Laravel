@@ -16,23 +16,30 @@
         <form id="mtop-create-form" data-mtop-form method="POST" action="{{ route('tricycle.mtop.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
             @csrf
 
-            <div class="sm:col-span-2">
+            <div class="sm:col-span-2 relative" data-searchable-select data-on-select="onMtopSearchSelect">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Tricycle</label>
-                <select name="tricycle_id" required onchange="syncMtopTricycleFields(this)"
+                <input type="text" data-search-input autocomplete="off" placeholder="Search by body no, plate no, or owner name..."
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
-                    <option value="" disabled selected>Select tricycle</option>
+                <input type="hidden" name="tricycle_id" data-search-hidden required>
+
+                <div data-search-dropdown class="hidden absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
                     @foreach ($tricycles as $tricycle)
-                        <option value="{{ $tricycle->id }}"
+                        <button type="button" data-option
+                            data-id="{{ $tricycle->id }}"
+                            data-label="{{ $tricycle->body_number }} — {{ $tricycle->plate_no }} ({{ $tricycle->name }})"
+                            data-search="{{ strtolower($tricycle->body_number . ' ' . $tricycle->plate_no . ' ' . $tricycle->name) }}"
                             data-name="{{ $tricycle->name }}"
                             data-address="{{ $tricycle->address }}"
                             data-make="{{ $tricycle->make_kind }}"
                             data-motor="{{ $tricycle->engine_motor_no }}"
                             data-chassis="{{ $tricycle->chassis_no }}"
-                            data-plate="{{ $tricycle->plate_no }}">
+                            data-plate="{{ $tricycle->plate_no }}"
+                            class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 transition-colors">
                             {{ $tricycle->body_number }} — {{ $tricycle->plate_no }} ({{ $tricycle->name }})
-                        </option>
+                        </button>
                     @endforeach
-                </select>
+                    <p data-no-results class="hidden px-4 py-2.5 text-sm text-gray-400">No tricycles found.</p>
+                </div>
             </div>
 
             <div>

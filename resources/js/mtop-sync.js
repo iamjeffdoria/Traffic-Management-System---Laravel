@@ -22,3 +22,23 @@ function syncMtopTricycleFields(selectEl) {
     });
 }
 window.syncMtopTricycleFields = syncMtopTricycleFields;
+
+function onMtopSearchSelect(optionEl, root) {
+    const container = root.closest('[data-mtop-form]');
+    if (!container) return;
+
+    const fieldMap = {
+        name: 'data-mtop-name-display',
+        address: 'data-mtop-address-display',
+        make: 'data-mtop-make-display',
+        motor: 'data-mtop-motor-display',
+        chassis: 'data-mtop-chassis-display',
+        plate: 'data-mtop-plate-display',
+    };
+
+    Object.entries(fieldMap).forEach(([dataKey, attr]) => {
+        const field = container.querySelector(`[${attr}]`);
+        if (field) field.value = optionEl.dataset[dataKey] || '';
+    });
+}
+window.onMtopSearchSelect = onMtopSearchSelect;

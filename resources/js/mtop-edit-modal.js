@@ -5,7 +5,17 @@ function openMtopEditModal(mtop) {
     const urlTemplate = form.dataset.updateUrlTemplate;
     form.action = urlTemplate.replace('__ID__', mtop.id);
 
-    form.querySelector('[name="tricycle_id"]').value = mtop.tricycle_id ?? '';
+    const searchRoot = form.querySelector('[data-searchable-select]');
+    if (searchRoot) {
+        const hidden = searchRoot.querySelector('[data-search-hidden]');
+        const input = searchRoot.querySelector('[data-search-input]');
+        const option = searchRoot.querySelector(`[data-option][data-id="${mtop.tricycle_id}"]`);
+
+        hidden.value = mtop.tricycle_id ?? '';
+        input.value = option ? option.dataset.label : (mtop.tricycle_name ?? '');
+        input.classList.remove('border-red-600', 'ring-2', 'ring-red-600');
+    }
+
     form.querySelector('[data-mtop-name-display]').value = mtop.tricycle_name ?? '';
     form.querySelector('[data-mtop-address-display]').value = mtop.tricycle_address ?? '';
     form.querySelector('[data-mtop-make-display]').value = mtop.tricycle_make ?? '';
