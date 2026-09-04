@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Franchise;
 use App\Models\Tricycle;
+use App\Imports\FranchisesImport;
+use App\Exports\FranchisesExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FranchiseController extends Controller
 {
@@ -94,5 +97,33 @@ class FranchiseController extends Controller
         $franchise->load('tricycle');
 
         return view('admin.franchise-print', compact('franchise'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new FranchisesExport, 'franchises-' . now()->format('Y-m-d') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        $import = new FranchisesImport;
+        Excel::import($import, $request->file('file'));
+
+        $failures = $import->getRowFailures();
+
+        if (!empty($failures)) {
+            $messages = array_map(
+                fn ($f) => 'Row ' . $f['row'] . ': ' . implode(', ', $f['errors']),
+                $failures
+            );
+
+            return back()->withErrors($messages);
+        }
+
+        return redirect()->route('tricycle.franchise')->with('success', 'Franchises imported successfully.');
     }
 }

@@ -21,6 +21,8 @@
 
             <x-franchise-create-modal :tricycles="$tricycles" />
 
+            <x-franchise-import-modal />
+
             <x-franchise-delete-confirm-modal />
 
             @php

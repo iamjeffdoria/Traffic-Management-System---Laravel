@@ -87,6 +87,8 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::put('/admin/tricycles/franchise/{franchise}', [FranchiseController::class, 'update'])->name('tricycle.franchise.update');
     Route::delete('/admin/tricycles/franchise/{franchise}', [FranchiseController::class, 'destroy'])->name('tricycle.franchise.destroy');
     Route::get('/admin/tricycles/franchise/{franchise}/print', [FranchiseController::class, 'print'])->name('tricycle.franchise.print');
+    Route::get('/admin/tricycles/franchise/export', [FranchiseController::class, 'export'])->name('tricycle.franchise.export');
+    Route::post('/admin/tricycles/franchise/import', [FranchiseController::class, 'import'])->name('tricycle.franchise.import');
 });
 
 

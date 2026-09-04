@@ -25,4 +25,5 @@ import './id-card-edit-modal.js';
 import './potpot-mayors-permit-edit-modal.js';
 import './tricycle-import-modal.js';
 import './tricycle-mayors-permit-import-modal.js';
+import './franchise-import-modal.js';
 import './searchable-select.js';
