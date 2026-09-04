@@ -5,7 +5,17 @@ function openFranchiseEditModal(franchise) {
     const urlTemplate = form.dataset.updateUrlTemplate;
     form.action = urlTemplate.replace('__ID__', franchise.id);
 
-    form.querySelector('[name="tricycle_id"]').value = franchise.tricycle_id ?? '';
+    const searchRoot = form.querySelector('[data-searchable-select]');
+    if (searchRoot) {
+        const hidden = searchRoot.querySelector('[data-search-hidden]');
+        const input = searchRoot.querySelector('[data-search-input]');
+        const option = searchRoot.querySelector(`[data-option][data-id="${franchise.tricycle_id}"]`);
+
+        hidden.value = franchise.tricycle_id ?? '';
+        input.value = option ? option.dataset.label : (franchise.tricycle_name ?? '');
+        input.classList.remove('border-red-600', 'ring-2', 'ring-red-600');
+    }
+
     form.querySelector('[data-franchise-name-display]').value = franchise.tricycle_name ?? '';
     form.querySelector('[data-franchise-plate-display]').value = franchise.tricycle_plate ?? '';
     form.querySelector('[data-franchise-motor-display]').value = franchise.tricycle_motor ?? '';

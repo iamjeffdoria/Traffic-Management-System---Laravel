@@ -18,3 +18,19 @@ function syncFranchiseTricycleFields(selectEl) {
     if (chassisDisplay) chassisDisplay.value = selected.dataset.chassis || '';
 }
 window.syncFranchiseTricycleFields = syncFranchiseTricycleFields;
+
+function onFranchiseSearchSelect(optionEl, root) {
+    const container = root.closest('[data-franchise-form]');
+    if (!container) return;
+
+    const nameDisplay = container.querySelector('[data-franchise-name-display]');
+    const plateDisplay = container.querySelector('[data-franchise-plate-display]');
+    const motorDisplay = container.querySelector('[data-franchise-motor-display]');
+    const chassisDisplay = container.querySelector('[data-franchise-chassis-display]');
+
+    if (nameDisplay) nameDisplay.value = optionEl.dataset.name || '';
+    if (plateDisplay) plateDisplay.value = optionEl.dataset.plate || '';
+    if (motorDisplay) motorDisplay.value = optionEl.dataset.motor || '';
+    if (chassisDisplay) chassisDisplay.value = optionEl.dataset.chassis || '';
+}
+window.onFranchiseSearchSelect = onFranchiseSearchSelect;

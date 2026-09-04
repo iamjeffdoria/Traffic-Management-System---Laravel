@@ -15,12 +15,12 @@ function initSearchableSelect(root) {
         dropdown.classList.add('hidden');
     }
 
-    function filterOptions() {
-        const query = input.value.trim().toLowerCase();
+    function filterOptions(query = input.value) {
+        const normalizedQuery = query.trim().toLowerCase();
         let anyVisible = false;
 
         options.forEach((opt) => {
-            const match = opt.dataset.search.includes(query);
+            const match = opt.dataset.search.includes(normalizedQuery);
             opt.classList.toggle('hidden', !match);
             if (match) anyVisible = true;
         });
@@ -35,7 +35,11 @@ function initSearchableSelect(root) {
             suppressNextFocus = false;
             return;
         }
-        filterOptions();
+        // Show the full list on focus rather than re-filtering against
+        // whatever's already displayed (e.g. the selected option's full
+        // label on edit modals) — that text won't match the plain
+        // data-search string and would wrongly show "No results".
+        filterOptions('');
         openDropdown();
     });
 
