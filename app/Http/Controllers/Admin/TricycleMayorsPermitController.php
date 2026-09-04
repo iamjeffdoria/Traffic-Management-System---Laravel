@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\TricycleMayorsPermit;
 use App\Models\Tricycle;
+use App\Imports\TricycleMayorsPermitsImport;
+use App\Exports\TricycleMayorsPermitsExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TricycleMayorsPermitController extends Controller
 {
@@ -92,5 +95,33 @@ class TricycleMayorsPermitController extends Controller
         $permit->load('tricycle');
 
         return view('admin.tricycle-mayors-permit-print', compact('permit'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new TricycleMayorsPermitsExport, 'tricycle-mayors-permits-' . now()->format('Y-m-d') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        $import = new TricycleMayorsPermitsImport;
+        Excel::import($import, $request->file('file'));
+
+        $failures = $import->getRowFailures();
+
+        if (!empty($failures)) {
+            $messages = array_map(
+                fn ($f) => 'Row ' . $f['row'] . ': ' . implode(', ', $f['errors']),
+                $failures
+            );
+
+            return back()->withErrors($messages);
+        }
+
+        return redirect()->route('tricycle.mayors-permit')->with('success', 'Permits imported successfully.');
     }
 }

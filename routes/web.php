@@ -73,6 +73,8 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::put('/admin/tricycles/mayors-permit/{permit}', [TricycleMayorsPermitController::class, 'update'])->name('tricycle.mayors-permit.update');
     Route::delete('/admin/tricycles/mayors-permit/{permit}', [TricycleMayorsPermitController::class, 'destroy'])->name('tricycle.mayors-permit.destroy');
     Route::get('/admin/tricycles/mayors-permit/{permit}/print', [TricycleMayorsPermitController::class, 'print'])->name('tricycle.mayors-permit.print');
+    Route::get('/admin/tricycles/mayors-permit/export', [TricycleMayorsPermitController::class, 'export'])->name('tricycle.mayors-permit.export');
+    Route::post('/admin/tricycles/mayors-permit/import', [TricycleMayorsPermitController::class, 'import'])->name('tricycle.mayors-permit.import');
 
     Route::get('/admin/tricycles/mtop', [MtopController::class, 'index'])->name('tricycle.mtop');
     Route::post('/admin/tricycles/mtop', [MtopController::class, 'store'])->name('tricycle.mtop.store');

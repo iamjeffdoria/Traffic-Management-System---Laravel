@@ -27,6 +27,8 @@
 
             <x-tricycle-mayors-permit-create-modal :tricycles="$tricycles" />
 
+            <x-tricycle-mayors-permit-import-modal />
+
             <x-tricycle-mayors-permit-delete-confirm-modal />
 
             @php
