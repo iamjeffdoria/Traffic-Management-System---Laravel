@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Mtop;
 use App\Models\Tricycle;
+use App\Imports\MtopsImport;
+use App\Exports\MtopsExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MtopController extends Controller
 {
@@ -82,5 +85,33 @@ class MtopController extends Controller
         $mtop->load('tricycle');
 
         return view('admin.mtop-print', compact('mtop'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new MtopsExport, 'mtops-' . now()->format('Y-m-d') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        $import = new MtopsImport;
+        Excel::import($import, $request->file('file'));
+
+        $failures = $import->getRowFailures();
+
+        if (!empty($failures)) {
+            $messages = array_map(
+                fn ($f) => 'Row ' . $f['row'] . ': ' . implode(', ', $f['errors']),
+                $failures
+            );
+
+            return back()->withErrors($messages);
+        }
+
+        return redirect()->route('tricycle.mtop')->with('success', 'MTOP records imported successfully.');
     }
 }

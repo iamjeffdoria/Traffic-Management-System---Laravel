@@ -21,6 +21,7 @@ import './tricycle-edit-modal.js';
 import './franchise-edit-modal.js';
 import './tricycle-mayors-permit-edit-modal.js';
 import './mtop-edit-modal.js';
+import './mtop-import-modal.js';
 import './id-card-edit-modal.js';
 import './potpot-mayors-permit-edit-modal.js';
 import './tricycle-import-modal.js';

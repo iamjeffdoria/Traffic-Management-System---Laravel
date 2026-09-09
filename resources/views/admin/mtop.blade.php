@@ -27,6 +27,8 @@
 
             <x-mtop-create-modal :tricycles="$tricycles" />
 
+            <x-mtop-import-modal />
+
             <x-mtop-delete-confirm-modal />
 
             @php
