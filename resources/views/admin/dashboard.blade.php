@@ -17,7 +17,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                 </svg>
                 <p class="text-sm text-amber-800">
-                    <span class="font-semibold">86 records</span> are expiring within the next 30 days across all modules.
+                    <span class="font-semibold">{{ $expiringSoon }} {{ Str::plural('record', $expiringSoon) }}</span> are expiring within the next 30 days across all modules.
                 </p>
                 <a href="{{ route('tricycle.list') }}" class="ml-auto text-xs font-semibold text-amber-800 whitespace-nowrap hover:underline">Review now →</a>
             </div>
@@ -28,7 +28,7 @@
                     <div class="flex items-start justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Registered Vehicles</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">2,400+</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-1">{{ number_format($totalTricycles) }}</p>
                         </div>
                         <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
                             <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,14 +36,13 @@
                             </svg>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-600 font-medium mt-3">↑ 4.2% this month</p>
                 </div>
 
                 <div class="rounded-2xl border border-gray-200 bg-white p-6">
                     <div class="flex items-start justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Active Permits</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">1,100+</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-1">{{ number_format($activePermits) }}</p>
                         </div>
                         <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center shrink-0">
                             <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,14 +50,13 @@
                             </svg>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-600 font-medium mt-3">↑ 1.8% this month</p>
                 </div>
 
                 <div class="rounded-2xl border border-gray-200 bg-white p-6">
                     <div class="flex items-start justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Expiring Soon</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">86</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-1">{{ number_format($expiringSoon) }}</p>
                         </div>
                         <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
                             <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +71,7 @@
                     <div class="flex items-start justify-between">
                         <div>
                             <p class="text-sm text-gray-500">ID Cards Issued</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">640+</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-1">{{ number_format($idCardsIssued) }}</p>
                         </div>
                         <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center shrink-0">
                             <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +79,6 @@
                             </svg>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-600 font-medium mt-3">↑ 6.5% this month</p>
                 </div>
             </div>
 
@@ -166,50 +163,21 @@
                 <div class="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6">
                     <h2 class="text-sm font-semibold text-gray-900 mb-4">Recent Activity</h2>
                     <div class="space-y-4">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                        @forelse ($recentActivity as $activity)
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-sm text-gray-900">{{ $activity['text'] }}</p>
+                                    <p class="text-xs text-gray-400 mt-0.5">{{ $activity['time']->diffForHumans() }}</p>
+                                </div>
                             </div>
-                            <div class="min-w-0">
-                                <p class="text-sm text-gray-900">New tricycle <span class="font-medium">BOD-91125</span> registered</p>
-                                <p class="text-xs text-gray-400 mt-0.5">2 hours ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
-                            </div>
-                            <div class="min-w-0">
-                                <p class="text-sm text-gray-900">Franchise <span class="font-medium">FR-84021</span> updated</p>
-                                <p class="text-xs text-gray-400 mt-0.5">5 hours ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                                </svg>
-                            </div>
-                            <div class="min-w-0">
-                                <p class="text-sm text-gray-900">Mayor's Permit <span class="font-medium">MP-2291</span> is expiring soon</p>
-                                <p class="text-xs text-gray-400 mt-0.5">Yesterday</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center shrink-0 mt-0.5">
-                                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </div>
-                            <div class="min-w-0">
-                                <p class="text-sm text-gray-900">ID card <span class="font-medium">PID-00456</span> was removed</p>
-                                <p class="text-xs text-gray-400 mt-0.5">2 days ago</p>
-                            </div>
-                        </div>
+                        @empty
+                            <p class="text-sm text-gray-400">No recent activity yet.</p>
+                        @endforelse
                     </div>
                 </div>
 
@@ -219,28 +187,28 @@
                         <div>
                             <div class="flex justify-between text-xs mb-1">
                                 <span class="text-gray-600">Active</span>
-                                <span class="font-medium text-gray-900">68%</span>
+                                <span class="font-medium text-gray-900">{{ $statusBreakdown['active'] }}%</span>
                             </div>
                             <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
-                                <div class="h-full bg-emerald-500 rounded-full" style="width: 68%"></div>
+                                <div class="h-full bg-emerald-500 rounded-full" style="width: {{ $statusBreakdown['active'] }}%"></div>
                             </div>
                         </div>
                         <div>
                             <div class="flex justify-between text-xs mb-1">
                                 <span class="text-gray-600">Renewed</span>
-                                <span class="font-medium text-gray-900">21%</span>
+                                <span class="font-medium text-gray-900">{{ $statusBreakdown['renewed'] }}%</span>
                             </div>
                             <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
-                                <div class="h-full bg-blue-500 rounded-full" style="width: 21%"></div>
+                                <div class="h-full bg-blue-500 rounded-full" style="width: {{ $statusBreakdown['renewed'] }}%"></div>
                             </div>
                         </div>
                         <div>
                             <div class="flex justify-between text-xs mb-1">
                                 <span class="text-gray-600">Expired</span>
-                                <span class="font-medium text-gray-900">11%</span>
+                                <span class="font-medium text-gray-900">{{ $statusBreakdown['expired'] }}%</span>
                             </div>
                             <div class="h-2 rounded-full bg-gray-100 overflow-hidden">
-                                <div class="h-full bg-red-500 rounded-full" style="width: 11%"></div>
+                                <div class="h-full bg-red-500 rounded-full" style="width: {{ $statusBreakdown['expired'] }}%"></div>
                             </div>
                         </div>
                     </div>
@@ -255,68 +223,33 @@
                         <a href="{{ route('tricycle.list') }}" class="text-xs text-red-600 font-medium">View all →</a>
                     </div>
                     <div class="divide-y divide-gray-100">
-                        <div class="flex items-center justify-between py-3">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">BOD-27173 — PL-3138</p>
-                                <p class="text-xs text-gray-500">Faye Ziemann</p>
+                        @forelse ($upcomingRenewals as $renewal)
+                            <div class="flex items-center justify-between py-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">{{ $renewal['label'] }}</p>
+                                    <p class="text-xs text-gray-500">{{ $renewal['sub'] }}</p>
+                                </div>
+                                <span class="inline-block rounded-full {{ $renewal['date']->diffInDays(now()) <= 7 ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700' }} text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                                    Expires {{ $renewal['date']->format('M-d-y') }}
+                                </span>
                             </div>
-                            <span class="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
-                                Expires Sep-03-26
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between py-3">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">BOD-19629 — KW-3102</p>
-                                <p class="text-xs text-gray-500">Claudia Roob</p>
-                            </div>
-                            <span class="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
-                                Expires Sep-07-26
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between py-3">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Franchise FR-84021</p>
-                                <p class="text-xs text-gray-500">Prof. Pete Stroman</p>
-                            </div>
-                            <span class="inline-block rounded-full bg-red-100 text-red-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
-                                Expires Sep-12-26
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between py-3">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">MTOP Case CN-3305</p>
-                                <p class="text-xs text-gray-500">Bernita Erdman</p>
-                            </div>
-                            <span class="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
-                                Expires Sep-18-26
-                            </span>
-                        </div>
+                        @empty
+                            <p class="text-sm text-gray-400 py-3">Nothing expiring in the next 30 days.</p>
+                        @endforelse
                     </div>
                 </div>
 
                 <div class="rounded-2xl border border-gray-200 bg-white p-6">
                     <h2 class="text-sm font-semibold text-gray-900 mb-4">Tricycles by TODA</h2>
                     <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">PTL 001-A</span>
-                            <span class="text-xs font-medium text-gray-900">142</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">PSMTL 001-B</span>
-                            <span class="text-xs font-medium text-gray-900">98</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">PST 001-C</span>
-                            <span class="text-xs font-medium text-gray-900">76</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">PCRT-001-D</span>
-                            <span class="text-xs font-medium text-gray-900">54</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">PHC 001-E</span>
-                            <span class="text-xs font-medium text-gray-900">30</span>
-                        </div>
+                        @forelse (\App\Models\Tricycle::TODA_OPTIONS as $value => $label)
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-gray-600">{{ $label }}</span>
+                                <span class="text-xs font-medium text-gray-900">{{ $todaCounts[$value] ?? 0 }}</span>
+                            </div>
+                        @empty
+                            <p class="text-sm text-gray-400">No TODA data yet.</p>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -328,38 +261,12 @@
                     <span class="text-xs text-gray-400">Tricycles + Franchises + Permits</span>
                 </div>
                 <div class="flex items-end gap-3 h-40">
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 40%"></div>
-                        <span class="text-[10px] text-gray-400">Jan</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 55%"></div>
-                        <span class="text-[10px] text-gray-400">Feb</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 48%"></div>
-                        <span class="text-[10px] text-gray-400">Mar</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 70%"></div>
-                        <span class="text-[10px] text-gray-400">Apr</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 62%"></div>
-                        <span class="text-[10px] text-gray-400">May</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 80%"></div>
-                        <span class="text-[10px] text-gray-400">Jun</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-100 rounded-t-lg" style="height: 75%"></div>
-                        <span class="text-[10px] text-gray-400">Jul</span>
-                    </div>
-                    <div class="flex-1 flex flex-col items-center gap-2">
-                        <div class="w-full bg-red-600 rounded-t-lg" style="height: 95%"></div>
-                        <span class="text-[10px] text-gray-900 font-medium">Aug</span>
-                    </div>
+                    @foreach ($monthlyRegistrations as $index => $month)
+                        <div class="flex-1 flex flex-col items-center gap-2">
+                            <div class="w-full {{ $index === $monthlyRegistrations->count() - 1 ? 'bg-red-600' : 'bg-red-100' }} rounded-t-lg" style="height: {{ max(($month['count'] / $maxMonthly) * 100, 4) }}%"></div>
+                            <span class="text-[10px] {{ $index === $monthlyRegistrations->count() - 1 ? 'text-gray-900 font-medium' : 'text-gray-400' }}">{{ $month['label'] }}</span>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -372,37 +279,35 @@
                             <a href="{{ route('admin.users') }}" class="text-xs text-red-600 font-medium">Manage →</a>
                         @endif
                     </div>
+                    @php
+                        $roleAvatarColors = [
+                            'superadmin' => 'bg-red-600',
+                            'potpot_admin' => 'bg-blue-600',
+                            'tricycle_admin' => 'bg-emerald-600',
+                        ];
+                        $roleBadgeColors = [
+                            'superadmin' => 'bg-gray-900 text-white',
+                            'potpot_admin' => 'bg-blue-100 text-blue-700',
+                            'tricycle_admin' => 'bg-emerald-100 text-emerald-700',
+                        ];
+                    @endphp
                     <div class="divide-y divide-gray-100">
-                        <div class="flex items-center justify-between py-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-red-600 text-white text-xs font-semibold flex items-center justify-center">S</div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900">Super Admin</p>
-                                    <p class="text-xs text-gray-500">superadmin@tms.gov</p>
+                        @foreach ($admins->take(5) as $admin)
+                            <div class="flex items-center justify-between py-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full {{ $roleAvatarColors[$admin->role] ?? 'bg-slate-600' }} text-white text-xs font-semibold flex items-center justify-center">
+                                        {{ strtoupper(substr($admin->name, 0, 1)) }}
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">{{ $admin->name }}</p>
+                                        <p class="text-xs text-gray-500">{{ $admin->email }}</p>
+                                    </div>
                                 </div>
+                                <span class="inline-block rounded-full {{ $roleBadgeColors[$admin->role] ?? 'bg-slate-100 text-slate-700' }} text-xs font-semibold px-2.5 py-1">
+                                    {{ str_replace('_', ' ', ucfirst($admin->role)) }}
+                                </span>
                             </div>
-                            <span class="inline-block rounded-full bg-gray-900 text-white text-xs font-semibold px-2.5 py-1">Superadmin</span>
-                        </div>
-                        <div class="flex items-center justify-between py-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-semibold flex items-center justify-center">P</div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900">Potpot Officer</p>
-                                    <p class="text-xs text-gray-500">potpot@tms.gov</p>
-                                </div>
-                            </div>
-                            <span class="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-1">Potpot Admin</span>
-                        </div>
-                        <div class="flex items-center justify-between py-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white text-xs font-semibold flex items-center justify-center">T</div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-900">Tricycle Officer</p>
-                                    <p class="text-xs text-gray-500">tricycle@tms.gov</p>
-                                </div>
-                            </div>
-                            <span class="inline-block rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold px-2.5 py-1">Tricycle Admin</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -411,19 +316,11 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-gray-600">Total records</span>
-                            <span class="text-sm font-semibold text-gray-900">3,842</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ number_format($totalRecords) }}</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-xs text-gray-600">Admin accounts</span>
-                            <span class="text-sm font-semibold text-gray-900">3</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">Last backup</span>
-                            <span class="text-sm font-semibold text-gray-900">Today, 3:00 AM</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-gray-600">System version</span>
-                            <span class="text-sm font-semibold text-gray-900">v2.1.0</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ $admins->count() }}</span>
                         </div>
                     </div>
                 </div>

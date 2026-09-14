@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PotpotMayorsPermitController;
 use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -31,9 +32,7 @@ Route::middleware('guest')->group(function () {
 // Auth-only: logout + a protected admin dashboard (any logged-in role can see it)
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 // Potpot admin + superadmin only
