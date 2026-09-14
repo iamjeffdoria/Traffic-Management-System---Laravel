@@ -36,8 +36,8 @@
             <form id="potpot-mayors-permit-filter-form" method="GET" action="{{ route('potpot.mayors-permit') }}"></form>
 
             <!-- Desktop table -->
-            <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto">
-                <table class="w-full text-sm border-collapse table-fixed">
+            <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto isolate" style="max-height: 600px; overflow-y: auto;">
+                <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
                         <col class="w-32">
                         <col class="w-[12%]">
@@ -48,7 +48,7 @@
                         <col class="w-[16%]">
                         <col class="w-[15%]">
                     </colgroup>
-                    <thead class="bg-gray-50 text-left text-gray-900">
+                    <thead class="text-left text-gray-900 bg-gray-50 sticky top-0 z-30">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
                             <th class="px-6 py-3 font-bold w-32">Actions</th>
                             <th class="px-6 py-3 font-bold">Status</th>
