@@ -27,6 +27,8 @@
 
             <x-id-card-create-modal />
 
+            <x-id-card-import-modal />
+
             <x-id-card-delete-confirm-modal />
 
             <div id="id-card-edit-modals">
