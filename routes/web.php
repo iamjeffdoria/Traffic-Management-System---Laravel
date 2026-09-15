@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -33,6 +34,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Potpot admin + superadmin only

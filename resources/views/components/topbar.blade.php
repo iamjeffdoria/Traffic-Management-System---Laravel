@@ -15,13 +15,13 @@
             </button>
 
             <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-44 rounded-xl border border-gray-200 bg-white shadow-lg py-1 z-30">
-                <a href="#"
-                    class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                <button type="button" onclick="toggleDropdown('profile-dropdown'); openModal('profile-edit-modal')"
+                    class="w-full flex items-center gap-2 text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                     Profile
-                </a>
+                </button>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
@@ -35,4 +35,6 @@
             </div>
         </div>
     </div>
+
+    <x-profile-edit-modal />
 </header>
