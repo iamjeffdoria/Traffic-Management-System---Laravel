@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PotpotMayorsPermit;
+use App\Imports\PotpotMayorsPermitsImport;
+use App\Exports\PotpotMayorsPermitsExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PotpotMayorsPermitController extends Controller
 {
@@ -86,5 +89,33 @@ class PotpotMayorsPermitController extends Controller
     public function print(PotpotMayorsPermit $permit)
     {
         return view('admin.potpot-mayors-permit-print', compact('permit'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new PotpotMayorsPermitsExport, 'potpot-mayors-permits-' . now()->format('Y-m-d') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        $import = new PotpotMayorsPermitsImport;
+        Excel::import($import, $request->file('file'));
+
+        $failures = $import->getRowFailures();
+
+        if (!empty($failures)) {
+            $messages = array_map(
+                fn ($f) => 'Row ' . $f['row'] . ': ' . implode(', ', $f['errors']),
+                $failures
+            );
+
+            return back()->withErrors($messages);
+        }
+
+        return redirect()->route('potpot.mayors-permit')->with('success', 'Permits imported successfully.');
     }
 }

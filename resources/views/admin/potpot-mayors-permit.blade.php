@@ -27,6 +27,8 @@
 
             <x-potpot-mayors-permit-create-modal />
 
+            <x-potpot-mayors-permit-import-modal />
+
             <x-potpot-mayors-permit-delete-confirm-modal />
 
             @php

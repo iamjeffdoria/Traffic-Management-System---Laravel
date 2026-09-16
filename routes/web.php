@@ -56,6 +56,8 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::put('/admin/potpot/mayors-permit/{permit}', [PotpotMayorsPermitController::class, 'update'])->name('potpot.mayors-permit.update');
     Route::delete('/admin/potpot/mayors-permit/{permit}', [PotpotMayorsPermitController::class, 'destroy'])->name('potpot.mayors-permit.destroy');
     Route::get('/admin/potpot/mayors-permit/{permit}/print', [PotpotMayorsPermitController::class, 'print'])->name('potpot.mayors-permit.print');
+    Route::get('/admin/potpot/mayors-permit/export', [PotpotMayorsPermitController::class, 'export'])->name('potpot.mayors-permit.export');
+    Route::post('/admin/potpot/mayors-permit/import', [PotpotMayorsPermitController::class, 'import'])->name('potpot.mayors-permit.import');
 });
 
 // Tricycle admin + superadmin only
