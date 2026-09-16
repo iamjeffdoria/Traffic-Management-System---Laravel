@@ -33,9 +33,10 @@
         }
         .field-row {
             display: flex;
+            gap: 40px;
             margin-bottom: 22px;
         }
-        .field-row .field { flex: 1; display: flex; }
+        .field-row .field { flex: 1; display: flex; min-width: 0; }
         .field-label { font-weight: bold; width: 190px; flex-shrink: 0; }
         .field-value { flex: 1; }
         .signature-block { margin-top: 60px; display: flex; justify-content: flex-end; }
@@ -66,7 +67,7 @@
     <div class="field-row">
         <div class="field">
             <span class="field-label">Name:</span>
-            <span class="field-value">{{ $franchise->name }}</span>
+            <span class="field-value">{{ $franchise->tricycle->name ?? '—' }}</span>
         </div>
     </div>
 
@@ -80,7 +81,7 @@
     <div class="field-row">
         <div class="field">
             <span class="field-label">Plate No:</span>
-            <span class="field-value">{{ $franchise->plate_no }}</span>
+            <span class="field-value">{{ $franchise->tricycle->plate_no ?? '—' }}</span>
         </div>
         <div class="field">
             <span class="field-label">Valid Until:</span>
@@ -91,7 +92,7 @@
     <div class="field-row">
         <div class="field">
             <span class="field-label">Motor No:</span>
-            <span class="field-value">{{ $franchise->motor_no }}</span>
+            <span class="field-value">{{ $franchise->tricycle->engine_motor_no ?? '—' }}</span>
         </div>
         <div class="field">
             <span class="field-label">Authorized No:</span>
@@ -102,7 +103,7 @@
     <div class="field-row">
         <div class="field">
             <span class="field-label">Chassis No:</span>
-            <span class="field-value">{{ $franchise->chassis_no }}</span>
+            <span class="field-value">{{ $franchise->tricycle->chassis_no ?? '—' }}</span>
         </div>
     </div>
 
