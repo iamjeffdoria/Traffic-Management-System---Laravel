@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                 <x-tricycle-toda-filter />
                 <x-tricycle-toolbar />
             </div>
