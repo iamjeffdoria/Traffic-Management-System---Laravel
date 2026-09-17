@@ -3,10 +3,82 @@
 @section('title', 'Admin Login')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 px-6 py-12">
-    <div class="w-full max-w-sm">
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b1130] px-6 py-12">
 
-        <div class="bg-white rounded-2xl px-8 py-10">
+    {{-- Animated traffic scene --}}
+    <div class="absolute inset-0 scene-fade-in" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0b1130] via-[#161d45] to-[#232a5c]"></div>
+
+        @for ($i = 0; $i < 50; $i++)
+            <span class="absolute rounded-full bg-white star"
+                style="top: {{ rand(0, 55) }}%; left: {{ rand(0, 100) }}%; width: {{ rand(1, 2) }}px; height: {{ rand(1, 2) }}px; opacity: {{ rand(30, 90) / 100 }}; animation-delay: {{ rand(0, 40) / 10 }}s;"></span>
+        @endfor
+
+        {{-- Bottom highway strip with real moving traffic --}}
+        <div class="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-[#12162e] border-t border-white/10 overflow-hidden highway-rise">
+            <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[3px] lane-dashes"></div>
+
+            {{-- Traffic light standing on the road --}}
+            <div class="absolute right-10 sm:right-24 bottom-0 flex flex-col items-center z-10 pole-drop">
+                <div class="flex flex-col items-center gap-1.5 bg-gray-900 rounded-md px-1.5 py-2 shadow-[0_0_25px_rgba(0,0,0,0.6)]">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500" style="animation: tl-red 3s ease-in-out infinite;"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-400" style="animation: tl-yellow 3s ease-in-out infinite;"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500" style="animation: tl-green 3s ease-in-out infinite;"></span>
+                </div>
+                <div class="w-1.5 h-16 sm:h-20 bg-gray-700"></div>
+                <div class="w-6 h-1.5 bg-gray-800 rounded-full"></div>
+            </div>
+
+            @php $carColors = ['#ef4444', '#3b82f6', '#eab308', '#22c55e', '#f97316', '#a855f7']; @endphp
+
+            {{-- Lane 1: right to left --}}
+            @for ($i = 0; $i < 4; $i++)
+                <div class="car car-rtl" style="
+                    top: {{ rand(8, 30) }}%;
+                    --car-color: {{ $carColors[array_rand($carColors)] }};
+                    animation-duration: {{ rand(45, 75) / 10 }}s;
+                    animation-delay: {{ $i * 1.8 }}s;">
+                    <span class="car-cabin"></span>
+                    <span class="car-body"></span>
+                    <span class="car-wheel left"></span>
+                    <span class="car-wheel right"></span>
+                    <span class="car-light front"></span>
+                    <span class="car-light back"></span>
+                </div>
+            @endfor
+
+            {{-- Lane 2: left to right --}}
+            @for ($i = 0; $i < 4; $i++)
+                <div class="car car-ltr" style="
+                    top: {{ rand(60, 82) }}%;
+                    --car-color: {{ $carColors[array_rand($carColors)] }};
+                    animation-duration: {{ rand(45, 75) / 10 }}s;
+                    animation-delay: {{ $i * 2 }}s;">
+                    <span class="car-cabin"></span>
+                    <span class="car-body"></span>
+                    <span class="car-wheel left"></span>
+                    <span class="car-wheel right"></span>
+                    <span class="car-light front"></span>
+                    <span class="car-light back"></span>
+                </div>
+            @endfor
+        </div>
+
+        {{-- Jet flying past --}}
+        <div class="jet">
+            <span class="jet-trail"></span>
+            <span class="jet-wing top"></span>
+            <span class="jet-wing bottom"></span>
+            <span class="jet-body"></span>
+            <span class="jet-tail-light"></span>
+        </div>
+
+        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0b1130]/40"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-sm">
+
+        <div class="bg-white rounded-2xl px-8 py-10 shadow-2xl login-card-enter">
             <div class="flex flex-col items-center gap-3 mb-8">
                 <img src="{{ asset('images/csulogo2.png') }}" alt="Logo" class="w-14 h-14 object-contain">
                 <span class="font-medium text-gray-900 text-sm">Traffic Management System</span>
@@ -61,5 +133,5 @@
             </p>
         </div>
     </div>
-</div>
+</section>
 @endsection

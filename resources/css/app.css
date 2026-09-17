@@ -4,3 +4,220 @@
 @theme {
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
+
+@keyframes tl-red {
+  0% { opacity: 1; box-shadow: 0 0 14px 3px rgba(239, 68, 68, .8); }
+  8% { opacity: 1; box-shadow: 0 0 14px 3px rgba(239, 68, 68, .8); }
+  16%, 100% { opacity: .2; box-shadow: none; }
+}
+@keyframes tl-yellow {
+  0%, 33% { opacity: .2; box-shadow: none; }
+  41% { opacity: 1; box-shadow: 0 0 14px 3px rgba(234, 179, 8, .8); }
+  49% { opacity: 1; box-shadow: 0 0 14px 3px rgba(234, 179, 8, .8); }
+  57%, 100% { opacity: .2; box-shadow: none; }
+}
+@keyframes tl-green {
+  0%, 66% { opacity: .2; box-shadow: none; }
+  74% { opacity: 1; box-shadow: 0 0 14px 3px rgba(34, 197, 94, .8); }
+  90% { opacity: 1; box-shadow: 0 0 14px 3px rgba(34, 197, 94, .8); }
+  98%, 100% { opacity: .2; box-shadow: none; }
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: .2; }
+  50% { opacity: 1; }
+}
+.star {
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+
+.lane-dashes {
+  background-image: repeating-linear-gradient(to right, #facc15 0 24px, transparent 24px 48px);
+  opacity: .5;
+}
+
+.car {
+  position: absolute;
+  width: 44px;
+  height: 18px;
+}
+.car-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: var(--car-color, #ef4444);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .5);
+}
+.car-cabin {
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  top: -7px;
+  height: 9px;
+  border-radius: 4px 4px 0 0;
+  background: var(--car-color, #ef4444);
+  filter: brightness(1.15);
+  opacity: .95;
+}
+.car-wheel {
+  position: absolute;
+  bottom: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0a0a0a;
+}
+.car-wheel.left { left: 6px; }
+.car-wheel.right { right: 6px; }
+.car-light {
+  position: absolute;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+.car-light.front {
+  background: #fef08a;
+  box-shadow: 0 0 8px 3px rgba(254, 240, 138, .9);
+  right: -2px;
+}
+.car-light.back {
+  background: #f87171;
+  box-shadow: 0 0 5px 2px rgba(248, 113, 113, .7);
+  left: -2px;
+}
+
+.car-rtl {
+  animation-name: drive-rtl;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: backwards;
+  transform: scaleX(-1);
+}
+@keyframes drive-rtl {
+  from { left: 108%; }
+  to { left: -15%; }
+}
+
+.car-ltr {
+  animation-name: drive-ltr;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: backwards;
+}
+@keyframes drive-ltr {
+  from { left: -15%; }
+  to { left: 108%; }
+}
+
+/* Page-load entrance sequence */
+.scene-fade-in {
+  animation: scene-fade .9s ease-out both;
+}
+@keyframes scene-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.highway-rise {
+  animation: highway-up .7s cubic-bezier(.16, 1, .3, 1) .15s both;
+}
+@keyframes highway-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.pole-drop {
+  animation: pole-fall .6s cubic-bezier(.34, 1.56, .64, 1) .55s both;
+}
+@keyframes pole-fall {
+  0% { transform: translateY(-140px); opacity: 0; }
+  55% { opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.login-card-enter {
+  animation: card-assemble 1s cubic-bezier(.34, 1.56, .64, 1) 1.85s both;
+}
+@keyframes card-assemble {
+  0% { opacity: 0; transform: perspective(900px) rotateY(85deg) scale(.6); }
+  55% { opacity: 1; }
+  100% { opacity: 1; transform: perspective(900px) rotateY(0deg) scale(1); }
+}
+
+/* Jet flyby */
+.jet {
+  position: absolute;
+  top: 16%;
+  left: -15%;
+  width: 130px;
+  height: 36px;
+  z-index: 5;
+  animation: jet-fly 1s cubic-bezier(.45, 0, .65, 1) .8s both;
+}
+.jet-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+  clip-path: polygon(0% 50%, 20% 25%, 55% 35%, 100% 48%, 100% 52%, 55% 65%, 20% 75%);
+  box-shadow: 0 0 18px 4px rgba(255, 255, 255, .5);
+}
+.jet-wing {
+  position: absolute;
+  width: 26%;
+  height: 70%;
+  top: 15%;
+  left: 32%;
+  background: #cbd5e1;
+}
+.jet-wing.top {
+  clip-path: polygon(0 100%, 100% 40%, 60% 0%);
+  transform: translateY(-55%);
+}
+.jet-wing.bottom {
+  clip-path: polygon(0 0%, 100% 60%, 60% 100%);
+  transform: translateY(55%);
+}
+.jet-tail-light {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f87171;
+  transform: translateY(-50%);
+  box-shadow: 0 0 8px 3px rgba(248, 113, 113, .8);
+}
+.jet-trail {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 160px;
+  height: 3px;
+  transform: translateY(-50%);
+  background: linear-gradient(to left, rgba(255, 255, 255, .8), transparent);
+  filter: blur(1px);
+}
+
+@keyframes jet-fly {
+  0% { transform: translate(0, 0) scale(.7) rotate(-8deg); opacity: 0; }
+  10% { opacity: 1; }
+  55% { transform: translate(70vw, -14vh) scale(1.6) rotate(-8deg); }
+  90% { opacity: 1; }
+  100% { transform: translate(135vw, -28vh) scale(2.1) rotate(-8deg); opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  .jet {
+    width: 70px;
+    height: 20px;
+    top: 10%;
+  }
+  @keyframes jet-fly {
+    0% { transform: translate(0, 0) scale(.7) rotate(-8deg); opacity: 0; }
+    10% { opacity: 1; }
+    55% { transform: translate(60vw, -10vh) scale(1.3) rotate(-8deg); }
+    90% { opacity: 1; }
+    100% { transform: translate(115vw, -20vh) scale(1.7) rotate(-8deg); opacity: 0; }
+  }
+}
