@@ -373,10 +373,8 @@
   width: 170px;
   height: 54px;
   z-index: 5;
-  animation: jet-fly 3.2s cubic-bezier(.33, 0, .3, 1) .8s both;
+  animation: jet-fly 9s linear infinite;
   will-change: transform, opacity;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
 }
 .jet-body {
   position: absolute;
@@ -479,21 +477,20 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 70%);
   opacity: 0;
-  animation: jet-flash-pulse 2.4s ease-out .8s both;
+  animation: jet-flash-pulse 9s linear infinite;
 }
 @keyframes jet-flash-pulse {
-  0%, 48% { opacity: 0; transform: scale(.3); }
-  56% { opacity: .95; transform: scale(1.6); }
-  68% { opacity: 0; transform: scale(2.4); }
-  100% { opacity: 0; }
+  0%, 34% { opacity: 0; transform: scale(.3); }
+  40% { opacity: .9; transform: scale(1.5); }
+  50%, 100% { opacity: 0; transform: scale(2.2); }
 }
 
 @keyframes jet-fly {
-  0% { transform: translate3d(0, 14vh, 0) scale(.45) rotate(-3deg); opacity: 0; }
-  12% { opacity: 1; }
-  40% { transform: translate3d(45vw, -6vh, 0) scale(1.3) rotate(-9deg); }
-  70% { transform: translate3d(95vw, -25vh, 0) scale(2.2) rotate(-9deg); opacity: 1; }
-  100% { transform: translate3d(145vw, -34vh, 0) scale(2.9) rotate(-9deg); opacity: 0; }
+  0% { transform: translate3d(-10vw, 11vh, 0) scale(.5) rotate(-4deg); opacity: 0; }
+  6% { opacity: 1; }
+  40% { transform: translate3d(55vw, -12vh, 0) scale(1.5) rotate(-8deg); opacity: 1; }
+  58% { transform: translate3d(125vw, -30vh, 0) scale(2.6) rotate(-9deg); opacity: 0; }
+  100% { transform: translate3d(125vw, -30vh, 0) scale(2.6) rotate(-9deg); opacity: 0; }
 }
 
 @media (max-width: 640px) {
@@ -503,10 +500,10 @@
     top: 9%;
   }
   @keyframes jet-fly {
-    0% { transform: translate3d(0, 10vh, 0) scale(.5) rotate(-3deg); opacity: 0; }
-    12% { opacity: 1; }
-    40% { transform: translate3d(40vw, -4vh, 0) scale(1.15) rotate(-8deg); }
-    70% { transform: translate3d(85vw, -18vh, 0) scale(1.8) rotate(-8deg); opacity: 1; }
-    100% { transform: translate3d(125vw, -25vh, 0) scale(2.3) rotate(-8deg); opacity: 0; }
+    0% { transform: translate3d(-8vw, 9vh, 0) scale(.55) rotate(-4deg); opacity: 0; }
+    6% { opacity: 1; }
+    40% { transform: translate3d(45vw, -9vh, 0) scale(1.2) rotate(-7deg); opacity: 1; }
+    58% { transform: translate3d(105vw, -22vh, 0) scale(2.1) rotate(-8deg); opacity: 0; }
+    100% { transform: translate3d(105vw, -22vh, 0) scale(2.1) rotate(-8deg); opacity: 0; }
   }
 }
