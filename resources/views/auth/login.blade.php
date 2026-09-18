@@ -9,10 +9,78 @@
     <div class="absolute inset-0 scene-fade-in" aria-hidden="true">
         <div class="absolute inset-0 bg-gradient-to-b from-[#0b1130] via-[#161d45] to-[#232a5c]"></div>
 
+        {{-- Moon --}}
+        <div class="moon" style="top: 8%; right: 12%; width: 64px; height: 64px;">
+            <span class="moon-crater" style="top: 18%; left: 22%; width: 14px; height: 14px;"></span>
+            <span class="moon-crater" style="top: 50%; left: 58%; width: 10px; height: 10px;"></span>
+            <span class="moon-crater" style="top: 65%; left: 28%; width: 8px; height: 8px;"></span>
+        </div>
+
         @for ($i = 0; $i < 50; $i++)
             <span class="absolute rounded-full bg-white star"
                 style="top: {{ rand(0, 55) }}%; left: {{ rand(0, 100) }}%; width: {{ rand(1, 2) }}px; height: {{ rand(1, 2) }}px; opacity: {{ rand(30, 90) / 100 }}; animation-delay: {{ rand(0, 40) / 10 }}s;"></span>
         @endfor
+
+        {{-- Welcome landmark sign (desktop only, hidden on mobile to avoid clutter) --}}
+        <div class="landmark-sign hidden lg:block" style="bottom: 9rem; right: 6%;" aria-hidden="true">
+            <div class="landmark-sign-board">
+                <p class="landmark-sign-title">Welcome to</p>
+                <p class="landmark-sign-main">Palompon</p>
+            </div>
+            <span class="landmark-sign-post"></span>
+        </div>
+
+        {{-- City skyline --}}
+        <div class="skyline" aria-hidden="true">
+            @for ($b = 0; $b < 16; $b++)
+                @php
+                    $height = rand(35, 100);
+                    $width = rand(28, 52);
+                    $cols = rand(2, 3);
+                    $rows = rand(3, 6);
+                    $hasAntenna = rand(0, 4) === 0;
+                @endphp
+                <div class="building" style="height: {{ $height }}%; width: {{ $width }}px;">
+                    @if ($hasAntenna)
+                        <span class="building-antenna"></span>
+                    @endif
+                    <div class="building-windows" style="--wcols: {{ $cols }};">
+                        @for ($w = 0; $w < $cols * $rows; $w++)
+                            <span class="window {{ rand(0, 100) < 55 ? 'lit' : '' }}" style="animation-delay: {{ rand(0, 50) / 10 }}s;"></span>
+                        @endfor
+                    </div>
+                </div>
+            @endfor
+        </div>
+
+        {{-- Sidewalk with pedestrians --}}
+        <div class="sidewalk" aria-hidden="true">
+            @php $pedColors = ['#1e293b', '#334155', '#0f172a', '#475569']; @endphp
+
+            @for ($p = 0; $p < 5; $p++)
+                <div class="pedestrian pedestrian-walk-rtl" style="
+                    --ped-color: {{ $pedColors[array_rand($pedColors)] }};
+                    animation-duration: {{ rand(320, 480) / 10 }}s;
+                    animation-delay: {{ $p * rand(4, 8) }}s;">
+                    <span class="pedestrian-head"></span>
+                    <span class="pedestrian-torso"></span>
+                    <span class="pedestrian-leg left"></span>
+                    <span class="pedestrian-leg right"></span>
+                </div>
+            @endfor
+
+            @for ($p = 0; $p < 5; $p++)
+                <div class="pedestrian pedestrian-walk-ltr" style="
+                    --ped-color: {{ $pedColors[array_rand($pedColors)] }};
+                    animation-duration: {{ rand(320, 480) / 10 }}s;
+                    animation-delay: {{ $p * rand(4, 8) }}s;">
+                    <span class="pedestrian-head"></span>
+                    <span class="pedestrian-torso"></span>
+                    <span class="pedestrian-leg left"></span>
+                    <span class="pedestrian-leg right"></span>
+                </div>
+            @endfor
+        </div>
 
         {{-- Bottom highway strip with real moving traffic --}}
         <div class="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-[#12162e] border-t border-white/10 overflow-hidden highway-rise">
@@ -66,10 +134,16 @@
 
         {{-- Jet flying past --}}
         <div class="jet">
-            <span class="jet-trail"></span>
+            <span class="jet-trail jet-trail-1"></span>
+            <span class="jet-trail jet-trail-2"></span>
+            <span class="jet-flash"></span>
+            <span class="jet-afterburner"></span>
             <span class="jet-wing top"></span>
             <span class="jet-wing bottom"></span>
+            <span class="jet-fin"></span>
             <span class="jet-body"></span>
+            <span class="jet-nose"></span>
+            <span class="jet-cockpit"></span>
             <span class="jet-tail-light"></span>
         </div>
 

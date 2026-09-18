@@ -17,7 +17,7 @@ Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     }
 
-    return view('dashboard');
+    return redirect()->route('login');
 });
 
 Route::get('/ping', function () {
