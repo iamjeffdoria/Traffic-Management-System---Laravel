@@ -205,12 +205,12 @@ class IdCardController extends Controller
 
             $row = array_combine($header, $row);
             $photoPath = null;
-            $photoFilename = trim((string) ($row['photo_filename'] ?? ''));
+            $photoFilename = basename(trim((string) ($row['photo_filename'] ?? '')));
 
             if ($photoFilename !== '') {
                 $sourcePhoto = $tempDir . '/photos/' . $photoFilename;
 
-                if (file_exists($sourcePhoto)) {
+                if (is_file($sourcePhoto) && in_array(strtolower(pathinfo($photoFilename, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'webp'], true)) {
                     $storedName = 'id-cards/' . uniqid() . '_' . $photoFilename;
                     Storage::disk('public')->put($storedName, file_get_contents($sourcePhoto));
                     $photoPath = $storedName;
