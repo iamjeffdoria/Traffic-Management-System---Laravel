@@ -19,7 +19,7 @@ class IdCardFactory extends Factory
             'id_number' => 'ID-' . $this->faker->unique()->numberBetween(10000, 99999),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
             'date_of_birth' => $this->faker->dateTimeBetween('-60 years', '-18 years'),
-            'address' => $this->faker->address(),
+            'address' => $this->faker->streetAddress() . ', ' . $this->faker->city(),
             'height' => $this->faker->randomFloat(2, 150, 190),
             'weight' => $this->faker->randomFloat(2, 45, 95),
             'or_number' => 'OR-' . $this->faker->unique()->numberBetween(100000, 999999),

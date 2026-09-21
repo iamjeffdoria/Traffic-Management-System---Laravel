@@ -20,6 +20,7 @@
 <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
     <div class="flex items-start justify-between gap-3">
         <div class="flex items-start gap-3 min-w-0">
+            <input type="checkbox" class="id-card-checkbox mt-1 shrink-0 rounded border-gray-300 text-red-600 focus:ring-red-600" data-id="{{ $idCard->id }}" onchange="updateIdCardBulkPrintButton()">
             @if ($idCard->photo_path)
                 <img src="{{ asset('storage/' . $idCard->photo_path) }}" alt="{{ $idCard->full_name }}"
                     class="w-14 h-14 rounded-lg object-cover border border-gray-200 shrink-0">

@@ -19,6 +19,9 @@
 
 <tr class="divide-x divide-gray-300 border-b border-gray-200 hover:bg-gray-50/60 transition-colors">
     <td class="px-4 py-4 align-top">
+        <input type="checkbox" class="id-card-checkbox rounded border-gray-300 text-red-600 focus:ring-red-600" data-id="{{ $idCard->id }}" onchange="updateIdCardBulkPrintButton()">
+    </td>
+    <td class="px-4 py-4 align-top">
         <div class="flex items-center gap-0.5">
             <button type="button" onclick="openIdCardEditModal({{ Illuminate\Support\Js::from($idCardEditData) }})" title="Edit"
                 class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">

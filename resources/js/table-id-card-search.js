@@ -69,6 +69,9 @@ function fetchIdCardResults(url) {
 
             window.history.replaceState({}, '', targetUrl);
             attachIdCardPaginationLinks();
+            if (typeof syncIdCardCheckboxes === 'function') {
+                syncIdCardCheckboxes();
+            }
         })
         .catch((err) => {
             if (err.name !== 'AbortError') {

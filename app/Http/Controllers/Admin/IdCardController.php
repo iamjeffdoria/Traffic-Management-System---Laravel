@@ -101,6 +101,25 @@ class IdCardController extends Controller
         return view('admin.id-card-print', compact('idCard'));
     }
 
+    public function bulkPrint(Request $request)
+    {
+        $ids = collect(explode(',', (string) $request->query('ids')))
+            ->map(fn ($id) => (int) trim($id))
+            ->filter()
+            ->unique()
+            ->take(4)
+            ->values();
+
+        abort_if($ids->isEmpty(), 404, 'No ID cards selected for printing.');
+
+        $idCards = IdCard::whereIn('id', $ids)
+            ->get()
+            ->sortBy(fn ($idCard) => $ids->search($idCard->id))
+            ->values();
+
+        return view('admin.id-card-bulk-print', compact('idCards'));
+    }
+
     public function export()
     {
         $idCards = IdCard::orderBy('full_name')->get();

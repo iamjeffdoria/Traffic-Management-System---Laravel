@@ -7,7 +7,7 @@
         <x-id-card-table-row :idCard="$idCard" />
     @empty
         <tr>
-            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActiveIdCardFilters)
                     No ID cards match your search.
                     <a href="{{ route('potpot.id-cards') }}" data-ajax-id-card-link class="text-red-600 font-medium ml-1">Clear filters</a>

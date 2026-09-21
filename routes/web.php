@@ -48,6 +48,7 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::put('/admin/potpot/id-cards/{idCard}', [IdCardController::class, 'update'])->name('potpot.id-cards.update');
     Route::delete('/admin/potpot/id-cards/{idCard}', [IdCardController::class, 'destroy'])->name('potpot.id-cards.destroy');
     Route::get('/admin/potpot/id-cards/{idCard}/print', [IdCardController::class, 'print'])->name('potpot.id-cards.print');
+    Route::get('/admin/potpot/id-cards/bulk-print', [IdCardController::class, 'bulkPrint'])->name('potpot.id-cards.bulk-print');
     Route::get('/admin/potpot/id-cards/export', [IdCardController::class, 'export'])->name('potpot.id-cards.export');
     Route::post('/admin/potpot/id-cards/import', [IdCardController::class, 'import'])->name('potpot.id-cards.import');
 

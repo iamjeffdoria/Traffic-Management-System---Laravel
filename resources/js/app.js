@@ -17,6 +17,7 @@ import './print-helper.js';
 import './table-potpot-mayors-permit-search.js';
 import './potpot-mayors-permit-import-modal.js';
 import './table-id-card-search.js';
+import './id-card-bulk-print.js';
 import './page-loading.js';
 import './tricycle-edit-modal.js';
 import './franchise-edit-modal.js';

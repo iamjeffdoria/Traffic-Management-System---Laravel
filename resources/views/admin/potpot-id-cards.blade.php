@@ -45,6 +45,7 @@
             <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto isolate" style="max-height: 600px; overflow-y: auto;">
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
+                        <col class="w-10">
                         <col class="w-32">
                         <col class="w-[10%]">
                         <col class="w-[16%]">
@@ -55,6 +56,9 @@
                     </colgroup>
                     <thead class="text-left text-gray-900 bg-gray-50 sticky top-0 z-30">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
+                            <th class="px-4 py-3 font-bold w-10">
+                                <input type="checkbox" class="rounded border-gray-300 text-red-600 focus:ring-red-600" onchange="toggleAllIdCardCheckboxes(this)" title="Select up to 4">
+                            </th>
                             <th class="px-6 py-3 font-bold w-32">Actions</th>
                             <th class="px-6 py-3 font-bold">Photo</th>
                             <th class="px-6 py-3 font-bold">ID No. / Gender</th>
@@ -64,6 +68,7 @@
                             <th class="px-6 py-3 font-bold">Issued / Expiry</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
+                            <th class="px-4 py-2"></th>
                             <th class="px-6 py-2"></th>
                             <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
@@ -84,7 +89,7 @@
                             <x-id-card-table-row :idCard="$idCard" />
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
+                                <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
                                     @if ($hasActiveIdCardFilters)
                                         No ID cards match your search.
                                         <a href="{{ route('potpot.id-cards') }}" data-ajax-id-card-link class="text-red-600 font-medium ml-1">Clear filters</a>
