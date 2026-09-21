@@ -26,15 +26,15 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
             color: #111;
-            font-size: 17px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.65;
             margin: 0;
         }
         .page {
             border: 1px solid #999;
-            padding: 0.9in 1in;
+            padding: 0.7in 1in;
             box-sizing: border-box;
-            min-height: 100vh;
+            min-height: calc(100vh - 4px);
             position: relative;
             overflow: hidden;
         }
@@ -54,28 +54,28 @@
             position: relative;
             z-index: 1;
         }
-        .header { position: relative; text-align: center; margin-bottom: 10px; }
+        .header { position: relative; text-align: center; margin-bottom: 16px; }
         .header img { position: absolute; left: 20px; top: 4px; width: 80px; height: 80px; }
         .header p { margin: 0; font-weight: bold; }
         .header .republic { font-size: 18px; }
         .header .province,
         .header .municipality { font-size: 16px; margin-top: 4px; }
         .header .divider { margin-top: 6px; font-size: 16px; }
-        .office { text-align: center; font-weight: bold; font-size: 18px; margin-top: 18px; }
+        .office { text-align: center; font-weight: bold; font-size: 18px; margin-top: 24px; }
         .doc-title {
             text-align: center;
             font-weight: bold;
-            font-size: 20px;
-            margin: 4px 0 34px;
+            font-size: 19px;
+            margin: 6px 0 32px;
         }
         .body-text { text-align: justify; text-indent: 0.5in; margin: 0 0 22px; }
         .u { font-weight: bold; text-decoration: underline; }
-        .sig-table { width: 100%; border-collapse: collapse; margin-top: 50px; }
-        .sig-table td { width: 50%; vertical-align: top; text-align: center; padding: 0 10px; }
+        .sig-table { width: 100%; border-collapse: collapse; margin-top: 44px; page-break-inside: avoid; }
+        .sig-table td { width: 50%; vertical-align: top; text-align: center; padding: 0 18px; }
         .sig-label { text-align: left; font-weight: bold; margin: 0 0 34px; }
-        .sig-name { font-weight: bold; text-transform: uppercase; margin: 0; }
-        .sig-title { margin: 0; font-size: 15px; font-weight: bold; }
-        .approved { width: 50%; margin: 50px auto 0; text-align: center; }
+        .sig-name { font-weight: bold; text-transform: uppercase; margin: 0; line-height: 1.4; }
+        .sig-title { margin: 2px 0 0; font-size: 14px; font-weight: bold; }
+        .approved { width: 50%; margin: 44px auto 0; text-align: center; page-break-inside: avoid; }
         .approved .sig-label { margin-bottom: 34px; }
     </style>
 </head>

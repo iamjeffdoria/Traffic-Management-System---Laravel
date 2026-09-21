@@ -16,7 +16,7 @@
         </a>
         <button type="button" onclick="openModal('create-franchise-modal')"
             class="inline-flex items-center gap-1.5 bg-red-600 text-white px-5 py-2 text-sm font-semibold hover:bg-red-700 transition-colors whitespace-nowrap">
-            + Add Franchise
+            + Add Fran...
         </button>
     </div>
 </div>

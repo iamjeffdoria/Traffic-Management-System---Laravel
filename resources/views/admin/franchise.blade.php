@@ -56,7 +56,7 @@
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
                             <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
-                                <input type="text" name="authorized_no" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('authorized_no') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Franchise no..."
+                                <input type="text" name="authorized_no" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('authorized_no') }}" oninput="debouncedFetchFranchiseFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-2 py-2">
@@ -69,11 +69,11 @@
                                 </select>
                             </th>
                             <th class="px-2 py-2">
-                                <input type="text" name="name" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Owner name..."
+                                <input type="text" name="name" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchFranchiseFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-2 py-2">
-                                <input type="text" name="route" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('route') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search route..."
+                                <input type="text" name="route" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('route') }}" oninput="debouncedFetchFranchiseFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-6 py-2"></th>

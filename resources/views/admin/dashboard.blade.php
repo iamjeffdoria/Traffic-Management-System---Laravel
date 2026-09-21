@@ -112,7 +112,12 @@
                 <a href="{{ route('tricycle.list') }}" class="rounded-2xl border border-gray-200 bg-white p-5 flex items-center gap-4 hover:border-red-300 hover:shadow-sm transition-all">
                     <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
                         <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                            <g stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="5" cy="16" r="3" />
+                                <circle cx="19" cy="16" r="3" />
+                                <path d="M7.5 14h5l4 -4h-10.5m1.5 4l4 -4" />
+                                <path d="M13 6h2l1.5 3l2 4" />
+                            </g>
                         </svg>
                     </div>
                     <div>
