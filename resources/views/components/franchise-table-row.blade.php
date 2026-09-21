@@ -57,7 +57,9 @@
     </td>
     <td class="px-4 py-4 align-top">
         <p class="text-gray-900 font-semibold break-words">{{ $franchise->authorized_no }}</p>
-        <span class="inline-block max-w-full truncate rounded-full {{ $statusColor }} text-white text-xs font-semibold px-2.5 py-1 mt-1.5">
+    </td>
+    <td class="px-4 py-4 align-top">
+        <span class="inline-block max-w-full truncate rounded-full {{ $statusColor }} text-white text-xs font-semibold px-2.5 py-1">
             {{ $franchise->status }}
         </span>
     </td>

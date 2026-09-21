@@ -7,7 +7,7 @@
         <x-franchise-table-row :franchise="$franchise" />
     @empty
         <tr>
-            <td colspan="6" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActiveFranchiseFilters)
                     No franchises match your search.
                     <a href="{{ route('tricycle.franchise') }}" data-ajax-franchise-link class="text-red-600 font-medium ml-1">Clear filters</a>

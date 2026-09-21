@@ -36,16 +36,18 @@
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
                         <col class="w-24">
-                        <col class="w-[16%]">
-                        <col class="w-[20%]">
-                        <col class="w-[20%]">
-                        <col class="w-[12%]">
+                        <col class="w-[14%]">
+                        <col class="w-[11%]">
                         <col class="w-[18%]">
+                        <col class="w-[18%]">
+                        <col class="w-[12%]">
+                        <col class="w-[15%]">
                     </colgroup>
                     <thead class="text-left text-gray-900 bg-gray-50 sticky top-0 z-30">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
                             <th class="px-6 py-3 font-bold w-24">Actions</th>
-                            <th class="px-6 py-3 font-bold">Franchise No. / Status</th>
+                            <th class="px-6 py-3 font-bold">Franchise No.</th>
+                            <th class="px-6 py-3 font-bold">Status</th>
                             <th class="px-6 py-3 font-bold">Owner / Vehicle</th>
                             <th class="px-6 py-3 font-bold">Route / Purpose</th>
                             <th class="px-6 py-3 font-bold">Amount / OR No.</th>
@@ -54,26 +56,27 @@
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
                             <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
-                                <input type="text" name="authorized_no" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('authorized_no') }}" oninput="debouncedFetchFranchiseFilter()"
+                                <input type="text" name="authorized_no" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('authorized_no') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Franchise no..."
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-2 py-2">
-                                <input type="text" name="name" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchFranchiseFilter()"
+                                <select name="status" form="franchise-filter-form" data-filter-scope="desktop" onchange="debouncedFetchFranchiseFilter()"
+                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                    <option value="">All</option>
+                                    <option value="New" @selected(request('status') === 'New')>New</option>
+                                    <option value="Renewed" @selected(request('status') === 'Renewed')>Renewed</option>
+                                    <option value="Expired" @selected(request('status') === 'Expired')>Expired</option>
+                                </select>
+                            </th>
+                            <th class="px-2 py-2">
+                                <input type="text" name="name" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Owner name..."
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
                             <th class="px-2 py-2">
                                 <input type="text" name="route" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('route') }}" oninput="debouncedFetchFranchiseFilter()" placeholder="Search route..."
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
                             </th>
-                            <th class="px-1.5 py-2">
-                                <select name="status" form="franchise-filter-form" data-filter-scope="desktop" onchange="debouncedFetchFranchiseFilter()"
-                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
-                                    <option value="">All statuses</option>
-                                    <option value="New" @selected(request('status') === 'New')>New</option>
-                                    <option value="Renewed" @selected(request('status') === 'Renewed')>Renewed</option>
-                                    <option value="Expired" @selected(request('status') === 'Expired')>Expired</option>
-                                </select>
-                            </th>
+                            <th class="px-6 py-2"></th>
                             <th class="px-6 py-2"></th>
                         </tr>
                     </thead>
@@ -82,7 +85,7 @@
                             <x-franchise-table-row :franchise="$franchise" />
                         @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-10 text-center text-gray-500 text-sm">
+                                <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
                                     @if ($hasActiveFranchiseFilters)
                                         No franchises match your search.
                                         <a href="{{ route('tricycle.franchise') }}" data-ajax-franchise-link class="text-red-600 font-medium ml-1">Clear filters</a>
