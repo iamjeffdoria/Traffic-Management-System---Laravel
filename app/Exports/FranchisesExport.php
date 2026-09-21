@@ -18,7 +18,7 @@ class FranchisesExport implements FromQuery, WithHeadings, WithMapping
     {
         return [
             'Body Number', 'Valid Until', 'Denomination', 'Status', 'Authorized No',
-            'Authorized Route', 'Purpose', 'Official Receipt No', 'Amount Paid', 'Date', 'Municipal Treasurer',
+            'Authorized Route', 'Purpose', 'Official Receipt No', 'Amount Paid', 'Date', 'Municipal Treasurer', 'License Issued Date', 'License Issued At',
         ];
     }
 
@@ -36,6 +36,8 @@ class FranchisesExport implements FromQuery, WithHeadings, WithMapping
             $franchise->amount_paid,
             optional($franchise->date)->format('Y-m-d'),
             $franchise->municipal_treasurer,
+            optional($franchise->license_issued_date)->format('Y-m-d'),
+            $franchise->license_issued_at,
         ];
     }
 }

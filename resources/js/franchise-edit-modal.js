@@ -31,6 +31,8 @@ function openFranchiseEditModal(franchise) {
     form.querySelector('[name="amount_paid"]').value = franchise.amount_paid ?? '';
     form.querySelector('[name="date"]').value = franchise.date ?? '';
     form.querySelector('[name="municipal_treasurer"]').value = franchise.municipal_treasurer ?? '';
+    form.querySelector('[name="license_issued_date"]').value = franchise.license_issued_date ?? '';
+    form.querySelector('[name="license_issued_at"]').value = franchise.license_issued_at ?? '';
 
     openModal('edit-franchise-modal');
 }

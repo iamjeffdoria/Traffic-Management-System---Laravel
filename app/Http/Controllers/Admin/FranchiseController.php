@@ -51,6 +51,8 @@ class FranchiseController extends Controller
             'denomination' => 'nullable|string|max:255',
             'status' => 'required|in:New,Renewed,Expired',
             'authorized_no' => 'required|string|max:255|unique:franchises,authorized_no',
+            'license_issued_date' => 'nullable|date',
+            'license_issued_at' => 'nullable|string|max:255',
             'authorized_route' => 'required|string',
             'purpose' => 'nullable|string',
             'official_receipt_no' => 'required|string|max:255',
@@ -72,6 +74,8 @@ class FranchiseController extends Controller
             'denomination' => 'nullable|string|max:255',
             'status' => 'required|in:New,Renewed,Expired',
             'authorized_no' => 'required|string|max:255|unique:franchises,authorized_no,' . $franchise->id,
+            'license_issued_date' => 'nullable|date',
+            'license_issued_at' => 'nullable|string|max:255',
             'authorized_route' => 'required|string',
             'purpose' => 'nullable|string',
             'official_receipt_no' => 'required|string|max:255',
@@ -80,7 +84,15 @@ class FranchiseController extends Controller
             'municipal_treasurer' => 'required|string|max:255',
         ]);
 
-        $franchise->update($validated);
+        $franchise->fill($validated);
+
+        // A new validity period or new license date is a new license,
+        // so re-snapshot the current officials on the next print.
+        if ($franchise->isDirty(['valid_until', 'license_issued_date'])) {
+            $franchise->license_snapshot = null;
+        }
+
+        $franchise->save();
 
         return redirect()->route('tricycle.franchise')->with('success', 'Franchise updated successfully.');
     }
@@ -97,6 +109,31 @@ class FranchiseController extends Controller
         $franchise->load('tricycle');
 
         return view('admin.franchise-print', compact('franchise'));
+    }
+
+    public function printLicense(Request $request, Franchise $franchise)
+    {
+        abort_if(
+            $franchise->status === 'Expired',
+            403,
+            'Expired franchises cannot be issued a License to Operate. Renew the franchise first.'
+        );
+
+        $franchise->load('tricycle');
+
+        // Freeze the officials/ordinance on first print so an issued license never
+        // changes when config/franchise.php is updated. Append ?refresh=1 to the
+        // URL to deliberately re-snapshot from the current config.
+        if ($franchise->license_snapshot === null || $request->boolean('refresh')) {
+            $franchise->license_snapshot = config('franchise.license');
+            $franchise->timestamps = false; // don't bump "recently updated" ordering
+            $franchise->save();
+        }
+
+        return view('admin.franchise-license-print', [
+            'franchise' => $franchise,
+            'license' => $franchise->license_snapshot,
+        ]);
     }
 
     public function export()

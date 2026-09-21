@@ -22,6 +22,15 @@
             @csrf
             @method('PUT')
 
+            <div class="sm:col-span-2 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3">
+                <svg class="w-5 h-5 text-blue-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-xs text-blue-800 leading-relaxed">
+                    All information here is used to generate the <strong>Franchise Confirmation</strong> and the <strong>License to Operate</strong>. Changing the Valid Until or License Issue Date will apply the current signatories the next time the license is printed. Please double-check every field before saving.
+                </p>
+            </div>
+
             <div class="sm:col-span-2 relative" data-searchable-select data-on-select="onFranchiseSearchSelect">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Tricycle (Body No.)</label>
                 <input type="text" data-search-input autocomplete="off" placeholder="Search by body no, plate no, or owner name..."
@@ -124,6 +133,20 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Municipal Treasurer</label>
                 <input type="text" name="municipal_treasurer" required
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div class="sm:col-span-2 border-t border-gray-100 pt-4">
+                <p class="text-sm font-semibold text-gray-900">License to Operate (Sangguniang Bayan)</p>
+                <p class="text-xs text-gray-500">Used when printing the License to Operate.</p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">License Issue Date</label>
+                <input type="date" name="license_issued_date"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">License Issued At</label>
+                <input type="text" name="license_issued_at" placeholder="Civil Security Office Palompon, Leyte"
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
         </form>

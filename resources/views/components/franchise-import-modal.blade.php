@@ -15,7 +15,7 @@
             @csrf
 
             <p class="text-sm text-gray-500 mb-4">
-                Upload an .xlsx, .xls, or .csv file with columns: Body Number, Valid Until, Denomination, Status, Authorized No, Authorized Route, Purpose, Official Receipt No, Amount Paid, Date, Municipal Treasurer.
+                Upload an .xlsx, .xls, or .csv file with columns: Body Number, Valid Until, Denomination, Status, Authorized No, Authorized Route, Purpose, Official Receipt No, Amount Paid, Date, Municipal Treasurer. Optional: License Issued Date, License Issued At.
             </p>
 
             <label id="franchise-import-dropzone" for="franchise-import-input"

@@ -21,11 +21,15 @@ class Franchise extends Model
         'amount_paid',
         'date',
         'municipal_treasurer',
+        'license_issued_date',
+        'license_issued_at',
     ];
 
     protected $casts = [
         'valid_until' => 'date',
         'date' => 'date',
+        'license_issued_date' => 'date',
+        'license_snapshot' => 'array',
         'amount_paid' => 'decimal:2',
     ];
 

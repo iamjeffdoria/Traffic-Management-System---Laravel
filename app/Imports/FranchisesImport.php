@@ -43,6 +43,8 @@ class FranchisesImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             'amount_paid' => $row['amount_paid'] ?? null,
             'date' => $this->parseDate($row['date'] ?? null),
             'municipal_treasurer' => $this->toStringOrNull($row['municipal_treasurer'] ?? null),
+            'license_issued_date' => $this->parseDate($row['license_issued_date'] ?? null),
+            'license_issued_at' => $this->toStringOrNull($row['license_issued_at'] ?? null),
         ];
 
         $validator = Validator::make($data, [
@@ -57,6 +59,8 @@ class FranchisesImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             'amount_paid' => 'required|numeric|min:0',
             'date' => 'required|date',
             'municipal_treasurer' => 'required|string|max:255',
+            'license_issued_date' => 'nullable|date',
+            'license_issued_at' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
