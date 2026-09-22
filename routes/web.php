@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DocumentSubmissionController;
+use App\Http\Controllers\DriverDocumentSubmissionController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -29,6 +31,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 });
+
+// Public: tricycle driver document submission (no auth required)
+Route::get('/submit-documents', [DriverDocumentSubmissionController::class, 'create'])->name('driver.documents.create');
+Route::post('/submit-documents', [DriverDocumentSubmissionController::class, 'store'])->name('driver.documents.store');
 
 // Auth-only: logout + a protected admin dashboard (any logged-in role can see it)
 Route::middleware('auth')->group(function () {
@@ -98,6 +104,10 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::get('/admin/tricycles/franchise/{franchise}/license', [FranchiseController::class, 'printLicense'])->name('tricycle.franchise.license');
     Route::get('/admin/tricycles/franchise/export', [FranchiseController::class, 'export'])->name('tricycle.franchise.export');
     Route::post('/admin/tricycles/franchise/import', [FranchiseController::class, 'import'])->name('tricycle.franchise.import');
+
+    Route::get('/admin/tricycles/document-submissions', [DocumentSubmissionController::class, 'index'])->name('tricycle.document-submissions');
+    Route::put('/admin/tricycles/document-submissions/{submission}', [DocumentSubmissionController::class, 'updateStatus'])->name('tricycle.document-submissions.update-status');
+    Route::delete('/admin/tricycles/document-submissions/{submission}', [DocumentSubmissionController::class, 'destroy'])->name('tricycle.document-submissions.destroy');
 });
 
 

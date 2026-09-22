@@ -112,6 +112,15 @@
                 </svg>
                 <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Franchise</span>
             </a>
+
+            <a href="{{ route('tricycle.document-submissions') }}" title="Document Submissions"
+            class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+            {{ $active === 'tricycle-document-submissions' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Document Submissions</span>
+            </a>
         @endif
 
         @if (auth()->user()->isSuperadmin())
