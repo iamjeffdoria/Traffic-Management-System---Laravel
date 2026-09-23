@@ -20,6 +20,10 @@ class DocumentSubmissionController extends Controller
             ->paginate(20)
             ->withQueryString();
 
+        if ($request->ajax()) {
+            return view('admin.partials.document-submission-ajax-results', compact('submissions'));
+        }
+
         return view('admin.document-submissions', compact('submissions'));
     }
 
