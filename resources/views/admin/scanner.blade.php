@@ -36,7 +36,7 @@
                     </svg>
                     <span id="file-label" class="truncate">Upload a Photo</span>
                 </label>
-                <input type="file" id="file-input" accept="image/*" class="hidden">
+                <input type="file" id="file-input" class="hidden">
 
                 <button type="button" id="rescan-btn" onclick="restartScanner()"
                     class="hidden w-full mt-4 rounded-full bg-gray-900 text-white px-6 py-2.5 text-sm font-semibold hover:bg-gray-800 transition-colors">
