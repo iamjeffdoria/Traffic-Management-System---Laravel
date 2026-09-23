@@ -36,11 +36,16 @@ Route::middleware('guest')->group(function () {
 Route::get('/submit-documents', [DriverDocumentSubmissionController::class, 'create'])->name('driver.documents.create');
 Route::post('/submit-documents', [DriverDocumentSubmissionController::class, 'store'])->name('driver.documents.store');
 
+
 // Auth-only: logout + a protected admin dashboard (any logged-in role can see it)
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Scanner: any logged-in admin can use it, regardless of role.
+    Route::get('/admin/scanner', [\App\Http\Controllers\Admin\ScannerController::class, 'index'])->name('admin.scanner');
+    Route::post('/admin/scanner/verify', [\App\Http\Controllers\Admin\ScannerController::class, 'verify'])->name('admin.scanner.verify');
 });
 
 // Potpot admin + superadmin only

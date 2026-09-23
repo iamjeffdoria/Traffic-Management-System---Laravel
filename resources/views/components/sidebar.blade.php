@@ -51,6 +51,15 @@
             <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Dashboard</span>
         </a>
 
+        <a href="{{ route('admin.scanner') }}" title="Scanner"
+        class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+        {{ $active === 'scanner' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 4.5h4.5v4.5h-4.5v-4.5zm11.25 0h4.5v4.5h-4.5v-4.5zm-11.25 11.25h4.5v4.5h-4.5v-4.5zm13.5-1.5v3m3-3v3m-3 3h3m-6-6h.008v.008h-.008v-.008z" />
+            </svg>
+            <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Scanner</span>
+        </a>
+
         @if (auth()->user()->isPotpotAdmin())
             <a href="{{ route('potpot.id-cards') }}" title="ID Cards"
             class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
