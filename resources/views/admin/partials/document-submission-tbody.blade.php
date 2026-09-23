@@ -19,12 +19,18 @@
         <tr class="hover:bg-gray-50/60 transition-colors align-top">
             <td class="px-3 py-1.5">
                 <p class="text-gray-900 font-medium truncate">{{ $submission->driver_name }}</p>
-                <span class="inline-block mt-1 rounded-full bg-slate-600 text-white text-[10px] font-mono px-2 py-0.5 truncate max-w-full" title="{{ $submission->contact_number }}">{{ $submission->contact_number }}</span>
+                <span class="inline-block mt-1 rounded-full bg-slate-600 text-white text-[10px] font-mono px-2 py-0.5 truncate max-w-full" title="{{ $submission->contact_number }}">
+                    {{ $submission->contact_number }}
+                </span>
             </td>
             <td class="px-3 py-1.5">
                 <div class="flex flex-wrap gap-1">
-                    <span class="inline-block rounded-full bg-cyan-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->body_number ?? '—' }}">{{ $submission->body_number ?? '—' }}</span>
-                    <span class="inline-block rounded-full bg-indigo-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->plate_no ?? '—' }}">{{ $submission->plate_no ?? '—' }}</span>
+                    <span class="inline-block rounded-full bg-cyan-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->body_number ?? '—' }}">
+                        {{ $submission->body_number ?? '—' }}
+                    </span>
+                    <span class="inline-block rounded-full bg-indigo-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->plate_no ?? '—' }}">
+                        {{ $submission->plate_no ?? '—' }}
+                    </span>
                 </div>
             </td>
             <td class="px-3 py-1.5">

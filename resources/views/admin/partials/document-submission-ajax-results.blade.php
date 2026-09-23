@@ -5,11 +5,11 @@
         'rejected' => 'bg-red-600',
     ];
     $docIcons = [
-        'endorsement_letter_path' => 'EL',
-        'toda_certificate_path' => 'TC',
-        'police_clearance_path' => 'PC',
-        'or_cr_path' => 'OR',
-        'drivers_license_path' => 'DL',
+        'endorsement_letter_path' => 'Endorsement',
+        'toda_certificate_path' => 'TODA Cert',
+        'police_clearance_path' => 'Police',
+        'or_cr_path' => 'OR/CR',
+        'drivers_license_path' => 'License',
     ];
 @endphp
 
