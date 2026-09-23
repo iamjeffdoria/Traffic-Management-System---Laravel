@@ -6,17 +6,17 @@
         'rejected' => 'bg-red-600',
     ];
     $docIcons = [
-        'endorsement_letter_path' => 'EL',
-        'toda_certificate_path' => 'TC',
-        'police_clearance_path' => 'PC',
-        'or_cr_path' => 'OR',
-        'drivers_license_path' => 'DL',
+        'endorsement_letter_path' => 'Endorsement',
+        'toda_certificate_path' => 'TODA Cert',
+        'police_clearance_path' => 'Police',
+        'or_cr_path' => 'OR/CR',
+        'drivers_license_path' => 'License',
     ];
 @endphp
 
-<div id="document-submission-cards-mobile" class="lg:hidden space-y-2">
+<div id="document-submission-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
     @forelse ($submissions as $submission)
-        <div class="rounded-lg border border-gray-200 bg-white p-3">
+        <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
             <div class="flex items-start justify-between gap-2">
                 <div class="min-w-0">
                     <p class="text-gray-900 font-medium text-sm truncate">{{ $submission->driver_name }}</p>
@@ -31,13 +31,13 @@
                 </span>
             </div>
 
-            <div class="flex items-center gap-1 mt-2">
-                @foreach ($docIcons as $field => $abbr)
+            <div class="flex flex-wrap gap-1 mt-2">
+                @foreach ($docIcons as $field => $label)
                     <button type="button"
-                        onclick="openDocModal('{{ asset('storage/' . $submission->$field) }}', '{{ \App\Models\TricycleDocumentSubmission::DOCUMENT_LABELS[$field] }} — {{ $submission->driver_name }}')"
+                        onclick="openDocModal('{{ asset('storage/' . $submission->$field) }}', '{{ addslashes(\App\Models\TricycleDocumentSubmission::DOCUMENT_LABELS[$field] . ' — ' . $submission->driver_name) }}')"
                         title="{{ \App\Models\TricycleDocumentSubmission::DOCUMENT_LABELS[$field] }}"
-                        class="inline-flex items-center justify-center w-6 h-6 rounded border border-gray-200 text-[9px] font-bold text-gray-500">
-                        {{ $abbr }}
+                        class="inline-flex items-center rounded-full border border-gray-200 px-2 py-0.5 text-[9px] font-semibold text-gray-500 whitespace-nowrap">
+                        {{ $label }}
                     </button>
                 @endforeach
             </div>
@@ -55,12 +55,14 @@
                 <button type="submit" class="shrink-0 rounded bg-gray-900 text-white px-2.5 py-1 text-xs font-semibold">Save</button>
             </form>
 
-            <form method="POST" action="{{ route('tricycle.document-submissions.destroy', $submission) }}" class="mt-1.5"
-                onsubmit="return confirm('Remove this submission?');">
+            <form id="delete-document-submission-form-mobile-{{ $submission->id }}" method="POST" action="{{ route('tricycle.document-submissions.destroy', $submission) }}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-[11px] text-red-600 hover:underline">Remove</button>
             </form>
+            <button type="button" onclick="confirmDocumentSubmissionDelete('delete-document-submission-form-mobile-{{ $submission->id }}', '{{ addslashes($submission->driver_name) }}')"
+                class="mt-1.5 text-[11px] text-red-600 hover:underline">
+                Remove
+            </button>
         </div>
     @empty
         <div class="rounded-lg border border-gray-200 p-8 text-center text-gray-400 text-sm">

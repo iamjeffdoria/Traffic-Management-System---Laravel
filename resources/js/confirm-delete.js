@@ -117,3 +117,23 @@ function submitPendingIdCardDelete() {
     }
 }
 window.submitPendingIdCardDelete = submitPendingIdCardDelete;
+
+let pendingDocumentSubmissionDeleteForm = null;
+
+function confirmDocumentSubmissionDelete(formId, name) {
+    pendingDocumentSubmissionDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-document-submission-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-document-submission-confirm-modal');
+}
+window.confirmDocumentSubmissionDelete = confirmDocumentSubmissionDelete;
+
+function submitPendingDocumentSubmissionDelete() {
+    if (pendingDocumentSubmissionDeleteForm) {
+        pendingDocumentSubmissionDeleteForm.submit();
+        pendingDocumentSubmissionDeleteForm = null;
+    }
+}
+window.submitPendingDocumentSubmissionDelete = submitPendingDocumentSubmissionDelete;
