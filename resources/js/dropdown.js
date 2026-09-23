@@ -15,6 +15,19 @@ function toggleDropdown(id) {
 }
 window.toggleDropdown = toggleDropdown;
 
+// Sidebar collapsible groups (Potpot / Tricycle, etc.) — plain JS toggle
+// instead of a checkbox + group-has-[] CSS trick, since that combo is
+// unreliable across Tailwind builds for dynamically-named nested groups.
+function toggleSidebarGroup(id) {
+    const panel = document.getElementById(id);
+    const chevron = document.getElementById(id + '-chevron');
+    if (!panel) return;
+
+    panel.classList.toggle('hidden');
+    if (chevron) chevron.classList.toggle('rotate-180');
+}
+window.toggleSidebarGroup = toggleSidebarGroup;
+
 // Close dropdown when clicking outside of it
 document.addEventListener('click', function (event) {
     document.querySelectorAll('[id$="-dropdown"]').forEach((dropdown) => {
