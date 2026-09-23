@@ -22,7 +22,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard'));
+
+            return redirect()->intended(route('admin.dashboard'))
+                ->withCookie(cookie('remembered_email', $credentials['email'], 60 * 24 * 30));
         }
 
         return back()->withErrors([

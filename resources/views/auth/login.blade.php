@@ -16,9 +16,9 @@
             <span class="moon-crater" style="top: 65%; left: 28%; width: 8px; height: 8px;"></span>
         </div>
 
-        @for ($i = 0; $i < 50; $i++)
+        @for ($i = 0; $i < 18; $i++)
             <span class="absolute rounded-full bg-white star"
-                style="top: {{ rand(0, 55) }}%; left: {{ rand(0, 100) }}%; width: {{ rand(1, 2) }}px; height: {{ rand(1, 2) }}px; opacity: {{ rand(30, 90) / 100 }}; animation-delay: {{ rand(0, 40) / 10 }}s;"></span>
+                style="top: {{ rand(0, 55) }}%; left: {{ rand(0, 100) }}%; width: {{ rand(1, 2) }}px; height: {{ rand(1, 2) }}px; opacity: {{ rand(30, 90) / 100 }};"></span>
         @endfor
 
         {{-- Welcome landmark sign (desktop only, hidden on mobile to avoid clutter) --}}
@@ -32,12 +32,12 @@
 
         {{-- City skyline --}}
         <div class="skyline" aria-hidden="true">
-            @for ($b = 0; $b < 16; $b++)
+            @for ($b = 0; $b < 8; $b++)
                 @php
                     $height = rand(35, 100);
                     $width = rand(28, 52);
                     $cols = rand(2, 3);
-                    $rows = rand(3, 6);
+                    $rows = rand(2, 3);
                     $hasAntenna = rand(0, 4) === 0;
                 @endphp
                 <div class="building" style="height: {{ $height }}%; width: {{ $width }}px;">
@@ -46,105 +46,11 @@
                     @endif
                     <div class="building-windows" style="--wcols: {{ $cols }};">
                         @for ($w = 0; $w < $cols * $rows; $w++)
-                            <span class="window {{ rand(0, 100) < 55 ? 'lit' : '' }}" style="animation-delay: {{ rand(0, 50) / 10 }}s;"></span>
+                            <span class="window {{ rand(0, 100) < 55 ? 'lit' : '' }}"></span>
                         @endfor
                     </div>
                 </div>
             @endfor
-        </div>
-
-        {{-- Sidewalk with pedestrians --}}
-        <div class="sidewalk" aria-hidden="true">
-            @php $pedColors = ['#1e293b', '#334155', '#0f172a', '#475569']; @endphp
-
-            @for ($p = 0; $p < 5; $p++)
-                <div class="pedestrian pedestrian-walk-rtl" style="
-                    --ped-color: {{ $pedColors[array_rand($pedColors)] }};
-                    animation-duration: {{ rand(320, 480) / 10 }}s;
-                    animation-delay: {{ $p * rand(4, 8) }}s;">
-                    <span class="pedestrian-head"></span>
-                    <span class="pedestrian-torso"></span>
-                    <span class="pedestrian-leg left"></span>
-                    <span class="pedestrian-leg right"></span>
-                </div>
-            @endfor
-
-            @for ($p = 0; $p < 5; $p++)
-                <div class="pedestrian pedestrian-walk-ltr" style="
-                    --ped-color: {{ $pedColors[array_rand($pedColors)] }};
-                    animation-duration: {{ rand(320, 480) / 10 }}s;
-                    animation-delay: {{ $p * rand(4, 8) }}s;">
-                    <span class="pedestrian-head"></span>
-                    <span class="pedestrian-torso"></span>
-                    <span class="pedestrian-leg left"></span>
-                    <span class="pedestrian-leg right"></span>
-                </div>
-            @endfor
-        </div>
-
-        {{-- Bottom highway strip with real moving traffic --}}
-        <div class="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-[#12162e] border-t border-white/10 overflow-hidden highway-rise">
-            <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[3px] lane-dashes"></div>
-
-            {{-- Traffic light standing on the road --}}
-            <div class="absolute right-10 sm:right-24 bottom-0 flex flex-col items-center z-10 pole-drop">
-                <div class="flex flex-col items-center gap-1.5 bg-gray-900 rounded-md px-1.5 py-2 shadow-[0_0_25px_rgba(0,0,0,0.6)]">
-                    <span class="w-2.5 h-2.5 rounded-full bg-red-500" style="animation: tl-red 3s ease-in-out infinite;"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-400" style="animation: tl-yellow 3s ease-in-out infinite;"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-500" style="animation: tl-green 3s ease-in-out infinite;"></span>
-                </div>
-                <div class="w-1.5 h-16 sm:h-20 bg-gray-700"></div>
-                <div class="w-6 h-1.5 bg-gray-800 rounded-full"></div>
-            </div>
-
-            @php $carColors = ['#ef4444', '#3b82f6', '#eab308', '#22c55e', '#f97316', '#a855f7']; @endphp
-
-            {{-- Lane 1: right to left --}}
-            @for ($i = 0; $i < 4; $i++)
-                <div class="car car-rtl" style="
-                    top: {{ rand(8, 30) }}%;
-                    --car-color: {{ $carColors[array_rand($carColors)] }};
-                    animation-duration: {{ rand(45, 75) / 10 }}s;
-                    animation-delay: {{ $i * 1.8 }}s;">
-                    <span class="car-cabin"></span>
-                    <span class="car-body"></span>
-                    <span class="car-wheel left"></span>
-                    <span class="car-wheel right"></span>
-                    <span class="car-light front"></span>
-                    <span class="car-light back"></span>
-                </div>
-            @endfor
-
-            {{-- Lane 2: left to right --}}
-            @for ($i = 0; $i < 4; $i++)
-                <div class="car car-ltr" style="
-                    top: {{ rand(60, 82) }}%;
-                    --car-color: {{ $carColors[array_rand($carColors)] }};
-                    animation-duration: {{ rand(45, 75) / 10 }}s;
-                    animation-delay: {{ $i * 2 }}s;">
-                    <span class="car-cabin"></span>
-                    <span class="car-body"></span>
-                    <span class="car-wheel left"></span>
-                    <span class="car-wheel right"></span>
-                    <span class="car-light front"></span>
-                    <span class="car-light back"></span>
-                </div>
-            @endfor
-        </div>
-
-        {{-- Jet flying past --}}
-        <div class="jet">
-            <span class="jet-trail jet-trail-1"></span>
-            <span class="jet-trail jet-trail-2"></span>
-            <span class="jet-flash"></span>
-            <span class="jet-afterburner"></span>
-            <span class="jet-wing top"></span>
-            <span class="jet-wing bottom"></span>
-            <span class="jet-fin"></span>
-            <span class="jet-body"></span>
-            <span class="jet-nose"></span>
-            <span class="jet-cockpit"></span>
-            <span class="jet-tail-light"></span>
         </div>
 
         <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0b1130]/40"></div>
@@ -170,13 +76,15 @@
             <form method="POST" action="{{ route('login') }}" class="mt-8 space-y-4">
                 @csrf
                 <div>
-                    <input type="email" name="email" value="{{ old('email') }}" required autofocus
+                    <input type="email" name="email" value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
+                        autocomplete="username"
                         placeholder="Email"
                         class="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-shadow">
                 </div>
 
                 <div class="relative">
                     <input type="password" name="password" id="password" required
+                        autocomplete="current-password"
                         placeholder="Password"
                         class="w-full rounded-lg border border-gray-200 px-4 py-2.5 pr-11 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-shadow">
                     <button type="button" onclick="togglePassword('password', 'eye-open', 'eye-closed')"
@@ -192,7 +100,7 @@
                 </div>
 
                 <label class="flex items-center gap-2 text-sm text-gray-500">
-                    <input type="checkbox" name="remember" class="rounded border-gray-300 text-red-600 focus:ring-red-600">
+                    <input type="checkbox" name="remember" @checked(old('remember')) class="rounded border-gray-300 text-red-600 focus:ring-red-600">
                     Remember me
                 </label>
 
