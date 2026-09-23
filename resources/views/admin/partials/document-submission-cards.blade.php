@@ -20,7 +20,11 @@
             <div class="flex items-start justify-between gap-2">
                 <div class="min-w-0">
                     <p class="text-gray-900 font-medium text-sm truncate">{{ $submission->driver_name }}</p>
-                    <p class="text-gray-400 text-xs truncate">{{ $submission->contact_number }} · {{ $submission->body_number ?? '—' }} · {{ $submission->plate_no ?? '—' }}</p>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <span class="inline-block rounded-full bg-slate-600 text-white text-[10px] font-mono px-2 py-0.5">{{ $submission->contact_number }}</span>
+                        <span class="inline-block rounded-full bg-cyan-600 text-white text-[10px] font-mono px-2 py-0.5">{{ $submission->body_number ?? '—' }}</span>
+                        <span class="inline-block rounded-full bg-indigo-600 text-white text-[10px] font-mono px-2 py-0.5">{{ $submission->plate_no ?? '—' }}</span>
+                    </div>
                 </div>
                 <span class="inline-block rounded-full {{ $statusColors[$submission->status] }} text-white text-[10px] font-semibold px-2 py-0.5 whitespace-nowrap shrink-0">
                     {{ ucfirst($submission->status) }}

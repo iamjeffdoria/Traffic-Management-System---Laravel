@@ -13,7 +13,6 @@
     ];
 @endphp
 
-<!-- Desktop table -->
 <div class="hidden lg:block rounded-xl border border-gray-200 overflow-x-auto isolate" style="max-height: 680px; overflow-y: auto;">
     <table class="w-full text-xs border-separate border-spacing-0 table-fixed">
         <colgroup>
@@ -43,7 +42,6 @@
     @endunless
 </div>
 
-<!-- Mobile compact cards -->
 @include('admin.partials.document-submission-cards')
 
 <div id="document-submission-pagination-mobile" class="lg:hidden mt-4">
