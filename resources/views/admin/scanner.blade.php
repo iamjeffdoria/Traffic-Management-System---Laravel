@@ -44,15 +44,33 @@
                 </button>
             </div>
 
-            <!-- Result card -->
-            <div id="result-card" class="hidden mt-6 rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-                <div id="result-header" class="px-6 py-5 text-center border-b border-gray-100">
-                    <div id="result-icon" class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"></div>
-                    <h3 id="result-title" class="font-semibold text-gray-900 text-lg"></h3>
-                    <p id="result-subtitle" class="text-sm text-gray-500 mt-1"></p>
-                </div>
-                <div id="result-fields" class="px-6 py-2"></div>
-            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Result modal -->
+<div id="result-card" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 overflow-y-auto">
+    <div onclick="closeResultModal()" class="absolute inset-0 bg-black/50"></div>
+
+    <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-sm max-h-[90vh] overflow-y-auto">
+        <button type="button" onclick="closeResultModal()" class="absolute right-4 top-4 text-gray-400 hover:text-gray-600 z-10">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <div id="result-header" class="px-6 py-5 text-center border-b border-gray-100">
+            <div id="result-icon" class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"></div>
+            <h3 id="result-title" class="font-semibold text-gray-900 text-lg"></h3>
+            <p id="result-subtitle" class="text-sm text-gray-500 mt-1"></p>
+        </div>
+        <div id="result-fields" class="px-6 py-2"></div>
+
+        <div class="px-6 py-4">
+            <button type="button" onclick="closeResultModal(); restartScanner();"
+                class="w-full rounded-full bg-gray-900 text-white px-6 py-2.5 text-sm font-semibold hover:bg-gray-800 transition-colors">
+                Scan Another
+            </button>
         </div>
     </div>
 </div>
@@ -194,15 +212,22 @@
         }
 
         card.classList.remove('hidden');
+        card.classList.add('flex');
         document.getElementById('rescan-btn').classList.remove('hidden');
         document.getElementById('scanner-status').classList.add('hidden');
+    }
+
+    function closeResultModal() {
+        const card = document.getElementById('result-card');
+        card.classList.add('hidden');
+        card.classList.remove('flex');
     }
 
     function restartScanner() {
         isProcessing = false;
         document.getElementById('file-input').value = '';
         document.getElementById('file-label').textContent = 'Upload a Photo';
-        document.getElementById('result-card').classList.add('hidden');
+        closeResultModal();
         document.getElementById('rescan-btn').classList.add('hidden');
         document.getElementById('scanner-status').classList.remove('hidden');
         document.getElementById('scanner-status').innerHTML =

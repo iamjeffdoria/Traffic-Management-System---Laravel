@@ -14,11 +14,11 @@
         }
         .page {
             border: 1px solid #999;
-            padding: 0.6in;
+            padding: 0.45in 0.6in;
             box-sizing: border-box;
             min-height: 100vh;
         }
-        .header { position: relative; text-align: center; margin-bottom: 12px; padding-bottom: 10px; }
+        .header { position: relative; text-align: center; margin-bottom: 8px; padding-bottom: 6px; }
         .header img { position: absolute; left: 20px; top: 4px; width: 80px; height: 80px; }
         .header .title-block { display: inline-block; }
         .header h3, .header h4 { margin: 0; font-weight: bold; }
@@ -35,22 +35,38 @@
         .row { display: flex; justify-content: space-between; margin-bottom: 6px; }
         .row .label { font-weight: normal; }
         .row .value { font-weight: bold; }
-        hr { border: none; border-top: 1px solid #000; margin: 14px 0; }
-        .vehicle-table { width: 100%; border-collapse: separate; border-spacing: 12px 0; margin: 18px -12px; }
+        hr { border: none; border-top: 1px solid #000; margin: 8px 0; }
+        .vehicle-table { width: 100%; border-collapse: separate; border-spacing: 12px 0; margin: 12px -12px; }
         .vehicle-table td { text-align: center; padding-bottom: 2px; }
         .vehicle-table .value-row td { border-bottom: 1px solid #000; padding-bottom: 4px; font-weight: bold; }
         .vehicle-table .label-row td { font-size: 12px; padding-top: 4px; }
-        ol { padding-left: 20px; margin: 10px 0; }
-        ol li { margin-bottom: 6px; }
-        .so-ordered { margin-top: 24px; font-weight: bold; }
+        ol { padding-left: 20px; margin: 8px 0; }
+        ol li { margin-bottom: 4px; }
+        .so-ordered { margin-top: 14px; font-weight: bold; }
         .signature-row { display: flex; align-items: flex-end; gap: 8px; margin: 0; }
         .signature-spacer { visibility: hidden; }
         .signature-blank { flex: 0 0 220px; border-bottom: 1px solid #000; }
         .signature-date { flex: 0 0 220px; text-align: center; }
-        .approval-section { margin-top: 20px; }
-        .approval-columns { display: flex; justify-content: space-between; margin-top: 20px; }
-        .approval-columns div { text-align: center; width: 45%; }
+        .approval-section { margin-top: 12px; }
+        .approval-columns { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 6px; margin-bottom: 8px; }
+        .approval-columns .signatures { display: flex; justify-content: flex-start; gap: 40px; flex: 1; }
+        .approval-columns .signatures div { text-align: center; }
         .approval-columns .name { font-weight: bold; }
+        .qr-code {
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .qr-code img {
+            width: 130px;
+            height: 130px;
+            display: block;
+        }
+        .qr-code .qr-label {
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            color: #555;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -126,13 +142,25 @@
     <div class="approval-section">
         <p><strong>Recommending approval:</strong></p>
         <div class="approval-columns">
-            <div>
-                <p class="name" style="margin-bottom: 2px;">{{ $mtop->municipal_treasurer }}</p>
-                <p style="margin-top: 0;">ICO-Municipal Treasurer</p>
+            <div class="signatures">
+                <div>
+                    <p class="name" style="margin-bottom: 2px;">{{ $mtop->municipal_treasurer }}</p>
+                    <p style="margin-top: 0;">ICO-Municipal Treasurer</p>
+                </div>
+                <div>
+                    <p class="name" style="margin-bottom: 2px;">{{ $mtop->officer_in_charge }}</p>
+                    <p style="margin-top: 0;">OFFICER-IN-CHARGE</p>
+                </div>
             </div>
-            <div>
-                <p class="name" style="margin-bottom: 2px;">{{ $mtop->officer_in_charge }}</p>
-                <p style="margin-top: 0;">OFFICER-IN-CHARGE</p>
+
+            @php
+                $qrToken = \App\Services\QrToken::encode('mtop', $mtop->id);
+                $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&ecc=M&data=' . urlencode($qrToken);
+            @endphp
+
+            <div class="qr-code">
+                <img src="{{ $qrUrl }}" alt="Verification QR Code">
+                <p class="qr-label">SCAN TO VERIFY</p>
             </div>
         </div>
     </div>

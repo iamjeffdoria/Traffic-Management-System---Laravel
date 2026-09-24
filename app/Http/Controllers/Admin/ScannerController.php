@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PotpotMayorsPermit;
+use App\Models\Mtop;
 use App\Services\QrToken;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,22 @@ class ScannerController extends Controller
                         'Expiry Date' => $permit->expiry_date->format('M d, Y'),
                         'OR No.' => $permit->or_no,
                         'Mayor' => $permit->mayor,
+                    ];
+                },
+            ],
+            'mtop' => [
+                'model' => Mtop::class,
+                'label' => 'MTOP',
+                'fields' => function (Mtop $mtop) {
+                    return [
+                        'Case No.' => $mtop->case_no,
+                        'Operator' => $mtop->tricycle->name ?? '—',
+                        'Body No.' => $mtop->tricycle->body_number ?? '—',
+                        'Route' => $mtop->route_operation,
+                        'No. of Units' => $mtop->no_of_units,
+                        'Date' => $mtop->date->format('M d, Y'),
+                        'Officer-in-Charge' => $mtop->officer_in_charge,
+                        'Mayor' => $mtop->mayor,
                     ];
                 },
             ],
