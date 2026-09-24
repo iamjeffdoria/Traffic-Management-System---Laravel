@@ -32,22 +32,33 @@
                     </svg>
                 </div>
             @endif
-            <div class="min-w-0">
+            <div class="min-w-0 flex-1">
                 <p class="text-gray-900 font-medium truncate">{{ $idCard->full_name }}</p>
-                <p class="text-gray-500 text-sm truncate">{{ $idCard->id_number }} · {{ $idCard->address }}</p>
+                <p class="text-gray-500 text-sm truncate">{{ $idCard->id_number }}</p>
+                <p class="text-gray-500 text-xs truncate mt-0.5">{{ $idCard->address }}</p>
                 <div class="flex flex-wrap gap-1 mt-2">
-                    <span class="inline-block rounded-full {{ $idCard->gender === 'Male' ? 'bg-blue-600' : 'bg-pink-600' }} text-white text-xs font-semibold px-2.5 py-1">
+                    <span class="inline-block rounded-full {{ $idCard->gender === 'Male' ? 'bg-blue-600' : 'bg-pink-600' }} text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
                         {{ $idCard->gender }}
                     </span>
-                    <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-semibold px-2.5 py-1">
+                    <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
                         {{ $idCard->height }} cm
                     </span>
-                    <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-semibold px-2.5 py-1">
+                    <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
                         {{ $idCard->weight }} kg
                     </span>
                 </div>
-                <p class="text-gray-500 text-xs mt-1.5">DOB: {{ $idCard->date_of_birth->format('M-d-y') }} · OR: {{ $idCard->or_number }}</p>
-                <p class="text-gray-500 text-xs">Issued: {{ $idCard->date_issued->format('M-d-y') }} · Exp: {{ $idCard->expiry_date->format('M-d-y') }}</p>
+                <div class="flex flex-wrap gap-1 mt-1.5">
+                    <span class="inline-block rounded-full bg-teal-600 text-white text-xs font-mono px-2.5 py-1 whitespace-nowrap" title="OR: {{ $idCard->or_number }}">
+                        OR: {{ $idCard->or_number }}
+                    </span>
+                    <span class="inline-block rounded-full bg-green-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                        {{ $idCard->date_issued->format('M-d-y') }}
+                    </span>
+                    <span class="inline-block rounded-full bg-red-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+                        Exp: {{ $idCard->expiry_date->format('M-d-y') }}
+                    </span>
+                </div>
+                <p class="text-gray-400 text-xs mt-1.5">DOB: {{ $idCard->date_of_birth->format('M-d-y') }}</p>
             </div>
         </div>
         <div class="flex items-center gap-1 shrink-0">
