@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PotpotMayorsPermit;
 use App\Models\Mtop;
+use App\Models\TricycleMayorsPermit;
+use App\Models\Franchise;
 use App\Services\QrToken;
 use Illuminate\Http\Request;
 
@@ -48,6 +50,38 @@ class ScannerController extends Controller
                         'Date' => $mtop->date->format('M d, Y'),
                         'Officer-in-Charge' => $mtop->officer_in_charge,
                         'Mayor' => $mtop->mayor,
+                    ];
+                },
+            ],
+            'tricycle_mayors_permit' => [
+                'model' => TricycleMayorsPermit::class,
+                'label' => "Mayor's Permit — Tricycle",
+                'fields' => function (TricycleMayorsPermit $permit) {
+                    return [
+                        'Control No.' => $permit->control_no,
+                        'Owner' => $permit->tricycle->name ?? '—',
+                        'Body No.' => $permit->tricycle->body_number ?? '—',
+                        'Business Name' => $permit->business_name ?: 'None',
+                        'Operation' => $permit->motorized_operation,
+                        'Quarter' => $permit->quarter,
+                        'Issue Date' => $permit->issue_date->format('M d, Y'),
+                        'Expiry Date' => $permit->expiry_date->format('M d, Y'),
+                        'OR No.' => $permit->or_no,
+                        'Mayor' => $permit->mayor,
+                    ];
+                },
+            ],
+            'franchise_license' => [
+                'model' => Franchise::class,
+                'label' => 'License to Operate — Franchise',
+                'fields' => function (Franchise $franchise) {
+                    return [
+                        'Authorized No.' => $franchise->authorized_no,
+                        'Owner' => $franchise->tricycle->name ?? '—',
+                        'Body No.' => $franchise->tricycle->body_number ?? '—',
+                        'Plate No.' => $franchise->tricycle->plate_no ?? '—',
+                        'Route' => $franchise->authorized_route,
+                        'Valid Until' => $franchise->valid_until->format('M d, Y'),
                     ];
                 },
             ],

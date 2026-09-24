@@ -73,6 +73,23 @@
         .footer-fields { margin-top: 18px; font-size: 14px; }
         .footer-fields .line { margin-bottom: 6px; }
         .footer-fields .label { font-weight: bold; display: inline-block; width: 120px; }
+        .qr-code {
+            position: absolute;
+            bottom: 0.4in;
+            right: 0.6in;
+            text-align: center;
+        }
+        .qr-code img {
+            width: 130px;
+            height: 130px;
+            display: block;
+        }
+        .qr-code .qr-label {
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            color: #555;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -162,6 +179,16 @@
         <p class="line"><span class="label">O.R No:</span> {{ $permit->or_no }}</p>
         <p class="line"><span class="label">Issued On:</span> {{ $permit->issue_date->format('F j, Y') }}</p>
         <p class="line"><span class="label">Issued At:</span> {{ $permit->issued_at }}</p>
+    </div>
+
+    @php
+        $qrToken = \App\Services\QrToken::encode('tricycle_mayors_permit', $permit->id);
+        $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&ecc=M&data=' . urlencode($qrToken);
+    @endphp
+
+    <div class="qr-code">
+        <img src="{{ $qrUrl }}" alt="Verification QR Code">
+        <p class="qr-label">SCAN TO VERIFY</p>
     </div>
 </div>
 </body>

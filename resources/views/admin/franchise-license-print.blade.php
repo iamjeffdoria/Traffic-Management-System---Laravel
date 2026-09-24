@@ -75,8 +75,28 @@
         .sig-label { text-align: left; font-weight: bold; margin: 0 0 34px; }
         .sig-name { font-weight: bold; text-transform: uppercase; margin: 0; line-height: 1.4; }
         .sig-title { margin: 2px 0 0; font-size: 14px; font-weight: bold; }
-        .approved { width: 50%; margin: 44px auto 0; text-align: center; page-break-inside: avoid; }
-        .approved .sig-label { margin-bottom: 34px; }
+        .approval-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 44px; page-break-inside: avoid; }
+        .approval-row .spacer { width: 130px; flex-shrink: 0; }
+        .approved { flex: 1; text-align: center; }
+        .approved .sig-label { margin-bottom: 34px; text-align: center; }
+        .qr-code {
+            flex-shrink: 0;
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            right: -20px;
+        }
+        .qr-code img {
+            width: 130px;
+            height: 130px;
+            display: block;
+        }
+        .qr-code .qr-label {
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            color: #555;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -138,10 +158,24 @@
         </tr>
     </table>
 
-    <div class="approved">
-        <p class="sig-label" style="text-align:center;">APPROVED:</p>
-        <p class="sig-name">{{ $license['approved_by']['name'] }}</p>
-        <p class="sig-title">{{ $license['approved_by']['title'] }}</p>
+    <div class="approval-row">
+        <div class="spacer"></div>
+
+        <div class="approved">
+            <p class="sig-label" style="text-align:center;">APPROVED:</p>
+            <p class="sig-name">{{ $license['approved_by']['name'] }}</p>
+            <p class="sig-title">{{ $license['approved_by']['title'] }}</p>
+        </div>
+
+        @php
+            $qrToken = \App\Services\QrToken::encode('franchise_license', $franchise->id);
+            $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&ecc=M&data=' . urlencode($qrToken);
+        @endphp
+
+        <div class="qr-code">
+            <img src="{{ $qrUrl }}" alt="Verification QR Code">
+            <p class="qr-label">SCAN TO VERIFY</p>
+        </div>
     </div>
 </div>
 </body>
