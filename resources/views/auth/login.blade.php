@@ -5,55 +5,16 @@
 @section('content')
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b1130] px-6 py-12">
 
-    {{-- Animated traffic scene --}}
-    <div class="absolute inset-0 scene-fade-in" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0b1130] via-[#161d45] to-[#232a5c]"></div>
-
-        {{-- Moon --}}
-        <div class="moon" style="top: 8%; right: 12%; width: 64px; height: 64px;">
-            <span class="moon-crater" style="top: 18%; left: 22%; width: 14px; height: 14px;"></span>
-            <span class="moon-crater" style="top: 50%; left: 58%; width: 10px; height: 10px;"></span>
-            <span class="moon-crater" style="top: 65%; left: 28%; width: 8px; height: 8px;"></span>
-        </div>
-
-        @for ($i = 0; $i < 18; $i++)
-            <span class="absolute rounded-full bg-white star"
-                style="top: {{ rand(0, 55) }}%; left: {{ rand(0, 100) }}%; width: {{ rand(1, 2) }}px; height: {{ rand(1, 2) }}px; opacity: {{ rand(30, 90) / 100 }};"></span>
-        @endfor
-
-        {{-- Welcome landmark sign (desktop only, hidden on mobile to avoid clutter) --}}
-        <div class="landmark-sign hidden lg:block" style="bottom: 9rem; right: 6%;" aria-hidden="true">
-            <div class="landmark-sign-board">
-                <p class="landmark-sign-title">Welcome to</p>
-                <p class="landmark-sign-main">Palompon</p>
-            </div>
-            <span class="landmark-sign-post"></span>
-        </div>
-
-        {{-- City skyline --}}
-        <div class="skyline" aria-hidden="true">
-            @for ($b = 0; $b < 8; $b++)
-                @php
-                    $height = rand(35, 100);
-                    $width = rand(28, 52);
-                    $cols = rand(2, 3);
-                    $rows = rand(2, 3);
-                    $hasAntenna = rand(0, 4) === 0;
-                @endphp
-                <div class="building" style="height: {{ $height }}%; width: {{ $width }}px;">
-                    @if ($hasAntenna)
-                        <span class="building-antenna"></span>
-                    @endif
-                    <div class="building-windows" style="--wcols: {{ $cols }};">
-                        @for ($w = 0; $w < $cols * $rows; $w++)
-                            <span class="window {{ rand(0, 100) < 55 ? 'lit' : '' }}"></span>
-                        @endfor
-                    </div>
-                </div>
-            @endfor
-        </div>
-
-        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0b1130]/40"></div>
+    {{-- Minimal futuristic background --}}
+    <div class="absolute inset-0 scene-fade-in futuristic-bg" aria-hidden="true">
+        <div class="absolute inset-0 bg-[#05070f]"></div>
+        <div class="grid-overlay"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+        <div class="scanline"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#05070f] via-transparent to-[#05070f]/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#05070f]/40 via-transparent to-[#05070f]/40"></div>
     </div>
 
     <div class="relative z-10 w-full max-w-sm">
