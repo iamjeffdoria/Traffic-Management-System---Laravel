@@ -3,33 +3,31 @@
 @section('title', 'Admin Login')
 
 @section('content')
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b1130] px-6 py-12">
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFF7E8] px-6 py-12">
 
-    {{-- Minimal futuristic background --}}
-    <div class="absolute inset-0 scene-fade-in futuristic-bg" aria-hidden="true">
-        <div class="absolute inset-0 bg-[#05070f]"></div>
-        <div class="grid-overlay"></div>
-        <div class="glow-orb glow-orb-1"></div>
-        <div class="glow-orb glow-orb-2"></div>
-        <div class="glow-orb glow-orb-3"></div>
-        <div class="scanline"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-[#05070f] via-transparent to-[#05070f]/70"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-[#05070f]/40 via-transparent to-[#05070f]/40"></div>
+    {{-- Cartoony bouncy background --}}
+    <div class="absolute inset-0 cartoon-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
     </div>
 
-    <div class="relative z-10 w-full max-w-sm">
+    <div class="relative z-10 w-full max-w-sm scene-pop-in">
 
-        <div class="bg-white rounded-2xl px-8 py-10 shadow-2xl login-card-enter">
+        <div class="bg-white rounded-[2rem] px-8 py-10 border-4 border-gray-900 shadow-[8px_8px_0_0_rgba(17,24,39,1)] login-card-enter">
             <div class="flex flex-col items-center gap-3 mb-8">
-                <img src="{{ asset('images/csulogo2.png') }}" alt="Logo" class="w-14 h-14 object-contain">
-                <span class="font-medium text-gray-900 text-sm">Traffic Management System</span>
+                <div class="w-16 h-16 rounded-full bg-yellow-300 border-4 border-gray-900 flex items-center justify-center overflow-hidden">
+                    <img src="{{ asset('images/csulogo2.png') }}" alt="Logo" class="w-10 h-10 object-contain">
+                </div>
+                <span class="font-bold text-gray-900 text-sm">Traffic Management System</span>
             </div>
 
-            <h2 class="text-xl font-semibold text-gray-900 tracking-tight text-center">Welcome back</h2>
-            <p class="mt-1.5 text-sm text-gray-400 text-center">Sign in to continue</p>
+            <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight text-center">Welcome back! 👋</h2>
+            <p class="mt-1.5 text-sm text-gray-500 text-center">Sign in to continue</p>
 
             @if ($errors->any())
-                <div class="mt-6 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
+                <div class="mt-6 rounded-xl border-2 border-red-400 bg-red-50 text-red-600 text-sm font-medium px-4 py-3">
                     {{ $errors->first() }}
                 </div>
             @endif
@@ -40,14 +38,14 @@
                     <input type="email" name="email" value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
                         autocomplete="username"
                         placeholder="Email"
-                        class="w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-shadow">
+                        class="w-full rounded-xl border-2 border-gray-900 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-shadow">
                 </div>
 
                 <div class="relative">
                     <input type="password" name="password" id="password" required
                         autocomplete="current-password"
                         placeholder="Password"
-                        class="w-full rounded-lg border border-gray-200 px-4 py-2.5 pr-11 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-shadow">
+                        class="w-full rounded-xl border-2 border-gray-900 px-4 py-2.5 pr-11 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-shadow">
                     <button type="button" onclick="togglePassword('password', 'eye-open', 'eye-closed')"
                         class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
                         <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,12 +59,12 @@
                 </div>
 
                 <label class="flex items-center gap-2 text-sm text-gray-500">
-                    <input type="checkbox" name="remember" @checked(old('remember')) class="rounded border-gray-300 text-red-600 focus:ring-red-600">
+                    <input type="checkbox" name="remember" @checked(old('remember')) class="rounded border-2 border-gray-900 text-yellow-400 focus:ring-yellow-300">
                     Remember me
                 </label>
 
                 <button type="submit"
-                    class="w-full rounded-full bg-red-600 text-white px-6 py-2.5 text-sm font-semibold hover:bg-red-700 transition-colors">
+                    class="w-full rounded-full bg-yellow-300 text-gray-900 border-2 border-gray-900 px-6 py-2.5 text-sm font-bold shadow-[4px_4px_0_0_rgba(17,24,39,1)] hover:shadow-[2px_2px_0_0_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all">
                     Log In
                 </button>
             </form>
