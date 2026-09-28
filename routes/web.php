@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
+use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpotDocumentSubmissionController;
 use App\Http\Controllers\DriverDocumentSubmissionController;
 use App\Http\Controllers\PotpotDocumentSubmissionController;
 use App\Http\Controllers\ProfileController;
@@ -77,6 +78,10 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::get('/admin/potpot/mayors-permit/{permit}/print', [PotpotMayorsPermitController::class, 'print'])->name('potpot.mayors-permit.print');
     Route::get('/admin/potpot/mayors-permit/export', [PotpotMayorsPermitController::class, 'export'])->name('potpot.mayors-permit.export');
     Route::post('/admin/potpot/mayors-permit/import', [PotpotMayorsPermitController::class, 'import'])->name('potpot.mayors-permit.import');
+
+    Route::get('/admin/potpot/document-submissions', [AdminPotpotDocumentSubmissionController::class, 'index'])->name('potpot.document-submissions');
+    Route::put('/admin/potpot/document-submissions/{submission}', [AdminPotpotDocumentSubmissionController::class, 'updateStatus'])->name('potpot.document-submissions.update-status');
+    Route::delete('/admin/potpot/document-submissions/{submission}', [AdminPotpotDocumentSubmissionController::class, 'destroy'])->name('potpot.document-submissions.destroy');
 });
 
 // Tricycle admin + superadmin only

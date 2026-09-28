@@ -4,13 +4,7 @@
         'approved' => 'bg-green-600',
         'rejected' => 'bg-red-600',
     ];
-    $docIcons = [
-        'endorsement_letter_path' => 'Endorsement',
-        'toda_certificate_path' => 'TODA Cert',
-        'police_clearance_path' => 'Police',
-        'or_cr_path' => 'OR/CR',
-        'drivers_license_path' => 'License',
-    ];
+    $docIcons = $config['shortLabels'];
 @endphp
 
 <div class="hidden lg:block rounded-xl border border-gray-200 overflow-x-auto isolate" style="max-height: 680px; overflow-y: auto;">

@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\TricycleDocumentSubmission;
+use App\Models\PotpotDocumentSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class DocumentSubmissionController extends Controller
+class PotpotDocumentSubmissionController extends Controller
 {
     public function index(Request $request)
     {
-        $submissions = TricycleDocumentSubmission::query()
+        $submissions = PotpotDocumentSubmission::query()
             ->when($request->filled('driver_name'), fn ($q) =>
                 $q->where('driver_name', 'like', '%' . $request->input('driver_name') . '%'))
             ->when($request->filled('status'), fn ($q) =>
@@ -29,27 +29,7 @@ class DocumentSubmissionController extends Controller
         return view('admin.document-submissions', compact('submissions', 'config'));
     }
 
-    protected function pageConfig(): array
-    {
-        return [
-            'title' => 'Tricycle Document Submissions',
-            'sidebar' => 'tricycle-document-submissions',
-            'indexRoute' => 'tricycle.document-submissions',
-            'updateRoute' => 'tricycle.document-submissions.update-status',
-            'destroyRoute' => 'tricycle.document-submissions.destroy',
-            'showPlate' => true,
-            'labels' => TricycleDocumentSubmission::DOCUMENT_LABELS,
-            'shortLabels' => [
-                'endorsement_letter_path' => 'Endorsement',
-                'toda_certificate_path' => 'TODA Cert',
-                'police_clearance_path' => 'Police',
-                'or_cr_path' => 'OR/CR',
-                'drivers_license_path' => 'License',
-            ],
-        ];
-    }
-
-    public function updateStatus(Request $request, TricycleDocumentSubmission $submission)
+    public function updateStatus(Request $request, PotpotDocumentSubmission $submission)
     {
         $validated = $request->validate([
             'status' => 'required|in:pending,approved,rejected',
@@ -61,9 +41,9 @@ class DocumentSubmissionController extends Controller
         return back()->with('success', 'Submission status updated.');
     }
 
-    public function destroy(TricycleDocumentSubmission $submission)
+    public function destroy(PotpotDocumentSubmission $submission)
     {
-        foreach (['endorsement_letter_path', 'toda_certificate_path', 'police_clearance_path', 'or_cr_path', 'drivers_license_path'] as $field) {
+        foreach (array_keys(PotpotDocumentSubmission::DOCUMENT_LABELS) as $field) {
             if ($submission->$field) {
                 Storage::disk('public')->delete($submission->$field);
             }
@@ -72,5 +52,25 @@ class DocumentSubmissionController extends Controller
         $submission->delete();
 
         return back()->with('success', 'Submission removed.');
+    }
+
+    protected function pageConfig(): array
+    {
+        return [
+            'title' => 'Potpot Document Submissions',
+            'sidebar' => 'potpot-document-submissions',
+            'indexRoute' => 'potpot.document-submissions',
+            'updateRoute' => 'potpot.document-submissions.update-status',
+            'destroyRoute' => 'potpot.document-submissions.destroy',
+            'showPlate' => false,
+            'labels' => PotpotDocumentSubmission::DOCUMENT_LABELS,
+            'shortLabels' => [
+                'drivers_license_path' => 'License',
+                'id_card_path' => 'ID Card',
+                'mayors_permit_path' => 'Permit',
+                'police_clearance_path' => 'Police',
+                'medical_certificate_path' => 'Medical',
+            ],
+        ];
     }
 }

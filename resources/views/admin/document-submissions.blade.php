@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Document Submissions')
+@section('title', $config['title'])
 
 @section('content')
 <div class="lg:flex group/layout">
-    <x-sidebar active="tricycle-document-submissions" />
+    <x-sidebar :active="$config['sidebar']" />
     <div class="flex-1 min-w-0 lg:ml-56 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
-        <x-topbar title="Document Submissions" />
+        <x-topbar :title="$config['title']" />
 
         <div class="max-w-7xl mx-auto px-6 py-6">
             @if (session('success'))
@@ -17,7 +17,7 @@
                 </script>
             @endif
 
-            <form id="document-submission-filter-form" method="GET" action="{{ route('tricycle.document-submissions') }}" class="flex flex-col sm:flex-row gap-2 mb-4">
+            <form id="document-submission-filter-form" method="GET" action="{{ route($config['indexRoute']) }}" class="flex flex-col sm:flex-row gap-2 mb-4">
                 <input type="text" name="driver_name" value="{{ request('driver_name') }}" oninput="debouncedFetchDocumentSubmissionFilter()" placeholder="Search driver name..."
                     class="w-full sm:w-64 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                 <select name="status" onchange="debouncedFetchDocumentSubmissionFilter()" class="w-full sm:w-40 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">

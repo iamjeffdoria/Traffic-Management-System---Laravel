@@ -5,13 +5,7 @@
         'approved' => 'bg-green-600',
         'rejected' => 'bg-red-600',
     ];
-    $docIcons = [
-        'endorsement_letter_path' => 'Endorsement',
-        'toda_certificate_path' => 'TODA Cert',
-        'police_clearance_path' => 'Police',
-        'or_cr_path' => 'OR/CR',
-        'drivers_license_path' => 'License',
-    ];
+    $docIcons = $config['shortLabels'];
 @endphp
 
 <tbody id="document-submission-tbody-desktop" class="divide-y-4 divide-gray-200">
@@ -28,17 +22,19 @@
                     <span class="inline-block rounded-full bg-cyan-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->body_number ?? '—' }}">
                         {{ $submission->body_number ?? '—' }}
                     </span>
-                    <span class="inline-block rounded-full bg-indigo-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->plate_no ?? '—' }}">
-                        {{ $submission->plate_no ?? '—' }}
-                    </span>
+                    @if ($config['showPlate'])
+                        <span class="inline-block rounded-full bg-indigo-600 text-white text-[10px] font-mono px-2 py-0.5" title="{{ $submission->plate_no ?? '—' }}">
+                            {{ $submission->plate_no ?? '—' }}
+                        </span>
+                    @endif
                 </div>
             </td>
             <td class="px-3 py-1.5">
                 <div class="flex flex-wrap gap-1">
                     @foreach ($docIcons as $field => $label)
                         <button type="button"
-                            onclick="openDocModal('{{ asset('storage/' . $submission->$field) }}', '{{ addslashes(\App\Models\TricycleDocumentSubmission::DOCUMENT_LABELS[$field] . ' — ' . $submission->driver_name) }}')"
-                            title="{{ \App\Models\TricycleDocumentSubmission::DOCUMENT_LABELS[$field] }}"
+                            onclick="openDocModal('{{ asset('storage/' . $submission->$field) }}', '{{ addslashes($config['labels'][$field] . ' — ' . $submission->driver_name) }}')"
+                            title="{{ $config['labels'][$field] }}"
                             class="inline-flex items-center rounded-full border border-gray-200 px-2 py-0.5 text-[9px] font-semibold text-gray-500 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors whitespace-nowrap">
                             {{ $label }}
                         </button>
@@ -51,7 +47,7 @@
                 </span>
             </td>
             <td class="px-3 py-1.5">
-                <form method="POST" action="{{ route('tricycle.document-submissions.update-status', $submission) }}" class="flex items-center gap-1.5">
+                <form method="POST" action="{{ route($config['updateRoute'], $submission) }}" class="flex items-center gap-1.5">
                     @csrf
                     @method('PUT')
                     <select name="status" class="rounded border border-gray-300 px-1.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-600">
@@ -70,7 +66,7 @@
                 </form>
             </td>
             <td class="px-3 py-1.5 text-right">
-                <form id="delete-document-submission-form-{{ $submission->id }}" method="POST" action="{{ route('tricycle.document-submissions.destroy', $submission) }}">
+                <form id="delete-document-submission-form-{{ $submission->id }}" method="POST" action="{{ route($config['destroyRoute'], $submission) }}">
                     @csrf
                     @method('DELETE')
                 </form>
@@ -88,7 +84,7 @@
             <td colspan="6" class="px-3 py-10 text-center text-gray-400">
                 @if ($hasActiveFilters)
                     No submissions match your search.
-                    <a href="{{ route('tricycle.document-submissions') }}" data-ajax-document-submission-link class="text-red-600 font-medium ml-1">Clear filters</a>
+                    <a href="{{ route($config['indexRoute']) }}" data-ajax-document-submission-link class="text-red-600 font-medium ml-1">Clear filters</a>
                 @else
                     No document submissions yet.
                 @endif
