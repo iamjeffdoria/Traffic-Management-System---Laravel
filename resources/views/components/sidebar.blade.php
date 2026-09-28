@@ -124,8 +124,8 @@
 
 <div id="tricycle-submenu" class="{{ $tricycleOpen ? 'flex' : 'hidden' }} flex-col gap-1 ml-5 mt-1 mb-2 p-1.5 rounded-lg bg-gray-800 border-l-2 border-red-500 lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">
                     <a href="{{ route('tricycle.list') }}" title="Tricycle List"
-                    class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors
-                    {{ $active === 'tricycle-list' ? 'bg-red-600 text-white shadow-sm' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                    {{ $active === 'tricycle-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <g stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="5" cy="16" r="3" />

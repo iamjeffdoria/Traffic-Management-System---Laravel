@@ -7,6 +7,23 @@ function showPageLoading() {
 }
 window.showPageLoading = showPageLoading;
 
+function hidePageLoading() {
+    const overlay = document.getElementById('page-loading-overlay');
+    if (overlay) {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+    }
+}
+window.hidePageLoading = hidePageLoading;
+
+// When the user presses Back/Forward, the browser may restore this page from
+// its back/forward cache with the overlay still showing. Hide it again.
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        hidePageLoading();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // Show spinner on any sidebar nav link click (not modals/buttons, just real page links)
     document.querySelectorAll('aside nav a[href]').forEach((link) => {
