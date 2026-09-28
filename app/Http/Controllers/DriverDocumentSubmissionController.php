@@ -10,7 +10,18 @@ class DriverDocumentSubmissionController extends Controller
 {
     public function create()
     {
-        return view('driver.document-submission');
+        return view('driver.document-submission', [
+            'heading' => 'Tricycle Document Submission',
+            'reviewer' => 'tricycle admin',
+            'formAction' => route('driver.tricycle.documents.store'),
+            'requiredDocs' => [
+                'endorsement_letter' => 'Endorsement Letter',
+                'toda_certificate' => 'TODA Certificate',
+                'police_clearance' => 'Police Clearance',
+                'or_cr' => 'OR/CR Photocopy',
+                'drivers_license' => "Driver's License Photocopy",
+            ],
+        ]);
     }
 
     public function store(Request $request)

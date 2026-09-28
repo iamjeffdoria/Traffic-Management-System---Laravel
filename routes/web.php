@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
 use App\Http\Controllers\DriverDocumentSubmissionController;
+use App\Http\Controllers\PotpotDocumentSubmissionController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -32,9 +33,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'store']);
 });
 
-// Public: tricycle driver document submission (no auth required)
-Route::get('/submit-documents', [DriverDocumentSubmissionController::class, 'create'])->name('driver.documents.create');
-Route::post('/submit-documents', [DriverDocumentSubmissionController::class, 'store'])->name('driver.documents.store');
+// Public: driver document submission (no auth required)
+// Old generic URL still works, but now points to the tricycle form.
+Route::redirect('/submit-documents', '/tricycle/submit-documents');
+
+Route::get('/tricycle/submit-documents', [DriverDocumentSubmissionController::class, 'create'])->name('driver.tricycle.documents.create');
+Route::post('/tricycle/submit-documents', [DriverDocumentSubmissionController::class, 'store'])->name('driver.tricycle.documents.store');
+
+Route::get('/potpot/submit-documents', [PotpotDocumentSubmissionController::class, 'create'])->name('driver.potpot.documents.create');
+Route::post('/potpot/submit-documents', [PotpotDocumentSubmissionController::class, 'store'])->name('driver.potpot.documents.store');
 
 
 // Auth-only: logout + a protected admin dashboard (any logged-in role can see it)

@@ -3,15 +3,7 @@
 @section('title', 'Submit Your Documents')
 
 @section('content')
-@php
-    $requiredDocs = [
-        'endorsement_letter' => 'Endorsement Letter',
-        'toda_certificate' => 'TODA Certificate',
-        'police_clearance' => 'Police Clearance',
-        'or_cr' => 'OR/CR Photocopy',
-        'drivers_license' => "Driver's License Photocopy",
-    ];
-@endphp
+{{-- $heading, $reviewer, $formAction and $requiredDocs are passed in by the controller --}}
 
 <section class="min-h-screen flex items-center justify-center bg-gray-100 px-3 py-4 sm:px-6 sm:py-10 overflow-x-hidden">
     <div class="w-full min-w-0 max-w-5xl bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden grid grid-cols-[minmax(0,1fr)] md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
@@ -24,12 +16,12 @@
                 </div>
                 <div class="min-w-0">
                     <p class="text-[11px] sm:text-xs uppercase tracking-wide text-red-100">Municipality of Palompon</p>
-                    <h1 class="text-lg sm:text-2xl font-bold leading-tight">Tricycle Document Submission</h1>
+                    <h1 class="text-lg sm:text-2xl font-bold leading-tight">{{ $heading }}</h1>
                 </div>
             </div>
 
             <p class="text-sm text-red-100 leading-relaxed">
-                Upload the required documents. The tricycle admin will review your submission.
+                Upload the required documents. The {{ $reviewer }} will review your submission.
             </p>
 
             {{-- Checklist: hidden on small phones to keep the form near the top --}}
@@ -70,7 +62,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('driver.documents.store') }}" enctype="multipart/form-data" class="space-y-5">
+            <form method="POST" action="{{ $formAction }}" enctype="multipart/form-data" class="space-y-5">
                 @csrf
 
                 <div>
@@ -86,16 +78,18 @@
                             <input type="tel" inputmode="tel" name="contact_number" value="{{ old('contact_number') }}" required
                                 class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                         </div>
-                        <div>
+                        <div @class(['sm:col-span-2' => ! ($showPlateNo ?? true)])>
                             <label class="block text-xs font-medium text-gray-600 mb-1">Body Number <span class="text-gray-400">(if known)</span></label>
                             <input type="text" name="body_number" value="{{ old('body_number') }}"
                                 class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                         </div>
-                        <div>
-                            <label class="block text-xs font-medium text-gray-600 mb-1">Plate No. <span class="text-gray-400">(if known)</span></label>
-                            <input type="text" name="plate_no" value="{{ old('plate_no') }}"
-                                class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
-                        </div>
+                        @if ($showPlateNo ?? true)
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 mb-1">Plate No. <span class="text-gray-400">(if known)</span></label>
+                                <input type="text" name="plate_no" value="{{ old('plate_no') }}"
+                                    class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                            </div>
+                        @endif
                     </div>
                 </div>
 
