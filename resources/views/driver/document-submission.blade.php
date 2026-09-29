@@ -64,7 +64,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ $formAction }}" enctype="multipart/form-data" class="space-y-5">
+            <form id="document-submission-form" method="POST" action="{{ $formAction }}" enctype="multipart/form-data" class="space-y-5">
                 @csrf
 
                 <div>
@@ -120,9 +120,9 @@
                         @endforeach
 
                         {{-- Submit button fills the last empty grid cell on desktop --}}
-                        <button type="submit"
+                        <button type="button" onclick="openReviewModal()"
                             class="h-16 w-full min-w-0 rounded-xl bg-red-600 text-white px-6 text-sm font-semibold hover:bg-red-700 active:bg-red-800 transition-colors">
-                            Submit Documents
+                            Review &amp; Submit
                         </button>
                     </div>
                 </div>
@@ -130,6 +130,166 @@
         </div>
     </div>
 </section>
+
+{{-- Review modal: shown before the form is actually submitted --}}
+<div id="review-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6">
+    <div onclick="closeReviewModal()" class="absolute inset-0 bg-black/50"></div>
+
+    <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
+            <div>
+                <h3 class="font-semibold text-gray-900 text-lg">Review your submission</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Please check everything before submitting.</p>
+            </div>
+            <button type="button" onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-600" title="Close">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Driver Information</p>
+                <div id="review-info" class="rounded-xl border border-gray-200 divide-y divide-gray-100"></div>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Documents</p>
+                <div id="review-docs" class="space-y-2"></div>
+            </div>
+        </div>
+
+        <div class="flex gap-3 px-5 py-4 border-t border-gray-100 shrink-0">
+            <button type="button" onclick="closeReviewModal()"
+                class="flex-1 rounded-full border border-gray-300 text-gray-700 px-6 py-2.5 text-sm font-semibold hover:bg-gray-50 transition-colors">
+                Go Back &amp; Edit
+            </button>
+            <button type="button" id="review-confirm-btn" onclick="confirmReviewSubmit()"
+                class="flex-1 rounded-full bg-red-600 text-white px-6 py-2.5 text-sm font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                Confirm &amp; Submit
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let reviewObjectUrls = [];
+
+    function openReviewModal() {
+        const form = document.getElementById('document-submission-form');
+
+        // Run the browser's normal required-field / file checks first.
+        if (!form.reportValidity()) return;
+
+        // Driver information
+        const infoFields = [
+            ['Driver Name', 'driver_name'],
+            ['Contact Number', 'contact_number'],
+            ['Body Number', 'body_number'],
+            ['Plate No.', 'plate_no'], // only exists on the tricycle form
+        ];
+
+        const infoWrap = document.getElementById('review-info');
+        infoWrap.innerHTML = '';
+
+        infoFields.forEach(([label, name]) => {
+            const input = form.elements[name];
+            if (!input) return;
+
+            const row = document.createElement('div');
+            row.className = 'flex justify-between gap-3 px-4 py-2.5 text-sm';
+
+            const l = document.createElement('span');
+            l.className = 'text-gray-500';
+            l.textContent = label;
+
+            const v = document.createElement('span');
+            v.className = 'font-semibold text-gray-900 text-right break-words min-w-0';
+            v.textContent = input.value.trim() || '—';
+
+            row.append(l, v);
+            infoWrap.appendChild(row);
+        });
+
+        // Documents
+        const docsWrap = document.getElementById('review-docs');
+        docsWrap.innerHTML = '';
+        reviewObjectUrls.forEach((u) => URL.revokeObjectURL(u));
+        reviewObjectUrls = [];
+
+        document.querySelectorAll('[data-upload-tile]').forEach((tile) => {
+            const input = tile.querySelector('input[type="file"]');
+            const label = tile.querySelector('.text-gray-800').textContent.trim();
+            const file = input.files[0];
+            if (!file) return;
+
+            const row = document.createElement('div');
+            row.className = 'flex items-center gap-3 rounded-xl border border-gray-200 p-2.5';
+
+            const thumb = document.createElement('div');
+            thumb.className = 'w-12 h-12 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center overflow-hidden shrink-0';
+
+            if (file.type.startsWith('image/')) {
+                const url = URL.createObjectURL(file);
+                reviewObjectUrls.push(url);
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = label;
+                img.className = 'w-full h-full object-cover';
+                thumb.appendChild(img);
+            } else {
+                thumb.innerHTML = '<span class="text-[10px] font-bold text-red-600">PDF</span>';
+            }
+
+            const text = document.createElement('div');
+            text.className = 'min-w-0 flex-1';
+
+            const t1 = document.createElement('p');
+            t1.className = 'text-sm font-medium text-gray-800 truncate';
+            t1.textContent = label;
+
+            const t2 = document.createElement('p');
+            t2.className = 'text-xs text-gray-500 truncate';
+            t2.textContent = file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+            text.append(t1, t2);
+            row.append(thumb, text);
+            docsWrap.appendChild(row);
+        });
+
+        const modal = document.getElementById('review-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeReviewModal() {
+        const modal = document.getElementById('review-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+
+        reviewObjectUrls.forEach((u) => URL.revokeObjectURL(u));
+        reviewObjectUrls = [];
+    }
+
+    function confirmReviewSubmit() {
+        const btn = document.getElementById('review-confirm-btn');
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+
+        // Only now does the form actually post and get saved in the database.
+        document.getElementById('document-submission-form').submit();
+    }
+
+    // Reset the button if the user comes back via the browser's back button
+    window.addEventListener('pageshow', () => {
+        const btn = document.getElementById('review-confirm-btn');
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'Confirm & Submit';
+        }
+    });
+</script>
 
 <script>
     document.querySelectorAll('[data-upload-tile]').forEach((tile) => {
