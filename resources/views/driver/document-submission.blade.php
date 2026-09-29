@@ -9,37 +9,39 @@
     <div class="w-full min-w-0 max-w-5xl bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden grid grid-cols-[minmax(0,1fr)] md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
 
         {{-- Left panel: branding + checklist (on mobile it becomes a compact header) --}}
-        <aside class="min-w-0 bg-red-600 text-white px-5 py-5 sm:px-6 sm:py-8 md:px-8 md:py-10 flex flex-col gap-4 md:gap-6 break-words">
+        <aside class="min-w-0 bg-gray-50 text-gray-900 border-b md:border-b-0 md:border-r border-gray-200 px-5 py-5 sm:px-6 sm:py-8 md:px-8 md:py-10 flex flex-col gap-4 md:gap-6 break-words">
             <div class="flex items-center gap-3">
-                <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0">
+                <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white ring-1 ring-gray-200 shadow-sm flex items-center justify-center overflow-hidden shrink-0">
                     <img src="{{ asset('images/lgu-logo.png') }}" alt="Logo" class="w-8 h-8 sm:w-10 sm:h-10 object-contain">
                 </div>
                 <div class="min-w-0">
-                    <p class="text-[11px] sm:text-xs uppercase tracking-wide text-red-100">Municipality of Palompon</p>
-                    <h1 class="text-lg sm:text-2xl font-bold leading-tight">{{ $heading }}</h1>
+                    <p class="text-[11px] sm:text-xs uppercase tracking-wide text-red-600 font-semibold">Municipality of Palompon</p>
+                    <h1 class="text-lg sm:text-2xl font-bold leading-tight text-gray-900">{{ $heading }}</h1>
                 </div>
             </div>
 
-            <p class="text-sm text-red-100 leading-relaxed">
+            <p class="text-sm text-gray-600 leading-relaxed">
                 Upload the required documents. The {{ $reviewer }} will review your submission.
             </p>
 
             {{-- Checklist: hidden on small phones to keep the form near the top --}}
             <div class="hidden sm:block">
-                <p class="text-xs font-semibold uppercase tracking-wide text-red-100 mb-2">Required documents</p>
-                <ul class="space-y-2">
+                <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">Required documents</p>
+                <ul class="space-y-2.5">
                     @foreach ($requiredDocs as $label)
-                        <li class="flex items-center gap-2 text-sm">
-                            <svg class="w-4 h-4 shrink-0 text-red-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                        <li class="flex items-center gap-2.5 text-sm text-gray-700">
+                            <span class="w-5 h-5 rounded-full bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
                             {{ $label }}
                         </li>
                     @endforeach
                 </ul>
             </div>
 
-            <p class="hidden sm:block mt-auto text-xs text-red-100">
+            <p class="hidden sm:block mt-auto text-xs text-gray-500">
                 Accepted files: PDF, JPG, PNG &middot; Max 5&nbsp;MB each
             </p>
         </aside>
