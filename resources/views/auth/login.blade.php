@@ -17,13 +17,13 @@
 
         <div class="bg-white rounded-[2rem] px-8 py-10 border-4 border-gray-900 shadow-[8px_8px_0_0_rgba(17,24,39,1)] login-card-enter">
             <div class="flex flex-col items-center gap-3 mb-8">
-                <div class="w-20 h-20 min-w-20 min-h-20 shrink-0 aspect-square rounded-full bg-white border-4 border-gray-900 shadow-[3px_3px_0_0_rgba(17,24,39,1)] flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-14 h-14 shrink-0 object-contain">
+                <div class="w-20 h-20 shrink-0 aspect-square rounded-full border-4 border-gray-900 overflow-hidden">
+                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-full h-full object-cover">
                 </div>
-<span class="inline-block rounded-full bg-red-600 border-2 border-gray-900 px-3 py-1 font-extrabold text-white text-[11px] uppercase tracking-wider shadow-[2px_2px_0_0_rgba(17,24,39,1)]">PUBLIC SAFETY OFFICE</span>
+            <span class="inline-block rounded-full bg-red-600 border-2 border-gray-900 px-3 py-1 font-extrabold text-white text-[11px] uppercase tracking-wider shadow-[2px_2px_0_0_rgba(17,24,39,1)]">PUBLIC SAFETY OFFICE</span>
             </div>
 
-            <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight text-center">Welcome back! 👋</h2>
+            <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight text-center">Welcome back!</h2>
             <p class="mt-1.5 text-sm text-gray-500 text-center">Sign in to continue</p>
 
             @if ($errors->any())
