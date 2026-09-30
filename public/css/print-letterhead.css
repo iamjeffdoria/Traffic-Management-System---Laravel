@@ -1,0 +1,26 @@
+@page { margin: 0; }
+
+* {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+/* Full-page letterhead background. Padding keeps content clear of the
+   header (top) and footer (bottom) artwork. */
+.letterhead-page {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 2.1in 0.75in 1.4in;
+}
+
+/* Letterhead artwork as a real <img>. Fixed = repeats on every printed page. */
+.letterhead-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}

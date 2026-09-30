@@ -3,27 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Franchise - {{ $franchise->authorized_no }}</title>
+    <link rel="stylesheet" href="{{ asset('css/print-letterhead.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=block" rel="stylesheet">
     <style>
-        @page { margin: 0; }
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
             color: #111;
             font-size: 18px;
             line-height: 1.5;
             margin: 0;
         }
-        .page {
-            border: 1px solid #999;
-            padding: 0.6in;
-            box-sizing: border-box;
-            min-height: 100vh;
-        }
-        .header { position: relative; text-align: center; margin-bottom: 20px; padding-bottom: 10px; }
-        .header img { position: absolute; left: 20px; top: 4px; width: 80px; height: 80px; }
-        .header p { margin: 0; font-weight: bold; }
-        .header .republic { font-size: 18px; }
-        .header .province,
-        .header .municipality { font-size: 16px; font-weight: normal; margin-top: 4px; }
         .doc-title {
             text-align: center;
             font-weight: bold;
@@ -54,14 +45,8 @@
     </style>
 </head>
 <body>
-<div class="page">
-    <div class="header">
-        <img src="{{ asset('images/lgu-logo.png') }}" alt="Seal">
-        <p class="republic">Republic of the Philippines</p>
-        <p class="province">Province of Leyte</p>
-        <p class="municipality">Municipality of Palompon</p>
-    </div>
-
+<div class="letterhead-page">
+    <img class="letterhead-bg" src="{{ asset('images/letterhead.png') }}" alt="">
     <p class="doc-title">FRANCHISE CONFIRMATION/ VERIFICATION</p>
 
     <div class="field-row">

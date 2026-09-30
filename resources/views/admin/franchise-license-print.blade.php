@@ -17,64 +17,33 @@
 <head>
     <meta charset="UTF-8">
     <title>License to Operate - {{ $franchise->authorized_no }}</title>
+    <link rel="stylesheet" href="{{ asset('css/print-letterhead.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=block" rel="stylesheet">
     <style>
-        @page { margin: 0; }
-        * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
             color: #111;
             font-size: 15px;
             line-height: 1.5;
             margin: 0;
         }
-        .page {
-            border: 1px solid #999;
-            padding: 0.5in 0.85in;
-            box-sizing: border-box;
-            min-height: 100vh;
-            position: relative;
-        }
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5in;
-            height: 5in;
-            transform: translate(-50%, -50%);
-            object-fit: contain;
-            opacity: 0.1;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .page > *:not(.watermark) {
-            position: relative;
-            z-index: 1;
-        }
-        .header { position: relative; text-align: center; margin-bottom: 32px; }
-        .header img { position: absolute; left: 0; top: 2px; width: 76px; height: 76px; }
-        .header p { margin: 0; font-weight: bold; }
-        .header .republic { font-size: 18px; }
-        .header .province,
-        .header .municipality { font-size: 16px; margin-top: 3px; }
-        .header .divider { margin-top: 6px; font-size: 16px; }
-        .office { text-align: center; font-weight: bold; font-size: 18px; margin-top: 40px; }
+        .office { text-align: center; font-weight: bold; font-size: 16px; margin-top: 0; }
         .doc-title {
             text-align: center;
             font-weight: bold;
-            font-size: 20px;
-            margin: 8px 0 44px;
+            font-size: 18px;
+            margin: 8px 0 28px;
         }
-        .body-text { text-align: justify; text-indent: 0.5in; margin: 0 0 28px; font-size: 16px; }
+        .body-text { text-align: justify; text-indent: 0.5in; margin: 0 0 20px; font-size: 14px; }
         .u { font-weight: bold; text-decoration: underline; }
-        .sig-table { width: 100%; border-collapse: collapse; margin-top: 56px; page-break-inside: avoid; }
+        .sig-table { width: 100%; border-collapse: collapse; margin-top: 32px; page-break-inside: avoid; }
         .sig-table td { width: 50%; vertical-align: top; text-align: center; padding: 0 18px; }
         .sig-label { text-align: left; font-weight: bold; margin: 0 0 38px; }
         .sig-name { font-weight: bold; text-transform: uppercase; margin: 0; line-height: 1.4; }
         .sig-title { margin: 2px 0 0; font-size: 14px; font-weight: bold; }
-        .approval-row { display: flex; align-items: center; justify-content: space-between; margin-top: 64px; page-break-inside: avoid; }
+        .approval-row { display: flex; align-items: center; justify-content: space-between; margin-top: 36px; page-break-inside: avoid; }
         .approval-row .spacer { width: 130px; flex-shrink: 0; }
         .approved { flex: 1; text-align: center; }
         .approved .sig-label { margin-bottom: 38px; text-align: center; }
@@ -96,16 +65,8 @@
     </style>
 </head>
 <body>
-<div class="page">
-    <img class="watermark" src="{{ asset('images/lgu-logo.png') }}" alt="">
-    <div class="header">
-        <img src="{{ asset('images/lgu-logo.png') }}" alt="Seal">
-        <p class="republic">Republic of the Philippines</p>
-        <p class="province">Province of Leyte</p>
-        <p class="municipality">Municipality of Palompon</p>
-        <p class="divider">-oOo-</p>
-    </div>
-
+<div class="letterhead-page">
+    <img class="letterhead-bg" src="{{ asset('images/letterhead.png') }}" alt="">
     <p class="office">OFFICE OF THE SANGGUNIANG BAYAN</p>
     <p class="doc-title">LICENSE TO OPERATE MOTORIZED TRICYCLE (FRANCHISE)</p>
 

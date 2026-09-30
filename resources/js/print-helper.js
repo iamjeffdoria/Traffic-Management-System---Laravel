@@ -17,12 +17,22 @@ function printFromUrl(url) {
 
     iframe.onload = function () {
         const frameWindow = iframe.contentWindow;
-        frameWindow.focus();
-        frameWindow.print();
 
-        frameWindow.onafterprint = function () {
-            iframe.remove();
+        const doPrint = function () {
+            frameWindow.focus();
+            frameWindow.print();
+
+            frameWindow.onafterprint = function () {
+                iframe.remove();
+            };
         };
+
+        // Wait for web fonts (e.g. Montserrat) before opening the print dialog
+        if (frameWindow.document.fonts && frameWindow.document.fonts.ready) {
+            frameWindow.document.fonts.ready.then(doPrint);
+        } else {
+            doPrint();
+        }
     };
 
     document.body.appendChild(iframe);
