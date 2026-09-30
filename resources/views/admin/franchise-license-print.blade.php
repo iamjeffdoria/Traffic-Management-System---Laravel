@@ -29,7 +29,20 @@
             line-height: 1.5;
             margin: 0;
         }
-        .office { text-align: center; font-weight: bold; font-size: 16px; margin-top: 0; }
+        /* Faint LGU seal behind the text. Fixed = centered on every printed page. */
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 5in;
+            height: 5in;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .office { text-align: center; font-weight: bold; font-size: 16px; margin-top: 40px; }
         .doc-title {
             text-align: center;
             font-weight: bold;
@@ -43,7 +56,7 @@
         .sig-label { text-align: left; font-weight: bold; margin: 0 0 38px; }
         .sig-name { font-weight: bold; text-transform: uppercase; margin: 0; line-height: 1.4; }
         .sig-title { margin: 2px 0 0; font-size: 14px; font-weight: bold; }
-        .approval-row { display: flex; align-items: center; justify-content: space-between; margin-top: 36px; page-break-inside: avoid; }
+        .approval-row { display: flex; align-items: center; justify-content: space-between; margin-top: 28px; page-break-inside: avoid; }
         .approval-row .spacer { width: 130px; flex-shrink: 0; }
         .approved { flex: 1; text-align: center; }
         .approved .sig-label { margin-bottom: 38px; text-align: center; }
@@ -67,6 +80,7 @@
 <body>
 <div class="letterhead-page">
     <img class="letterhead-bg" src="{{ asset('images/letterhead.png') }}" alt="">
+    <img class="watermark" src="{{ asset('images/lgu-logo.png') }}" alt="">
     <p class="office">OFFICE OF THE SANGGUNIANG BAYAN</p>
     <p class="doc-title">LICENSE TO OPERATE MOTORIZED TRICYCLE (FRANCHISE)</p>
 
