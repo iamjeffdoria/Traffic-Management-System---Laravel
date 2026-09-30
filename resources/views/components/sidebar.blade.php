@@ -24,7 +24,10 @@
     <input type="checkbox" id="sidebar-collapse" class="hidden" />
 
     <div class="flex items-center justify-between px-5 py-4 border-b border-white/10 lg:group-has-[#sidebar-collapse:checked]/collapse:px-3">
-        <span class="font-semibold text-lg lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">TMS Admin</span>
+        <div class="flex items-center gap-2.5 min-w-0 lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">
+            <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-9 h-9 object-contain shrink-0">
+            <span class="font-bold text-[13px] leading-tight uppercase tracking-wide">Public Safety<br>Office</span>
+        </div>
 
         <!-- Mobile close button -->
         <label for="sidebar-toggle" class="lg:hidden cursor-pointer p-1">
@@ -72,7 +75,13 @@
                     class="w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-colors text-gray-400 hover:bg-white/5 hover:text-white lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0">
                     <span class="flex items-center gap-2.5 min-w-0">
                         <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                            <g stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="5" cy="17" r="3" />
+                                <circle cx="19" cy="17" r="3" />
+                                <path d="M5 17l2-6h3l2 3" />
+                                <path d="M7 11L6 8H4" />
+                                <path d="M12 17v-5h6a3 3 0 013 3v2" />
+                            </g>
                         </svg>
                         <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Potpot</span>
                     </span>
@@ -201,7 +210,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Mayor's Permit - Potpot</span>
-Mayor's Permit - Potpot</span>
                 </a>
 
                 <a href="{{ route('potpot.document-submissions') }}" title="Potpot Document Submissions"

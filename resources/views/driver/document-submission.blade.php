@@ -137,9 +137,16 @@
 
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
-            <div>
-                <h3 class="font-semibold text-gray-900 text-lg">Review your submission</h3>
-                <p class="text-xs text-gray-500 mt-0.5">Please check everything before submitting.</p>
+            <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-full bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                </span>
+                <div>
+                    <h3 class="font-semibold text-gray-900 text-lg">Review your submission</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Please check everything before submitting.</p>
+                </div>
             </div>
             <button type="button" onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-600" title="Close">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,24 +157,40 @@
 
         <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
             <div>
-                <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Driver Information</p>
+                <p class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    Driver Information
+                </p>
                 <div id="review-info" class="rounded-xl border border-gray-200 divide-y divide-gray-100"></div>
             </div>
 
             <div>
-                <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">Documents</p>
+                <p class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                    </svg>
+                    Documents
+                </p>
                 <div id="review-docs" class="space-y-2"></div>
             </div>
         </div>
 
         <div class="flex gap-3 px-5 py-4 border-t border-gray-100 shrink-0">
             <button type="button" onclick="closeReviewModal()"
-                class="flex-1 rounded-full border border-gray-300 text-gray-700 px-6 py-2.5 text-sm font-semibold hover:bg-gray-50 transition-colors">
+                class="flex-1 inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 text-gray-700 px-6 py-2.5 text-sm font-semibold hover:bg-gray-50 transition-colors">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
                 Go Back &amp; Edit
             </button>
             <button type="button" id="review-confirm-btn" onclick="confirmReviewSubmit()"
-                class="flex-1 rounded-full bg-red-600 text-white px-6 py-2.5 text-sm font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-                Confirm &amp; Submit
+                class="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-red-600 text-white px-6 py-2.5 text-sm font-semibold hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                <svg id="review-confirm-icon" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span id="review-confirm-label">Confirm &amp; Submit</span>
             </button>
         </div>
     </div>
@@ -175,6 +198,11 @@
 
 <script>
     let reviewObjectUrls = [];
+
+    function reviewIcon(path, classes = 'w-4 h-4') {
+        return '<svg class="' + classes + '" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">'
+            + '<path stroke-linecap="round" stroke-linejoin="round" d="' + path + '"/></svg>';
+    }
 
     function openReviewModal() {
         const form = document.getElementById('document-submission-form');
@@ -184,25 +212,29 @@
 
         // Driver information
         const infoFields = [
-            ['Driver Name', 'driver_name'],
-            ['Contact Number', 'contact_number'],
-            ['Body Number', 'body_number'],
-            ['Plate No.', 'plate_no'], // only exists on the tricycle form
+            ['Driver Name', 'driver_name', 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
+            ['Contact Number', 'contact_number', 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'],
+            ['Body Number', 'body_number', 'M7 20l4-16m2 16l4-16M6 9h14M4 15h14'],
+            ['Plate No.', 'plate_no', 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'], // only exists on the tricycle form
         ];
 
         const infoWrap = document.getElementById('review-info');
         infoWrap.innerHTML = '';
 
-        infoFields.forEach(([label, name]) => {
+        infoFields.forEach(([label, name, iconPath]) => {
             const input = form.elements[name];
             if (!input) return;
 
             const row = document.createElement('div');
-            row.className = 'flex justify-between gap-3 px-4 py-2.5 text-sm';
+            row.className = 'flex items-center justify-between gap-3 px-4 py-2.5 text-sm';
 
             const l = document.createElement('span');
-            l.className = 'text-gray-500';
-            l.textContent = label;
+            l.className = 'flex items-center gap-2 text-gray-500 shrink-0';
+            l.innerHTML = '<span class="w-7 h-7 rounded-lg bg-red-50 text-red-600 flex items-center justify-center shrink-0">'
+                + reviewIcon(iconPath) + '</span>';
+            const lt = document.createElement('span');
+            lt.textContent = label;
+            l.appendChild(lt);
 
             const v = document.createElement('span');
             v.className = 'font-semibold text-gray-900 text-right break-words min-w-0';
@@ -239,7 +271,9 @@
                 img.className = 'w-full h-full object-cover';
                 thumb.appendChild(img);
             } else {
-                thumb.innerHTML = '<span class="text-[10px] font-bold text-red-600">PDF</span>';
+                thumb.className = 'w-12 h-12 rounded-lg bg-red-50 border border-red-100 text-red-600 flex flex-col items-center justify-center overflow-hidden shrink-0';
+                thumb.innerHTML = reviewIcon('M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', 'w-5 h-5')
+                    + '<span class="text-[9px] font-bold leading-none mt-0.5">PDF</span>';
             }
 
             const text = document.createElement('div');
@@ -254,7 +288,12 @@
             t2.textContent = file.name + ' · ' + (file.size / 1024 / 1024).toFixed(2) + ' MB';
 
             text.append(t1, t2);
-            row.append(thumb, text);
+
+            const check = document.createElement('span');
+            check.className = 'w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0';
+            check.innerHTML = reviewIcon('M5 13l4 4L19 7', 'w-3.5 h-3.5');
+
+            row.append(thumb, text, check);
             docsWrap.appendChild(row);
         });
 
@@ -275,7 +314,8 @@
     function confirmReviewSubmit() {
         const btn = document.getElementById('review-confirm-btn');
         btn.disabled = true;
-        btn.textContent = 'Submitting...';
+        document.getElementById('review-confirm-label').textContent = 'Submitting...';
+        document.getElementById('review-confirm-icon').classList.add('animate-pulse');
 
         // Only now does the form actually post and get saved in the database.
         document.getElementById('document-submission-form').submit();
@@ -286,7 +326,8 @@
         const btn = document.getElementById('review-confirm-btn');
         if (btn) {
             btn.disabled = false;
-            btn.textContent = 'Confirm & Submit';
+            document.getElementById('review-confirm-label').textContent = 'Confirm & Submit';
+            document.getElementById('review-confirm-icon').classList.remove('animate-pulse');
         }
     });
 </script>

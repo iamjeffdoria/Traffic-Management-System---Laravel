@@ -17,10 +17,10 @@
 
         <div class="bg-white rounded-[2rem] px-8 py-10 border-4 border-gray-900 shadow-[8px_8px_0_0_rgba(17,24,39,1)] login-card-enter">
             <div class="flex flex-col items-center gap-3 mb-8">
-                <div class="w-16 h-16 rounded-full bg-yellow-300 border-4 border-gray-900 flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('images/csulogo2.png') }}" alt="Logo" class="w-10 h-10 object-contain">
+                <div class="w-20 h-20 min-w-20 min-h-20 shrink-0 aspect-square rounded-full bg-white border-4 border-gray-900 shadow-[3px_3px_0_0_rgba(17,24,39,1)] flex items-center justify-center overflow-hidden">
+                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-14 h-14 shrink-0 object-contain">
                 </div>
-                <span class="font-bold text-gray-900 text-sm">Traffic Management System</span>
+<span class="inline-block rounded-full bg-red-600 border-2 border-gray-900 px-3 py-1 font-extrabold text-white text-[11px] uppercase tracking-wider shadow-[2px_2px_0_0_rgba(17,24,39,1)]">PUBLIC SAFETY OFFICE</span>
             </div>
 
             <h2 class="text-2xl font-extrabold text-gray-900 tracking-tight text-center">Welcome back! 👋</h2>
@@ -38,14 +38,14 @@
                     <input type="email" name="email" value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
                         autocomplete="username"
                         placeholder="Email"
-                        class="w-full rounded-xl border-2 border-gray-900 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-shadow">
+                        class="w-full rounded-xl border-2 border-gray-900 px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-200 transition-shadow">
                 </div>
 
                 <div class="relative">
                     <input type="password" name="password" id="password" required
                         autocomplete="current-password"
                         placeholder="Password"
-                        class="w-full rounded-xl border-2 border-gray-900 px-4 py-2.5 pr-11 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-shadow">
+                        class="w-full rounded-xl border-2 border-gray-900 px-4 py-2.5 pr-11 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-200 transition-shadow">
                     <button type="button" onclick="togglePassword('password', 'eye-open', 'eye-closed')"
                         class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
                         <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,18 +59,18 @@
                 </div>
 
                 <label class="flex items-center gap-2 text-sm text-gray-500">
-                    <input type="checkbox" name="remember" @checked(old('remember')) class="rounded border-2 border-gray-900 text-yellow-400 focus:ring-yellow-300">
+                    <input type="checkbox" name="remember" @checked(old('remember')) class="rounded border-2 border-gray-900 text-red-600 focus:ring-red-300">
                     Remember me
                 </label>
 
                 <button type="submit"
-                    class="w-full rounded-full bg-yellow-300 text-gray-900 border-2 border-gray-900 px-6 py-2.5 text-sm font-bold shadow-[4px_4px_0_0_rgba(17,24,39,1)] hover:shadow-[2px_2px_0_0_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all">
+                    class="w-full rounded-full bg-red-600 text-white border-2 border-gray-900 px-6 py-2.5 text-sm font-bold shadow-[4px_4px_0_0_rgba(17,24,39,1)] hover:bg-red-700 hover:shadow-[2px_2px_0_0_rgba(17,24,39,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all">
                     Log In
                 </button>
             </form>
 
             <p class="mt-8 text-center text-xs text-gray-400">
-                &copy; {{ date('Y') }} Traffic Management System
+                &copy; {{ date('Y') }} PUBLIC SAFETY OFFICE
             </p>
         </div>
     </div>
