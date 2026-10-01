@@ -33,3 +33,4 @@ import './id-card-import-modal.js';
 import './searchable-select.js';
 import './doc-preview-modal.js';
 import './table-document-submission-search.js';
+import './avatar-preview.js';

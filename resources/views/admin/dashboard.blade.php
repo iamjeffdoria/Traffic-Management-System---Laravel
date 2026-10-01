@@ -300,9 +300,7 @@
                         @foreach ($admins->take(5) as $admin)
                             <div class="flex items-center justify-between py-3">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full {{ $roleAvatarColors[$admin->role] ?? 'bg-slate-600' }} text-white text-xs font-semibold flex items-center justify-center">
-                                        {{ strtoupper(substr($admin->name, 0, 1)) }}
-                                    </div>
+                                    <x-avatar :user="$admin" size="w-8 h-8" text="text-xs" :color="$roleAvatarColors[$admin->role] ?? 'bg-slate-600'" />
                                     <div>
                                         <p class="text-sm font-medium text-gray-900">{{ $admin->name }}</p>
                                         <p class="text-xs text-gray-500">{{ $admin->email }}</p>

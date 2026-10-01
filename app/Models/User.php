@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'photo_path',
     ];
 
     /**
@@ -46,6 +47,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        return $this->photo_path ? asset('storage/' . $this->photo_path) : null;
     }
 
     public function isSuperadmin(): bool

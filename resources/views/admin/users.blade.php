@@ -69,12 +69,14 @@
                     <thead class="bg-gray-50 text-left text-gray-900">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
                             <th class="px-6 py-3 font-bold w-24">Actions</th>
+                            <th class="px-4 py-3 font-bold w-20">Photo</th>
                             <th class="px-6 py-3 font-bold">Name</th>
                             <th class="px-6 py-3 font-bold">Email</th>
                             <th class="px-6 py-3 font-bold">Role</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
                             <th class="px-6 py-2"></th>
+                            <th class="px-4 py-2"></th>
                             <th class="px-2 py-2">
                                 <input type="text" id="filter-name" oninput="filterAdminTable()"
                                     class="w-full rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
@@ -128,6 +130,9 @@
                                         @endif
                                     </div>
                                 </td>
+                                <td class="px-4 py-3 align-top">
+                                    <x-avatar :user="$admin" size="w-10 h-10" />
+                                </td>
                                 <td class="px-4 py-4 align-top text-gray-900 font-semibold">{{ $admin->name }}</td>
                                 <td class="px-4 py-4 align-top text-gray-700 text-sm">{{ $admin->email }}</td>
                                 <td class="px-4 py-4 align-top">
@@ -163,8 +168,13 @@
                         class="rounded-2xl border border-gray-200 p-4">
                         <div class="flex items-start justify-between gap-3">
                             <div class="min-w-0">
-                                <p class="text-gray-900 font-medium truncate">{{ $admin->name }}</p>
-                                <p class="text-gray-500 text-sm truncate">{{ $admin->email }}</p>
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <x-avatar :user="$admin" size="w-11 h-11" />
+                                    <div class="min-w-0">
+                                        <p class="text-gray-900 font-medium truncate">{{ $admin->name }}</p>
+                                        <p class="text-gray-500 text-sm truncate">{{ $admin->email }}</p>
+                                    </div>
+                                </div>
                                 <span class="inline-block mt-2 rounded-full bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1">
                                     {{ str_replace('_', ' ', ucfirst($admin->role)) }}
                                 </span>
