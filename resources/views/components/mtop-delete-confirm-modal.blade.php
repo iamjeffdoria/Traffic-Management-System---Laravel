@@ -1,5 +1,5 @@
 <div id="delete-mtop-confirm-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 overflow-y-auto">
-    <div onclick="closeModal('delete-mtop-confirm-modal')" class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
 
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
         <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">

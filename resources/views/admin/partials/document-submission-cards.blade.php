@@ -59,7 +59,7 @@
                 @csrf
                 @method('DELETE')
             </form>
-            <button type="button" onclick="confirmDocumentSubmissionDelete('delete-document-submission-form-mobile-{{ $submission->id }}', '{{ addslashes($submission->driver_name) }}')"
+            <button type="button" onclick="confirmDocumentSubmissionDelete('delete-document-submission-form-mobile-{{ $submission->id }}', {{ Illuminate\Support\Js::from($submission->driver_name) }})"
                 class="mt-1.5 text-[11px] text-red-600 hover:underline">
                 Remove
             </button>

@@ -1,5 +1,5 @@
 <div id="create-potpot-mayors-permit-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 overflow-y-auto">
-    <div onclick="closeModal('create-potpot-mayors-permit-modal')" class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
 
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
         <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-gray-100 shrink-0">

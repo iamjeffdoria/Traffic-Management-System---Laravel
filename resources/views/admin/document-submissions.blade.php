@@ -37,7 +37,7 @@
 
 <!-- Document preview modal -->
 <div id="doc-preview-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6">
-    <div onclick="closeDocModal()" class="absolute inset-0 bg-black/70"></div>
+    <div class="absolute inset-0 bg-black/70"></div>
 
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
         <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100 shrink-0">
@@ -67,7 +67,7 @@
 
 <!-- Delete confirmation modal -->
 <div id="delete-document-submission-confirm-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 overflow-y-auto">
-    <div onclick="closeModal('delete-document-submission-confirm-modal')" class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
 
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
         <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
