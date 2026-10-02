@@ -18,7 +18,7 @@ class TricycleMayorsPermitsExport implements FromQuery, WithHeadings, WithMappin
     {
         return [
             'Body Number', 'Control No', 'Status', 'Business Name', 'Motorized Operation',
-            'OR No', 'Amount Paid', 'Issue Date', 'Expiry Date', 'Issued At', 'Mayor', 'Quarter',
+            'OR No', 'Amount Paid', 'Issue Date', 'Expiry Date', 'Issued At', 'Mayor', 'Quarter', 'Renewed By',
         ];
     }
 
@@ -37,6 +37,7 @@ class TricycleMayorsPermitsExport implements FromQuery, WithHeadings, WithMappin
             $permit->issued_at,
             $permit->mayor,
             $permit->quarter,
+            $permit->renewed_by,
         ];
     }
 }

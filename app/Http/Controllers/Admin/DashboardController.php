@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $in30Days = $now->copy()->addDays(30);
 
         $totalTricycles = Tricycle::count();
-        $activePermits = TricycleMayorsPermit::where('status', 'active')->count()
+        $activePermits = TricycleMayorsPermit::whereIn('status', ['active', 'renewed'])->count()
             + PotpotMayorsPermit::whereIn('status', ['active', 'renewed'])->count();
         $idCardsIssued = IdCard::count();
 

@@ -26,6 +26,31 @@ function onTricycleSearchSelect(optionEl, root) {
 }
 window.onTricycleSearchSelect = onTricycleSearchSelect;
 
+// Makes "Renewed By" required (native browser message) only while status = renewed.
+function syncPermitRenewedByRequired(container) {
+    if (!container) return;
+
+    const status = container.querySelector('[name="status"]');
+    const renewedBy = container.querySelector('[name="renewed_by"]');
+    const star = container.querySelector('[data-renewed-by-required]');
+    if (!status || !renewedBy) return;
+
+    const isRenewed = status.value === 'renewed';
+    renewedBy.required = isRenewed;
+    if (star) star.classList.toggle('hidden', !isRenewed);
+}
+window.syncPermitRenewedByRequired = syncPermitRenewedByRequired;
+
+// Delegated, so it keeps working after the AJAX refresh replaces the edit modal.
+document.addEventListener('change', (event) => {
+    if (!event.target.matches('[data-permit-form] [name="status"]')) return;
+    syncPermitRenewedByRequired(event.target.closest('[data-permit-form]'));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-permit-form]').forEach(syncPermitRenewedByRequired);
+});
+
 function openTricycleMayorsPermitEditModal(permit) {
     const form = document.getElementById('tricycle-mayors-permit-edit-form');
     if (!form) return;
@@ -58,6 +83,8 @@ function openTricycleMayorsPermitEditModal(permit) {
     form.querySelector('[name="issued_at"]').value = permit.issued_at ?? '';
     form.querySelector('[name="mayor"]').value = permit.mayor ?? '';
     form.querySelector('[name="quarter"]').value = permit.quarter ?? '';
+    form.querySelector('[name="renewed_by"]').value = permit.renewed_by ?? '';
+    syncPermitRenewedByRequired(form);
 
     openModal('edit-tricycle-mayors-permit-modal');
 }

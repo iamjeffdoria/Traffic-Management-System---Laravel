@@ -20,6 +20,8 @@ function openTricycleMayorsPermitEditModal(permit) {
     form.querySelector('[name="issued_at"]').value = permit.issued_at ?? '';
     form.querySelector('[name="mayor"]').value = permit.mayor ?? '';
     form.querySelector('[name="quarter"]').value = permit.quarter ?? '';
+    form.querySelector('[name="renewed_by"]').value = permit.renewed_by ?? '';
+    syncPermitRenewedByRequired(form);
 
     openModal('edit-tricycle-mayors-permit-modal');
 }

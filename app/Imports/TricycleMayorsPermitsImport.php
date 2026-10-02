@@ -44,12 +44,13 @@ class TricycleMayorsPermitsImport implements ToModel, WithHeadingRow, WithBatchI
             'issued_at' => $this->toStringOrNull($row['issued_at'] ?? null),
             'mayor' => $this->toStringOrNull($row['mayor'] ?? null),
             'quarter' => $this->toStringOrNull($row['quarter'] ?? null),
+            'renewed_by' => $this->toStringOrNull($row['renewed_by'] ?? null),
         ];
 
         $validator = Validator::make($data, [
             'tricycle_id' => 'required|exists:tricycles,id',
             'control_no' => 'required|string|max:255|unique:tricycle_mayors_permits,control_no',
-            'status' => 'required|in:active,expired',
+            'status' => 'required|in:active,renewed,expired',
             'business_name' => 'nullable|string|max:255',
             'motorized_operation' => 'required|string|max:255',
             'or_no' => 'required|string|max:255',
@@ -59,6 +60,7 @@ class TricycleMayorsPermitsImport implements ToModel, WithHeadingRow, WithBatchI
             'issued_at' => 'required|string|max:255',
             'mayor' => 'required|string|max:255',
             'quarter' => 'required|string|max:255',
+            'renewed_by' => ['required_if:status,renewed', 'nullable', 'string', 'max:255'],
         ]);
 
         if ($validator->fails()) {
@@ -193,7 +195,7 @@ class TricycleMayorsPermitsImport implements ToModel, WithHeadingRow, WithBatchI
         $aliases = [
             'active' => 'active',
             'new' => 'active',
-            'renewed' => 'active',
+            'renewed' => 'renewed',
             'expired' => 'expired',
             'expire' => 'expired',
             'inactive' => 'expired',

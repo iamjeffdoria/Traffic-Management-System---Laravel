@@ -65,6 +65,7 @@
                 <select name="status" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                     <option value="active">Active</option>
+                    <option value="renewed">Renewed</option>
                     <option value="expired">Expired</option>
                 </select>
             </div>
@@ -122,6 +123,12 @@
                     <option value="Third Quarter">Third Quarter</option>
                     <option value="Fourth Quarter">Fourth Quarter</option>
                 </select>
+            </div>
+
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Renewed By <span data-renewed-by-required class="hidden text-red-600">*</span> <span class="text-gray-400 font-normal">(required if status is Renewed)</span></label>
+                <input type="text" name="renewed_by" placeholder="Full name of the person who processed the renewal"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
         </form>
 
