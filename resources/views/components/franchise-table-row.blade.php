@@ -73,8 +73,12 @@
         <span class="inline-block max-w-full truncate rounded-full {{ $statusColor }} text-white text-xs font-semibold px-2.5 py-1">
             {{ $franchise->status }}
         </span>
-        @if ($franchise->status === 'Renewed' && $franchise->renewed_by)
-            <p class="text-gray-500 text-xs mt-1.5 break-words">By: {{ $franchise->renewed_by }}</p>
+    </td>
+    <td class="px-4 py-4 align-top">
+        @if ($franchise->renewed_by)
+            <p class="text-gray-900 text-sm break-words">{{ $franchise->renewed_by }}</p>
+        @else
+            <span class="text-gray-400 text-sm">—</span>
         @endif
     </td>
     <td class="px-4 py-4 align-top">
