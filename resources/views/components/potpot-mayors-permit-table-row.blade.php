@@ -3,6 +3,7 @@
 @php
     $statusColors = [
         'active' => 'bg-teal-500',
+        'renewed' => 'bg-green-600',
         'expired' => 'bg-red-600',
     ];
 
@@ -21,6 +22,7 @@
         'issued_at' => $permit->issued_at,
         'mayor' => $permit->mayor,
         'quarter' => $permit->quarter,
+        'renewed_by' => $permit->renewed_by,
     ];
 @endphp
 

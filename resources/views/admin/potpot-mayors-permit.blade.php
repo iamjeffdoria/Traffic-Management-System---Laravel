@@ -124,6 +124,7 @@
                     class="w-full max-w-full truncate rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                     <option value="">All statuses</option>
                     <option value="active" @selected(request('status') === 'active')>Active</option>
+                    <option value="renewed" @selected(request('status') === 'renewed')>Renewed</option>
                     <option value="expired" @selected(request('status') === 'expired')>Expired</option>
                 </select>
             </div>

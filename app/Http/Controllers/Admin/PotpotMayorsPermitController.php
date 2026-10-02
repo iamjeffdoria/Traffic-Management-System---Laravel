@@ -63,7 +63,7 @@ class PotpotMayorsPermitController extends Controller
     {
         $validated = $request->validate([
             'control_no' => 'required|string|max:255|unique:potpot_mayors_permits,control_no,' . $permit->id,
-            'status' => 'required|in:active,expired',
+            'status' => 'required|in:active,renewed,expired',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'business_name' => 'nullable|string|max:255',
@@ -75,6 +75,9 @@ class PotpotMayorsPermitController extends Controller
             'issued_at' => 'required|string|max:255',
             'mayor' => 'required|string|max:255',
             'quarter' => 'required|string|max:255',
+            'renewed_by' => ['required_if:status,renewed', 'nullable', 'string', 'max:255'],
+        ], [
+            'renewed_by.required_if' => 'Please enter who renewed this permit. "Renewed By" is required when the status is Renewed.',
         ]);
 
         $permit->update($validated);
