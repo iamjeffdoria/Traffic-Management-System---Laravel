@@ -27,6 +27,7 @@
         'municipal_treasurer' => $franchise->municipal_treasurer,
         'license_issued_date' => optional($franchise->license_issued_date)->format('Y-m-d'),
         'license_issued_at' => $franchise->license_issued_at,
+        'renewed_by' => $franchise->renewed_by,
     ];
 @endphp
 
@@ -63,6 +64,9 @@
                 </span>
             </div>
             <p class="text-gray-500 text-xs mt-1.5">₱{{ number_format($franchise->amount_paid, 2) }}</p>
+            @if ($franchise->status === 'Renewed' && $franchise->renewed_by)
+                <p class="text-gray-500 text-xs">Renewed by: {{ $franchise->renewed_by }}</p>
+            @endif
         </div>
         <div class="flex items-center gap-1 shrink-0">
             <button type="button" onclick="openFranchiseEditModal({{ Illuminate\Support\Js::from($franchiseEditData) }})" title="Edit"

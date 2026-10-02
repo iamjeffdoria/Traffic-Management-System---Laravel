@@ -135,6 +135,11 @@
                 <input type="text" name="municipal_treasurer" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Renewed By <span class="text-gray-400 font-normal">(required if status is Renewed)</span></label>
+                <input type="text" name="renewed_by" placeholder="Full name of the person who processed the renewal"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
             <div class="sm:col-span-2 border-t border-gray-100 pt-4">
                 <p class="text-sm font-semibold text-gray-900">License to Operate (Sangguniang Bayan)</p>
                 <p class="text-xs text-gray-500">Used when printing the License to Operate.</p>

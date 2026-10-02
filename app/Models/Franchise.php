@@ -21,6 +21,7 @@ class Franchise extends Model
         'amount_paid',
         'date',
         'municipal_treasurer',
+        'renewed_by',
         'license_issued_date',
         'license_issued_at',
     ];
