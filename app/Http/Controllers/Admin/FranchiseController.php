@@ -59,7 +59,9 @@ class FranchiseController extends Controller
             'amount_paid' => 'required|numeric|min:0',
             'date' => 'required|date',
             'municipal_treasurer' => 'required|string|max:255',
-            'renewed_by' => 'required_if:status,Renewed|nullable|string|max:255',
+            'renewed_by' => ['required_if:status,Renewed', 'nullable', 'string', 'max:255'],
+        ], [
+            'renewed_by.required_if' => 'Please enter who renewed this franchise. "Renewed By" is required when the status is Renewed.',
         ]);
 
         Franchise::create($validated);

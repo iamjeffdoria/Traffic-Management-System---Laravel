@@ -15,7 +15,7 @@
             @csrf
 
             <p class="text-sm text-gray-500 mb-4">
-                Upload an .xlsx, .xls, or .csv file with columns: Control No, Status, Name, Address, Business Name, Motorized Operation, OR No, Amount Paid, Issue Date, Expiry Date, Issued At, Mayor, Quarter.
+                Upload an .xlsx, .xls, or .csv file with columns: Control No, Status, Name, Address, Business Name, Motorized Operation, OR No, Amount Paid, Issue Date, Expiry Date, Issued At, Mayor, Quarter. Optional: Renewed By (required when Status is Renewed).
             </p>
 
             <label id="potpot-mayors-permit-import-dropzone" for="potpot-mayors-permit-import-input"

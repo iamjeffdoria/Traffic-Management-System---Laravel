@@ -11,7 +11,7 @@
             </button>
         </div>
 
-        <form id="potpot-mayors-permit-create-form" method="POST" action="{{ route('potpot.mayors-permit.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
+        <form id="potpot-mayors-permit-create-form" data-potpot-permit-form method="POST" action="{{ route('potpot.mayors-permit.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
             @csrf
 
             <div>
@@ -35,6 +35,7 @@
                 <select name="status" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
                     <option value="active" @selected(old('status') === 'active')>Active</option>
+                    <option value="renewed" @selected(old('status') === 'renewed')>Renewed</option>
                     <option value="expired" @selected(old('status') === 'expired')>Expired</option>
                 </select>
             </div>
@@ -93,6 +94,12 @@
                     <option value="Third Quarter" @selected(old('quarter') === 'Third Quarter')>Third Quarter</option>
                     <option value="Fourth Quarter" @selected(old('quarter') === 'Fourth Quarter')>Fourth Quarter</option>
                 </select>
+            </div>
+
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Renewed By <span data-renewed-by-required class="hidden text-red-600">*</span> <span class="text-gray-400 font-normal">(required if status is Renewed)</span></label>
+                <input type="text" name="renewed_by" value="{{ old('renewed_by') }}" placeholder="Full name of the person who processed the renewal"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
         </form>
 

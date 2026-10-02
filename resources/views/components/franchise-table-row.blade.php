@@ -68,18 +68,19 @@
     </td>
     <td class="px-4 py-4 align-top">
         <p class="text-gray-900 font-semibold break-words">{{ $franchise->authorized_no }}</p>
+        @if ($franchise->renewed_by)
+            <span class="inline-flex items-center max-w-full gap-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 mt-1.5" title="Renewed by: {{ $franchise->renewed_by }}">
+                <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.5 15A7 7 0 0018.4 17M18.5 9A7 7 0 005.6 7" />
+                </svg>
+                <span class="truncate">{{ $franchise->renewed_by }}</span>
+            </span>
+        @endif
     </td>
     <td class="px-4 py-4 align-top">
         <span class="inline-block max-w-full truncate rounded-full {{ $statusColor }} text-white text-xs font-semibold px-2.5 py-1">
             {{ $franchise->status }}
         </span>
-    </td>
-    <td class="px-4 py-4 align-top">
-        @if ($franchise->renewed_by)
-            <p class="text-gray-900 text-sm break-words">{{ $franchise->renewed_by }}</p>
-        @else
-            <span class="text-gray-400 text-sm">—</span>
-        @endif
     </td>
     <td class="px-4 py-4 align-top">
         @if ($franchise->tricycle)

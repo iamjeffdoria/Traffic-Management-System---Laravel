@@ -3,6 +3,7 @@
 @php
     $statusColors = [
         'active' => 'bg-teal-500',
+        'renewed' => 'bg-green-600',
         'expired' => 'bg-red-600',
     ];
 
@@ -21,6 +22,7 @@
         'issued_at' => $permit->issued_at,
         'mayor' => $permit->mayor,
         'quarter' => $permit->quarter,
+        'renewed_by' => $permit->renewed_by,
     ];
 @endphp
 
@@ -28,6 +30,14 @@
     <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
             <p class="text-gray-900 font-medium truncate">{{ $permit->control_no }}</p>
+            @if ($permit->renewed_by)
+                <span class="flex w-fit items-center max-w-full gap-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 mt-1" title="Renewed by: {{ $permit->renewed_by }}">
+                    <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M5.5 15A7 7 0 0018.4 17M18.5 9A7 7 0 005.6 7" />
+                    </svg>
+                    <span class="truncate">{{ $permit->renewed_by }}</span>
+                </span>
+            @endif
             <p class="text-gray-500 text-sm truncate">{{ $permit->name }} — {{ $permit->address }}</p>
             <div class="flex flex-wrap gap-1 mt-2">
                 <span class="inline-block rounded-full {{ $statusColors[$permit->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1">

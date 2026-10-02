@@ -60,7 +60,7 @@ class FranchisesImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             'amount_paid' => 'required|numeric|min:0',
             'date' => 'required|date',
             'municipal_treasurer' => 'required|string|max:255',
-            'renewed_by' => 'nullable|string|max:255',
+            'renewed_by' => ['required_if:status,Renewed', 'nullable', 'string', 'max:255'],
             'license_issued_date' => 'nullable|date',
             'license_issued_at' => 'nullable|string|max:255',
         ]);

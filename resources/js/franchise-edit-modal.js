@@ -32,6 +32,7 @@ function openFranchiseEditModal(franchise) {
     form.querySelector('[name="date"]').value = franchise.date ?? '';
     form.querySelector('[name="municipal_treasurer"]').value = franchise.municipal_treasurer ?? '';
     form.querySelector('[name="renewed_by"]').value = franchise.renewed_by ?? '';
+    syncRenewedByRequired(form);
     form.querySelector('[name="license_issued_date"]').value = franchise.license_issued_date ?? '';
     form.querySelector('[name="license_issued_at"]').value = franchise.license_issued_at ?? '';
 

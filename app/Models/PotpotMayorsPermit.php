@@ -25,6 +25,7 @@ class PotpotMayorsPermit extends Model
         'issued_at',
         'mayor',
         'quarter',
+        'renewed_by',
     ];
 
     protected $casts = [

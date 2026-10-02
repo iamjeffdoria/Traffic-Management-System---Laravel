@@ -17,6 +17,12 @@
                 </script>
             @endif
 
+            @if ($errors->any())
+                <div class="mb-4 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
             <x-franchise-toolbar />
 
             <x-franchise-create-modal :tricycles="$tricycles" />
@@ -36,11 +42,10 @@
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
                         <col class="w-40">
-                        <col class="w-[12%]">
+                        <col class="w-[18%]">
                         <col class="w-[9%]">
-                        <col class="w-[12%]">
-                        <col class="w-[15%]">
-                        <col class="w-[15%]">
+                        <col class="w-[17%]">
+                        <col class="w-[17%]">
                         <col class="w-[10%]">
                         <col class="w-[13%]">
                     </colgroup>
@@ -49,7 +54,6 @@
                             <th class="px-6 py-3 font-bold w-40">Actions</th>
                             <th class="px-6 py-3 font-bold">Franchise No.</th>
                             <th class="px-6 py-3 font-bold">Status</th>
-                            <th class="px-6 py-3 font-bold">Renewed By</th>
                             <th class="px-6 py-3 font-bold">Owner / Vehicle</th>
                             <th class="px-6 py-3 font-bold">Route / Purpose</th>
                             <th class="px-6 py-3 font-bold">Amount / OR No.</th>
@@ -70,7 +74,6 @@
                                     <option value="Expired" @selected(request('status') === 'Expired')>Expired</option>
                                 </select>
                             </th>
-                            <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
                                 <input type="text" name="name" form="franchise-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchFranchiseFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
@@ -88,7 +91,7 @@
                             <x-franchise-table-row :franchise="$franchise" />
                         @empty
                             <tr>
-                                <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
+                                <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
                                     @if ($hasActiveFranchiseFilters)
                                         No franchises match your search.
                                         <a href="{{ route('tricycle.franchise') }}" data-ajax-franchise-link class="text-red-600 font-medium ml-1">Clear filters</a>

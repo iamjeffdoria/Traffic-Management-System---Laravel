@@ -18,7 +18,7 @@ class PotpotMayorsPermitsExport implements FromQuery, WithHeadings, WithMapping
     {
         return [
             'Control No', 'Status', 'Name', 'Address', 'Business Name', 'Motorized Operation',
-            'OR No', 'Amount Paid', 'Issue Date', 'Expiry Date', 'Issued At', 'Mayor', 'Quarter',
+            'OR No', 'Amount Paid', 'Issue Date', 'Expiry Date', 'Issued At', 'Mayor', 'Quarter', 'Renewed By',
         ];
     }
 
@@ -38,6 +38,7 @@ class PotpotMayorsPermitsExport implements FromQuery, WithHeadings, WithMapping
             $permit->issued_at,
             $permit->mayor,
             $permit->quarter,
+            $permit->renewed_by,
         ];
     }
 }
