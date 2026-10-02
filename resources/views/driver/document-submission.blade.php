@@ -133,7 +133,7 @@
 
 {{-- Review modal: shown before the form is actually submitted --}}
 <div id="review-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6">
-    <div onclick="closeReviewModal()" class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
 
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
