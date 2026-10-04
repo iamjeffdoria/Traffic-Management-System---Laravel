@@ -15,20 +15,21 @@
             line-height: 1.4;
             margin: 0;
         }
-        /* Control No. box sits top-right, on the same line as the titles */
-        .permit-head { position: relative; }
-        .control-box { position: absolute; top: 0; right: 0; text-align: center; width: 170px; }
+        /* Control No. sits in the middle of the footer row, between the fields and the QR */
+        .control-box { text-align: center; align-self: center; padding: 0 12px; }
         .control-box p { margin: 0; }
-        .control-box .cn-label { font-size: 11px; letter-spacing: 1.5px; color: #555; }
+        .control-box .cn-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; color: #555; }
         .control-box .cn-value {
-            border: 1.5px solid #000;
-            font-weight: bold;
-            font-size: 22px;
-            padding: 6px 8px;
-            margin-top: 3px;
+            border: 2px solid #000;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 1px;
+            padding: 8px 18px;
+            margin-top: 4px;
             white-space: nowrap;
         }
-        .control-box .cn-series { font-size: 10px; letter-spacing: 1px; color: #555; margin-top: 3px; }
+        .control-box .cn-series { font-size: 10px; letter-spacing: 1.5px; color: #555; margin-top: 4px; }
         .office-title { text-align: center; font-weight: bold; font-size: 14px; margin: 0; }
         .permit-title { text-align: center; font-weight: bold; font-size: 26px; margin: 4px 0 0; }
         .permit-purpose { text-align: center; font-size: 12px; margin-top: 14px; }
@@ -88,15 +89,8 @@
 <body>
 <div class="letterhead-page">
     <img class="letterhead-bg" src="{{ asset('images/letterhead.png') }}" alt="">
-    <div class="permit-head">
-        <div class="control-box">
-            <p class="cn-label">CONTROL NO.</p>
-            <p class="cn-value">{{ $permit->control_no }}</p>
-            <p class="cn-series">SERIES OF {{ $permit->issue_date->format('Y') }}</p>
-        </div>
-        <p class="office-title">OFFICE OF THE MUNICIPAL MAYOR</p>
-        <p class="permit-title">MAYOR'S PERMIT</p>
-    </div>
+    <p class="office-title">OFFICE OF THE MUNICIPAL MAYOR</p>
+    <p class="permit-title">MAYOR'S PERMIT</p>
 
     <div class="permit-purpose">
         To Operate, Drive Potpot / Pedicab
@@ -172,6 +166,12 @@
             <p class="line"><span class="label">O.R No:</span> {{ $permit->or_no }}</p>
             <p class="line"><span class="label">Issued On:</span> {{ $permit->issue_date->format('F j, Y') }}</p>
             <p class="line"><span class="label">Issued At:</span> {{ $permit->issued_at }}</p>
+        </div>
+
+        <div class="control-box">
+            <p class="cn-label">CONTROL NO.</p>
+            <p class="cn-value">{{ $permit->control_no }}</p>
+            <p class="cn-series">SERIES OF {{ $permit->issue_date->format('Y') }}</p>
         </div>
 
         <div class="qr-code">
