@@ -15,19 +15,23 @@
             line-height: 1.4;
             margin: 0;
         }
-        /* Control No. box sits top-right, on the same line as the titles */
-        .permit-head { position: relative; }
-        .control-box { position: absolute; top: 0; right: 0; text-align: center; width: 150px; }
+        /* Control No. is centered on the page: the footer grid gives equal-width side columns */
+        .control-box { justify-self: center; align-self: center; text-align: center; }
         .control-box p { margin: 0; }
-        .control-box .cn-label { font-size: 11px; letter-spacing: 1.5px; color: #555; }
+        .control-box .cn-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; color: #555; }
         .control-box .cn-value {
-            border: 1.5px solid #000;
-            font-weight: bold;
-            font-size: 24px;
-            padding: 6px 10px;
-            margin-top: 3px;
+            display: inline-block;
+            border: 2px solid #000;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 1px;
+            line-height: 1;
+            padding: 10px 16px;
+            margin-top: 5px;
+            white-space: nowrap;
         }
-        .control-box .cn-series { font-size: 10px; letter-spacing: 1px; color: #555; margin-top: 3px; }
+        .control-box .cn-series { font-size: 9px; letter-spacing: 1.5px; color: #555; margin-top: 5px; }
         .office-title { text-align: center; font-weight: bold; font-size: 14px; margin: 0; }
         .permit-title { text-align: center; font-weight: bold; font-size: 26px; margin: 4px 0 0; }
         .permit-purpose { text-align: center; font-size: 12px; margin-top: 14px; }
@@ -64,7 +68,9 @@
         .signature-block .sig-inner { display: inline-block; width: 240px; text-align: center; }
         .signature-block .name { font-weight: bold; display: block; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 3px; font-size: 13px; }
         .signature-block .title { display: block; font-size: 10px; }
-        .footer-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 36px; }
+        .footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 16px; margin-top: 36px; page-break-inside: avoid; }
+        .footer-row .footer-fields { justify-self: start; }
+        .footer-row .qr-code { justify-self: end; }
         .footer-fields { font-size: 12px; }
         .footer-fields .line { margin: 0 0 5px; }
         .footer-fields .label { font-weight: bold; display: inline-block; width: 105px; }
@@ -86,11 +92,6 @@
 <div class="letterhead-page">
     <img class="letterhead-bg" src="{{ asset('images/letterhead.png') }}" alt="">
     <div class="permit-head">
-        <div class="control-box">
-            <p class="cn-label">CONTROL NO.</p>
-            <p class="cn-value">{{ $permit->control_no }}</p>
-            <p class="cn-series">SERIES OF {{ $permit->issue_date->format('Y') }}</p>
-        </div>
         <p class="office-title">OFFICE OF THE MUNICIPAL MAYOR</p>
         <p class="permit-title">MAYOR'S PERMIT</p>
     </div>
@@ -169,6 +170,12 @@
             <p class="line"><span class="label">O.R No:</span> {{ $permit->or_no }}</p>
             <p class="line"><span class="label">Issued On:</span> {{ $permit->issue_date->format('F j, Y') }}</p>
             <p class="line"><span class="label">Issued At:</span> {{ $permit->issued_at }}</p>
+        </div>
+
+        <div class="control-box">
+            <p class="cn-label">CONTROL NO.</p>
+            <p class="cn-value">{{ $permit->control_no }}</p>
+            <p class="cn-series">SERIES OF {{ $permit->issue_date->format('Y') }}</p>
         </div>
 
         <div class="qr-code">

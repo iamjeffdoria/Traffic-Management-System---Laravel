@@ -15,21 +15,23 @@
             line-height: 1.4;
             margin: 0;
         }
-        /* Control No. sits in the middle of the footer row, between the fields and the QR */
-        .control-box { text-align: center; align-self: center; padding: 0 12px; }
+        /* Control No. is centered on the page: the footer grid gives equal-width side columns */
+        .control-box { justify-self: center; align-self: center; text-align: center; }
         .control-box p { margin: 0; }
-        .control-box .cn-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; color: #555; }
+        .control-box .cn-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; color: #555; }
         .control-box .cn-value {
+            display: inline-block;
             border: 2px solid #000;
             border-radius: 6px;
             font-weight: 700;
-            font-size: 24px;
+            font-size: 22px;
             letter-spacing: 1px;
-            padding: 8px 18px;
-            margin-top: 4px;
+            line-height: 1;
+            padding: 10px 16px;
+            margin-top: 5px;
             white-space: nowrap;
         }
-        .control-box .cn-series { font-size: 10px; letter-spacing: 1.5px; color: #555; margin-top: 4px; }
+        .control-box .cn-series { font-size: 9px; letter-spacing: 1.5px; color: #555; margin-top: 5px; }
         .office-title { text-align: center; font-weight: bold; font-size: 14px; margin: 0; }
         .permit-title { text-align: center; font-weight: bold; font-size: 26px; margin: 4px 0 0; }
         .permit-purpose { text-align: center; font-size: 12px; margin-top: 14px; }
@@ -67,8 +69,9 @@
         .signature-block .sig-inner { display: inline-block; width: 240px; text-align: center; }
         .signature-block .name { font-weight: bold; display: block; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 3px; font-size: 13px; }
         .signature-block .title { display: block; font-size: 10px; }
-        .footer-row { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 28px; }
-        .footer-row { page-break-inside: avoid; }
+        .footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; column-gap: 16px; margin-top: 28px; page-break-inside: avoid; }
+        .footer-row .footer-fields { justify-self: start; }
+        .footer-row .qr-code { justify-self: end; }
         .footer-fields { font-size: 12px; }
         .footer-fields .line { margin: 0 0 5px; }
         .footer-fields .label { font-weight: bold; display: inline-block; width: 105px; }
