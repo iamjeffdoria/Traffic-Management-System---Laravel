@@ -42,6 +42,9 @@ class TricycleController extends Controller
         $validated = $request->validate([
             'body_number' => 'required|string|max:255',
             'plate_no' => 'required|string|max:255|unique:tricycles,plate_no',
+            'owner_number' => 'nullable|string|max:50',
+            'driver' => 'nullable|string|max:255',
+            'driver_number' => 'nullable|string|max:50',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'make_kind' => 'required|string|max:255',
@@ -64,6 +67,9 @@ class TricycleController extends Controller
         $validated = $request->validate([
             'body_number' => 'required|string|max:255',
             'plate_no' => 'required|string|max:255|unique:tricycles,plate_no,' . $tricycle->id,
+            'owner_number' => 'nullable|string|max:50',
+            'driver' => 'nullable|string|max:255',
+            'driver_number' => 'nullable|string|max:50',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'make_kind' => 'required|string|max:255',

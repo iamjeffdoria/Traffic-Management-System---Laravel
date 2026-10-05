@@ -9,6 +9,9 @@ function openTricycleEditModal(tricycle) {
     form.querySelector('[name="plate_no"]').value = tricycle.plate_no ?? '';
     form.querySelector('[name="name"]').value = tricycle.name ?? '';
     form.querySelector('[name="address"]').value = tricycle.address ?? '';
+    form.querySelector('[name="owner_number"]').value = tricycle.owner_number ?? '';
+    form.querySelector('[name="driver"]').value = tricycle.driver ?? '';
+    form.querySelector('[name="driver_number"]').value = tricycle.driver_number ?? '';
     form.querySelector('[name="make_kind"]').value = tricycle.make_kind ?? '';
     form.querySelector('[name="status"]').value = tricycle.status ?? 'active';
     form.querySelector('[name="engine_motor_no"]').value = tricycle.engine_motor_no ?? '';

@@ -34,6 +34,21 @@
                 <input type="text" name="address" value="{{ old('address') }}" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Owner's Number <span class="text-gray-400 font-normal">(optional)</span></label>
+                <input type="tel" inputmode="tel" name="owner_number" value="{{ old('owner_number') }}" placeholder="e.g. 09123456789"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Driver <span class="text-gray-400 font-normal">(optional)</span></label>
+                <input type="text" name="driver" value="{{ old('driver') }}" placeholder="Name of the person driving"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Driver's Number <span class="text-gray-400 font-normal">(optional)</span></label>
+                <input type="tel" inputmode="tel" name="driver_number" value="{{ old('driver_number') }}" placeholder="e.g. 09123456789"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Make/Kind</label>
                 <input type="text" name="make_kind" value="{{ old('make_kind') }}" required

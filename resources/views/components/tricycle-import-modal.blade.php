@@ -15,7 +15,7 @@
             @csrf
 
             <p class="text-sm text-gray-500 mb-4">
-                Upload an .xlsx, .xls, or .csv file with columns: Body Number, Plate No, Name, Address, Make Kind, Status, Engine Motor No, Chassis No, Date Registered, Date Expired, Toda, Remarks.
+                Upload an .xlsx, .xls, or .csv file with columns: Body Number, Plate No, Name, Address, Owner Number (optional), Driver (optional), Driver Number (optional), Make Kind, Status, Engine Motor No, Chassis No, Date Registered, Date Expired, Toda, Remarks.
             </p>
 
             <label id="tricycle-import-dropzone" for="tricycle-import-input"

@@ -17,7 +17,7 @@ class TricyclesExport implements FromQuery, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'Body Number', 'Plate No', 'Name', 'Address', 'Make Kind', 'Status',
+            'Body Number', 'Plate No', 'Name', 'Address', 'Owner Number', 'Driver', 'Driver Number', 'Make Kind', 'Status',
             'Engine Motor No', 'Chassis No', 'Date Registered', 'Date Expired', 'Toda', 'Remarks',
         ];
     }
@@ -29,6 +29,9 @@ class TricyclesExport implements FromQuery, WithHeadings, WithMapping
             $tricycle->plate_no,
             $tricycle->name,
             $tricycle->address,
+            $tricycle->owner_number,
+            $tricycle->driver,
+            $tricycle->driver_number,
             $tricycle->make_kind,
             $tricycle->status,
             $tricycle->engine_motor_no,

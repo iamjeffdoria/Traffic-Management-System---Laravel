@@ -42,6 +42,15 @@ class TricyclesImport implements ToModel, WithHeadingRow, WithBatchInserts, With
             'plate_no' => $row['plate_no'] ?? null,
             'name' => $row['name'] ?? null,
             'address' => $row['address'] ?? null,
+            'owner_number' => isset($row['owner_number']) && $row['owner_number'] !== ''
+                ? (string) $row['owner_number']
+                : null,
+            'driver' => isset($row['driver']) && $row['driver'] !== ''
+                ? (string) $row['driver']
+                : null,
+            'driver_number' => isset($row['driver_number']) && $row['driver_number'] !== ''
+                ? (string) $row['driver_number']
+                : null,
             'make_kind' => $row['make_kind'] ?? null,
             'status' => $this->normalizeStatus($row['status'] ?? ''),
             'engine_motor_no' => $row['engine_motor_no'] ?? null,
@@ -57,6 +66,9 @@ class TricyclesImport implements ToModel, WithHeadingRow, WithBatchInserts, With
             'plate_no' => 'required|string|max:255|unique:tricycles,plate_no',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
+            'owner_number' => 'nullable|string|max:50',
+            'driver' => 'nullable|string|max:255',
+            'driver_number' => 'nullable|string|max:50',
             'make_kind' => 'required|string|max:255',
             'status' => 'required|in:active,renewed,expired',
             'engine_motor_no' => 'nullable|string|max:255',
