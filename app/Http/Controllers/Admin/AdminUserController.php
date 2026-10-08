@@ -10,9 +10,22 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminUserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $admins = User::orderBy('name')->get();
+        $admins = User::query()
+            ->when($request->filled('name'), fn ($q) =>
+                $q->where('name', 'like', '%' . $request->input('name') . '%'))
+            ->when($request->filled('email'), fn ($q) =>
+                $q->where('email', 'like', '%' . $request->input('email') . '%'))
+            ->when($request->filled('role'), fn ($q) =>
+                $q->where('role', $request->input('role')))
+            ->orderBy('name')
+            ->paginate(25)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.partials.admin-ajax-results', compact('admins'));
+        }
 
         return view('admin.users', compact('admins'));
     }
