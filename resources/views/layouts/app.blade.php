@@ -14,6 +14,15 @@
 
     <div class="min-h-screen">
         <div id="toast-container" class="fixed top-4 right-4 z-[100] space-y-2 w-80 max-w-[calc(100vw-2rem)]"></div>
+
+        @if (session('greeting'))
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    showToast(@json(session('greeting')));
+                });
+            </script>
+        @endif
+
         @yield('content')
     </div>
 

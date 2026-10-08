@@ -24,6 +24,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended(route('admin.dashboard'))
+                ->with('greeting', 'Welcome back, ' . Auth::user()->name . '!')
                 ->withCookie(cookie('remembered_email', $credentials['email'], 60 * 24 * 30));
         }
 
