@@ -3,48 +3,51 @@
 @section('title', 'Admin Login')
 
 @section('content')
-<section class="min-h-screen grid lg:grid-cols-2 bg-white">
+<section class="min-h-screen grid lg:grid-cols-2 neo-bg">
 
     {{-- Brand panel (desktop only) --}}
-    <aside class="hidden lg:flex relative flex-col justify-between bg-gray-900 text-white p-12 overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-red-600/20"></div>
-        <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-red-600/10"></div>
-
-        <div class="relative flex items-center gap-3">
-            <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-11 h-11 object-contain">
-            <span class="font-bold text-sm leading-tight uppercase tracking-wide">Public Safety<br>Office</span>
+    <aside class="hidden lg:flex flex-col justify-between p-14">
+        <div class="flex items-center gap-4">
+            <div class="neo-raised w-16 h-16 rounded-full flex items-center justify-center">
+                <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-10 h-10 object-contain">
+            </div>
+            <span class="font-bold text-sm leading-tight uppercase tracking-wide text-gray-600">Public Safety<br>Office</span>
         </div>
 
-        <div class="relative max-w-md">
-            <h1 class="text-4xl font-bold leading-tight tracking-tight">
-                Permits, franchises &amp; records in one place.
-            </h1>
-            <p class="mt-4 text-gray-400 text-sm leading-relaxed">
-                Manage tricycle and potpot registrations, mayor's permits, ID cards, and document submissions.
-            </p>
+        <div class="max-w-md">
+            <div class="neo-inset rounded-3xl p-8">
+                <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-700">
+                    Permits, franchises &amp; records in one place.
+                </h1>
+                <p class="mt-4 text-gray-500 text-sm leading-relaxed">
+                    Manage tricycle and potpot registrations, mayor's permits, ID cards, and document submissions.
+                </p>
+            </div>
         </div>
 
-        <p class="relative text-xs text-gray-500">
+        <p class="text-xs text-gray-500">
             &copy; {{ date('Y') }} Public Safety Office
         </p>
     </aside>
 
     {{-- Form panel --}}
-    <main class="flex items-center justify-center bg-gray-50 lg:bg-white px-6 py-12">
+    <main class="flex items-center justify-center px-6 py-12">
         <div class="w-full max-w-sm">
 
             {{-- Mobile logo --}}
             <div class="lg:hidden flex flex-col items-center gap-3 mb-8">
-                <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-16 h-16 object-contain">
+                <div class="neo-raised w-20 h-20 rounded-full flex items-center justify-center">
+                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-12 h-12 object-contain">
+                </div>
                 <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Public Safety Office</span>
             </div>
 
-            <div class="bg-white lg:bg-transparent rounded-2xl border border-gray-200 lg:border-0 shadow-sm lg:shadow-none p-8 lg:p-0">
-                <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Welcome back</h2>
+            <div class="neo-raised rounded-3xl p-8 login-card-enter">
+                <h2 class="text-2xl font-bold text-gray-700 tracking-tight">Welcome back</h2>
                 <p class="mt-1 text-sm text-gray-500">Sign in to your account to continue.</p>
 
                 @if ($errors->any())
-                    <div class="mt-6 flex items-start gap-2 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
+                    <div class="neo-inset mt-6 flex items-start gap-2 rounded-xl text-red-600 text-sm px-4 py-3">
                         <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                         </svg>
@@ -52,27 +55,27 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}" class="mt-8 space-y-5">
+                <form method="POST" action="{{ route('login') }}" class="mt-8 space-y-6">
                     @csrf
 
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-600 mb-2">Email</label>
                         <input type="email" name="email" id="email"
                             value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
                             autocomplete="username"
                             placeholder="you@example.com"
-                            class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600/20 transition">
+                            class="neo-input w-full rounded-xl px-4 py-3 text-sm">
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+                        <label for="password" class="block text-sm font-medium text-gray-600 mb-2">Password</label>
                         <div class="relative">
                             <input type="password" name="password" id="password" required
                                 autocomplete="current-password"
                                 placeholder="Enter your password"
-                                class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 pr-11 text-sm placeholder:text-gray-400 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600/20 transition">
+                                class="neo-input w-full rounded-xl px-4 py-3 pr-14 text-sm">
                             <button type="button" onclick="togglePassword('password', 'eye-open', 'eye-closed')"
-                                class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
+                                class="neo-raised-sm absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 hover:text-gray-700">
                                 <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -84,20 +87,19 @@
                         </div>
                     </div>
 
-                    <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none">
-                        <input type="checkbox" name="remember" @checked(old('remember'))
-                            class="rounded border-gray-300 text-red-600 focus:ring-red-600/30">
+                    <label class="flex items-center gap-3 text-sm text-gray-600 cursor-pointer select-none">
+                        <input type="checkbox" name="remember" @checked(old('remember')) class="neo-check">
                         Remember me
                     </label>
 
                     <button type="submit"
-                        class="w-full rounded-lg bg-red-600 text-white px-6 py-2.5 text-sm font-semibold hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600/40 focus:ring-offset-2 transition-colors">
+                        class="neo-btn w-full rounded-xl px-6 py-3 text-sm font-semibold tracking-wide">
                         Sign In
                     </button>
                 </form>
             </div>
 
-            <p class="lg:hidden mt-8 text-center text-xs text-gray-400">
+            <p class="lg:hidden mt-8 text-center text-xs text-gray-500">
                 &copy; {{ date('Y') }} Public Safety Office
             </p>
         </div>

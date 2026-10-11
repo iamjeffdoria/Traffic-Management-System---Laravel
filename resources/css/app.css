@@ -108,3 +108,89 @@
   60% { opacity: 1; }
   100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
 }
+
+/* ===== Neomorphism (login page) ===== */
+.neo-bg {
+  background: #e0e5ec;
+}
+
+.neo-raised {
+  background: #e0e5ec;
+  box-shadow: 10px 10px 22px #a3b1c6, -10px -10px 22px #ffffff;
+}
+
+.neo-raised-sm {
+  background: #e0e5ec;
+  box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.neo-raised-sm:hover {
+  box-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+}
+.neo-raised-sm:active {
+  box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff;
+}
+
+.neo-inset {
+  background: #e0e5ec;
+  box-shadow: inset 6px 6px 12px #a3b1c6, inset -6px -6px 12px #ffffff;
+}
+
+.neo-input {
+  background: #e0e5ec;
+  color: #374151;
+  border: 2px solid transparent;
+  box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.neo-input::placeholder {
+  color: #9aa3b2;
+}
+.neo-input:focus {
+  outline: none;
+  border-color: rgba(220, 38, 38, .45);
+  box-shadow: inset 3px 3px 7px #a3b1c6, inset -3px -3px 7px #ffffff;
+}
+
+.neo-btn {
+  background: linear-gradient(145deg, #ef4444, #dc2626);
+  color: #fff;
+  box-shadow: 7px 7px 14px #a3b1c6, -7px -7px 14px #ffffff;
+  transition: box-shadow .15s ease, transform .15s ease, filter .15s ease;
+}
+.neo-btn:hover {
+  filter: brightness(1.05);
+  box-shadow: 4px 4px 9px #a3b1c6, -4px -4px 9px #ffffff;
+}
+.neo-btn:active {
+  box-shadow: inset 4px 4px 8px #b91c1c, inset -4px -4px 8px #f87171;
+  transform: scale(.99);
+}
+.neo-btn:focus-visible {
+  outline: 2px solid rgba(220, 38, 38, .5);
+  outline-offset: 3px;
+}
+
+.neo-check {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  background: #e0e5ec;
+  box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff;
+  cursor: pointer;
+  transition: box-shadow .15s ease;
+  flex-shrink: 0;
+}
+.neo-check:checked {
+  background-color: #e0e5ec;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+}
+.neo-check:focus-visible {
+  outline: 2px solid rgba(220, 38, 38, .5);
+  outline-offset: 2px;
+}
