@@ -7,11 +7,13 @@
 
     {{-- Brand panel (desktop only) --}}
     <aside class="hidden lg:flex flex-col justify-between p-14">
-        <div class="flex items-center gap-4">
-            <div class="neo-raised w-16 h-16 rounded-full flex items-center justify-center">
-                <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-10 h-10 object-contain">
+        <div class="flex items-center gap-6">
+            <div class="neo-raised w-36 h-36 rounded-full flex items-center justify-center shrink-0">
+                <div class="neo-inset w-28 h-28 rounded-full flex items-center justify-center">
+                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-20 h-20 object-contain drop-shadow-md">
+                </div>
             </div>
-            <span class="font-bold text-sm leading-tight uppercase tracking-wide text-gray-600">Public Safety<br>Office</span>
+            <span class="font-extrabold text-lg leading-tight uppercase tracking-wider text-gray-700">Public Safety<br>Office</span>
         </div>
 
         <div class="max-w-md">
@@ -35,11 +37,13 @@
         <div class="w-full max-w-sm">
 
             {{-- Mobile logo --}}
-            <div class="lg:hidden flex flex-col items-center gap-3 mb-8">
-                <div class="neo-raised w-20 h-20 rounded-full flex items-center justify-center">
-                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-12 h-12 object-contain">
+            <div class="lg:hidden flex flex-col items-center gap-4 mb-10">
+                <div class="neo-raised w-32 h-32 rounded-full flex items-center justify-center">
+                    <div class="neo-inset w-24 h-24 rounded-full flex items-center justify-center">
+                        <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-16 h-16 object-contain drop-shadow-md">
+                    </div>
                 </div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Public Safety Office</span>
+                <span class="text-sm font-extrabold uppercase tracking-wider text-gray-700">Public Safety Office</span>
             </div>
 
             <div class="neo-raised rounded-3xl p-8 login-card-enter">
