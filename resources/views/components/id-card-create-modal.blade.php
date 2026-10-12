@@ -14,17 +14,26 @@
         <form id="id-card-create-form" method="POST" action="{{ route('potpot.id-cards.store') }}" enctype="multipart/form-data" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
             @csrf
 
-            <div class="sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700 mb-1">2x2 Photo</label>
+            <div class="sm:col-span-2" data-avatar-upload>
+                <p class="block text-sm font-medium text-gray-700 mb-2">2x2 Photo</p>
                 <div class="flex items-center gap-4">
-                    <div class="w-20 h-20 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden shrink-0">
-                        <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                    <input type="file" name="photo" accept="image/*"
-                        class="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-600 hover:file:bg-red-100">
+                    <label for="create-id-card-photo" class="relative group cursor-pointer shrink-0">
+                        <span class="w-24 h-24 rounded-lg overflow-hidden bg-gray-50 border-2 border-dashed border-gray-300 group-hover:border-red-400 transition-colors flex items-center justify-center">
+                            <img data-avatar-img src="" alt="" class="hidden w-full h-full object-cover">
+                            <svg data-avatar-placeholder class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <span class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center border-2 border-white shadow">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                    </label>
+                    <input type="file" id="create-id-card-photo" name="photo" accept="image/*" class="hidden" onchange="previewAvatar(this)">
+                    <p data-avatar-filename class="text-xs text-gray-400 min-w-0 truncate">Click the photo to upload · max 5 MB</p>
                 </div>
             </div>
 

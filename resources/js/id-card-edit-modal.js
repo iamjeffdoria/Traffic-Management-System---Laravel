@@ -21,8 +21,9 @@ function openIdCardEditModal(idCard) {
     const fileInput = form.querySelector('[name="photo"]');
     if (fileInput) fileInput.value = '';
 
-    const preview = form.querySelector('[data-id-card-photo-preview]');
-    const placeholder = form.querySelector('[data-id-card-photo-placeholder]');
+    const preview = form.querySelector('[data-avatar-img]');
+    const placeholder = form.querySelector('[data-avatar-placeholder]');
+    const photoLabel = form.querySelector('[data-avatar-filename]');
     if (idCard.photo_url) {
         preview.src = idCard.photo_url;
         preview.classList.remove('hidden');
@@ -32,6 +33,7 @@ function openIdCardEditModal(idCard) {
         preview.classList.add('hidden');
         placeholder.classList.remove('hidden');
     }
+    if (photoLabel) photoLabel.textContent = 'Click the photo to change it · max 5 MB';
 
     openModal('edit-id-card-modal');
 }
