@@ -27,6 +27,8 @@
 
             <x-potpot-create-modal />
 
+            <form id="potpot-filter-form" method="GET" action="{{ route('potpot.list') }}"></form>
+
             <!-- Desktop table -->
             <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto isolate" style="max-height: 600px; overflow-y: auto;">
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
@@ -47,65 +49,62 @@
                             <th class="px-6 py-3 font-bold">Registration / Expiry</th>
                             <th class="px-6 py-3 font-bold">OR No. / Remarks</th>
                         </tr>
+                        <tr class="border-t border-gray-300 divide-x divide-gray-300">
+                            <th class="px-2 py-2">
+                                <input type="text" name="body" form="potpot-filter-form" data-filter-scope="desktop" value="{{ request('body') }}" oninput="debouncedFetchPotpotFilter()"
+                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                            </th>
+                            <th class="px-2 py-2">
+                                <input type="text" name="name" form="potpot-filter-form" data-filter-scope="desktop" value="{{ request('name') }}" oninput="debouncedFetchPotpotFilter()"
+                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                            </th>
+                            <th class="px-2 py-2">
+                                <input type="text" name="address" form="potpot-filter-form" data-filter-scope="desktop" value="{{ request('address') }}" oninput="debouncedFetchPotpotFilter()"
+                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                            </th>
+                            <th class="px-1.5 py-2">
+                                <select name="status" form="potpot-filter-form" data-filter-scope="desktop" onchange="debouncedFetchPotpotFilter()"
+                                    class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium pl-1.5 pr-0.5 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
+                                    <option value="">All</option>
+                                    <option value="active" @selected(request('status') === 'active')>Active</option>
+                                    <option value="renewed" @selected(request('status') === 'renewed')>Renewed</option>
+                                    <option value="expired" @selected(request('status') === 'expired')>Expired</option>
+                                </select>
+                            </th>
+                            <th class="px-6 py-2"></th>
+                            <th class="px-6 py-2"></th>
+                        </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-300">
-                        @forelse ($potpots as $potpot)
-                            <x-potpot-table-row :potpot="$potpot" />
-                        @empty
-                            <tr>
-                                <td colspan="6" class="px-6 py-10 text-center text-gray-500 text-sm">
-                                    No potpots registered yet.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
+                    @include('admin.partials.potpot-tbody')
                 </table>
             </div>
 
-            <div class="hidden lg:block mt-4">
+            <div id="potpot-pagination-desktop" class="hidden lg:block mt-4">
                 @unless ($potpots->isEmpty())
                     {{ $potpots->links() }}
                 @endunless
             </div>
 
-            <!-- Mobile cards -->
-            @php
-                $potpotStatusColors = ['active' => 'bg-teal-500', 'renewed' => 'bg-green-600', 'expired' => 'bg-red-600'];
-            @endphp
-            <div class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
-                @forelse ($potpots as $potpot)
-                    <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
-                        <p class="text-gray-900 font-medium truncate">{{ $potpot->body_number }} — {{ $potpot->name }}</p>
-                        @if ($potpot->address)
-                            <p class="text-gray-500 text-sm truncate">{{ $potpot->address }}</p>
-                        @endif
-                        <div class="flex flex-wrap gap-1 mt-2">
-                            <span class="inline-block rounded-full {{ $potpotStatusColors[$potpot->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1">
-                                {{ ucfirst($potpot->status) }}
-                            </span>
-                            @if ($potpot->or_number)
-                                <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-mono px-2.5 py-1">{{ $potpot->or_number }}</span>
-                            @endif
-                            @if ($potpot->contact_number)
-                                <span class="inline-block rounded-full bg-emerald-600 text-white text-xs font-mono px-2.5 py-1">{{ $potpot->contact_number }}</span>
-                            @endif
-                        </div>
-                        <div class="flex items-center gap-1 mt-1.5">
-                            <span class="inline-block rounded-full bg-green-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">{{ $potpot->date_registered->format('M-d-y') }}</span>
-                            <span class="inline-block rounded-full bg-red-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">{{ $potpot->date_expired->format('M-d-y') }}</span>
-                        </div>
-                        @if ($potpot->remarks)
-                            <p class="text-gray-500 text-xs mt-1.5">{{ $potpot->remarks }}</p>
-                        @endif
-                    </div>
-                @empty
-                    <div class="rounded-2xl border border-gray-200 p-8 text-center text-gray-500 text-sm">
-                        No potpots registered yet.
-                    </div>
-                @endforelse
+            <!-- Mobile search filters -->
+            <div class="lg:hidden space-y-2 mb-4">
+                <input type="text" name="body" form="potpot-filter-form" data-filter-scope="mobile" value="{{ request('body') }}" oninput="debouncedFetchPotpotFilter()" placeholder="Search body no..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <input type="text" name="name" form="potpot-filter-form" data-filter-scope="mobile" value="{{ request('name') }}" oninput="debouncedFetchPotpotFilter()" placeholder="Search operator..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <input type="text" name="address" form="potpot-filter-form" data-filter-scope="mobile" value="{{ request('address') }}" oninput="debouncedFetchPotpotFilter()" placeholder="Search address..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <select name="status" form="potpot-filter-form" data-filter-scope="mobile" onchange="debouncedFetchPotpotFilter()"
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <option value="">All statuses</option>
+                    <option value="active" @selected(request('status') === 'active')>Active</option>
+                    <option value="renewed" @selected(request('status') === 'renewed')>Renewed</option>
+                    <option value="expired" @selected(request('status') === 'expired')>Expired</option>
+                </select>
             </div>
 
-            <div class="lg:hidden mt-4">
+            @include('admin.partials.potpot-cards')
+
+            <div id="potpot-pagination-mobile" class="lg:hidden mt-4">
                 @unless ($potpots->isEmpty())
                     {{ $potpots->links() }}
                 @endunless

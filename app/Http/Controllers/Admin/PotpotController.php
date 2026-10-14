@@ -8,12 +8,24 @@ use Illuminate\Http\Request;
 
 class PotpotController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $potpots = Potpot::query()
+            ->when($request->filled('body'), fn ($q) =>
+                $q->where('body_number', 'like', '%' . $request->input('body') . '%'))
+            ->when($request->filled('name'), fn ($q) =>
+                $q->where('name', 'like', '%' . $request->input('name') . '%'))
+            ->when($request->filled('address'), fn ($q) =>
+                $q->where('address', 'like', '%' . $request->input('address') . '%'))
+            ->when($request->filled('status'), fn ($q) =>
+                $q->where('status', $request->input('status')))
             ->latest('updated_at')
             ->paginate(25)
             ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.partials.potpot-ajax-results', compact('potpots'));
+        }
 
         return view('admin.potpots', compact('potpots'));
     }
