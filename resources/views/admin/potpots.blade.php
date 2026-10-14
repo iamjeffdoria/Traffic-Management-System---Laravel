@@ -29,6 +29,8 @@
 
             <x-potpot-edit-modal />
 
+            <x-potpot-delete-confirm-modal />
+
             <form id="potpot-filter-form" method="GET" action="{{ route('potpot.list') }}"></form>
 
             <!-- Desktop table -->

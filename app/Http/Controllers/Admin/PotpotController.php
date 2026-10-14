@@ -67,4 +67,11 @@ class PotpotController extends Controller
 
         return redirect()->route('potpot.list')->with('success', 'Potpot updated successfully.');
     }
+
+    public function destroy(Potpot $potpot)
+    {
+        $potpot->delete();
+
+        return redirect()->route('potpot.list')->with('success', 'Potpot removed successfully.');
+    }
 }

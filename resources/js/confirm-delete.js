@@ -137,3 +137,23 @@ function submitPendingDocumentSubmissionDelete() {
     }
 }
 window.submitPendingDocumentSubmissionDelete = submitPendingDocumentSubmissionDelete;
+
+let pendingPotpotDeleteForm = null;
+
+function confirmPotpotDelete(formId, name) {
+    pendingPotpotDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-potpot-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-potpot-confirm-modal');
+}
+window.confirmPotpotDelete = confirmPotpotDelete;
+
+function submitPendingPotpotDelete() {
+    if (pendingPotpotDeleteForm) {
+        pendingPotpotDeleteForm.submit();
+        pendingPotpotDeleteForm = null;
+    }
+}
+window.submitPendingPotpotDelete = submitPendingPotpotDelete;
