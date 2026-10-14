@@ -48,4 +48,23 @@ class PotpotController extends Controller
 
         return redirect()->route('potpot.list')->with('success', 'Potpot added successfully.');
     }
+
+    public function update(Request $request, Potpot $potpot)
+    {
+        $validated = $request->validate([
+            'body_number' => 'required|string|max:255|unique:potpots,body_number,' . $potpot->id,
+            'name' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'contact_number' => 'nullable|string|max:50',
+            'or_number' => 'nullable|string|max:255',
+            'status' => 'required|in:active,renewed,expired',
+            'date_registered' => 'required|date',
+            'date_expired' => 'required|date|after_or_equal:date_registered',
+            'remarks' => 'nullable|string',
+        ]);
+
+        $potpot->update($validated);
+
+        return redirect()->route('potpot.list')->with('success', 'Potpot updated successfully.');
+    }
 }

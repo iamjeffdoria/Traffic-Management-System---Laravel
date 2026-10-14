@@ -37,3 +37,4 @@ import './table-document-submission-search.js';
 import './avatar-preview.js';
 import './admin-edit-modal.js';
 import './table-potpot-search.js';
+import './potpot-edit-modal.js';

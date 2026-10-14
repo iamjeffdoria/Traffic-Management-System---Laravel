@@ -5,8 +5,38 @@
 
 <div id="potpot-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
     @forelse ($potpots as $potpot)
+        @php
+            $potpotEditData = [
+                'id' => $potpot->id,
+                'body_number' => $potpot->body_number,
+                'name' => $potpot->name,
+                'address' => $potpot->address,
+                'contact_number' => $potpot->contact_number,
+                'or_number' => $potpot->or_number,
+                'status' => $potpot->status,
+                'date_registered' => $potpot->date_registered->format('Y-m-d'),
+                'date_expired' => $potpot->date_expired->format('Y-m-d'),
+                'remarks' => $potpot->remarks,
+            ];
+        @endphp
         <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
-            <p class="text-gray-900 font-medium truncate">{{ $potpot->body_number }} — {{ $potpot->name }}</p>
+            <div class="flex items-start justify-between gap-3">
+                <p class="text-gray-900 font-medium truncate min-w-0">{{ $potpot->body_number }} — {{ $potpot->name }}</p>
+                <div class="flex items-center gap-1 shrink-0">
+                    <button type="button" onclick="openPotpotEditModal({{ Illuminate\Support\Js::from($potpotEditData) }})" title="Edit"
+                        class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </button>
+                    <button type="button" title="Delete"
+                        class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
             @if ($potpot->address)
                 <p class="text-gray-500 text-sm truncate">{{ $potpot->address }}</p>
             @endif

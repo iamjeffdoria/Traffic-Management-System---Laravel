@@ -7,7 +7,7 @@
         <x-potpot-table-row :potpot="$potpot" />
     @empty
         <tr>
-            <td colspan="6" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActivePotpotFilters)
                     No potpots match your search.
                     <a href="{{ route('potpot.list') }}" data-ajax-potpot-link class="text-red-600 font-medium ml-1">Clear filters</a>
