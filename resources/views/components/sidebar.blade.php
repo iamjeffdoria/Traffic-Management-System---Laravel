@@ -65,7 +65,7 @@
 
         @if (auth()->user()->isSuperadmin())
             @php
-                $potpotOpen = in_array($active, ['potpot-id-cards', 'potpot-mayors-permit', 'potpot-document-submissions']);
+                $potpotOpen = in_array($active, ['potpot-list', 'potpot-id-cards', 'potpot-mayors-permit', 'potpot-document-submissions']);
                 $tricycleOpen = in_array($active, ['tricycle-list', 'tricycle-mayors-permit', 'tricycle-mtop', 'tricycle-franchise', 'tricycle-document-submissions']);
             @endphp
 
@@ -91,6 +91,14 @@
                 </button>
 
 <div id="potpot-submenu" class="{{ $potpotOpen ? 'flex' : 'hidden' }} flex-col gap-1 ml-5 mt-1 mb-2 p-1.5 rounded-lg bg-gray-800 border-l-2 border-red-500 lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">
+                    <a href="{{ route('potpot.list') }}" title="Potpot List"
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                    {{ $active === 'potpot-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                        </svg>
+                        <span class="truncate">Potpot List</span>
+                    </a>
                     <a href="{{ route('potpot.id-cards') }}" title="ID Cards"
                     class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors
                     {{ $active === 'potpot-id-cards' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
@@ -194,6 +202,14 @@
             </div>
         @else
             @if (auth()->user()->isPotpotAdmin())
+                <a href="{{ route('potpot.list') }}" title="Potpot List"
+                class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+                {{ $active === 'potpot-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Potpot List</span>
+                </a>
                 <a href="{{ route('potpot.id-cards') }}" title="ID Cards"
                 class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
                 {{ $active === 'potpot-id-cards' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">

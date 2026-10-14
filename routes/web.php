@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PotpotMayorsPermitController;
 use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
+use App\Http\Controllers\Admin\PotpotController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
 use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpotDocumentSubmissionController;
@@ -61,6 +62,9 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::get('/potpot', function () {
         return view('admin.potpot'); // create this view when you build the module
     })->name('potpot.index');
+
+    Route::get('/admin/potpot/list', [PotpotController::class, 'index'])->name('potpot.list');
+    Route::post('/admin/potpot/list', [PotpotController::class, 'store'])->name('potpot.store');
 
     Route::get('/admin/potpot/id-cards', [IdCardController::class, 'index'])->name('potpot.id-cards');
     Route::post('/admin/potpot/id-cards', [IdCardController::class, 'store'])->name('potpot.id-cards.store');
