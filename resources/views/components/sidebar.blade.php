@@ -65,7 +65,7 @@
 
         @if (auth()->user()->isSuperadmin())
             @php
-                $potpotOpen = in_array($active, ['potpot-list', 'potpot-id-cards', 'potpot-mayors-permit', 'potpot-document-submissions']);
+                $potpotOpen = in_array($active, ['potpot-list', 'potpot-id-cards', 'potpot-mayors-permit', 'potpot-kasabutan-selling', 'potpot-kasabutan-lost-item', 'potpot-document-submissions']);
                 $tricycleOpen = in_array($active, ['tricycle-list', 'tricycle-mayors-permit', 'tricycle-mtop', 'tricycle-franchise', 'tricycle-document-submissions']);
             @endphp
 
@@ -115,6 +115,25 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         <span class="truncate">Mayor's Permit - Potpot</span>
+                    </a>
+
+                    <a href="{{ route('potpot.kasabutan.selling') }}" title="Kasabutan - Selling"
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                    {{ $active === 'potpot-kasabutan-selling' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h.008v.008H6V6z" />
+                        </svg>
+                        <span class="truncate">Kasabutan - Selling</span>
+                    </a>
+
+                    <a href="{{ route('potpot.kasabutan.lost-item') }}" title="Kasabutan - Lost Item"
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                    {{ $active === 'potpot-kasabutan-lost-item' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                        <span class="truncate">Kasabutan - Lost Item</span>
                     </a>
 
                     <a href="{{ route('potpot.document-submissions') }}" title="Potpot Document Submissions"
@@ -226,6 +245,25 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Mayor's Permit - Potpot</span>
+                </a>
+
+                <a href="{{ route('potpot.kasabutan.selling') }}" title="Kasabutan - Selling"
+                class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+                {{ $active === 'potpot-kasabutan-selling' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h.008v.008H6V6z" />
+                    </svg>
+                    <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Kasabutan - Selling</span>
+                </a>
+
+                <a href="{{ route('potpot.kasabutan.lost-item') }}" title="Kasabutan - Lost Item"
+                class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+                {{ $active === 'potpot-kasabutan-lost-item' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                    <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Kasabutan - Lost Item</span>
                 </a>
 
                 <a href="{{ route('potpot.document-submissions') }}" title="Potpot Document Submissions"

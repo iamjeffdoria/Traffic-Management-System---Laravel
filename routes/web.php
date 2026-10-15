@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MtopController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\PotpotController;
+use App\Http\Controllers\Admin\KasabutanController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
 use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpotDocumentSubmissionController;
@@ -90,6 +91,9 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::get('/admin/potpot/document-submissions', [AdminPotpotDocumentSubmissionController::class, 'index'])->name('potpot.document-submissions');
     Route::put('/admin/potpot/document-submissions/{submission}', [AdminPotpotDocumentSubmissionController::class, 'updateStatus'])->name('potpot.document-submissions.update-status');
     Route::delete('/admin/potpot/document-submissions/{submission}', [AdminPotpotDocumentSubmissionController::class, 'destroy'])->name('potpot.document-submissions.destroy');
+
+    Route::get('/admin/potpot/kasabutan/selling', [KasabutanController::class, 'selling'])->name('potpot.kasabutan.selling');
+    Route::get('/admin/potpot/kasabutan/lost-item', [KasabutanController::class, 'lostItem'])->name('potpot.kasabutan.lost-item');
 });
 
 // Tricycle admin + superadmin only
