@@ -42,3 +42,4 @@ import './potpot-import-modal.js';
 import './table-kasabutan-selling-search.js';
 import './kasabutan-selling-sync.js';
 import './kasabutan-selling-edit-modal.js';
+import './table-kasabutan-lost-item-search.js';
