@@ -56,8 +56,8 @@
             </span>
         @endif
     </td>
-    <td class="px-6 py-4 align-top">
-        <span class="inline-block rounded-full {{ $statusColors[$potpot->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1">
+    <td class="px-3 py-4 align-top">
+        <span class="inline-block rounded-full {{ $statusColors[$potpot->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1 whitespace-nowrap">
             {{ ucfirst($potpot->status) }}
         </span>
     </td>

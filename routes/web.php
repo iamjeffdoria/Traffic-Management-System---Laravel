@@ -67,6 +67,8 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::post('/admin/potpot/list', [PotpotController::class, 'store'])->name('potpot.store');
     Route::put('/admin/potpot/list/{potpot}', [PotpotController::class, 'update'])->name('potpot.update');
     Route::delete('/admin/potpot/list/{potpot}', [PotpotController::class, 'destroy'])->name('potpot.destroy');
+    Route::get('/admin/potpot/list/export', [PotpotController::class, 'export'])->name('potpot.export');
+    Route::post('/admin/potpot/list/import', [PotpotController::class, 'import'])->name('potpot.import');
 
     Route::get('/admin/potpot/id-cards', [IdCardController::class, 'index'])->name('potpot.id-cards');
     Route::post('/admin/potpot/id-cards', [IdCardController::class, 'store'])->name('potpot.id-cards.store');

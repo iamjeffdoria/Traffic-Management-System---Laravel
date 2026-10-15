@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Potpot;
+use App\Exports\PotpotsExport;
+use App\Imports\PotpotsImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PotpotController extends Controller
 {
@@ -73,5 +76,43 @@ class PotpotController extends Controller
         $potpot->delete();
 
         return redirect()->route('potpot.list')->with('success', 'Potpot removed successfully.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PotpotsExport, 'potpots-' . now()->format('Y-m-d') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls,csv',
+        ]);
+
+        @set_time_limit(300);
+
+        $import = new PotpotsImport;
+        Excel::import($import, $request->file('file'));
+
+        $summary = $import->getCreatedCount() . ' added, ' . $import->getUpdatedCount() . ' updated';
+        $failures = $import->getRowFailures();
+
+        if (!empty($failures)) {
+            $messages = [
+                "Imported: {$summary}. These " . count($failures) . ' row(s) were skipped - fix them in the file and import again (already-imported rows will just be updated):',
+            ];
+
+            foreach (array_slice($failures, 0, 50) as $f) {
+                $messages[] = 'Row ' . $f['row'] . ($f['body'] ? ' (Body ' . $f['body'] . ')' : '') . ': ' . implode(' ', $f['errors']);
+            }
+
+            if (count($failures) > 50) {
+                $messages[] = '...and ' . (count($failures) - 50) . ' more.';
+            }
+
+            return back()->withErrors($messages);
+        }
+
+        return redirect()->route('potpot.list')->with('success', "Potpots imported: {$summary}.");
     }
 }

@@ -18,14 +18,20 @@
             @endif
 
             @if ($errors->any())
-                <div class="mb-4 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3">
-                    {{ $errors->first() }}
+                <div class="mb-4 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3 max-h-64 overflow-y-auto">
+                    <ul class="space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
 
             <x-potpot-toolbar />
 
             <x-potpot-create-modal />
+
+            <x-potpot-import-modal />
 
             <x-potpot-edit-modal />
 
@@ -38,10 +44,10 @@
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
                         <col class="w-24">
-                        <col class="w-[12%]">
-                        <col class="w-[20%]">
+                        <col class="w-[11%]">
+                        <col class="w-[18%]">
                         <col class="w-[16%]">
-                        <col class="w-[10%]">
+                        <col class="w-[13%]">
                         <col class="w-[14%]">
                         <col class="w-[18%]">
                     </colgroup>

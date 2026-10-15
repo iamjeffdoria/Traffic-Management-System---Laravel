@@ -38,3 +38,4 @@ import './avatar-preview.js';
 import './admin-edit-modal.js';
 import './table-potpot-search.js';
 import './potpot-edit-modal.js';
+import './potpot-import-modal.js';
