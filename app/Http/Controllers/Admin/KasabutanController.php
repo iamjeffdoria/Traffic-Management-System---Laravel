@@ -30,6 +30,11 @@ class KasabutanController extends Controller
         return view('admin.kasabutan-selling', compact('sellings'));
     }
 
+    public function printSelling(KasabutanSelling $selling)
+    {
+        return view('admin.kasabutan-selling-print', compact('selling'));
+    }
+
     public function storeSelling(Request $request)
     {
         $validated = $request->validate([
