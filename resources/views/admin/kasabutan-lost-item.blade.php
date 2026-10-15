@@ -32,9 +32,24 @@
                 </script>
             @endif
 
+            @if ($errors->lostItemUpdate->any())
+                <div class="mb-4 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3 max-h-64 overflow-y-auto">
+                    <p class="font-semibold mb-1">The record could not be updated:</p>
+                    <ul class="space-y-1">
+                        @foreach ($errors->lostItemUpdate->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <x-kasabutan-lost-item-toolbar />
 
-            <x-kasabutan-lost-item-create-modal />
+            <x-kasabutan-lost-item-create-modal :potpots="$potpots" />
+
+            <x-kasabutan-lost-item-edit-modal :potpots="$potpots" />
+
+            <x-kasabutan-lost-item-delete-confirm-modal />
 
             <form id="kasabutan-lost-item-filter-form" method="GET" action="{{ route('potpot.kasabutan.lost-item') }}"></form>
 

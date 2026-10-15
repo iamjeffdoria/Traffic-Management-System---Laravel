@@ -177,3 +177,23 @@ function submitPendingKasabutanSellingDelete() {
     }
 }
 window.submitPendingKasabutanSellingDelete = submitPendingKasabutanSellingDelete;
+
+let pendingKasabutanLostItemDeleteForm = null;
+
+function confirmKasabutanLostItemDelete(formId, name) {
+    pendingKasabutanLostItemDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-kasabutan-lost-item-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-kasabutan-lost-item-confirm-modal');
+}
+window.confirmKasabutanLostItemDelete = confirmKasabutanLostItemDelete;
+
+function submitPendingKasabutanLostItemDelete() {
+    if (pendingKasabutanLostItemDeleteForm) {
+        pendingKasabutanLostItemDeleteForm.submit();
+        pendingKasabutanLostItemDeleteForm = null;
+    }
+}
+window.submitPendingKasabutanLostItemDelete = submitPendingKasabutanLostItemDelete;

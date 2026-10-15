@@ -105,7 +105,9 @@ class KasabutanController extends Controller
             return view('admin.partials.kasabutan-lost-item-ajax-results', compact('lostItems'));
         }
 
-        return view('admin.kasabutan-lost-item', compact('lostItems'));
+        $potpots = Potpot::orderBy('body_number')->get(['id', 'body_number', 'name', 'driver', 'address']);
+
+        return view('admin.kasabutan-lost-item', compact('lostItems', 'potpots'));
     }
 
     public function printLostItem(KasabutanLostItem $lostItem)
@@ -136,5 +138,38 @@ class KasabutanController extends Controller
         KasabutanLostItem::create($validated);
 
         return redirect()->route('potpot.kasabutan.lost-item')->with('success', 'Kasabutan - Lost Item record added successfully.');
+    }
+
+    public function updateLostItem(Request $request, KasabutanLostItem $lostItem)
+    {
+        // Named error bag so a failed update doesn't reopen the "Add" modal.
+        $validated = $request->validateWithBag('lostItemUpdate', [
+            'driver' => 'required|string|max:255',
+            'body_number' => 'required|string|max:255',
+            'driver_age' => 'required|integer|min:1|max:120',
+            'driver_address' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:0',
+            'passenger' => 'required|string|max:255',
+            'passenger_age' => 'required|integer|min:1|max:120',
+            'passenger_address' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+            'issued_at' => 'required|string|max:255',
+            'witness_1' => 'required|string|max:255',
+            'witness_2' => 'required|string|max:255',
+            'it_section' => 'required|string|max:255',
+            'security_officer' => 'required|string|max:255',
+        ]);
+
+        $lostItem->update($validated);
+
+        return redirect()->route('potpot.kasabutan.lost-item')->with('success', 'Kasabutan - Lost Item record updated successfully.');
+    }
+
+    public function destroyLostItem(KasabutanLostItem $lostItem)
+    {
+        $lostItem->delete();
+
+        return redirect()->route('potpot.kasabutan.lost-item')->with('success', 'Kasabutan - Lost Item record removed successfully.');
     }
 }
