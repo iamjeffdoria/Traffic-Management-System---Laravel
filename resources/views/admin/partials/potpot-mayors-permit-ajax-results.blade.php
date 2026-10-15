@@ -47,5 +47,5 @@
 </div>
 
 <div id="potpot-mayors-permit-edit-modals">
-    <x-potpot-mayors-permit-edit-modal />
+    <x-potpot-mayors-permit-edit-modal :potpots="$potpots" />
 </div>

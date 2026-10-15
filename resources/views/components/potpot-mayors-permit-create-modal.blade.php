@@ -1,3 +1,5 @@
+@props(['potpots'])
+
 <div id="create-potpot-mayors-permit-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 overflow-y-auto">
     <div class="absolute inset-0 bg-black/50"></div>
 
@@ -14,14 +16,36 @@
         <form id="potpot-mayors-permit-create-form" data-potpot-permit-form method="POST" action="{{ route('potpot.mayors-permit.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
             @csrf
 
+            <div class="sm:col-span-2 relative" data-searchable-select data-on-select="onPotpotPermitSearchSelect">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Potpot <span class="text-gray-400 font-normal">(search to auto-fill name and address)</span></label>
+                <input type="text" data-search-input autocomplete="off" placeholder="Search by body no or operator name..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <input type="hidden" data-search-hidden>
+
+                <div data-search-dropdown class="hidden absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+                    @foreach ($potpots as $potpot)
+                        <button type="button" data-option
+                            data-id="{{ $potpot->id }}"
+                            data-label="{{ $potpot->body_number }} — {{ $potpot->name }}"
+                            data-search="{{ strtolower($potpot->body_number . ' ' . $potpot->name) }}"
+                            data-name="{{ $potpot->name }}"
+                            data-address="{{ $potpot->address }}"
+                            class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 transition-colors">
+                            {{ $potpot->body_number }} — {{ $potpot->name }}
+                        </button>
+                    @endforeach
+                    <p data-no-results class="hidden px-4 py-2.5 text-sm text-gray-400">No potpots found.</p>
+                </div>
+            </div>
+
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input type="text" name="name" value="{{ old('name') }}" required
+                <input type="text" name="name" data-potpot-permit-name value="{{ old('name') }}" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                <input type="text" name="address" value="{{ old('address') }}" required
+                <input type="text" name="address" data-potpot-permit-address value="{{ old('address') }}" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
 

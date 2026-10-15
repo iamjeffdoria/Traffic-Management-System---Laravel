@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Potpot;
 use App\Models\PotpotMayorsPermit;
 use App\Imports\PotpotMayorsPermitsImport;
 use App\Exports\PotpotMayorsPermitsExport;
@@ -26,11 +27,13 @@ class PotpotMayorsPermitController extends Controller
             ->paginate(25)
             ->withQueryString();
 
+        $potpots = Potpot::orderBy('body_number')->get(['id', 'body_number', 'name', 'address']);
+
         if ($request->ajax()) {
-            return view('admin.partials.potpot-mayors-permit-ajax-results', compact('permits'));
+            return view('admin.partials.potpot-mayors-permit-ajax-results', compact('permits', 'potpots'));
         }
 
-        return view('admin.potpot-mayors-permit', compact('permits'));
+        return view('admin.potpot-mayors-permit', compact('permits', 'potpots'));
     }
 
     public function store(Request $request)

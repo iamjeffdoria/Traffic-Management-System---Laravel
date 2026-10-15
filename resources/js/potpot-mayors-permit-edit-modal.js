@@ -5,6 +5,13 @@ function openPotpotPermitEditModal(permit) {
     const urlTemplate = form.dataset.updateUrlTemplate;
     form.action = urlTemplate.replace('__ID__', permit.id);
 
+    // The picker only helps fill Name/Address, so start it empty for every record.
+    const searchRoot = form.querySelector('[data-searchable-select]');
+    if (searchRoot) {
+        searchRoot.querySelector('[data-search-hidden]').value = '';
+        searchRoot.querySelector('[data-search-input]').value = '';
+    }
+
     form.querySelector('[name="name"]').value = permit.name ?? '';
     form.querySelector('[name="address"]').value = permit.address ?? '';
     form.querySelector('[name="control_no"]').value = permit.control_no ?? '';

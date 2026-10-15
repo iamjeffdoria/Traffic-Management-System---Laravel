@@ -1,3 +1,16 @@
+// Fills Name and Address in the create form from the potpot picked in the searchable select.
+function onPotpotPermitSearchSelect(optionEl, root) {
+    const container = root.closest('[data-potpot-permit-form]');
+    if (!container) return;
+
+    const nameField = container.querySelector('[data-potpot-permit-name]');
+    const addressField = container.querySelector('[data-potpot-permit-address]');
+
+    if (nameField) nameField.value = optionEl.dataset.name || '';
+    if (addressField) addressField.value = optionEl.dataset.address || '';
+}
+window.onPotpotPermitSearchSelect = onPotpotPermitSearchSelect;
+
 // Makes "Renewed By" required (native browser message) only while status = renewed.
 function syncPotpotRenewedByRequired(container) {
     if (!container) return;
