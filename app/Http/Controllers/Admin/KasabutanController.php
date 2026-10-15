@@ -76,6 +76,13 @@ class KasabutanController extends Controller
         return redirect()->route('potpot.kasabutan.selling')->with('success', 'Kasabutan record updated successfully.');
     }
 
+    public function destroySelling(KasabutanSelling $selling)
+    {
+        $selling->delete();
+
+        return redirect()->route('potpot.kasabutan.selling')->with('success', 'Kasabutan record removed successfully.');
+    }
+
     public function lostItem()
     {
         return view('admin.kasabutan-lost-item');

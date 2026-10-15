@@ -38,6 +38,8 @@
 
             <x-kasabutan-selling-edit-modal :potpots="$potpots" />
 
+            <x-kasabutan-selling-delete-confirm-modal />
+
             @php
                 $hasActiveSellingFilters = request()->filled('owner') || request()->filled('body') || request()->filled('buyer') || request()->filled('witness');
             @endphp
@@ -49,11 +51,11 @@
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
                         <col class="w-28">
+                        <col class="w-[18%]">
+                        <col class="w-[10%]">
                         <col class="w-[20%]">
-                        <col class="w-[11%]">
-                        <col class="w-[22%]">
-                        <col class="w-[12%]">
                         <col class="w-[15%]">
+                        <col class="w-[14%]">
                         <col class="w-[12%]">
                     </colgroup>
                     <thead class="text-left text-gray-900 bg-gray-50 sticky top-0 z-30">
@@ -130,8 +132,9 @@
                 @forelse ($sellings as $selling)
                     <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
                         <p class="text-gray-900 font-medium truncate">{{ $selling->owner }}</p>
-                        <p class="text-gray-500 text-sm truncate">{{ $selling->barangay }}, {{ $selling->municipality }}</p>
-                        <p class="text-gray-700 text-sm mt-1.5">Sold to <span class="font-medium">{{ $selling->buyer }}</span> — {{ $selling->buyer_address }}</p>
+                        <span class="inline-block max-w-full truncate rounded-full bg-purple-600 text-white text-xs font-semibold px-2.5 py-1 mt-1" title="{{ $selling->barangay }}, {{ $selling->municipality }}">{{ $selling->barangay }}, {{ $selling->municipality }}</span>
+                        <p class="text-gray-700 text-sm mt-1.5">Sold to <span class="font-medium">{{ $selling->buyer }}</span></p>
+                        <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-semibold px-2.5 py-1 mt-1" title="{{ $selling->buyer_address }}">{{ $selling->buyer_address }}</span>
                         <div class="flex flex-wrap gap-1 mt-2">
                             <span class="inline-block rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1">{{ $selling->body_number }}</span>
                             <span class="inline-block rounded-full bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1">₱{{ number_format($selling->amount, 2) }}</span>
@@ -149,7 +152,11 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v6H6v-6z" />
                                 </svg>
                             </button>
-                            <button type="button" title="Delete" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors">
+                            <form id="delete-kasabutan-selling-form-mobile-{{ $selling->id }}" method="POST" action="{{ route('potpot.kasabutan.selling.destroy', $selling) }}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                            <button type="button" title="Delete" onclick="confirmKasabutanSellingDelete('delete-kasabutan-selling-form-mobile-{{ $selling->id }}', {{ Illuminate\Support\Js::from('Kasabutan - ' . $selling->owner . ' (' . $selling->body_number . ')') }})" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>

@@ -157,3 +157,23 @@ function submitPendingPotpotDelete() {
     }
 }
 window.submitPendingPotpotDelete = submitPendingPotpotDelete;
+
+let pendingKasabutanSellingDeleteForm = null;
+
+function confirmKasabutanSellingDelete(formId, name) {
+    pendingKasabutanSellingDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-kasabutan-selling-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-kasabutan-selling-confirm-modal');
+}
+window.confirmKasabutanSellingDelete = confirmKasabutanSellingDelete;
+
+function submitPendingKasabutanSellingDelete() {
+    if (pendingKasabutanSellingDeleteForm) {
+        pendingKasabutanSellingDeleteForm.submit();
+        pendingKasabutanSellingDeleteForm = null;
+    }
+}
+window.submitPendingKasabutanSellingDelete = submitPendingKasabutanSellingDelete;

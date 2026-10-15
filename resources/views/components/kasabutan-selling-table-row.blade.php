@@ -22,7 +22,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v6H6v-6z" />
                 </svg>
             </button>
+            <form id="delete-kasabutan-selling-form-{{ $selling->id }}" method="POST" action="{{ route('potpot.kasabutan.selling.destroy', $selling) }}">
+                @csrf
+                @method('DELETE')
+            </form>
             <button type="button" title="Delete"
+                onclick="confirmKasabutanSellingDelete('delete-kasabutan-selling-form-{{ $selling->id }}', {{ Illuminate\Support\Js::from('Kasabutan - ' . $selling->owner . ' (' . $selling->body_number . ')') }})"
                 class="p-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -32,7 +37,9 @@
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 font-medium break-words">{{ $selling->owner }}</p>
-        <p class="text-gray-500 text-xs break-words mt-1">{{ $selling->barangay }}, {{ $selling->municipality }}</p>
+        <span class="inline-block max-w-full truncate rounded-full bg-purple-600 text-white text-xs font-semibold px-2.5 py-1 mt-1.5" title="{{ $selling->barangay }}, {{ $selling->municipality }}">
+            {{ $selling->barangay }}, {{ $selling->municipality }}
+        </span>
     </td>
     <td class="px-6 py-4 align-top">
         <span class="inline-block max-w-full truncate rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="{{ $selling->body_number }}">
@@ -41,10 +48,12 @@
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 font-medium break-words">{{ $selling->buyer }}</p>
-        <p class="text-gray-500 text-xs break-words mt-1">{{ $selling->buyer_address }}</p>
+        <span class="inline-block max-w-full truncate rounded-full bg-indigo-600 text-white text-xs font-semibold px-2.5 py-1 mt-1.5" title="{{ $selling->buyer_address }}">
+            {{ $selling->buyer_address }}
+        </span>
     </td>
-    <td class="px-6 py-4 align-top">
-        <span class="inline-block rounded-full bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">
+    <td class="px-4 py-4 align-top">
+        <span class="inline-block max-w-full truncate rounded-full bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap" title="₱{{ number_format($selling->amount, 2) }}">
             ₱{{ number_format($selling->amount, 2) }}
         </span>
     </td>
