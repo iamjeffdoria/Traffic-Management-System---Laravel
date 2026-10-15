@@ -108,6 +108,11 @@ class KasabutanController extends Controller
         return view('admin.kasabutan-lost-item', compact('lostItems'));
     }
 
+    public function printLostItem(KasabutanLostItem $lostItem)
+    {
+        return view('admin.kasabutan-lost-item-print', compact('lostItem'));
+    }
+
     public function storeLostItem(Request $request)
     {
         $validated = $request->validate([

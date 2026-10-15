@@ -99,6 +99,7 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::get('/admin/potpot/kasabutan/selling/{selling}/print', [KasabutanController::class, 'printSelling'])->name('potpot.kasabutan.selling.print');
     Route::get('/admin/potpot/kasabutan/lost-item', [KasabutanController::class, 'lostItem'])->name('potpot.kasabutan.lost-item');
     Route::post('/admin/potpot/kasabutan/lost-item', [KasabutanController::class, 'storeLostItem'])->name('potpot.kasabutan.lost-item.store');
+    Route::get('/admin/potpot/kasabutan/lost-item/{lostItem}/print', [KasabutanController::class, 'printLostItem'])->name('potpot.kasabutan.lost-item.print');
 });
 
 // Tricycle admin + superadmin only

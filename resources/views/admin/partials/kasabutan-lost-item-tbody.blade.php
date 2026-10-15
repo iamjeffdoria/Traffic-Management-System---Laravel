@@ -7,7 +7,7 @@
         <x-kasabutan-lost-item-table-row :item="$item" />
     @empty
         <tr>
-            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActiveLostItemFilters)
                     No Kasabutan - Lost Item records match your search.
                     <a href="{{ route('potpot.kasabutan.lost-item') }}" data-ajax-kasabutan-lost-item-link class="text-red-600 font-medium ml-1">Clear filters</a>

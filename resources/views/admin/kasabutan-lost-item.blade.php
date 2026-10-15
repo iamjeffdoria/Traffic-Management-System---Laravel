@@ -42,16 +42,18 @@
             <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto isolate" style="max-height: 600px; overflow-y: auto;">
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
-                        <col class="w-[20%]">
+                        <col class="w-28">
+                        <col class="w-[17%]">
                         <col class="w-[9%]">
-                        <col class="w-[20%]">
+                        <col class="w-[17%]">
                         <col class="w-[10%]">
                         <col class="w-[12%]">
                         <col class="w-[14%]">
-                        <col class="w-[15%]">
+                        <col class="w-[13%]">
                     </colgroup>
                     <thead class="text-left text-gray-900 bg-gray-50 sticky top-0 z-30">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
+                            <th class="px-6 py-3 font-bold">Actions</th>
                             <th class="px-6 py-3 font-bold">Driver / Address</th>
                             <th class="px-6 py-3 font-bold">Body No.</th>
                             <th class="px-6 py-3 font-bold">Passenger / Address</th>
@@ -61,6 +63,7 @@
                             <th class="px-6 py-3 font-bold">Issued At / Signatories</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
+                            <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
                                 <input type="text" name="driver" form="kasabutan-lost-item-filter-form" data-filter-scope="desktop" value="{{ request('driver') }}" oninput="debouncedFetchKasabutanLostItemFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
