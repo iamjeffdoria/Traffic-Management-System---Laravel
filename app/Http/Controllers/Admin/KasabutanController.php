@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\KasabutanSelling;
+use App\Models\Potpot;
 use Illuminate\Http\Request;
 
 class KasabutanController extends Controller
@@ -27,7 +28,9 @@ class KasabutanController extends Controller
             return view('admin.partials.kasabutan-selling-ajax-results', compact('sellings'));
         }
 
-        return view('admin.kasabutan-selling', compact('sellings'));
+        $potpots = Potpot::orderBy('body_number')->get(['id', 'body_number', 'name', 'address']);
+
+        return view('admin.kasabutan-selling', compact('sellings', 'potpots'));
     }
 
     public function printSelling(KasabutanSelling $selling)
@@ -52,6 +55,25 @@ class KasabutanController extends Controller
         KasabutanSelling::create($validated);
 
         return redirect()->route('potpot.kasabutan.selling')->with('success', 'Kasabutan record added successfully.');
+    }
+
+    public function updateSelling(Request $request, KasabutanSelling $selling)
+    {
+        $validated = $request->validate([
+            'owner' => 'required|string|max:255',
+            'barangay' => 'required|string|max:255',
+            'municipality' => 'required|string|max:255',
+            'body_number' => 'required|string|max:255',
+            'buyer' => 'required|string|max:255',
+            'buyer_address' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:0',
+            'witness' => 'required|string|max:255',
+            'date' => 'required|date',
+        ]);
+
+        $selling->update($validated);
+
+        return redirect()->route('potpot.kasabutan.selling')->with('success', 'Kasabutan record updated successfully.');
     }
 
     public function lostItem()

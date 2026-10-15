@@ -1,10 +1,16 @@
 @props(['selling'])
 
+@php
+    $sellingEditData = array_merge(
+        $selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness']),
+        ['date' => $selling->date->format('Y-m-d')]
+    );
+@endphp
+
 <tr class="divide-x divide-gray-300 border-b border-gray-200 hover:bg-gray-50/60 transition-colors">
     <td class="px-4 py-4 align-top">
         <div class="flex items-center gap-1">
-            {{-- Placeholders: no onclick yet --}}
-            <button type="button" title="Edit"
+            <button type="button" title="Edit" onclick="openKasabutanSellingEditModal({{ Illuminate\Support\Js::from($sellingEditData) }})"
                 class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

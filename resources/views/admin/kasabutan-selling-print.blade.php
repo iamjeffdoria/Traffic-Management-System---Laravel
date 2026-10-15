@@ -20,8 +20,8 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 5in;
-            height: 5in;
+            width: 7.5in;
+            height: 7.5in;
             transform: translate(-50%, -50%);
             object-fit: contain;
             opacity: 0.1;
@@ -42,9 +42,9 @@
 
         .sig-table { width: 100%; border-collapse: collapse; margin-top: 56px; page-break-inside: avoid; }
         .sig-table td { width: 50%; vertical-align: top; text-align: center; padding: 0 24px; }
-        .sig-space { height: 36px; border-bottom: 1px solid #000; }
-        .sig-name { font-weight: bold; text-transform: uppercase; margin: 4px 0 0; line-height: 1.4; }
-        .sig-label { margin: 0; font-size: 13px; }
+        .sig-line { border-bottom: 1px solid #000; min-height: 36px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2px; }
+        .sig-name { font-weight: bold; text-transform: uppercase; margin: 0; line-height: 1.4; }
+        .sig-label { margin: 4px 0 0; font-size: 13px; }
 
         .witness-block { width: 50%; margin: 48px auto 0; text-align: center; page-break-inside: avoid; }
         .date-line { margin-top: 36px; }
@@ -76,21 +76,18 @@
     <table class="sig-table">
         <tr>
             <td>
-                <div class="sig-space"></div>
-                <p class="sig-name">{{ $selling->owner }}</p>
+                <div class="sig-line"><span class="sig-name">{{ $selling->owner }}</span></div>
                 <p class="sig-label">[ Nagbaligya ]</p>
             </td>
             <td>
-                <div class="sig-space"></div>
-                <p class="sig-name">{{ $selling->buyer }}</p>
+                <div class="sig-line"><span class="sig-name">{{ $selling->buyer }}</span></div>
                 <p class="sig-label">[ Nagpalit ]</p>
             </td>
         </tr>
     </table>
 
     <div class="witness-block">
-        <div class="sig-space"></div>
-        <p class="sig-name">{{ $selling->witness }}</p>
+        <div class="sig-line"><span class="sig-name">{{ $selling->witness }}</span></div>
         <p class="sig-label">[ Testigos ]</p>
     </div>
 

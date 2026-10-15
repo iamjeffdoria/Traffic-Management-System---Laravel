@@ -1,3 +1,5 @@
+@props(['potpots'])
+
 <div id="create-kasabutan-selling-modal" class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 overflow-y-auto">
     <div class="absolute inset-0 bg-black/50"></div>
 
@@ -11,8 +13,31 @@
             </button>
         </div>
 
-        <form id="kasabutan-selling-create-form" method="POST" action="{{ route('potpot.kasabutan.selling.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
+        <form id="kasabutan-selling-create-form" data-kasabutan-form method="POST" action="{{ route('potpot.kasabutan.selling.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
             @csrf
+
+            <div class="sm:col-span-2 relative" data-searchable-select data-on-select="onKasabutanSearchSelect">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Potpot <span class="text-gray-400 font-normal">(search to auto-fill owner, barangay and body number)</span></label>
+                <input type="text" data-search-input autocomplete="off" placeholder="Search by body no or operator name..."
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                <input type="hidden" data-search-hidden>
+
+                <div data-search-dropdown class="hidden absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+                    @foreach ($potpots as $potpot)
+                        <button type="button" data-option
+                            data-id="{{ $potpot->id }}"
+                            data-label="{{ $potpot->body_number }} — {{ $potpot->name }}"
+                            data-search="{{ strtolower($potpot->body_number . ' ' . $potpot->name) }}"
+                            data-body="{{ $potpot->body_number }}"
+                            data-name="{{ $potpot->name }}"
+                            data-address="{{ $potpot->address }}"
+                            class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 transition-colors">
+                            {{ $potpot->body_number }} — {{ $potpot->name }}
+                        </button>
+                    @endforeach
+                    <p data-no-results class="hidden px-4 py-2.5 text-sm text-gray-400">No potpots found.</p>
+                </div>
+            </div>
 
             <div class="sm:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Owner</label>

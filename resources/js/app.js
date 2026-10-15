@@ -40,3 +40,5 @@ import './table-potpot-search.js';
 import './potpot-edit-modal.js';
 import './potpot-import-modal.js';
 import './table-kasabutan-selling-search.js';
+import './kasabutan-selling-sync.js';
+import './kasabutan-selling-edit-modal.js';
