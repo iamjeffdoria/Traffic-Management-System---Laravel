@@ -8,9 +8,24 @@ use Illuminate\Http\Request;
 
 class KasabutanController extends Controller
 {
-    public function selling()
+    public function selling(Request $request)
     {
-        $sellings = KasabutanSelling::latest('updated_at')->paginate(25);
+        $sellings = KasabutanSelling::query()
+            ->when($request->filled('owner'), fn ($q) =>
+                $q->where('owner', 'like', '%' . $request->input('owner') . '%'))
+            ->when($request->filled('body'), fn ($q) =>
+                $q->where('body_number', 'like', '%' . $request->input('body') . '%'))
+            ->when($request->filled('buyer'), fn ($q) =>
+                $q->where('buyer', 'like', '%' . $request->input('buyer') . '%'))
+            ->when($request->filled('witness'), fn ($q) =>
+                $q->where('witness', 'like', '%' . $request->input('witness') . '%'))
+            ->latest('updated_at')
+            ->paginate(25)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.partials.kasabutan-selling-ajax-results', compact('sellings'));
+        }
 
         return view('admin.kasabutan-selling', compact('sellings'));
     }
