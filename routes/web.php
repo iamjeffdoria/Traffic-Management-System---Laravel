@@ -93,6 +93,7 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     Route::delete('/admin/potpot/document-submissions/{submission}', [AdminPotpotDocumentSubmissionController::class, 'destroy'])->name('potpot.document-submissions.destroy');
 
     Route::get('/admin/potpot/kasabutan/selling', [KasabutanController::class, 'selling'])->name('potpot.kasabutan.selling');
+    Route::post('/admin/potpot/kasabutan/selling', [KasabutanController::class, 'storeSelling'])->name('potpot.kasabutan.selling.store');
     Route::get('/admin/potpot/kasabutan/lost-item', [KasabutanController::class, 'lostItem'])->name('potpot.kasabutan.lost-item');
 });
 
