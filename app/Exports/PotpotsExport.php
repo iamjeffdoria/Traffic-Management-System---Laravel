@@ -19,7 +19,7 @@ class PotpotsExport implements FromQuery, WithHeadings, WithMapping, WithColumnF
     public function headings(): array
     {
         return [
-            'Body Number', 'Operator', 'Address', 'Contact Number', 'OR Number',
+            'Body Number', 'Operator', 'Driver', 'Address', 'Contact Number', 'OR Number',
             'Status', 'Date Registered', 'Date Expired', 'Remarks',
         ];
     }
@@ -29,6 +29,7 @@ class PotpotsExport implements FromQuery, WithHeadings, WithMapping, WithColumnF
         return [
             $potpot->body_number,
             $potpot->name,
+            $potpot->driver,
             $potpot->address,
             $potpot->contact_number,
             $potpot->or_number,
@@ -44,8 +45,8 @@ class PotpotsExport implements FromQuery, WithHeadings, WithMapping, WithColumnF
         // Text, so leading zeros (001, 0912...) survive.
         return [
             'A' => NumberFormat::FORMAT_TEXT,
-            'D' => NumberFormat::FORMAT_TEXT,
             'E' => NumberFormat::FORMAT_TEXT,
+            'F' => NumberFormat::FORMAT_TEXT,
         ];
     }
 }

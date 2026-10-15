@@ -14,6 +14,7 @@ class Potpot extends Model
     protected $fillable = [
         'body_number',
         'name',
+        'driver',
         'address',
         'contact_number',
         'or_number',

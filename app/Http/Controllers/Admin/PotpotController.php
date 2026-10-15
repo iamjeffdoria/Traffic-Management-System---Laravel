@@ -38,6 +38,7 @@ class PotpotController extends Controller
         $validated = $request->validate([
             'body_number' => 'required|string|max:255|unique:potpots,body_number',
             'name' => 'required|string|max:255',
+            'driver' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'contact_number' => 'nullable|string|max:50',
             'or_number' => 'nullable|string|max:255',

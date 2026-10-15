@@ -11,6 +11,7 @@
         'id' => $potpot->id,
         'body_number' => $potpot->body_number,
         'name' => $potpot->name,
+        'driver' => $potpot->driver,
         'address' => $potpot->address,
         'contact_number' => $potpot->contact_number,
         'or_number' => $potpot->or_number,
@@ -44,6 +45,14 @@
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 font-semibold break-words">{{ $potpot->body_number }}</p>
+        @if ($potpot->driver)
+            <span class="inline-flex items-center max-w-full gap-1 rounded-full bg-cyan-600 text-white text-xs font-semibold px-2.5 py-1 mt-1.5" title="Driver: {{ $potpot->driver }}">
+                <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span class="truncate">{{ $potpot->driver }}</span>
+            </span>
+        @endif
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 font-medium break-words">{{ $potpot->name }}</p>

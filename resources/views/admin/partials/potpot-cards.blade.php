@@ -10,6 +10,7 @@
                 'id' => $potpot->id,
                 'body_number' => $potpot->body_number,
                 'name' => $potpot->name,
+                'driver' => $potpot->driver,
                 'address' => $potpot->address,
                 'contact_number' => $potpot->contact_number,
                 'or_number' => $potpot->or_number,
@@ -48,6 +49,11 @@
                 <span class="inline-block rounded-full {{ $potpotStatusColors[$potpot->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1">
                     {{ ucfirst($potpot->status) }}
                 </span>
+                @if ($potpot->driver)
+                    <span class="inline-block max-w-full truncate rounded-full bg-cyan-600 text-white text-xs font-semibold px-2.5 py-1" title="Driver: {{ $potpot->driver }}">
+                        Driver: {{ $potpot->driver }}
+                    </span>
+                @endif
                 @if ($potpot->or_number)
                     <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-mono px-2.5 py-1">{{ $potpot->or_number }}</span>
                 @endif

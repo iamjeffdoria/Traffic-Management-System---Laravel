@@ -73,6 +73,7 @@ class PotpotsImport implements ToCollection, WithHeadingRow, WithMultipleSheets
             $data = [
                 'body_number' => $this->toStringOrNull($this->pick($row, ['body_number', 'body_no', 'body'])),
                 'name' => $this->toStringOrNull($this->pick($row, ['operator', 'name'])),
+                'driver' => $this->toStringOrNull($this->pick($row, ['driver', 'driver_name'])),
                 'address' => $this->toStringOrNull($this->pick($row, ['address'])),
                 'contact_number' => $this->normalizeContact($this->pick($row, ['contact_number', 'contact_no', 'contact'])),
                 'or_number' => $this->toStringOrNull($this->pick($row, ['or_number', 'or_no', 'or'])),
@@ -85,6 +86,7 @@ class PotpotsImport implements ToCollection, WithHeadingRow, WithMultipleSheets
             $validator = Validator::make($data, [
                 'body_number' => 'required|string|max:255',
                 'name' => 'required|string|max:255',
+                'driver' => 'nullable|string|max:255',
                 'address' => 'nullable|string|max:255',
                 'contact_number' => 'nullable|string|max:50',
                 'or_number' => 'nullable|string|max:255',
@@ -114,9 +116,14 @@ class PotpotsImport implements ToCollection, WithHeadingRow, WithMultipleSheets
             $seen[$data['body_number']] = $rowNumber;
 
             try {
+                $hasDriverColumn = array_key_exists('driver', $row) || array_key_exists('driver_name', $row);
+
                 $potpot = Potpot::updateOrCreate(
                     ['body_number' => $data['body_number']],
-                    collect($data)->except('body_number')->all()
+                    collect($data)
+                        ->except('body_number')
+                        ->when(!$hasDriverColumn, fn ($c) => $c->except('driver'))
+                        ->all()
                 );
 
                 $potpot->wasRecentlyCreated ? $this->created++ : $this->updated++;
