@@ -5,6 +5,7 @@
         'superadmin' => 'bg-red-600',
         'potpot_admin' => 'bg-blue-600',
         'tricycle_admin' => 'bg-teal-600',
+        'tanod_admin' => 'bg-amber-600',
     ];
 
     $adminEditData = [

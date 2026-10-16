@@ -37,7 +37,7 @@ class AdminUserController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
             'photo' => ['nullable', 'image', 'max:2048'],
-            'role' => ['required', 'in:superadmin,potpot_admin,tricycle_admin'],
+            'role' => ['required', 'in:superadmin,potpot_admin,tricycle_admin,tanod_admin'],
         ]);
 
         $data = [

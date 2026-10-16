@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->role === 'superadmin' || $this->role === 'tricycle_admin';
     }
+
+    public function isTanodAdmin(): bool
+    {
+        return $this->role === 'superadmin' || $this->role === 'tanod_admin';
+    }
 }

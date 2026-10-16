@@ -77,6 +77,7 @@
                         <option value="superadmin">Super Admin</option>
                         <option value="potpot_admin">Potpot Admin</option>
                         <option value="tricycle_admin">Tricycle Admin</option>
+                        <option value="tanod_admin">Tanod Admin</option>
                     </select>
                 </div>
             </div>

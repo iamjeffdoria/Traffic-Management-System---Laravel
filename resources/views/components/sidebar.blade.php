@@ -67,6 +67,7 @@
             @php
                 $potpotOpen = in_array($active, ['potpot-list', 'potpot-id-cards', 'potpot-mayors-permit', 'potpot-kasabutan-selling', 'potpot-kasabutan-lost-item', 'potpot-document-submissions']);
                 $tricycleOpen = in_array($active, ['tricycle-list', 'tricycle-mayors-permit', 'tricycle-mtop', 'tricycle-franchise', 'tricycle-document-submissions']);
+                $tanodOpen = in_array($active, ['tanod-id', 'tanod-list']);
             @endphp
 
             {{-- Potpot group: collapsible, since superadmin sees every module at once --}}
@@ -219,6 +220,43 @@
                     </a>
                 </div>
             </div>
+            {{-- Tanod group --}}
+            <div>
+                <button type="button" onclick="toggleSidebarGroup('tanod-submenu')" title="Tanod"
+                    class="w-full flex items-center justify-between gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-colors text-gray-400 hover:bg-white/5 hover:text-white lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0">
+                    <span class="flex items-center gap-2.5 min-w-0">
+                        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                        </svg>
+                        <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tanod</span>
+                    </span>
+                    <svg id="tanod-submenu-chevron" class="w-4 h-4 shrink-0 transition-transform {{ $tanodOpen ? 'rotate-180' : '' }} lg:group-has-[#sidebar-collapse:checked]/collapse:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <div id="tanod-submenu" class="{{ $tanodOpen ? 'flex' : 'hidden' }} flex-col gap-1 ml-5 mt-1 mb-2 p-1.5 rounded-lg bg-gray-800 border-l-2 border-red-500 lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">
+                    {{-- TODO: add href="{{ route('tanod.list') }}" once the route exists --}}
+                    <a title="Tanod List"
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer
+                    {{ $active === 'tanod-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                        </svg>
+                        <span class="truncate">Tanod List</span>
+                    </a>
+
+                    {{-- TODO: add href="{{ route('tanod.id') }}" once the route exists --}}
+                    <a title="Tanod ID"
+                    class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer
+                    {{ $active === 'tanod-id' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                        </svg>
+                        <span class="truncate">Tanod ID</span>
+                    </a>
+                </div>
+            </div>
         @else
             @if (auth()->user()->isPotpotAdmin())
                 <a href="{{ route('potpot.list') }}" title="Potpot List"
@@ -325,6 +363,17 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                     </svg>
                     <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tricycle Documents</span>
+                </a>
+            @endif
+
+            @if (auth()->user()->isTanodAdmin())
+                <a href="{{ route('tanod.list') }}" title="Tanod List"
+                class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
+                {{ $active === 'tanod-list' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                    <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tanod List</span>
                 </a>
             @endif
         @endif
