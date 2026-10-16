@@ -15,7 +15,7 @@
             @csrf
 
             <p class="text-sm text-gray-500 mb-4">
-                Upload an .xlsx, .xls, or .csv file with columns: Body Number, Operator, Driver (optional), Address, Contact Number, OR Number, Status, Date Registered, Date Expired, Remarks. Only Body Number and Operator are required. Existing body numbers are updated, not duplicated.
+                Upload an .xlsx, .xls, or .csv file with columns: Body Number, Operator, Driver (optional), Address, Owner Number, Driver Number (optional), OR Number, Status, Date Registered, Date Expired, Remarks. Only Body Number and Operator are required. Existing body numbers are updated, not duplicated.
             </p>
 
             <label id="potpot-import-dropzone" for="potpot-import-input"

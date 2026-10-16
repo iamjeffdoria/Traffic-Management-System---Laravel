@@ -56,7 +56,7 @@
                             <th class="px-6 py-3 font-bold w-24">Actions</th>
                             <th class="px-6 py-3 font-bold">Body No.</th>
                             <th class="px-6 py-3 font-bold">Operator</th>
-                            <th class="px-6 py-3 font-bold">Address / Contact</th>
+                            <th class="px-6 py-3 font-bold">Address / Numbers</th>
                             <th class="px-6 py-3 font-bold">Status</th>
                             <th class="px-6 py-3 font-bold">Registration / Expiry</th>
                             <th class="px-6 py-3 font-bold">OR No. / Remarks</th>

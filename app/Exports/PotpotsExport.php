@@ -19,7 +19,7 @@ class PotpotsExport implements FromQuery, WithHeadings, WithMapping, WithColumnF
     public function headings(): array
     {
         return [
-            'Body Number', 'Operator', 'Driver', 'Address', 'Contact Number', 'OR Number',
+            'Body Number', 'Operator', 'Driver', 'Address', 'Owner Number', 'Driver Number', 'OR Number',
             'Status', 'Date Registered', 'Date Expired', 'Remarks',
         ];
     }
@@ -32,6 +32,7 @@ class PotpotsExport implements FromQuery, WithHeadings, WithMapping, WithColumnF
             $potpot->driver,
             $potpot->address,
             $potpot->contact_number,
+            $potpot->driver_number,
             $potpot->or_number,
             $potpot->status,
             optional($potpot->date_registered)->format('Y-m-d'),
@@ -47,6 +48,7 @@ class PotpotsExport implements FromQuery, WithHeadings, WithMapping, WithColumnF
             'A' => NumberFormat::FORMAT_TEXT,
             'E' => NumberFormat::FORMAT_TEXT,
             'F' => NumberFormat::FORMAT_TEXT,
+            'G' => NumberFormat::FORMAT_TEXT,
         ];
     }
 }

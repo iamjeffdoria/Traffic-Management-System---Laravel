@@ -9,6 +9,7 @@ function openPotpotEditModal(potpot) {
     form.querySelector('[name="driver"]').value = potpot.driver ?? '';
     form.querySelector('[name="address"]').value = potpot.address ?? '';
     form.querySelector('[name="contact_number"]').value = potpot.contact_number ?? '';
+    form.querySelector('[name="driver_number"]').value = potpot.driver_number ?? '';
     form.querySelector('[name="or_number"]').value = potpot.or_number ?? '';
     form.querySelector('[name="status"]').value = potpot.status ?? 'active';
     form.querySelector('[name="date_registered"]').value = potpot.date_registered ?? '';

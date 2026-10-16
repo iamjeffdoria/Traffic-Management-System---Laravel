@@ -39,6 +39,7 @@ class PotpotController extends Controller
             'body_number' => 'required|string|max:255|unique:potpots,body_number',
             'name' => 'required|string|max:255',
             'driver' => 'nullable|string|max:255',
+            'driver_number' => 'nullable|string|max:50',
             'address' => 'nullable|string|max:255',
             'contact_number' => 'nullable|string|max:50',
             'or_number' => 'nullable|string|max:255',

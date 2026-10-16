@@ -15,6 +15,7 @@ class Potpot extends Model
         'body_number',
         'name',
         'driver',
+        'driver_number',
         'address',
         'contact_number',
         'or_number',

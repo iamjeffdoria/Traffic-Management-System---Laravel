@@ -12,6 +12,7 @@
         'body_number' => $potpot->body_number,
         'name' => $potpot->name,
         'driver' => $potpot->driver,
+        'driver_number' => $potpot->driver_number,
         'address' => $potpot->address,
         'contact_number' => $potpot->contact_number,
         'or_number' => $potpot->or_number,
@@ -59,11 +60,18 @@
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-800 text-xs font-semibold break-words">{{ $potpot->address ?: '—' }}</p>
-        @if ($potpot->contact_number)
-            <span class="inline-block max-w-full truncate rounded-full bg-emerald-600 text-white text-xs font-mono px-2.5 py-1 mt-1.5" title="{{ $potpot->contact_number }}">
-                {{ $potpot->contact_number }}
-            </span>
-        @endif
+        <div class="flex flex-wrap gap-1 mt-1.5">
+            @if ($potpot->contact_number)
+                <span class="inline-block max-w-full truncate rounded-full bg-emerald-600 text-white text-xs font-mono px-2.5 py-1" title="Owner: {{ $potpot->contact_number }}">
+                    Owner: {{ $potpot->contact_number }}
+                </span>
+            @endif
+            @if ($potpot->driver_number)
+                <span class="inline-block max-w-full truncate rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1" title="Driver: {{ $potpot->driver_number }}">
+                    Driver: {{ $potpot->driver_number }}
+                </span>
+            @endif
+        </div>
     </td>
     <td class="px-3 py-4 align-top">
         <span class="inline-block rounded-full {{ $statusColors[$potpot->status] ?? 'bg-gray-500' }} text-white text-xs font-semibold px-3 py-1 whitespace-nowrap">

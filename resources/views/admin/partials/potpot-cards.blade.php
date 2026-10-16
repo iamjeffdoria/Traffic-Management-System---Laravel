@@ -11,6 +11,7 @@
                 'body_number' => $potpot->body_number,
                 'name' => $potpot->name,
                 'driver' => $potpot->driver,
+                'driver_number' => $potpot->driver_number,
                 'address' => $potpot->address,
                 'contact_number' => $potpot->contact_number,
                 'or_number' => $potpot->or_number,
@@ -58,7 +59,10 @@
                     <span class="inline-block rounded-full bg-slate-600 text-white text-xs font-mono px-2.5 py-1">{{ $potpot->or_number }}</span>
                 @endif
                 @if ($potpot->contact_number)
-                    <span class="inline-block rounded-full bg-emerald-600 text-white text-xs font-mono px-2.5 py-1">{{ $potpot->contact_number }}</span>
+                    <span class="inline-block rounded-full bg-emerald-600 text-white text-xs font-mono px-2.5 py-1">Owner: {{ $potpot->contact_number }}</span>
+                @endif
+                @if ($potpot->driver_number)
+                    <span class="inline-block rounded-full bg-cyan-600 text-white text-xs font-mono px-2.5 py-1">Driver: {{ $potpot->driver_number }}</span>
                 @endif
             </div>
             <div class="flex items-center gap-1 mt-1.5">
