@@ -45,3 +45,4 @@ import './kasabutan-selling-edit-modal.js';
 import './table-kasabutan-lost-item-search.js';
 import './kasabutan-lost-item-edit-modal.js';
 import './kasabutan-lost-item-sync.js';
+import './table-tanod-search.js';

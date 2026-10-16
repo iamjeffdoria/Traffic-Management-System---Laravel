@@ -63,7 +63,7 @@ class AdminUserController extends Controller
             'email' => ['required', 'email', 'unique:users,email,' . $user->id],
             'password' => ['nullable', 'string', 'min:8'],
             'photo' => ['nullable', 'image', 'max:2048'],
-            'role' => ['required', 'in:superadmin,potpot_admin,tricycle_admin'],
+            'role' => ['required', 'in:superadmin,potpot_admin,tricycle_admin,tanod_admin'],
         ]);
 
         $user->name = $validated['name'];

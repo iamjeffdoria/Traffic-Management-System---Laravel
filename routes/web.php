@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\PotpotController;
 use App\Http\Controllers\Admin\KasabutanController;
+use App\Http\Controllers\Admin\TanodController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
 use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpotDocumentSubmissionController;
@@ -147,6 +148,12 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     Route::delete('/admin/tricycles/document-submissions/{submission}', [DocumentSubmissionController::class, 'destroy'])->name('tricycle.document-submissions.destroy');
 });
 
+
+// Tanod admin + superadmin only
+Route::middleware(['auth', 'role:tanod_admin'])->group(function () {
+    Route::get('/admin/tanods', [TanodController::class, 'index'])->name('tanod.list');
+    Route::post('/admin/tanods', [TanodController::class, 'store'])->name('tanod.store');
+});
 
 // Superadmin only
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
