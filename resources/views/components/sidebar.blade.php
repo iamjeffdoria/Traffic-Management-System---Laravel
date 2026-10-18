@@ -245,8 +245,8 @@
                         <span class="truncate">Tanod List</span>
                     </a>
 
-                    {{-- TODO: add href="{{ route('tanod.id') }}" once the route exists --}}
-                    <a title="Tanod ID"
+                    {{-- Tanod ID --}}
+                    <a href="{{ route('tanod.id') }}" title="Tanod ID"
                     class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer
                     {{ $active === 'tanod-id' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -375,8 +375,8 @@
                     <span class="truncate lg:group-has-[#sidebar-collapse:checked]/collapse:hidden">Tanod List</span>
                 </a>
 
-                {{-- TODO: add href="{{ route('tanod.id') }}" once the route exists --}}
-                <a title="Tanod ID"
+                {{-- Tanod ID --}}
+                <a href="{{ route('tanod.id') }}" title="Tanod ID"
                 class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer lg:group-has-[#sidebar-collapse:checked]/collapse:justify-center lg:group-has-[#sidebar-collapse:checked]/collapse:px-0
                 {{ $active === 'tanod-id' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

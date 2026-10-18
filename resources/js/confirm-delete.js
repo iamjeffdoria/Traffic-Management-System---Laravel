@@ -197,3 +197,23 @@ function submitPendingKasabutanLostItemDelete() {
     }
 }
 window.submitPendingKasabutanLostItemDelete = submitPendingKasabutanLostItemDelete;
+
+let pendingTanodDeleteForm = null;
+
+function confirmTanodDelete(formId, name) {
+    pendingTanodDeleteForm = document.getElementById(formId);
+
+    const nameEl = document.getElementById('delete-tanod-confirm-name');
+    if (nameEl) nameEl.textContent = name;
+
+    openModal('delete-tanod-confirm-modal');
+}
+window.confirmTanodDelete = confirmTanodDelete;
+
+function submitPendingTanodDelete() {
+    if (pendingTanodDeleteForm) {
+        pendingTanodDeleteForm.submit();
+        pendingTanodDeleteForm = null;
+    }
+}
+window.submitPendingTanodDelete = submitPendingTanodDelete;

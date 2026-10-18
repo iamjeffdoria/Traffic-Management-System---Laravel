@@ -28,6 +28,11 @@ class TanodController extends Controller
         return view('admin.tanods', compact('tanods'));
     }
 
+    public function idCards()
+    {
+        return view('admin.tanod-id');
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -52,5 +57,39 @@ class TanodController extends Controller
         Tanod::create($validated);
 
         return redirect()->route('tanod.list')->with('success', 'Tanod added successfully.');
+    }
+
+    public function update(Request $request, Tanod $tanod)
+    {
+        // Named error bag so a failed update doesn't reopen the "Add" modal.
+        $validated = $request->validateWithBag('tanodUpdate', [
+            'id_number' => 'required|string|max:255|unique:tanods,id_number,' . $tanod->id,
+            'full_name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'barangay' => 'required|string|max:255',
+            'barangay_chairman' => 'required|string|max:255',
+            'home_address' => 'required|string|max:255',
+            'weight' => 'nullable|numeric|min:0|max:999.99',
+            'date_of_birth' => 'required|date|before:today',
+            'place_of_birth' => 'required|string|max:255',
+            'height' => 'nullable|numeric|min:0|max:999.99',
+            'blood_type' => 'nullable|in:' . implode(',', Tanod::BLOOD_TYPES),
+            'mobile_no' => 'nullable|string|max:50',
+            'emergency_contact_name' => 'required|string|max:255',
+            'emergency_contact_address' => 'required|string|max:255',
+            'emergency_contact_relationship' => 'required|string|max:255',
+            'emergency_contact_number' => 'required|string|max:50',
+        ]);
+
+        $tanod->update($validated);
+
+        return redirect()->route('tanod.list')->with('success', 'Tanod updated successfully.');
+    }
+
+    public function destroy(Tanod $tanod)
+    {
+        $tanod->delete();
+
+        return redirect()->route('tanod.list')->with('success', 'Tanod removed successfully.');
     }
 }

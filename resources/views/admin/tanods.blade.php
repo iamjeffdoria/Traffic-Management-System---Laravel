@@ -32,9 +32,24 @@
                 </script>
             @endif
 
+            @if ($errors->tanodUpdate->any())
+                <div class="mb-4 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3 max-h-64 overflow-y-auto">
+                    <p class="font-semibold mb-1">The record could not be updated:</p>
+                    <ul class="space-y-1">
+                        @foreach ($errors->tanodUpdate->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <x-tanod-toolbar />
 
             <x-tanod-create-modal />
+
+            <x-tanod-edit-modal />
+
+            <x-tanod-delete-confirm-modal />
 
             <form id="tanod-filter-form" method="GET" action="{{ route('tanod.list') }}"></form>
 
@@ -42,14 +57,16 @@
             <div class="hidden lg:block rounded-2xl border border-gray-200 overflow-x-auto isolate" style="max-height: 600px; overflow-y: auto;">
                 <table class="w-full text-sm border-separate border-spacing-0 table-fixed">
                     <colgroup>
-                        <col class="w-[14%]">
-                        <col class="w-[24%]">
+                        <col class="w-24">
+                        <col class="w-[13%]">
                         <col class="w-[22%]">
-                        <col class="w-[16%]">
-                        <col class="w-[24%]">
+                        <col class="w-[20%]">
+                        <col class="w-[15%]">
+                        <col class="w-[22%]">
                     </colgroup>
                     <thead class="text-left text-gray-900 bg-gray-50 sticky top-0 z-30">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
+                            <th class="px-6 py-3 font-bold w-24">Actions</th>
                             <th class="px-6 py-3 font-bold">ID No.</th>
                             <th class="px-6 py-3 font-bold">Name / Position</th>
                             <th class="px-6 py-3 font-bold">Barangay / Chairman</th>
@@ -57,6 +74,7 @@
                             <th class="px-6 py-3 font-bold">Emergency Contact</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
+                            <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
                                 <input type="text" name="id_number" form="tanod-filter-form" data-filter-scope="desktop" value="{{ request('id_number') }}" oninput="debouncedFetchTanodFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">

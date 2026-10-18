@@ -4,9 +4,43 @@
 
 <div id="tanod-cards-mobile" class="lg:hidden space-y-4 bg-gray-50 -mx-6 px-6 py-2">
     @forelse ($tanods as $tanod)
+        @php
+            $tanodEditData = array_merge(
+                $tanod->only([
+                    'id', 'id_number', 'full_name', 'position', 'barangay', 'barangay_chairman',
+                    'home_address', 'place_of_birth', 'height', 'weight', 'blood_type', 'mobile_no',
+                    'emergency_contact_name', 'emergency_contact_address',
+                    'emergency_contact_relationship', 'emergency_contact_number',
+                ]),
+                ['date_of_birth' => $tanod->date_of_birth->format('Y-m-d')]
+            );
+        @endphp
         <div class="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
-            <p class="text-gray-900 font-medium truncate">{{ $tanod->full_name }}</p>
-            <p class="text-gray-500 text-sm truncate">{{ $tanod->id_number }}</p>
+            <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                    <p class="text-gray-900 font-medium truncate">{{ $tanod->full_name }}</p>
+                    <p class="text-gray-500 text-sm truncate">{{ $tanod->id_number }}</p>
+                </div>
+                <div class="flex items-center gap-1 shrink-0">
+                    <button type="button" title="Edit" onclick="openTanodEditModal({{ Illuminate\Support\Js::from($tanodEditData) }})"
+                        class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </button>
+                    <form id="delete-tanod-form-mobile-{{ $tanod->id }}" method="POST" action="{{ route('tanod.destroy', $tanod) }}">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <button type="button" title="Delete"
+                        onclick="confirmTanodDelete('delete-tanod-form-mobile-{{ $tanod->id }}', {{ Illuminate\Support\Js::from($tanod->full_name . ' (' . $tanod->id_number . ')') }})"
+                        class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
             <div class="flex flex-wrap gap-1 mt-2">
                 <span class="inline-block rounded-full bg-blue-600 text-white text-xs font-semibold px-2.5 py-1">{{ $tanod->position }}</span>
                 <span class="inline-block rounded-full bg-purple-600 text-white text-xs font-semibold px-2.5 py-1">{{ $tanod->barangay }}</span>
