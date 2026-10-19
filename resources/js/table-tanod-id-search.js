@@ -14,6 +14,15 @@ function fetchTanodIdResults(url) {
     const form = document.getElementById('tanod-id-filter-form');
     if (!form) return;
 
+    const isMobile = window.innerWidth < 1024;
+
+    document.querySelectorAll('[data-filter-scope="desktop"]').forEach((el) => {
+        el.disabled = isMobile;
+    });
+    document.querySelectorAll('[data-filter-scope="mobile"]').forEach((el) => {
+        el.disabled = !isMobile;
+    });
+
     const targetUrl = url || (form.action + '?' + new URLSearchParams(new FormData(form)).toString());
 
     if (tanodIdAbortController) {
@@ -35,7 +44,12 @@ function fetchTanodIdResults(url) {
                 ? new DOMParser().parseFromString('<table>' + tbodyHtml + '</table>', 'text/html')
                 : null;
 
-            ['tanod-id-tbody', 'tanod-id-pagination'].forEach((id) => {
+            [
+                'tanod-id-tbody',
+                'tanod-id-pagination-desktop',
+                'tanod-id-cards-mobile',
+                'tanod-id-pagination-mobile',
+            ].forEach((id) => {
                 const doc = id === 'tanod-id-tbody' ? tbodyDoc : restDoc;
                 const fresh = doc ? doc.getElementById(id) : null;
                 const current = document.getElementById(id);
@@ -67,7 +81,7 @@ function fetchTanodIdResults(url) {
 window.fetchTanodIdResults = fetchTanodIdResults;
 
 function attachTanodIdPaginationLinks() {
-    document.querySelectorAll('#tanod-id-pagination a, [data-ajax-tanod-id-link]').forEach((link) => {
+    document.querySelectorAll('#tanod-id-pagination-desktop a, #tanod-id-pagination-mobile a, [data-ajax-tanod-id-link]').forEach((link) => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             fetchTanodIdResults(link.href);

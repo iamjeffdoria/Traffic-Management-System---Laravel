@@ -1,9 +1,8 @@
 @php
-    // Up to 4 per sheet. Pad to 4 so the grid always has 4 slots.
-    $slots = array_pad($tanodIds->values()->all(), 4, null);
-
-    // Back sheet uses the same slot order as the front sheet.
-    $backSlots = $slots;
+    // ?side=front or ?side=back prints only that side (4 cards per page).
+    // Default prints front + back side by side (2 IDs per page).
+    $side = in_array(request()->query('side'), ['front', 'back']) ? request()->query('side') : 'both';
+    $pages = $tanodIds->values()->chunk($side === 'both' ? 2 : 4);
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -70,11 +69,14 @@
 </head>
 <body>
 
-{{-- PAGE 1: FRONTS --}}
-<div class="sheet">
-    @foreach ($slots as $tanodId)
-        @if ($tanodId)
+{{-- One page per 2 IDs. Each row = FRONT (left) + BACK (right). --}}
+@foreach ($pages as $page)
+    <div class="sheet">
+        @foreach ($page as $tanodId)
             @php $tanod = $tanods->get($tanodId->id_number); @endphp
+
+            {{-- FRONT --}}
+            @if ($side !== 'back')
             <div class="card">
                 <img class="bg" src="{{ asset('images/front-tanod.png') }}" alt="">
                 @if ($tanodId->photo_path)
@@ -86,17 +88,10 @@
                 <div class="field fit f-address">{{ $tanodId->address }}</div>
                 <div class="field fit f-dob">{{ $tanodId->date_of_birth->format('F j, Y') }}</div>
             </div>
-        @else
-            <div class="card"></div>
-        @endif
-    @endforeach
-</div>
+            @endif
 
-{{-- PAGE 2: BACKS (mirrored per row for double-sided printing) --}}
-<div class="sheet">
-    @foreach ($backSlots as $tanodId)
-        @if ($tanodId)
-            @php $tanod = $tanods->get($tanodId->id_number); @endphp
+            {{-- BACK --}}
+            @if ($side !== 'front')
             <div class="card">
                 <img class="bg" src="{{ asset('images/back-tanod.png') }}" alt="">
                 <div class="field fit b-barangay">{{ $tanod?->barangay }}</div>
@@ -106,11 +101,10 @@
                 <div class="field fit b-relationship">{{ $tanodId->emergency_contact_relationship }}</div>
                 <div class="field fit b-punong">{{ $tanod?->barangay_chairman }}</div>
             </div>
-        @else
-            <div class="card"></div>
-        @endif
-    @endforeach
-</div>
+            @endif
+        @endforeach
+    </div>
+@endforeach
 
 <script>
     // Shrink any text that's too long for its line instead of cutting it off.

@@ -22,7 +22,18 @@ class PotpotController extends Controller
                 $q->where('address', 'like', '%' . $request->input('address') . '%'))
             ->when($request->filled('status'), fn ($q) =>
                 $q->where('status', $request->input('status')))
-            ->latest('updated_at')
+            ->tap(function ($q) use ($request) {
+                // CAST makes body numbers sort numerically (2 before 10), then ties fall back to text.
+                match ($request->input('sort')) {
+                    'body_asc' => $q->orderByRaw('CAST(body_number AS UNSIGNED) asc')->orderBy('body_number'),
+                    'body_desc' => $q->orderByRaw('CAST(body_number AS UNSIGNED) desc')->orderByDesc('body_number'),
+                    'name_asc' => $q->orderBy('name'),
+                    'name_desc' => $q->orderByDesc('name'),
+                    'expiring' => $q->orderByRaw('date_expired IS NULL')->orderBy('date_expired'),
+                    'registered' => $q->orderByRaw('date_registered IS NULL')->orderByDesc('date_registered'),
+                    default => $q->latest('updated_at'),
+                };
+            })
             ->paginate(25)
             ->withQueryString();
 
