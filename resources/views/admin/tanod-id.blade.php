@@ -42,6 +42,7 @@
                 <table class="w-full text-sm">
                     <thead class="text-left text-gray-900 bg-gray-50">
                         <tr class="divide-x divide-gray-300 border-b-2 border-gray-300">
+                            <th class="px-6 py-3 font-bold w-28">Actions</th>
                             <th class="px-6 py-3 font-bold">ID No.</th>
                             <th class="px-6 py-3 font-bold">Full Name</th>
                             <th class="px-6 py-3 font-bold">Address</th>
@@ -49,6 +50,7 @@
                             <th class="px-6 py-3 font-bold">Emergency Contact</th>
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
+                            <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
                                 <input type="text" name="id_number" form="tanod-id-filter-form" value="{{ request('id_number') }}" oninput="debouncedFetchTanodIdFilter()"
                                     class="w-full max-w-full truncate rounded-lg border-2 border-gray-400 text-gray-900 font-medium placeholder-gray-500 px-2 py-2 text-xs focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-600">
