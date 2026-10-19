@@ -154,6 +154,7 @@ Route::middleware(['auth', 'role:tanod_admin'])->group(function () {
     Route::get('/admin/tanods', [TanodController::class, 'index'])->name('tanod.list');
     Route::post('/admin/tanods', [TanodController::class, 'store'])->name('tanod.store');
     Route::get('/admin/tanod/id', [TanodController::class, 'idCards'])->name('tanod.id');
+    Route::post('/admin/tanod/id', [TanodController::class, 'storeId'])->name('tanod.id.store');
     Route::put('/admin/tanods/{tanod}', [TanodController::class, 'update'])->name('tanod.update');
     Route::delete('/admin/tanods/{tanod}', [TanodController::class, 'destroy'])->name('tanod.destroy');
 });

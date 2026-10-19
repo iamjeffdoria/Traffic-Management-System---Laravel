@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tanod;
+use App\Models\TanodId;
 use Illuminate\Http\Request;
 
 class TanodController extends Controller
@@ -28,9 +29,50 @@ class TanodController extends Controller
         return view('admin.tanods', compact('tanods'));
     }
 
-    public function idCards()
+    public function idCards(Request $request)
     {
-        return view('admin.tanod-id');
+        $tanodIds = TanodId::query()
+            ->when($request->filled('id_number'), fn ($q) =>
+                $q->where('id_number', 'like', '%' . $request->input('id_number') . '%'))
+            ->when($request->filled('name'), fn ($q) =>
+                $q->where('full_name', 'like', '%' . $request->input('name') . '%'))
+            ->when($request->filled('address'), fn ($q) =>
+                $q->where('address', 'like', '%' . $request->input('address') . '%'))
+            ->when($request->filled('contact'), fn ($q) =>
+                $q->where('emergency_contact_name', 'like', '%' . $request->input('contact') . '%'))
+            ->latest('updated_at')
+            ->paginate(25)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.partials.tanod-id-ajax-results', compact('tanodIds'));
+        }
+
+        $tanods = Tanod::orderBy('full_name')->get([
+            'id', 'id_number', 'full_name', 'home_address', 'date_of_birth',
+            'emergency_contact_name', 'emergency_contact_address',
+            'emergency_contact_number', 'emergency_contact_relationship',
+        ]);
+
+        return view('admin.tanod-id', compact('tanodIds', 'tanods'));
+    }
+
+    public function storeId(Request $request)
+    {
+        $validated = $request->validate([
+            'id_number' => 'required|string|max:255|unique:tanod_ids,id_number',
+            'full_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'date_of_birth' => 'required|date|before:today',
+            'emergency_contact_name' => 'required|string|max:255',
+            'emergency_contact_address' => 'required|string|max:255',
+            'emergency_contact_number' => 'required|string|max:50',
+            'emergency_contact_relationship' => 'required|string|max:255',
+        ]);
+
+        TanodId::create($validated);
+
+        return redirect()->route('tanod.id')->with('success', 'Tanod ID added successfully.');
     }
 
     public function store(Request $request)
