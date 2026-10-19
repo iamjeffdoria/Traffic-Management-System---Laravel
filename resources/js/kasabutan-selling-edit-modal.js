@@ -19,6 +19,7 @@ function openKasabutanSellingEditModal(selling) {
     form.querySelector('[name="buyer_address"]').value = selling.buyer_address ?? '';
     form.querySelector('[name="amount"]').value = selling.amount ?? '';
     form.querySelector('[name="witness"]').value = selling.witness ?? '';
+    form.querySelector('[name="secretariat"]').value = selling.secretariat ?? '';
     form.querySelector('[name="date"]').value = selling.date ?? '';
 
     openModal('edit-kasabutan-selling-modal');

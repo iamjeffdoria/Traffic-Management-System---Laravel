@@ -2,7 +2,7 @@
 
 @php
     $sellingEditData = array_merge(
-        $selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness']),
+        $selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness', 'secretariat']),
         ['date' => $selling->date->format('Y-m-d')]
     );
 @endphp
@@ -59,6 +59,9 @@
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 text-sm break-words">{{ $selling->witness }}</p>
+        @if ($selling->secretariat)
+            <p class="text-gray-500 text-xs break-words mt-1">Secretariat: {{ $selling->secretariat }}</p>
+        @endif
     </td>
     <td class="px-6 py-4 align-top">
         <span class="inline-block rounded-full bg-green-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">

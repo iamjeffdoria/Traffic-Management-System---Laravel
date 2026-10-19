@@ -140,9 +140,9 @@
                             <span class="inline-block rounded-full bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1">₱{{ number_format($selling->amount, 2) }}</span>
                             <span class="inline-block rounded-full bg-green-600 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">{{ $selling->date->format('M-d-y') }}</span>
                         </div>
-                        <p class="text-gray-500 text-xs mt-1.5">Witness: {{ $selling->witness }}</p>
+                        <p class="text-gray-500 text-xs mt-1.5">Witness: {{ $selling->witness }}@if ($selling->secretariat) · Secretariat: {{ $selling->secretariat }}@endif</p>
                         <div class="flex items-center gap-1 mt-2">
-                            <button type="button" title="Edit" onclick="openKasabutanSellingEditModal({{ Illuminate\Support\Js::from(array_merge($selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness']), ['date' => $selling->date->format('Y-m-d')])) }})" class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+                            <button type="button" title="Edit" onclick="openKasabutanSellingEditModal({{ Illuminate\Support\Js::from(array_merge($selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness', 'secretariat']), ['date' => $selling->date->format('Y-m-d')])) }})" class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>

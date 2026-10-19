@@ -42,6 +42,7 @@ class KasabutanController extends Controller
     public function storeSelling(Request $request)
     {
         $validated = $request->validate([
+            'secretariat' => 'required|string|max:255',
             'owner' => 'required|string|max:255',
             'barangay' => 'required|string|max:255',
             'municipality' => 'required|string|max:255',
@@ -61,6 +62,7 @@ class KasabutanController extends Controller
     public function updateSelling(Request $request, KasabutanSelling $selling)
     {
         $validated = $request->validate([
+            'secretariat' => 'required|string|max:255',
             'owner' => 'required|string|max:255',
             'barangay' => 'required|string|max:255',
             'municipality' => 'required|string|max:255',

@@ -47,7 +47,16 @@
         .sig-label { margin: 4px 0 0; font-size: 13px; }
 
         .witness-block { width: 50%; margin: 48px auto 0; text-align: center; page-break-inside: avoid; }
-        .date-line { margin-top: 36px; }
+        .footer-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 40px;
+            page-break-inside: avoid;
+        }
+        .date-line { margin: 0; }
+        .secretariat-block { width: 240px; text-align: center; margin-left: auto; }
     </style>
 </head>
 <body>
@@ -91,7 +100,16 @@
         <p class="sig-label">[ Testigos ]</p>
     </div>
 
-    <p class="date-line">Petsa: <span class="u">{{ $selling->date->format('F j, Y') }}</span></p>
+    <div class="footer-row">
+        <p class="date-line">Petsa: <span class="u">{{ $selling->date->format('F j, Y') }}</span></p>
+
+        @if ($selling->secretariat)
+            <div class="secretariat-block">
+                <div class="sig-line"><span class="sig-name">{{ $selling->secretariat }}</span></div>
+                <p class="sig-label">[ Secretariat ]</p>
+            </div>
+        @endif
+    </div>
 </div>
 </body>
 </html>

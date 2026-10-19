@@ -89,6 +89,12 @@
                 <input type="text" name="witness" value="{{ old('witness') }}" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
+
+            <div class="sm:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Secretariat</label>
+                <input type="text" name="secretariat" value="{{ old('secretariat') }}" required
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
         </form>
 
         <div class="flex gap-3 px-6 py-4 border-t border-gray-100 shrink-0">
