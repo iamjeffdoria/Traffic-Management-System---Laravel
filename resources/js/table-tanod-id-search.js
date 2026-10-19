@@ -54,6 +54,9 @@ function fetchTanodIdResults(url) {
 
             window.history.replaceState({}, '', targetUrl);
             attachTanodIdPaginationLinks();
+            if (typeof syncTanodIdCheckboxes === 'function') {
+                syncTanodIdCheckboxes();
+            }
         })
         .catch((err) => {
             if (err.name !== 'AbortError') {

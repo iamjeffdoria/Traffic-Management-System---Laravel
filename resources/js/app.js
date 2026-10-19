@@ -49,3 +49,4 @@ import './table-tanod-search.js';
 import './tanod-edit-modal.js';
 import './tanod-id-sync.js';
 import './table-tanod-id-search.js';
+import './tanod-id-bulk-print.js';

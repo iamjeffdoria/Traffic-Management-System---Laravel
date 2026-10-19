@@ -6,6 +6,9 @@
     @forelse ($tanodIds as $tanodId)
         <tr class="divide-x divide-gray-300 hover:bg-gray-50/60 transition-colors">
             <td class="px-4 py-4 align-top">
+                <input type="checkbox" class="tanod-id-checkbox rounded border-gray-300 text-red-600 focus:ring-red-600" data-id="{{ $tanodId->id }}">
+            </td>
+            <td class="px-4 py-4 align-top">
                 <div class="flex items-center gap-1">
                     {{-- TODO: wire up to openTanodIdEditModal(...) once the edit modal exists --}}
                     <button type="button" title="Edit"
@@ -15,7 +18,7 @@
                         </svg>
                     </button>
                     {{-- TODO: wire up to printFromUrl(route(...)) once the print route exists --}}
-                    <button type="button" title="Print"
+                    <button type="button" title="Print" onclick="printFromUrl('{{ route('tanod.id.print', $tanodId) }}')"
                         class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v6H6v-6z" />
@@ -53,7 +56,7 @@
         </tr>
     @empty
         <tr>
-            <td colspan="6" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActiveTanodIdFilters)
                     No Tanod IDs match your search.
                     <a href="{{ route('tanod.id') }}" data-ajax-tanod-id-link class="text-red-600 font-medium ml-1">Clear filters</a>

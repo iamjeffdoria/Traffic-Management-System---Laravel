@@ -1,4 +1,12 @@
-<div class="flex justify-end mb-6">
+<div class="flex flex-col items-end gap-3 mb-6 sm:flex-row sm:items-center sm:justify-end">
+<button type="button" id="tanod-id-bulk-print-btn" data-bulk-print-url="{{ route('tanod.id.bulk-print') }}"
+        onclick="printSelectedTanodIds()" disabled
+        class="inline-flex items-center gap-1.5 rounded-full bg-blue-600 text-white px-5 py-2 text-sm font-semibold hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v6H6v-6z" />
+        </svg>
+        Print Selected
+    </button>
     <div class="inline-flex items-center overflow-hidden rounded-full">
         {{-- TODO: wire up to openModal('import-tanod-id-modal') once that modal exists --}}
         <button type="button"

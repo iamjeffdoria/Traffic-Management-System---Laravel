@@ -72,7 +72,41 @@ class TanodController extends Controller
 
         TanodId::create($validated);
 
-        return redirect()->route('tanod.id')->with('success', 'Tanod ID added successfully.');
+return redirect()->route('tanod.id')->with('success', 'Tanod ID added successfully.');
+    }
+
+    public function printId(TanodId $tanodId)
+    {
+        return $this->renderIdSheet(collect([$tanodId]));
+    }
+
+    public function bulkPrintIds(Request $request)
+    {
+        $ids = collect(explode(',', (string) $request->query('ids')))
+            ->map(fn ($id) => (int) trim($id))
+            ->filter()
+            ->unique()
+            ->take(4)
+            ->values();
+
+        abort_if($ids->isEmpty(), 404, 'No Tanod IDs selected for printing.');
+
+        $tanodIds = TanodId::whereIn('id', $ids)
+            ->get()
+            ->sortBy(fn ($t) => $ids->search($t->id))
+            ->values();
+
+        return $this->renderIdSheet($tanodIds);
+    }
+
+    protected function renderIdSheet($tanodIds)
+    {
+        // Barangay + Punong Barangay live on the Tanod List record, matched by ID number.
+        $tanods = Tanod::whereIn('id_number', $tanodIds->pluck('id_number'))
+            ->get()
+            ->keyBy('id_number');
+
+        return view('admin.tanod-id-print', compact('tanodIds', 'tanods'));
     }
 
     public function store(Request $request)
