@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Tanod;
 use App\Models\TanodId;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use ZipArchive;
 use Illuminate\Http\Request;
 
 class TanodController extends Controller
@@ -61,6 +65,7 @@ class TanodController extends Controller
     {
         $validated = $request->validate([
             'id_number' => 'required|string|max:255|unique:tanod_ids,id_number',
+            'photo' => 'nullable|image|max:5120',
             'full_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'date_of_birth' => 'required|date|before:today',
@@ -70,9 +75,149 @@ class TanodController extends Controller
             'emergency_contact_relationship' => 'required|string|max:255',
         ]);
 
+        if ($request->hasFile('photo')) {
+            $validated['photo_path'] = $request->file('photo')->store('tanod-ids', 'public');
+        }
+        unset($validated['photo']);
+
         TanodId::create($validated);
 
 return redirect()->route('tanod.id')->with('success', 'Tanod ID added successfully.');
+    }
+
+    public function updateId(Request $request, TanodId $tanodId)
+    {
+        // Named error bag so a failed update doesn't reopen the "Add" modal.
+        $validated = $request->validateWithBag('tanodIdUpdate', [
+            'id_number' => 'required|string|max:255|unique:tanod_ids,id_number,' . $tanodId->id,
+            'full_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'date_of_birth' => 'required|date|before:today',
+            'emergency_contact_name' => 'required|string|max:255',
+            'emergency_contact_address' => 'required|string|max:255',
+            'emergency_contact_number' => 'required|string|max:50',
+            'emergency_contact_relationship' => 'required|string|max:255',
+            'photo' => 'nullable|image|max:5120',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            if ($tanodId->photo_path) {
+                Storage::disk('public')->delete($tanodId->photo_path);
+            }
+            $validated['photo_path'] = $request->file('photo')->store('tanod-ids', 'public');
+        }
+        unset($validated['photo']);
+
+        $tanodId->update($validated);
+
+        return redirect()->route('tanod.id')->with('success', 'Tanod ID updated successfully.');
+    }
+
+    public function importIds(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:zip',
+        ]);
+
+        $tempDir = storage_path('app/temp/tanod-ids-import-' . uniqid());
+        mkdir($tempDir, 0755, true);
+
+        $zip = new ZipArchive;
+
+        if ($zip->open($request->file('file')->getRealPath()) !== true) {
+            File::deleteDirectory($tempDir);
+
+            return back()->withErrors(['file' => 'Could not open the uploaded zip file.']);
+        }
+
+        $zip->extractTo($tempDir);
+        $zip->close();
+
+        $csvPath = $tempDir . '/data.csv';
+
+        if (!file_exists($csvPath)) {
+            File::deleteDirectory($tempDir);
+
+            return back()->withErrors(['file' => 'The zip file must contain a data.csv file at its root.']);
+        }
+
+        $handle = fopen($csvPath, 'r');
+        $header = fgetcsv($handle);
+        $header = array_map(fn ($h) => strtolower(str_replace(' ', '_', trim((string) $h))), $header);
+
+        $rowFailures = [];
+        $rowNumber = 1;
+
+        while (($row = fgetcsv($handle)) !== false) {
+            $rowNumber++;
+
+            if ($row === [null]) {
+                continue; // blank line
+            }
+
+            if (count($row) !== count($header)) {
+                $rowFailures[] = "Row {$rowNumber}: column count does not match header.";
+                continue;
+            }
+
+            $row = array_combine($header, $row);
+            $photoPath = null;
+            $photoFilename = basename(trim((string) ($row['photo_filename'] ?? '')));
+
+            if ($photoFilename !== '') {
+                $sourcePhoto = $tempDir . '/photos/' . $photoFilename;
+
+                if (is_file($sourcePhoto) && in_array(strtolower(pathinfo($photoFilename, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'webp'], true)) {
+                    $storedName = 'tanod-ids/' . uniqid() . '_' . $photoFilename;
+                    Storage::disk('public')->put($storedName, file_get_contents($sourcePhoto));
+                    $photoPath = $storedName;
+                }
+            }
+
+            $data = [
+                'id_number' => trim((string) ($row['id_number'] ?? '')) ?: null,
+                'full_name' => trim((string) ($row['full_name'] ?? '')) ?: null,
+                'address' => trim((string) ($row['address'] ?? '')) ?: null,
+                'date_of_birth' => trim((string) ($row['date_of_birth'] ?? '')) ?: null,
+                'emergency_contact_name' => trim((string) ($row['emergency_contact_name'] ?? '')) ?: null,
+                'emergency_contact_address' => trim((string) ($row['emergency_contact_address'] ?? '')) ?: null,
+                'emergency_contact_number' => trim((string) ($row['emergency_contact_number'] ?? '')) ?: null,
+                'emergency_contact_relationship' => trim((string) ($row['emergency_contact_relationship'] ?? '')) ?: null,
+                'photo_path' => $photoPath,
+            ];
+
+            $validator = Validator::make($data, [
+                'id_number' => 'required|string|max:255|unique:tanod_ids,id_number',
+                'full_name' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'date_of_birth' => 'required|date|before:today',
+                'emergency_contact_name' => 'required|string|max:255',
+                'emergency_contact_address' => 'required|string|max:255',
+                'emergency_contact_number' => 'required|string|max:50',
+                'emergency_contact_relationship' => 'required|string|max:255',
+            ]);
+
+            if ($validator->fails()) {
+                $rowFailures[] = "Row {$rowNumber}: " . implode(', ', $validator->errors()->all());
+
+                if ($photoPath) {
+                    Storage::disk('public')->delete($photoPath);
+                }
+
+                continue;
+            }
+
+            TanodId::create($data);
+        }
+
+        fclose($handle);
+        File::deleteDirectory($tempDir);
+
+        if (!empty($rowFailures)) {
+            return back()->withErrors($rowFailures);
+        }
+
+        return redirect()->route('tanod.id')->with('success', 'Tanod IDs imported successfully.');
     }
 
     public function printId(TanodId $tanodId)

@@ -2,9 +2,8 @@
     // Up to 4 per sheet. Pad to 4 so the grid always has 4 slots.
     $slots = array_pad($tanodIds->values()->all(), 4, null);
 
-    // Back sheet is mirrored left-to-right per row, so the backs line up with the
-    // fronts when printing double-sided (flip on long edge).
-    $backSlots = [$slots[1], $slots[0], $slots[3], $slots[2]];
+    // Back sheet uses the same slot order as the front sheet.
+    $backSlots = $slots;
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -53,18 +52,19 @@
         }
 
         /* ---- FRONT (tweak top/left/width in % if a line is off) ---- */
-        .f-barangay { top: 16.4%; left: 50%;   width: 27%;   text-align: center; text-transform: uppercase; }
+        .f-photo { position: absolute; top: 34.5%; left: 7.2%; width: 32%; height: 30.8%; object-fit: cover; object-position: center top; border-radius: 10px; }
+        .f-barangay { top: 16.4%; left: 50%;   width: 27%;   text-align: center; text-transform: uppercase; color: #fff; }
         .f-idno     { top: 43.9%; left: 64.5%; width: 29%; }
         .f-name     { top: 50.5%; left: 47.5%; width: 45.5%; text-transform: uppercase; }
-        .f-address  { top: 54.4%; left: 47.5%; width: 45.5%; }
-        .f-dob      { top: 57.9%; left: 47.5%; width: 45.5%; }
+        .f-address  { top: 55.2%; left: 47.5%; width: 45.5%; }
+        .f-dob      { top: 58.5%; left: 47.5%; width: 45.5%; }
 
         /* ---- BACK ---- */
-        .b-barangay     { top: 26.5%; left: 60%;   width: 27%;   text-align: center; text-transform: uppercase; }
-        .b-name         { top: 43.3%; left: 32%;   width: 59.5%; }
-        .b-address      { top: 48.2%; left: 32%;   width: 59.5%; }
-        .b-contact      { top: 54.5%; left: 29%;   width: 19%;   font-size: 9px; }
-        .b-relationship { top: 54.5%; left: 75.5%; width: 19%;   font-size: 9px; }
+        .b-barangay     { top: 22.5%; left: 60%;   width: 27%;   text-align: center; text-transform: uppercase; }
+        .b-name         { top: 43%; left: 32%;   width: 59.5%; }
+        .b-address      { top: 48%; left: 32%;   width: 59.5%; }
+        .b-contact      { top: 54.3%; left: 29%;   width: 19%;   font-size: 9px; }
+        .b-relationship { top: 54.3%; left: 75.5%; width: 19%;   font-size: 9px; }
         .b-punong       { top: 73.9%; left: 59.5%; width: 31%;   text-align: center; text-transform: uppercase; font-size: 9px; }
     </style>
 </head>
@@ -76,7 +76,10 @@
         @if ($tanodId)
             @php $tanod = $tanods->get($tanodId->id_number); @endphp
             <div class="card">
-                <img class="bg" src="{{ asset('images/tanod-front.png') }}" alt="">
+                <img class="bg" src="{{ asset('images/front-tanod.png') }}" alt="">
+                @if ($tanodId->photo_path)
+                    <img class="f-photo" src="{{ asset('storage/' . $tanodId->photo_path) }}" alt="">
+                @endif
                 <div class="field fit f-barangay">{{ $tanod?->barangay }}</div>
                 <div class="field fit f-idno">{{ $tanodId->id_number }}</div>
                 <div class="field fit f-name">{{ $tanodId->full_name }}</div>
@@ -95,7 +98,7 @@
         @if ($tanodId)
             @php $tanod = $tanods->get($tanodId->id_number); @endphp
             <div class="card">
-                <img class="bg" src="{{ asset('images/tanod-back.png') }}" alt="">
+                <img class="bg" src="{{ asset('images/back-tanod.png') }}" alt="">
                 <div class="field fit b-barangay">{{ $tanod?->barangay }}</div>
                 <div class="field fit b-name">{{ $tanodId->emergency_contact_name }}</div>
                 <div class="field fit b-address">{{ $tanodId->emergency_contact_address }}</div>

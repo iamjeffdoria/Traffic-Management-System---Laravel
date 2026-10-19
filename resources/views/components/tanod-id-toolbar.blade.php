@@ -8,8 +8,7 @@
         Print Selected
     </button>
     <div class="inline-flex items-center overflow-hidden rounded-full">
-        {{-- TODO: wire up to openModal('import-tanod-id-modal') once that modal exists --}}
-        <button type="button"
+        <button type="button" onclick="openModal('import-tanod-id-modal')"
             class="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-700 transition-colors border-r border-emerald-700">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />

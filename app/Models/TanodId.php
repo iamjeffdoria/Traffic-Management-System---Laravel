@@ -20,6 +20,7 @@ class TanodId extends Model
         'emergency_contact_address',
         'emergency_contact_number',
         'emergency_contact_relationship',
+        'photo_path',
     ];
 
     protected $casts = [

@@ -32,9 +32,26 @@
                 </script>
             @endif
 
+            @if ($errors->tanodIdUpdate->any())
+                <div class="mb-4 rounded-lg bg-red-50 text-red-600 text-sm px-4 py-3 max-h-64 overflow-y-auto">
+                    <p class="font-semibold mb-1">The record could not be updated:</p>
+                    <ul class="space-y-1">
+                        @foreach ($errors->tanodIdUpdate->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <x-tanod-id-toolbar />
 
             <x-tanod-id-create-modal :tanods="$tanods" />
+
+            <x-tanod-id-edit-modal />
+
+            <x-tanod-id-import-modal />
+
+            <x-tanod-id-crop-modal />
 
             <form id="tanod-id-filter-form" method="GET" action="{{ route('tanod.id') }}"></form>
 
@@ -46,6 +63,7 @@
                                 <input type="checkbox" class="rounded border-gray-300 text-red-600 focus:ring-red-600" onchange="toggleAllTanodIdCheckboxes(this)" title="Select up to 4">
                             </th>
                             <th class="px-6 py-3 font-bold w-28">Actions</th>
+                            <th class="px-6 py-3 font-bold w-24">Photo</th>
                             <th class="px-6 py-3 font-bold">ID No.</th>
                             <th class="px-6 py-3 font-bold">Full Name</th>
                             <th class="px-6 py-3 font-bold">Address</th>
@@ -54,6 +72,7 @@
                         </tr>
                         <tr class="border-t border-gray-300 divide-x divide-gray-300">
                             <th class="px-4 py-2"></th>
+                            <th class="px-6 py-2"></th>
                             <th class="px-6 py-2"></th>
                             <th class="px-2 py-2">
                                 <input type="text" name="id_number" form="tanod-id-filter-form" value="{{ request('id_number') }}" oninput="debouncedFetchTanodIdFilter()"

@@ -4,14 +4,26 @@
 
 <tbody id="tanod-id-tbody" class="divide-y divide-gray-300">
     @forelse ($tanodIds as $tanodId)
+        @php
+            $tanodIdEditData = array_merge(
+                $tanodId->only([
+                    'id', 'id_number', 'full_name', 'address',
+                    'emergency_contact_name', 'emergency_contact_address',
+                    'emergency_contact_number', 'emergency_contact_relationship',
+                ]),
+                [
+                    'date_of_birth' => $tanodId->date_of_birth->format('Y-m-d'),
+                    'photo_url' => $tanodId->photo_path ? asset('storage/' . $tanodId->photo_path) : null,
+                ]
+            );
+        @endphp
         <tr class="divide-x divide-gray-300 hover:bg-gray-50/60 transition-colors">
             <td class="px-4 py-4 align-top">
                 <input type="checkbox" class="tanod-id-checkbox rounded border-gray-300 text-red-600 focus:ring-red-600" data-id="{{ $tanodId->id }}">
             </td>
             <td class="px-4 py-4 align-top">
                 <div class="flex items-center gap-1">
-                    {{-- TODO: wire up to openTanodIdEditModal(...) once the edit modal exists --}}
-                    <button type="button" title="Edit"
+                    <button type="button" title="Edit" onclick="openTanodIdEditModal({{ Illuminate\Support\Js::from($tanodIdEditData) }})"
                         class="p-1.5 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -32,6 +44,19 @@
                         </svg>
                     </button>
                 </div>
+            </td>
+            <td class="px-4 py-4 align-top">
+                @if ($tanodId->photo_path)
+                    <img src="{{ asset('storage/' . $tanodId->photo_path) }}" alt="{{ $tanodId->full_name }}"
+                        class="w-12 h-12 rounded-lg object-cover border border-gray-200">
+                @else
+                    <div class="w-12 h-12 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        </svg>
+                    </div>
+                @endif
             </td>
             <td class="px-6 py-4 align-top font-semibold text-gray-900 break-words">{{ $tanodId->id_number }}</td>
             <td class="px-6 py-4 align-top text-gray-900 font-medium break-words">{{ $tanodId->full_name }}</td>
@@ -56,7 +81,7 @@
         </tr>
     @empty
         <tr>
-            <td colspan="7" class="px-6 py-10 text-center text-gray-500 text-sm">
+            <td colspan="8" class="px-6 py-10 text-center text-gray-500 text-sm">
                 @if ($hasActiveTanodIdFilters)
                     No Tanod IDs match your search.
                     <a href="{{ route('tanod.id') }}" data-ajax-tanod-id-link class="text-red-600 font-medium ml-1">Clear filters</a>

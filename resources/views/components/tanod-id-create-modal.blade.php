@@ -13,8 +13,25 @@
             </button>
         </div>
 
-        <form id="tanod-id-create-form" data-tanod-id-form method="POST" action="{{ route('tanod.id.store') }}" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
+        <form id="tanod-id-create-form" data-tanod-id-form method="POST" action="{{ route('tanod.id.store') }}" enctype="multipart/form-data" class="grid sm:grid-cols-2 gap-4 px-6 py-5 overflow-y-auto">
             @csrf
+
+            <div class="sm:col-span-2" data-avatar-upload>
+                <p class="block text-sm font-medium text-gray-700 mb-2">2x2 Photo</p>
+                <div class="flex items-center gap-4">
+                    <label for="create-tanod-id-photo" class="relative group cursor-pointer shrink-0">
+                        <span class="w-24 h-24 rounded-lg overflow-hidden bg-gray-50 border-2 border-dashed border-gray-300 group-hover:border-red-400 transition-colors flex items-center justify-center">
+                            <img data-avatar-img src="" alt="" class="hidden w-full h-full object-cover">
+                            <svg data-avatar-placeholder class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                    </label>
+                    <input type="file" id="create-tanod-id-photo" name="photo" accept="image/*" class="hidden" onchange="openTanodIdCropper(this)">
+                    <p data-avatar-filename class="text-xs text-gray-400 min-w-0 truncate">Click the photo to upload · max 5 MB</p>
+                </div>
+            </div>
 
             <div class="sm:col-span-2 relative" data-searchable-select data-on-select="onTanodIdSearchSelect">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Tanod <span class="text-gray-400 font-normal">(search to auto-fill all fields from the Tanod List)</span></label>

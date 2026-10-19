@@ -50,3 +50,6 @@ import './tanod-edit-modal.js';
 import './tanod-id-sync.js';
 import './table-tanod-id-search.js';
 import './tanod-id-bulk-print.js';
+import './tanod-id-edit-modal.js';
+import './tanod-id-import-modal.js';
+import './tanod-id-cropper.js';
