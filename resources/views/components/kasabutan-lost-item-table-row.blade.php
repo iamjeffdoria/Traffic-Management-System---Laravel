@@ -5,7 +5,7 @@
         $item->only([
             'id', 'driver', 'body_number', 'driver_age', 'driver_address', 'amount',
             'passenger', 'passenger_age', 'passenger_address', 'issued_at',
-            'witness_1', 'witness_2', 'it_section', 'security_officer',
+            'witness_1', 'witness_2', 'witness_type', 'it_section', 'security_officer',
         ]),
         [
             'date' => $item->date->format('Y-m-d'),
@@ -87,6 +87,9 @@
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 text-sm break-words">1. {{ $item->witness_1 }}</p>
         <p class="text-gray-900 text-sm break-words mt-0.5">2. {{ $item->witness_2 }}</p>
+        <span class="inline-block max-w-full truncate rounded-full {{ $item->witness_type === 'PSO Personnel' ? 'bg-blue-600' : 'bg-amber-500' }} text-white text-xs font-semibold px-2.5 py-1 mt-1.5" title="{{ $item->witness_type }}">
+            {{ $item->witness_type }}
+        </span>
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 text-xs font-semibold break-words">{{ $item->issued_at }}</p>

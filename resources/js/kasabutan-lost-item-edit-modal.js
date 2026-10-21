@@ -15,7 +15,7 @@ function openKasabutanLostItemEditModal(item) {
         'driver', 'body_number', 'driver_age', 'driver_address', 'amount',
         'passenger', 'passenger_age', 'passenger_address',
         'date', 'time', 'issued_at',
-        'witness_1', 'witness_2', 'it_section', 'security_officer',
+        'witness_1', 'witness_2', 'witness_type', 'it_section', 'security_officer',
     ];
 
     fields.forEach((name) => {

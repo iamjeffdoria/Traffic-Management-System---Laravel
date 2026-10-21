@@ -109,11 +109,11 @@
         <tr>
             <td>
                 <div class="sig-line"><span class="sig-name">{{ $lostItem->witness_1 }}</span></div>
-                <p class="sig-label">Witness (Traffic Enforcer)</p>
+                <p class="sig-label">Witness ({{ $lostItem->witness_type }})</p>
             </td>
             <td>
                 <div class="sig-line"><span class="sig-name">{{ $lostItem->witness_2 }}</span></div>
-                <p class="sig-label">Witness (Traffic Enforcer)</p>
+                <p class="sig-label">Witness ({{ $lostItem->witness_type }})</p>
             </td>
         </tr>
     </table>
