@@ -25,7 +25,7 @@
 
             <x-tricycle-mayors-permit-toolbar />
 
-            <x-tricycle-mayors-permit-create-modal :tricycles="$tricycles" />
+            <x-tricycle-mayors-permit-create-modal />
 
             <x-tricycle-mayors-permit-import-modal />
 
@@ -150,7 +150,7 @@
             </div>
 
             <div id="tricycle-mayors-permit-edit-modals">
-                <x-tricycle-mayors-permit-edit-modal :tricycles="$tricycles" />
+                <x-tricycle-mayors-permit-edit-modal />
             </div>
         </div>
     </div>

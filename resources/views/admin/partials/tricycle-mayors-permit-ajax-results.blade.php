@@ -47,5 +47,5 @@
 </div>
 
 <div id="tricycle-mayors-permit-edit-modals">
-    <x-tricycle-mayors-permit-edit-modal :tricycles="$tricycles" />
+    <x-tricycle-mayors-permit-edit-modal />
 </div>

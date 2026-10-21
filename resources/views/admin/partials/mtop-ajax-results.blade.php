@@ -47,5 +47,5 @@
 </div>
 
 <div id="mtop-edit-modals">
-    <x-mtop-edit-modal :tricycles="$tricycles" />
+    <x-mtop-edit-modal />
 </div>

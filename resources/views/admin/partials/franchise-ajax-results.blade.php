@@ -47,5 +47,5 @@
 </div>
 
 <div id="franchise-edit-modals">
-    <x-franchise-edit-modal :tricycles="$tricycles" />
+    <x-franchise-edit-modal />
 </div>

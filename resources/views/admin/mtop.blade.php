@@ -25,7 +25,7 @@
 
             <x-mtop-toolbar />
 
-            <x-mtop-create-modal :tricycles="$tricycles" />
+            <x-mtop-create-modal />
 
             <x-mtop-import-modal />
 
@@ -129,7 +129,7 @@
             </div>
 
             <div id="mtop-edit-modals">
-                <x-mtop-edit-modal :tricycles="$tricycles" />
+                <x-mtop-edit-modal />
             </div>
         </div>
     </div>

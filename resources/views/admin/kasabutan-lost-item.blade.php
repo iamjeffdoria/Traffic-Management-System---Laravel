@@ -45,9 +45,9 @@
 
             <x-kasabutan-lost-item-toolbar />
 
-            <x-kasabutan-lost-item-create-modal :potpots="$potpots" />
+            <x-kasabutan-lost-item-create-modal />
 
-            <x-kasabutan-lost-item-edit-modal :potpots="$potpots" />
+            <x-kasabutan-lost-item-edit-modal />
 
             <x-kasabutan-lost-item-delete-confirm-modal />
 

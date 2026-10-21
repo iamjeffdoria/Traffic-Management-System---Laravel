@@ -25,7 +25,7 @@
 
             <x-potpot-mayors-permit-toolbar />
 
-            <x-potpot-mayors-permit-create-modal :potpots="$potpots" />
+            <x-potpot-mayors-permit-create-modal />
 
             <x-potpot-mayors-permit-import-modal />
 
@@ -150,7 +150,7 @@
             </div>
 
             <div id="potpot-mayors-permit-edit-modals">
-                <x-potpot-mayors-permit-edit-modal :potpots="$potpots" />
+                <x-potpot-mayors-permit-edit-modal />
             </div>
         </div>
     </div>

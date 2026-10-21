@@ -34,9 +34,9 @@
 
             <x-kasabutan-selling-toolbar />
 
-            <x-kasabutan-selling-create-modal :potpots="$potpots" />
+            <x-kasabutan-selling-create-modal />
 
-            <x-kasabutan-selling-edit-modal :potpots="$potpots" />
+            <x-kasabutan-selling-edit-modal />
 
             <x-kasabutan-selling-delete-confirm-modal />
 

@@ -25,7 +25,7 @@
 
             <x-franchise-toolbar />
 
-            <x-franchise-create-modal :tricycles="$tricycles" />
+            <x-franchise-create-modal />
 
             <x-franchise-import-modal />
 
@@ -152,7 +152,7 @@
             </div>
 
             <div id="franchise-edit-modals">
-                <x-franchise-edit-modal :tricycles="$tricycles" />
+                <x-franchise-edit-modal />
             </div>
         </div>
     </div>
