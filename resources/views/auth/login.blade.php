@@ -3,21 +3,29 @@
 @section('title', 'Admin Login')
 
 @section('content')
-<section class="min-h-screen grid lg:grid-cols-2 neo-bg">
+<section class="min-h-screen grid lg:grid-cols-2 neo-bg relative cartoon-bg overflow-hidden">
+
+    {{-- Decorative floating blobs (cartoony background) --}}
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+    </div>
 
     {{-- Brand panel (desktop only) --}}
     <aside class="hidden lg:flex flex-col justify-between p-14">
         <div class="flex items-center gap-6">
-            <div class="neo-raised w-36 h-36 rounded-full flex items-center justify-center shrink-0">
-                <div class="neo-inset w-28 h-28 rounded-full flex items-center justify-center">
-                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-20 h-20 object-contain drop-shadow-md">
+            <div class="neo-raised w-36 h-36 rounded-full flex items-center justify-center shrink-0 scene-pop-in">
+                <div class="neo-inset w-28 h-28 rounded-full flex items-center justify-center overflow-hidden">
+                    <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-[6.5rem] h-[6.5rem] object-contain drop-shadow-md scene-float">
                 </div>
             </div>
-            <span class="font-extrabold text-lg leading-tight uppercase tracking-wider text-gray-700">Public Safety<br>Office</span>
+            <span class="font-extrabold text-2xl leading-tight uppercase tracking-wider text-gray-700">Public Safety<br>Office</span>
         </div>
 
         <div class="max-w-md">
-            <div class="neo-inset rounded-3xl p-8">
+            <div class="neo-inset rounded-3xl p-8 scene-pop-in scene-delay-2">
                 <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-700">
                     Permits, franchises &amp; records in one place.
                 </h1>
@@ -37,13 +45,13 @@
         <div class="w-full max-w-sm">
 
             {{-- Mobile logo --}}
-            <div class="lg:hidden flex flex-col items-center gap-4 mb-10">
+            <div class="lg:hidden flex flex-col items-center gap-4 mb-10 scene-pop-in">
                 <div class="neo-raised w-32 h-32 rounded-full flex items-center justify-center">
-                    <div class="neo-inset w-24 h-24 rounded-full flex items-center justify-center">
-                        <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-16 h-16 object-contain drop-shadow-md">
+                    <div class="neo-inset w-24 h-24 rounded-full flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-[5.5rem] h-[5.5rem] object-contain drop-shadow-md scene-float">
                     </div>
                 </div>
-                <span class="text-sm font-extrabold uppercase tracking-wider text-gray-700">Public Safety Office</span>
+                <span class="text-base font-extrabold uppercase tracking-wider text-gray-700">Public Safety Office</span>
             </div>
 
             <div class="neo-raised rounded-3xl p-8 login-card-enter">
@@ -62,7 +70,7 @@
                 <form method="POST" action="{{ route('login') }}" class="mt-8 space-y-6">
                     @csrf
 
-                    <div>
+                    <div class="scene-pop-in scene-delay-1">
                         <label for="email" class="block text-sm font-medium text-gray-600 mb-2">Email</label>
                         <input type="email" name="email" id="email"
                             value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
@@ -71,7 +79,7 @@
                             class="neo-input w-full rounded-xl px-4 py-3 text-sm">
                     </div>
 
-                    <div>
+                    <div class="scene-pop-in scene-delay-2">
                         <label for="password" class="block text-sm font-medium text-gray-600 mb-2">Password</label>
                         <div class="relative">
                             <input type="password" name="password" id="password" required
@@ -91,13 +99,13 @@
                         </div>
                     </div>
 
-                    <label class="flex items-center gap-3 text-sm text-gray-600 cursor-pointer select-none">
+                    <label class="flex items-center gap-3 text-sm text-gray-600 cursor-pointer select-none scene-pop-in scene-delay-3">
                         <input type="checkbox" name="remember" @checked(old('remember')) class="neo-check">
                         Remember me
                     </label>
 
                     <button type="submit"
-                        class="neo-btn w-full rounded-xl px-6 py-3 text-sm font-semibold tracking-wide">
+                        class="neo-btn btn-shine relative overflow-hidden w-full rounded-xl px-6 py-3 text-sm font-semibold tracking-wide scene-pop-in scene-delay-4">
                         Sign In
                     </button>
                 </form>

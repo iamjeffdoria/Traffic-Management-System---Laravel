@@ -7,6 +7,47 @@
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ===== Login page animations ===== */
+
+/* Gentle floating for the logo */
+@keyframes scene-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.scene-float {
+  animation: scene-float 4s ease-in-out infinite;
+}
+
+/* Staggered entrance delays (pairs with .scene-pop-in from below) */
+.scene-delay-1 { animation-delay: .1s; }
+.scene-delay-2 { animation-delay: .2s; }
+.scene-delay-3 { animation-delay: .3s; }
+.scene-delay-4 { animation-delay: .4s; }
+
+/* Shine sweep across the Sign In button */
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-20deg);
+  animation: btn-shine-sweep 3.5s ease-in-out infinite;
+}
+@keyframes btn-shine-sweep {
+  0%, 60%, 100% { left: -60%; }
+  20%, 40% { left: 130%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-float,
+  .btn-shine::after {
+    animation: none;
+  }
+}
+
 /* Loading overlay traffic light (separate from the login page tl-* keyframes) */
 @keyframes loader-red {
   0%, 30% { opacity: 1; box-shadow: 0 0 8px 2px rgba(239, 68, 68, .7); }
