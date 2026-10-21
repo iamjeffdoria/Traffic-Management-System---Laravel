@@ -30,13 +30,11 @@ class TricycleMayorsPermitController extends Controller
             ->paginate(25)
             ->withQueryString();
 
-        $tricycles = Tricycle::orderBy('body_number')->get();
-
         if ($request->ajax()) {
-            return view('admin.partials.tricycle-mayors-permit-ajax-results', compact('permits', 'tricycles'));
+            return view('admin.partials.tricycle-mayors-permit-ajax-results', compact('permits'));
         }
 
-        return view('admin.tricycle-mayors-permit', compact('permits', 'tricycles'));
+        return view('admin.tricycle-mayors-permit', compact('permits'));
     }
 
     public function store(Request $request)

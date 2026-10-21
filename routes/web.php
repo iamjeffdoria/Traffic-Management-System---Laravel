@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\IdCardController;
 use App\Http\Controllers\Admin\PotpotController;
 use App\Http\Controllers\Admin\KasabutanController;
 use App\Http\Controllers\Admin\TanodController;
+use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
 use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpotDocumentSubmissionController;
@@ -66,6 +67,7 @@ Route::middleware(['auth', 'role:potpot_admin'])->group(function () {
     })->name('potpot.index');
 
     Route::get('/admin/potpot/list', [PotpotController::class, 'index'])->name('potpot.list');
+    Route::get('/admin/search/potpots', [SearchController::class, 'potpots'])->name('search.potpots');
     Route::post('/admin/potpot/list', [PotpotController::class, 'store'])->name('potpot.store');
     Route::put('/admin/potpot/list/{potpot}', [PotpotController::class, 'update'])->name('potpot.update');
     Route::delete('/admin/potpot/list/{potpot}', [PotpotController::class, 'destroy'])->name('potpot.destroy');
@@ -112,6 +114,7 @@ Route::middleware(['auth', 'role:tricycle_admin'])->group(function () {
     })->name('tricycle.index');
 
     Route::get('/admin/tricycles', [TricycleController::class, 'index'])->name('tricycle.list');
+    Route::get('/admin/search/tricycles', [SearchController::class, 'tricycles'])->name('search.tricycles');
     Route::post('/admin/tricycles', [TricycleController::class, 'store'])->name('tricycle.store');
     Route::put('/admin/tricycles/{tricycle}', [TricycleController::class, 'update'])->name('tricycle.update');
     Route::delete('/admin/tricycles/{tricycle}', [TricycleController::class, 'destroy'])->name('tricycle.destroy');

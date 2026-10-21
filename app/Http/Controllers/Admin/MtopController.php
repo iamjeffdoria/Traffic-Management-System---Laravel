@@ -28,13 +28,11 @@ class MtopController extends Controller
             ->paginate(25)
             ->withQueryString();
 
-        $tricycles = Tricycle::orderBy('body_number')->get();
-
         if ($request->ajax()) {
-            return view('admin.partials.mtop-ajax-results', compact('mtops', 'tricycles'));
+            return view('admin.partials.mtop-ajax-results', compact('mtops'));
         }
 
-        return view('admin.mtop', compact('mtops', 'tricycles'));
+        return view('admin.mtop', compact('mtops'));
     }
 
     public function store(Request $request)

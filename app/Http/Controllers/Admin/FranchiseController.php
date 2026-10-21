@@ -34,13 +34,11 @@ class FranchiseController extends Controller
             ->paginate(25)
             ->withQueryString();
 
-        $tricycles = Tricycle::orderBy('body_number')->get();
-
         if ($request->ajax()) {
-            return view('admin.partials.franchise-ajax-results', compact('franchises', 'tricycles'));
+            return view('admin.partials.franchise-ajax-results', compact('franchises'));
         }
 
-        return view('admin.franchise', compact('franchises', 'tricycles'));
+        return view('admin.franchise', compact('franchises'));
     }
 
     public function store(Request $request)

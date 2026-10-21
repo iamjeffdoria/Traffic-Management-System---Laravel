@@ -29,9 +29,7 @@ class KasabutanController extends Controller
             return view('admin.partials.kasabutan-selling-ajax-results', compact('sellings'));
         }
 
-        $potpots = Potpot::orderBy('body_number')->get(['id', 'body_number', 'name', 'address']);
-
-        return view('admin.kasabutan-selling', compact('sellings', 'potpots'));
+        return view('admin.kasabutan-selling', compact('sellings'));
     }
 
     public function printSelling(KasabutanSelling $selling)
@@ -107,9 +105,7 @@ class KasabutanController extends Controller
             return view('admin.partials.kasabutan-lost-item-ajax-results', compact('lostItems'));
         }
 
-        $potpots = Potpot::orderBy('body_number')->get(['id', 'body_number', 'name', 'driver', 'address']);
-
-        return view('admin.kasabutan-lost-item', compact('lostItems', 'potpots'));
+        return view('admin.kasabutan-lost-item', compact('lostItems'));
     }
 
     public function printLostItem(KasabutanLostItem $lostItem)
