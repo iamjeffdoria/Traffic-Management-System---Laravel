@@ -145,6 +145,7 @@
                         <option value="superadmin" @selected(request('role') === 'superadmin')>Super Admin</option>
                         <option value="potpot_admin" @selected(request('role') === 'potpot_admin')>Potpot Admin</option>
                         <option value="tricycle_admin" @selected(request('role') === 'tricycle_admin')>Tricycle Admin</option>
+                        <option value="tanod_admin" @selected(request('role') === 'tanod_admin')>Tanod Admin</option>
                     </select>
                 </div>
 
