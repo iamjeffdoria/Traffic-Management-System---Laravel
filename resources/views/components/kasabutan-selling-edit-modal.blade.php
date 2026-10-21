@@ -79,10 +79,19 @@
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
 
-            <div class="sm:col-span-2">
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Witness</label>
                 <input type="text" name="witness" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Witness Type</label>
+                <select name="witness_type" required
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <option value="" disabled hidden>Select type</option>
+                    <option value="Traffic Enforcer">Traffic Enforcer</option>
+                    <option value="PSO Personnel">PSO Personnel</option>
+                </select>
             </div>
 
             <div class="sm:col-span-2">

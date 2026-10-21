@@ -20,6 +20,7 @@ class KasabutanSelling extends Model
         'buyer_address',
         'amount',
         'witness',
+        'witness_type',
         'secretariat',
         'date',
     ];

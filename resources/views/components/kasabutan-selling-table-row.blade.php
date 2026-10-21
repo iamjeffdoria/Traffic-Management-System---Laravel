@@ -2,7 +2,7 @@
 
 @php
     $sellingEditData = array_merge(
-        $selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness', 'secretariat']),
+        $selling->only(['id', 'owner', 'barangay', 'municipality', 'body_number', 'buyer', 'buyer_address', 'amount', 'witness', 'witness_type', 'secretariat']),
         ['date' => $selling->date->format('Y-m-d')]
     );
 @endphp
@@ -59,6 +59,11 @@
     </td>
     <td class="px-6 py-4 align-top">
         <p class="text-gray-900 text-sm break-words">{{ $selling->witness }}</p>
+        @if ($selling->witness_type)
+            <span class="inline-block max-w-full truncate rounded-full {{ $selling->witness_type === 'PSO Personnel' ? 'bg-blue-600' : 'bg-amber-500' }} text-white text-xs font-semibold px-2.5 py-1 mt-1" title="{{ $selling->witness_type }}">
+                {{ $selling->witness_type }}
+            </span>
+        @endif
         @if ($selling->secretariat)
             <p class="text-gray-500 text-xs break-words mt-1">Secretariat: {{ $selling->secretariat }}</p>
         @endif

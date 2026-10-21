@@ -97,7 +97,7 @@
 
     <div class="witness-block">
         <div class="sig-line"><span class="sig-name">{{ $selling->witness }}</span></div>
-        <p class="sig-label">[ Testigos ]</p>
+        <p class="sig-label">[ Testigos{{ $selling->witness_type ? ' (' . $selling->witness_type . ')' : '' }} ]</p>
     </div>
 
     <div class="footer-row">

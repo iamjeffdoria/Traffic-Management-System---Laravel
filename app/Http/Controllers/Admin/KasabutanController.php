@@ -49,6 +49,7 @@ class KasabutanController extends Controller
             'buyer_address' => 'required|string|max:255',
             'amount' => 'required|numeric|min:0',
             'witness' => 'required|string|max:255',
+            'witness_type' => 'required|in:Traffic Enforcer,PSO Personnel',
             'date' => 'required|date',
         ]);
 
@@ -69,6 +70,7 @@ class KasabutanController extends Controller
             'buyer_address' => 'required|string|max:255',
             'amount' => 'required|numeric|min:0',
             'witness' => 'required|string|max:255',
+            'witness_type' => 'required|in:Traffic Enforcer,PSO Personnel',
             'date' => 'required|date',
         ]);
 
