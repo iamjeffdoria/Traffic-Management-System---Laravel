@@ -129,7 +129,8 @@ class KasabutanController extends Controller
             'issued_at' => 'required|string|max:255',
             'witness_1' => 'required|string|max:255',
             'witness_2' => 'required|string|max:255',
-            'witness_type' => 'required|in:Traffic Enforcer,PSO Personnel',
+            'witness_1_type' => 'required|in:Traffic Enforcer,PSO Personnel',
+            'witness_2_type' => 'required|in:Traffic Enforcer,PSO Personnel',
             'it_section' => 'required|string|max:255',
             'security_officer' => 'required|string|max:255',
         ]);
@@ -156,6 +157,8 @@ class KasabutanController extends Controller
             'issued_at' => 'required|string|max:255',
             'witness_1' => 'required|string|max:255',
             'witness_2' => 'required|string|max:255',
+            'witness_1_type' => 'required|in:Traffic Enforcer,PSO Personnel',
+            'witness_2_type' => 'required|in:Traffic Enforcer,PSO Personnel',
             'it_section' => 'required|string|max:255',
             'security_officer' => 'required|string|max:255',
         ]);

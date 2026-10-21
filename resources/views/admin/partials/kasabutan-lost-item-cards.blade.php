@@ -26,12 +26,12 @@
                 <span class="inline-block rounded-full bg-amber-500 text-white text-xs font-semibold px-2.5 py-1 whitespace-nowrap">{{ \Carbon\Carbon::parse($item->time)->format('g:i A') }}</span>
             </div>
 
-            <p class="text-gray-500 text-xs mt-1.5">Witnesses ({{ $item->witness_type }}): {{ $item->witness_1 }}, {{ $item->witness_2 }}</p>
+            <p class="text-gray-500 text-xs mt-1.5">Witnesses: {{ $item->witness_1 }} ({{ $item->witness_1_type }}), {{ $item->witness_2 }} ({{ $item->witness_2_type }})</p>
             <p class="text-gray-500 text-xs">{{ $item->issued_at }}</p>
             <p class="text-gray-400 text-xs">Verified: {{ $item->it_section }} · Noted: {{ $item->security_officer }}</p>
 
             <div class="flex items-center gap-1 mt-2">
-                <button type="button" title="Edit" onclick="openKasabutanLostItemEditModal({{ Illuminate\Support\Js::from(array_merge($item->only(['id', 'driver', 'body_number', 'driver_age', 'driver_address', 'amount', 'passenger', 'passenger_age', 'passenger_address', 'issued_at', 'witness_1', 'witness_2', 'witness_type', 'it_section', 'security_officer']), ['date' => $item->date->format('Y-m-d'), 'time' => \Carbon\Carbon::parse($item->time)->format('H:i')])) }})" class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+                <button type="button" title="Edit" onclick="openKasabutanLostItemEditModal({{ Illuminate\Support\Js::from(array_merge($item->only(['id', 'driver', 'body_number', 'driver_age', 'driver_address', 'amount', 'passenger', 'passenger_age', 'passenger_address', 'issued_at', 'witness_1', 'witness_2', 'witness_1_type', 'witness_2_type', 'it_section', 'security_officer']), ['date' => $item->date->format('Y-m-d'), 'time' => \Carbon\Carbon::parse($item->time)->format('H:i')])) }})" class="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>

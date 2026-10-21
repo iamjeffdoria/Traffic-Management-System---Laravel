@@ -106,24 +106,32 @@
                 <p class="text-sm font-semibold text-gray-900">Witnesses</p>
             </div>
 
-            <div class="sm:col-span-2">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Witness Type</label>
-                <select name="witness_type" required
-                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
-                    <option value="Traffic Enforcer" @selected(old('witness_type', 'Traffic Enforcer') === 'Traffic Enforcer')>Traffic Enforcer</option>
-                    <option value="PSO Personnel" @selected(old('witness_type') === 'PSO Personnel')>PSO Personnel</option>
-                </select>
-            </div>
-
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Witness 1</label>
                 <input type="text" name="witness_1" value="{{ old('witness_1') }}" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
             <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Witness 1 Type</label>
+                <select name="witness_1_type" required
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <option value="Traffic Enforcer" @selected(old('witness_1_type', 'Traffic Enforcer') === 'Traffic Enforcer')>Traffic Enforcer</option>
+                    <option value="PSO Personnel" @selected(old('witness_1_type') === 'PSO Personnel')>PSO Personnel</option>
+                </select>
+            </div>
+
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Witness 2</label>
                 <input type="text" name="witness_2" value="{{ old('witness_2') }}" required
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Witness 2 Type</label>
+                <select name="witness_2_type" required
+                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <option value="Traffic Enforcer" @selected(old('witness_2_type', 'Traffic Enforcer') === 'Traffic Enforcer')>Traffic Enforcer</option>
+                    <option value="PSO Personnel" @selected(old('witness_2_type') === 'PSO Personnel')>PSO Personnel</option>
+                </select>
             </div>
 
             <div class="sm:col-span-2 border-t border-gray-100 pt-4">

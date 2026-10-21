@@ -25,7 +25,8 @@ class KasabutanLostItem extends Model
         'issued_at',
         'witness_1',
         'witness_2',
-        'witness_type',
+        'witness_1_type',
+        'witness_2_type',
         'it_section',
         'security_officer',
     ];
