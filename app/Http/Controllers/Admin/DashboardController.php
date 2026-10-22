@@ -74,7 +74,10 @@ class DashboardController extends Controller
 
         // Tanod has no expiry dates, so the alert/renewals only apply to potpot and tricycle.
         $tracksExpiry = collect($modules)->contains(fn ($m) => $m !== 'tanod');
-        $expiringHref = in_array('potpot', $modules, true) ? route('potpot.list') : route('tricycle.list');
+        $expiringHref = route('admin.expiring', array_filter([
+            'module' => $selectedModule !== 'all' ? $selectedModule : null,
+            'days' => 30,
+        ]));
 
         $monthlyRegistrations = collect(range(0, 7))->map(function ($i) use ($modules) {
             $month = now()->startOfMonth()->subMonths(7 - $i);
@@ -186,7 +189,7 @@ class DashboardController extends Controller
                 $this->card('ID Cards Issued', $idCards, 'idcard', 'teal', route('potpot.id-cards')),
                 $this->card('Kasabutan Records', $kasabutan, 'tag', 'indigo', route('potpot.kasabutan.selling'), 'Selling + Lost Item'),
                 $this->card('Pending Documents', PotpotDocumentSubmission::where('status', 'pending')->count(), 'upload', 'cyan', route('potpot.document-submissions'), 'Awaiting review'),
-                $this->card('Expiring Soon', $expiring, 'clock', 'amber', route('potpot.list'), 'Within next 30 days'),
+                $this->card('Expiring Soon', $expiring, 'clock', 'amber', route('admin.expiring', ['module' => 'potpot']), 'Within next 30 days'),
             ],
             'panels' => [
                 $this->statusPanel('Potpot Status', $statusCounts),
@@ -285,7 +288,7 @@ class DashboardController extends Controller
                 $this->card('MTOP Records', $mtops, 'clipboard', 'amber', route('tricycle.mtop')),
                 $this->card('Active Franchises', Franchise::whereIn('status', ['New', 'Renewed'])->count(), 'franchise', 'cyan', route('tricycle.franchise'), 'New + Renewed'),
                 $this->card('Pending Documents', TricycleDocumentSubmission::where('status', 'pending')->count(), 'upload', 'teal', route('tricycle.document-submissions'), 'Awaiting review'),
-                $this->card('Expiring Soon', $expiring, 'clock', 'red', route('tricycle.list'), 'Within next 30 days'),
+                $this->card('Expiring Soon', $expiring, 'clock', 'red', route('admin.expiring', ['module' => 'tricycle']), 'Within next 30 days'),
             ],
             'panels' => [
                 $this->statusPanel('Tricycle Status', $statusCounts),

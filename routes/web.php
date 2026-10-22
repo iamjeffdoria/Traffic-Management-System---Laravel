@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\KasabutanController;
 use App\Http\Controllers\Admin\TanodController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExpiringController;
 use App\Http\Controllers\Admin\DocumentSubmissionController;
 use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpotDocumentSubmissionController;
 use App\Http\Controllers\DriverDocumentSubmissionController;
@@ -53,6 +54,7 @@ Route::post('/potpot/submit-documents', [PotpotDocumentSubmissionController::cla
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/expiring', [ExpiringController::class, 'index'])->name('admin.expiring');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Scanner: any logged-in admin can use it, regardless of role.
