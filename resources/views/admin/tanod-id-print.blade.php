@@ -57,6 +57,7 @@
         .f-name     { top: 50.5%; left: 47.5%; width: 45.5%; text-transform: uppercase; }
         .f-address  { top: 55.2%; left: 47.5%; width: 45.5%; }
         .f-dob      { top: 58.5%; left: 47.5%; width: 45.5%; }
+        .f-logo     { position: absolute; top: 2%; left: 78%; width: 19.5%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #8f0f12 0%, #7a0c0f 70%, #5e080b 100%); object-fit: contain; padding: 1%; z-index: 2; }
 
         /* ---- BACK ---- */
         .b-barangay     { top: 22.5%; left: 60%;   width: 27%;   text-align: center; text-transform: uppercase; }
@@ -82,6 +83,7 @@
                 @if ($tanodId->photo_path)
                     <img class="f-photo" src="{{ asset('storage/' . $tanodId->photo_path) }}" alt="">
                 @endif
+                <img class="f-logo" src="{{ asset('images/csulogo2.png') }}" alt="">
                 <div class="field fit f-barangay">{{ $tanod?->barangay }}</div>
                 <div class="field fit f-idno">{{ $tanodId->id_number }}</div>
                 <div class="field fit f-name">{{ $tanodId->full_name }}</div>
@@ -120,4 +122,4 @@
     });
 </script>
 </body>
-</html>
+</html> 
