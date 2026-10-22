@@ -63,7 +63,8 @@
         .sig-label { margin: 4px 0 0; font-size: 12px; }
 
         .officials-table { width: 100%; border-collapse: collapse; margin-top: 40px; page-break-inside: avoid; }
-        .officials-table td { width: 50%; vertical-align: top; text-align: center; padding: 0 24px; }
+        .officials-table td { width: 50%; vertical-align: top; text-align: center; padding: 0 8px; }
+        .officials-table .sig-name { white-space: nowrap; font-size: 13px; }
         .official-heading { text-align: left; font-weight: bold; font-size: 12px; letter-spacing: 0.5px; margin: 0 0 30px; }
         .official-title { margin: 2px 0 0; font-size: 12px; }
     </style>

@@ -24,16 +24,25 @@
         }
         .field-row {
             display: flex;
-            gap: 40px;
+            gap: 24px;
             margin-bottom: 22px;
         }
         .field-row .field { flex: 1; display: flex; min-width: 0; }
         .field-label { font-weight: bold; width: 190px; flex-shrink: 0; }
-        .field-value { flex: 1; }
+        .field-value { flex: 1; min-width: 0; }
+
+        /* Rows with two fields: left column lines up with the single-field rows,
+           right column has its own fixed label width so values align too */
+        .field-row:has(.field + .field) { gap: 16px; }
+        .field-row:has(.field + .field) .field:first-child { flex: 0 0 360px; }
+        .field-row:has(.field + .field) .field + .field { flex: 1; }
+        .field-row:has(.field + .field) .field + .field .field-label { width: 150px; white-space: nowrap; }
+        .field-row:has(.field + .field) .field-value { white-space: nowrap; }
         .signature-block { margin-top: 60px; display: flex; justify-content: flex-end; }
-        .signature-block .sig-inner { width: 240px; text-align: center; }
+        .signature-block .sig-inner { min-width: 240px; width: max-content; max-width: 100%; text-align: center; }
         .signature-block .name {
             font-weight: bold;
+            white-space: nowrap;
             display: block;
             border-bottom: 1px solid #000;
             padding-bottom: 6px;

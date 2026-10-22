@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=block" rel="stylesheet">
     <style>
-        @page { size: letter portrait; margin: 0; }
+        @page { size: A4 portrait; margin: 0; }
         * {
             box-sizing: border-box;
             -webkit-print-color-adjust: exact !important;
@@ -23,12 +23,12 @@
         body { font-family: 'Montserrat', Arial, Helvetica, sans-serif; color: #111; }
 
         .sheet {
-            width: 8.5in;
-            height: 10.95in;
+            width: 210mm;
+            height: 296mm;
             display: grid;
-            grid-template-columns: repeat(2, 3.4in);
-            grid-template-rows: repeat(2, 4.75in);
-            gap: 0.3in;
+            grid-template-columns: repeat(2, 98mm);
+            grid-template-rows: repeat(2, 136.9mm);
+            gap: 4mm;
             justify-content: center;
             align-content: center;
             page-break-after: always;
@@ -37,12 +37,12 @@
         }
         .sheet:last-of-type { page-break-after: auto; break-after: auto; }
 
-        .card { position: relative; width: 3.4in; height: 4.75in; }
+        .card { position: relative; width: 98mm; height: 136.9mm; container-type: inline-size; }
         .card .bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
         .field {
             position: absolute;
-            font-size: 11px;
+            font-size: 3.37cqw;
             font-weight: 700;
             line-height: 1.2;
             color: #111;
@@ -62,9 +62,9 @@
         .b-barangay     { top: 22.5%; left: 60%;   width: 27%;   text-align: center; text-transform: uppercase; }
         .b-name         { top: 43%; left: 32%;   width: 59.5%; }
         .b-address      { top: 48%; left: 32%;   width: 59.5%; }
-        .b-contact      { top: 54.3%; left: 29%;   width: 19%;   font-size: 9px; }
-        .b-relationship { top: 54.3%; left: 75.5%; width: 19%;   font-size: 9px; }
-        .b-punong       { top: 73.9%; left: 59.5%; width: 31%;   text-align: center; text-transform: uppercase; font-size: 9px; }
+        .b-contact      { top: 54.3%; left: 29%;   width: 19%;   font-size: 2.76cqw; }
+        .b-relationship { top: 54.3%; left: 75.5%; width: 19%;   font-size: 2.76cqw; }
+        .b-punong       { top: 73.9%; left: 59.5%; width: 31%;   text-align: center; text-transform: uppercase; font-size: 2.76cqw; }
     </style>
 </head>
 <body>
