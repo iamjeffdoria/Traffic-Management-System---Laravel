@@ -152,7 +152,9 @@
 
 /* ===== Neomorphism (login page) ===== */
 .neo-bg {
-  background: #e0e5ec;
+  background-color: #e0e5ec;
+  background-image: radial-gradient(rgba(148, 163, 184, .28) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
 }
 
 .neo-raised {
@@ -234,4 +236,64 @@
 .neo-check:focus-visible {
   outline: 2px solid rgba(220, 38, 38, .5);
   outline-offset: 2px;
+}
+
+/* ===== Login page enhancements ===== */
+.neo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .45rem .9rem;
+  border-radius: 9999px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: #4b5563;
+  background: #e0e5ec;
+  box-shadow: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
+}
+
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .3rem .75rem;
+  border-radius: 9999px;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #b91c1c;
+  background: #e0e5ec;
+  box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff;
+}
+
+.neo-input-icon {
+  color: #9aa3b2;
+  transition: color .2s ease;
+}
+.neo-input-wrap:focus-within .neo-input-icon {
+  color: #dc2626;
+}
+
+@keyframes login-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.login-shake {
+  animation: login-shake .45s ease-in-out;
+}
+
+@keyframes login-spin {
+  to { transform: rotate(360deg); }
+}
+.login-spinner {
+  animation: login-spin .8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-shake,
+  .login-spinner {
+    animation: none;
+  }
 }

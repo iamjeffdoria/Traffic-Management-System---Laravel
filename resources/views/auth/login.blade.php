@@ -32,6 +32,15 @@
                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                     Manage tricycle and potpot registrations, mayor's permits, ID cards, and document submissions.
                 </p>
+
+                <div class="mt-6 flex flex-wrap gap-2.5">
+                    <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Tricycle</span>
+                    <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-blue-500"></span>Potpot</span>
+                    <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Tanod</span>
+                    <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-purple-500"></span>Mayor's Permits</span>
+                    <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-red-500"></span>ID Cards</span>
+                    <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-cyan-500"></span>QR Verification</span>
+                </div>
             </div>
         </div>
 
@@ -55,11 +64,17 @@
             </div>
 
             <div class="neo-raised rounded-3xl p-8 login-card-enter">
-                <h2 class="text-2xl font-bold text-gray-700 tracking-tight">Welcome back</h2>
+                <span class="neo-badge">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Authorized personnel only
+                </span>
+                <h2 class="mt-4 text-2xl font-bold text-gray-700 tracking-tight">Welcome back</h2>
                 <p class="mt-1 text-sm text-gray-500">Sign in to your account to continue.</p>
 
                 @if ($errors->any())
-                    <div class="neo-inset mt-6 flex items-start gap-2 rounded-xl text-red-600 text-sm px-4 py-3">
+                    <div class="login-shake neo-inset mt-6 flex items-start gap-2 rounded-xl text-red-600 text-sm px-4 py-3">
                         <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                         </svg>
@@ -72,20 +87,32 @@
 
                     <div class="scene-pop-in scene-delay-1">
                         <label for="email" class="block text-sm font-medium text-gray-600 mb-2">Email</label>
-                        <input type="email" name="email" id="email"
-                            value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
-                            autocomplete="username"
-                            placeholder="you@example.com"
-                            class="neo-input w-full rounded-xl px-4 py-3 text-sm">
+                        <div class="neo-input-wrap relative">
+                            <span class="neo-input-icon pointer-events-none absolute left-4 top-1/2 -translate-y-1/2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </span>
+                            <input type="email" name="email" id="email"
+                                value="{{ old('email', request()->cookie('remembered_email')) }}" required autofocus
+                                autocomplete="username"
+                                placeholder="you@example.com"
+                                class="neo-input w-full rounded-xl pl-12 pr-4 py-3 text-sm">
+                        </div>
                     </div>
 
                     <div class="scene-pop-in scene-delay-2">
                         <label for="password" class="block text-sm font-medium text-gray-600 mb-2">Password</label>
-                        <div class="relative">
+                        <div class="neo-input-wrap relative">
+                            <span class="neo-input-icon pointer-events-none absolute left-4 top-1/2 -translate-y-1/2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </span>
                             <input type="password" name="password" id="password" required
                                 autocomplete="current-password"
                                 placeholder="Enter your password"
-                                class="neo-input w-full rounded-xl px-4 py-3 pr-14 text-sm">
+                                class="neo-input w-full rounded-xl pl-12 pr-14 py-3 text-sm">
                             <button type="button" onclick="togglePassword('password', 'eye-open', 'eye-closed')"
                                 class="neo-raised-sm absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 hover:text-gray-700">
                                 <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,14 +126,22 @@
                         </div>
                     </div>
 
+                    <p id="caps-warning" class="hidden -mt-3 text-xs font-medium text-amber-600">
+                        Caps Lock is on
+                    </p>
+
                     <label class="flex items-center gap-3 text-sm text-gray-600 cursor-pointer select-none scene-pop-in scene-delay-3">
                         <input type="checkbox" name="remember" @checked(old('remember')) class="neo-check">
                         Remember me
                     </label>
 
-                    <button type="submit"
-                        class="neo-btn btn-shine relative overflow-hidden w-full rounded-xl px-6 py-3 text-sm font-semibold tracking-wide scene-pop-in scene-delay-4">
-                        Sign In
+                    <button type="submit" id="login-btn"
+                        class="neo-btn btn-shine relative overflow-hidden w-full rounded-xl px-6 py-3 text-sm font-semibold tracking-wide scene-pop-in scene-delay-4 inline-flex items-center justify-center gap-2">
+                        <svg id="login-btn-spinner" class="login-spinner hidden w-4 h-4" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        </svg>
+                        <span id="login-btn-label">Sign In</span>
                     </button>
                 </form>
             </div>
@@ -117,4 +152,42 @@
         </div>
     </main>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('login-btn');
+        const label = document.getElementById('login-btn-label');
+        const spinner = document.getElementById('login-btn-spinner');
+        const password = document.getElementById('password');
+        const caps = document.getElementById('caps-warning');
+
+        if (!btn || !password) return;
+
+        // Caps Lock warning while typing the password
+        const checkCaps = (event) => {
+            if (!event.getModifierState) return;
+            caps.classList.toggle('hidden', !event.getModifierState('CapsLock'));
+        };
+        password.addEventListener('keydown', checkCaps);
+        password.addEventListener('keyup', checkCaps);
+        password.addEventListener('blur', () => caps.classList.add('hidden'));
+
+        // Loading state on submit
+        btn.form.addEventListener('submit', () => {
+            btn.disabled = true;
+            btn.classList.add('opacity-80', 'cursor-wait');
+            label.textContent = 'Signing in...';
+            spinner.classList.remove('hidden');
+        });
+
+        // Reset the button if the user returns with the browser's back button
+        window.addEventListener('pageshow', (event) => {
+            if (!event.persisted) return;
+            btn.disabled = false;
+            btn.classList.remove('opacity-80', 'cursor-wait');
+            label.textContent = 'Sign In';
+            spinner.classList.add('hidden');
+        });
+    });
+</script>
 @endsection
