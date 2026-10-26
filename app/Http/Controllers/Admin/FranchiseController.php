@@ -113,6 +113,16 @@ class FranchiseController extends Controller
         return view('admin.franchise-print', compact('franchise'));
     }
 
+    public function printRegistrationSlip(Franchise $franchise)
+    {
+        $franchise->load('tricycle');
+
+        return view('admin.franchise-registration-print', [
+            'franchise' => $franchise,
+            'slip' => config('franchise.registration_slip'),
+        ]);
+    }
+
     public function printLicense(Request $request, Franchise $franchise)
     {
         abort_if(
