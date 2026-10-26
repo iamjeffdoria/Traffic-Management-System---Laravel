@@ -84,6 +84,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v6H6v-6z" />
                 </svg>
             </button>
+            <button type="button" onclick="printFromUrl('{{ route('tricycle.mayors-permit.slip', $permit) }}')" title="Print Mayor's Permit Slip"
+                class="p-1.5 rounded-lg text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4m5 8H4a1 1 0 01-1-1V4a1 1 0 011-1h16a1 1 0 011 1v15a1 1 0 01-1 1zM7 8h10" />
+                </svg>
+            </button>
             <form id="delete-permit-form-mobile-{{ $permit->id }}" method="POST" action="{{ route('tricycle.mayors-permit.destroy', $permit) }}">
                 @csrf
                 @method('DELETE')

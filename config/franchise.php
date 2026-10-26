@@ -29,6 +29,26 @@ return [
         ],
     ],
 
+    'mayors_permit_slip' => [
+        'office' => 'OFFICE OF THE TRAFFIC MANAGEMENT SECTION',
+        'title' => "MAYOR'S PERMIT",
+
+        'fees' => [
+            ['label' => "Mayor's Permit", 'amount' => 100],
+            ['label' => 'Documentary Stamp', 'amount' => 30],
+            ['label' => 'Franchise Fee Motorized Tricycle', 'amount' => 50],
+        ],
+
+        'secretary' => [
+            'name' => 'JAMAICA L. DELFIN',
+            'title' => 'TMS-SECRETARY',
+        ],
+        'officer' => [
+            'name' => 'PLTCOL MARGARITO A. SALAÑO (RET)',
+            'title' => 'CIVIL SECURITY OFFICER',
+        ],
+    ],
+
     'license' => [
         'ordinance_no' => '465-190922',
         'default_issued_at' => 'Civil Security Office Palompon, Leyte',

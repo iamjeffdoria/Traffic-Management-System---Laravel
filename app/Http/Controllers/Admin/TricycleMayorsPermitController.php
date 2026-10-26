@@ -101,6 +101,16 @@ class TricycleMayorsPermitController extends Controller
         return view('admin.tricycle-mayors-permit-print', compact('permit'));
     }
 
+    public function printSlip(TricycleMayorsPermit $permit)
+    {
+        $permit->load('tricycle');
+
+        return view('admin.tricycle-mayors-permit-slip-print', [
+            'permit' => $permit,
+            'slip' => config('franchise.mayors_permit_slip'),
+        ]);
+    }
+
     public function export()
     {
         return Excel::download(new TricycleMayorsPermitsExport, 'tricycle-mayors-permits-' . now()->format('Y-m-d') . '.xlsx');
