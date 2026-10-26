@@ -2,7 +2,18 @@
     // ?side=front or ?side=back prints only that side (4 cards per page).
     // Default prints front + back side by side (2 IDs per page).
     $side = in_array(request()->query('side'), ['front', 'back']) ? request()->query('side') : 'both';
-    $pages = $tanodIds->values()->chunk($side === 'both' ? 2 : 4);
+    $pages = $tanodIds->values()->chunk($side === 'both' ? 2 : 4)->map(function ($page) use ($side) {
+        $slots = $page->values()->all();
+
+        // Backs are mirrored left/right within each row so that, when the sheet is
+        // flipped for double-sided printing, every back lands behind its own front.
+        if ($side === 'back') {
+            $slots = array_pad($slots, 4, null);
+            $slots = [$slots[1], $slots[0], $slots[3], $slots[2]];
+        }
+
+        return $slots;
+    });
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +85,11 @@
 @foreach ($pages as $page)
     <div class="sheet">
         @foreach ($page as $tanodId)
+            @if ($tanodId === null)
+                {{-- empty slot: keeps the mirrored position of the matching front --}}
+                <div class="card"></div>
+                @continue
+            @endif
             @php $tanod = $tanods->get($tanodId->id_number); @endphp
 
             {{-- FRONT --}}
