@@ -14,7 +14,7 @@
     </div>
 
     {{-- Brand panel (desktop only) --}}
-    <aside class="hidden lg:flex flex-col justify-between gap-4 px-12 py-8 min-h-0">
+    <aside class="relative z-10 hidden lg:flex flex-col justify-between gap-4 px-12 py-8 min-h-0">
         <div class="flex items-center gap-6">
             <div class="neo-raised w-36 h-36 rounded-full flex items-center justify-center shrink-0 scene-pop-in">
                 <div class="neo-inset w-28 h-28 rounded-full flex items-center justify-center overflow-hidden">
@@ -69,11 +69,11 @@
     </aside>
 
     {{-- Form panel --}}
-    <main class="flex items-center justify-center px-6 py-6 lg:py-4 min-h-0">
+    <main class="relative z-10 flex items-center justify-center px-6 py-6 lg:py-4 min-h-0">
         <div class="w-full max-w-sm">
 
             {{-- Mobile logo --}}
-            <div class="lg:hidden flex flex-col items-center gap-4 mb-10 scene-pop-in">
+            <div class="lg:hidden flex flex-col items-center gap-3 mb-6 scene-pop-in">
                 <div class="neo-raised w-32 h-32 rounded-full flex items-center justify-center">
                     <div class="neo-inset w-24 h-24 rounded-full flex items-center justify-center overflow-hidden">
                         <img src="{{ asset('images/csulogo2.png') }}" alt="PSO Logo" class="w-[5.5rem] h-[5.5rem] object-contain drop-shadow-md scene-float">
@@ -168,21 +168,12 @@
                     </button>
                 </form>
 
-                <div class="neo-inset mt-6 flex items-start gap-2.5 rounded-xl px-4 py-3">
-                    <svg class="w-4 h-4 mt-0.5 shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p class="text-xs leading-relaxed text-gray-500">
-                        Trouble signing in? Contact your system administrator to reset your password or update your access.
-                    </p>
-                </div>
+                <p class="mt-5 text-center text-xs text-gray-500">
+                    Trouble signing in? <span class="font-medium text-gray-600">Contact your administrator.</span>
+                </p>
             </div>
 
-            <p class="mt-4 text-center text-xs text-gray-500">
-                Trouble signing in? Contact your system administrator.
-            </p>
-
-            <p class="lg:hidden mt-3 text-center text-xs text-gray-500">
+            <p class="lg:hidden mt-4 text-center text-xs text-gray-500">
                 &copy; {{ date('Y') }} Public Safety Office
             </p>
         </div>
