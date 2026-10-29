@@ -3,7 +3,7 @@
 @section('title', 'Admin Login')
 
 @section('content')
-<section class="min-h-screen grid lg:grid-cols-2 neo-bg relative cartoon-bg overflow-hidden">
+<section class="min-h-screen lg:h-screen grid lg:grid-cols-2 lg:grid-rows-[minmax(0,1fr)] neo-bg relative cartoon-bg overflow-hidden">
 
     {{-- Decorative floating blobs (cartoony background) --}}
     <div class="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -14,7 +14,7 @@
     </div>
 
     {{-- Brand panel (desktop only) --}}
-    <aside class="hidden lg:flex flex-col justify-between p-14">
+    <aside class="hidden lg:flex flex-col justify-between gap-4 px-12 py-8 min-h-0">
         <div class="flex items-center gap-6">
             <div class="neo-raised w-36 h-36 rounded-full flex items-center justify-center shrink-0 scene-pop-in">
                 <div class="neo-inset w-28 h-28 rounded-full flex items-center justify-center overflow-hidden">
@@ -25,9 +25,9 @@
         </div>
 
         <div class="max-w-md">
-            <div class="neo-inset rounded-3xl p-8 scene-pop-in scene-delay-2">
+            <div class="neo-inset rounded-3xl p-6 scene-pop-in scene-delay-2">
                 <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-700">
-                    Permits, franchises &amp; records in one place.
+                    Permits, franchises &amp; records in <span class="text-gradient-red">one place.</span>
                 </h1>
                 <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                     Manage tricycle and potpot registrations, mayor's permits, ID cards, and document submissions.
@@ -41,6 +41,25 @@
                     <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-red-500"></span>ID Cards</span>
                     <span class="neo-chip"><span class="w-2 h-2 rounded-full bg-cyan-500"></span>QR Verification</span>
                 </div>
+
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                    <div class="neo-raised-sm rounded-2xl px-4 py-3">
+                        <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400">Today</p>
+                        <p id="login-date" class="mt-0.5 text-sm font-bold text-gray-700">&mdash;</p>
+                    </div>
+                    <div class="neo-raised-sm rounded-2xl px-4 py-3">
+                        <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400">Local Time</p>
+                        <p id="login-clock" class="mt-0.5 text-sm font-bold text-gray-700 tabular-nums">--:--:--</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center gap-2 text-xs font-medium text-gray-500">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="status-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                    </span>
+                    System online
+                </div>
             </div>
         </div>
 
@@ -50,7 +69,7 @@
     </aside>
 
     {{-- Form panel --}}
-    <main class="flex items-center justify-center px-6 py-12">
+    <main class="flex items-center justify-center px-6 py-6 lg:py-4 min-h-0">
         <div class="w-full max-w-sm">
 
             {{-- Mobile logo --}}
@@ -63,14 +82,15 @@
                 <span class="text-base font-extrabold uppercase tracking-wider text-gray-700">Public Safety Office</span>
             </div>
 
-            <div class="neo-raised rounded-3xl p-8 login-card-enter">
+            <div class="neo-raised rounded-3xl p-7 login-card-enter relative overflow-hidden">
+                <div class="login-accent-bar" aria-hidden="true"></div>
                 <span class="neo-badge">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     Authorized personnel only
                 </span>
-                <h2 class="mt-4 text-2xl font-bold text-gray-700 tracking-tight">Welcome back</h2>
+                <h2 class="mt-4 text-2xl font-bold text-gray-700 tracking-tight"><span id="login-greeting">Welcome back</span></h2>
                 <p class="mt-1 text-sm text-gray-500">Sign in to your account to continue.</p>
 
                 @if ($errors->any())
@@ -82,7 +102,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}" class="mt-8 space-y-6">
+                <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-5">
                     @csrf
 
                     <div class="scene-pop-in scene-delay-1">
@@ -142,11 +162,27 @@
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
                         </svg>
                         <span id="login-btn-label">Sign In</span>
+                        <svg class="btn-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
                     </button>
                 </form>
+
+                <div class="neo-inset mt-6 flex items-start gap-2.5 rounded-xl px-4 py-3">
+                    <svg class="w-4 h-4 mt-0.5 shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="text-xs leading-relaxed text-gray-500">
+                        Trouble signing in? Contact your system administrator to reset your password or update your access.
+                    </p>
+                </div>
             </div>
 
-            <p class="lg:hidden mt-8 text-center text-xs text-gray-500">
+            <p class="mt-4 text-center text-xs text-gray-500">
+                Trouble signing in? Contact your system administrator.
+            </p>
+
+            <p class="lg:hidden mt-3 text-center text-xs text-gray-500">
                 &copy; {{ date('Y') }} Public Safety Office
             </p>
         </div>
@@ -160,6 +196,29 @@
         const spinner = document.getElementById('login-btn-spinner');
         const password = document.getElementById('password');
         const caps = document.getElementById('caps-warning');
+
+        // Live date/time (Philippine time) + time-based greeting
+        const clockEl = document.getElementById('login-clock');
+        const dateEl = document.getElementById('login-date');
+        const greetEl = document.getElementById('login-greeting');
+
+        const tick = () => {
+            const now = new Date();
+            const tz = { timeZone: 'Asia/Manila' };
+
+            if (clockEl) {
+                clockEl.textContent = now.toLocaleTimeString('en-US', { ...tz, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            }
+            if (dateEl) {
+                dateEl.textContent = now.toLocaleDateString('en-US', { ...tz, weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+            }
+            if (greetEl) {
+                const hour = parseInt(now.toLocaleString('en-US', { ...tz, hour: 'numeric', hour12: false }), 10) % 24;
+                greetEl.textContent = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+            }
+        };
+        tick();
+        setInterval(tick, 1000);
 
         if (!btn || !password) return;
 

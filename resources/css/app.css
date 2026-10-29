@@ -303,3 +303,72 @@ html {
     animation: none;
   }
 }
+
+/* ===== Login page: polish ===== */
+
+/* Animated colour strip on top of the login card */
+.login-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #ef4444);
+  background-size: 200% 100%;
+  animation: accent-slide 6s linear infinite;
+}
+@keyframes accent-slide {
+  to { background-position: 200% 0; }
+}
+
+/* Gradient text accent */
+.text-gradient-red {
+  background: linear-gradient(90deg, #b91c1c, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Chips lift on hover */
+.neo-chip {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.neo-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px #ffffff;
+}
+
+/* Softer focus ring on inputs */
+.neo-input:focus {
+  box-shadow:
+    inset 3px 3px 7px #a3b1c6,
+    inset -3px -3px 7px #ffffff,
+    0 0 0 4px rgba(220, 38, 38, .12);
+}
+
+/* Sign In arrow nudges right on hover */
+.btn-arrow {
+  transition: transform .2s ease;
+}
+.neo-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* "System online" pulse */
+.status-ping {
+  animation: status-ping 1.8s cubic-bezier(0, 0, .2, 1) infinite;
+}
+@keyframes status-ping {
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-accent-bar,
+  .status-ping {
+    animation: none;
+  }
+  .neo-chip:hover,
+  .neo-btn:hover .btn-arrow {
+    transform: none;
+  }
+}
