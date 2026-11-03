@@ -52,7 +52,7 @@
 
 <div class="lg:flex group/layout">
     <x-sidebar active="dashboard" />
-    <div class="flex-1 min-w-0 lg:ml-56 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
+    <div class="flex-1 min-w-0 lg:ml-60 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
         <x-topbar title="Dashboard" />
 
         <div class="max-w-7xl mx-auto px-6 pt-8 pb-8">

@@ -5,7 +5,7 @@
 @section('content')
 <div class="lg:flex group/layout">
     <x-sidebar active="scanner" />
-    <div class="flex-1 min-w-0 lg:ml-56 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
+    <div class="flex-1 min-w-0 lg:ml-60 lg:group-has-[#sidebar-collapse:checked]/layout:ml-16 transition-all duration-300 ease-in-out">
         <x-topbar title="Scanner" />
 
         <div class="max-w-2xl mx-auto px-6 py-8">
