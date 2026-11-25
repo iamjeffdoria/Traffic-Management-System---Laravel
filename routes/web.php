@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\PotpotDocumentSubmissionController as AdminPotpot
 use App\Http\Controllers\DriverDocumentSubmissionController;
 use App\Http\Controllers\PotpotDocumentSubmissionController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -32,6 +33,16 @@ Route::get('/', function () {
 Route::get('/ping', function () {
     return response()->json(['message' => 'Laravel is alive']);
 });
+
+// Serves uploaded photos/documents without needing the public/storage symlink,
+// which doesn't exist inside the built NativePHP app.
+Route::get('/storage/{path}', function (string $path) {
+    $disk = Storage::disk('public');
+
+    abort_unless($disk->exists($path), 404);
+
+    return $disk->response($path);
+})->where('path', '.*');
 
 // Guest-only: show and submit the login form
 Route::middleware('guest')->group(function () {
