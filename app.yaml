@@ -12,3 +12,12 @@ volumes:
     mount: /uploads
 env:
   PUBLIC_DISK_ROOT: /uploads
+  APP_KEY: "base64:YwahSL5OXa/lYbJa78x2oYmOCdmq9WUXlicjqPdpOYU="
+  APP_ENV: production
+  APP_DEBUG: "false"
+  APP_URL: "https://tms.wasmer.app"
+  DB_CONNECTION: mysql
+  SESSION_DRIVER: database
+  CACHE_STORE: database
+  QUEUE_CONNECTION: database
+  LOG_CHANNEL: stderr
