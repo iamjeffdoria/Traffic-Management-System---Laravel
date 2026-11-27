@@ -11,7 +11,25 @@ class Tanod extends Model
 
     protected $table = 'tanods';
 
-    public const BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+    public const BLOOD_TYPES = ['A', 'A+', 'A-', 'B', 'B+', 'B-', 'AB', 'AB+', 'AB-', 'O', 'O+', 'O-'];
+
+    public const HEIGHT_UNITS = [
+        'cm' => 'cm',
+        'm' => 'm',
+        'mm' => 'mm',
+        'in' => 'in',
+        'ft' => 'ft',
+        'ft_in' => 'ft + in',
+        'yd' => 'yd',
+    ];
+
+    public const WEIGHT_UNITS = [
+        'kg' => 'kg',
+        'g' => 'g',
+        'lb' => 'lb',
+        'oz' => 'oz',
+        'st' => 'st',
+    ];
 
     protected $fillable = [
         'id_number',

@@ -8,11 +8,33 @@ use App\Models\TanodId;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use ZipArchive;
 use Illuminate\Http\Request;
 
 class TanodController extends Controller
 {
+    private const HEIGHT_TO_CM = ['cm' => 1, 'mm' => 0.1, 'm' => 100, 'in' => 2.54, 'ft' => 30.48, 'yd' => 91.44];
+
+    private const HEIGHT_ALIASES = [
+        'cm' => 'cm', 'cms' => 'cm', 'centimeter' => 'cm', 'centimeters' => 'cm', 'centimetre' => 'cm', 'centimetres' => 'cm',
+        'mm' => 'mm', 'millimeter' => 'mm', 'millimeters' => 'mm', 'millimetre' => 'mm', 'millimetres' => 'mm',
+        'm' => 'm', 'meter' => 'm', 'meters' => 'm', 'metre' => 'm', 'metres' => 'm',
+        'in' => 'in', 'inch' => 'in', 'inches' => 'in', '"' => 'in',
+        'ft' => 'ft', 'foot' => 'ft', 'feet' => 'ft', "'" => 'ft',
+        'yd' => 'yd', 'yds' => 'yd', 'yard' => 'yd', 'yards' => 'yd',
+    ];
+
+    private const WEIGHT_TO_KG = ['kg' => 1, 'g' => 0.001, 'lb' => 0.45359237, 'oz' => 0.028349523125, 'st' => 6.35029318];
+
+    private const WEIGHT_ALIASES = [
+        'kg' => 'kg', 'kgs' => 'kg', 'kilo' => 'kg', 'kilos' => 'kg', 'kilogram' => 'kg', 'kilograms' => 'kg',
+        'g' => 'g', 'gm' => 'g', 'gms' => 'g', 'gram' => 'g', 'grams' => 'g',
+        'lb' => 'lb', 'lbs' => 'lb', 'pound' => 'lb', 'pounds' => 'lb',
+        'oz' => 'oz', 'ounce' => 'oz', 'ounces' => 'oz',
+        'st' => 'st', 'stone' => 'st', 'stones' => 'st',
+    ];
+
     public function index(Request $request)
     {
         $tanods = Tanod::query()
@@ -256,6 +278,8 @@ return redirect()->route('tanod.id')->with('success', 'Tanod ID added successful
 
     public function store(Request $request)
     {
+        $this->normalizeMeasurements($request);
+
         $validated = $request->validate([
             'id_number' => 'required|string|max:255|unique:tanods,id_number',
             'full_name' => 'required|string|max:255',
@@ -282,9 +306,20 @@ return redirect()->route('tanod.id')->with('success', 'Tanod ID added successful
 
     public function update(Request $request, Tanod $tanod)
     {
+        // The Tanod ID record linked to this tanod (matched by ID number).
+        $linkedId = TanodId::where('id_number', $tanod->id_number)->first();
+
+        $this->normalizeMeasurements($request);
+
         // Named error bag so a failed update doesn't reopen the "Add" modal.
         $validated = $request->validateWithBag('tanodUpdate', [
-            'id_number' => 'required|string|max:255|unique:tanods,id_number,' . $tanod->id,
+            'id_number' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:tanods,id_number,' . $tanod->id,
+                Rule::unique('tanod_ids', 'id_number')->ignore($linkedId?->id),
+            ],
             'full_name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'barangay' => 'required|string|max:255',
@@ -304,7 +339,119 @@ return redirect()->route('tanod.id')->with('success', 'Tanod ID added successful
 
         $tanod->update($validated);
 
+        // One-way sync: Tanod List -> Tanod ID. (Editing a Tanod ID never touches the list.)
+        if ($linkedId) {
+            $linkedId->update([
+                'id_number' => $validated['id_number'],
+                'full_name' => $validated['full_name'],
+                'address' => $validated['home_address'],
+                'date_of_birth' => $validated['date_of_birth'],
+                'emergency_contact_name' => $validated['emergency_contact_name'],
+                'emergency_contact_address' => $validated['emergency_contact_address'],
+                'emergency_contact_number' => $validated['emergency_contact_number'],
+                'emergency_contact_relationship' => $validated['emergency_contact_relationship'],
+            ]);
+        }
+
         return redirect()->route('tanod.list')->with('success', 'Tanod updated successfully.');
+    }
+
+    /**
+     * Converts the submitted height/weight (in whatever unit was picked)
+     * into cm / kg, which is what the database stores.
+     */
+    protected function normalizeMeasurements(Request $request): void
+    {
+        // Reset the units so a redisplayed form matches the converted values.
+        $merge = ['height_unit' => 'cm', 'weight_unit' => 'kg', 'height_inches' => null];
+
+        // Height
+        $heightUnit = (string) $request->input('height_unit', 'cm');
+        if (!isset(Tanod::HEIGHT_UNITS[$heightUnit])) {
+            $heightUnit = 'cm';
+        }
+        $isFtIn = $heightUnit === 'ft_in';
+
+        $main = $this->parseMeasurement($request->input('height'), $isFtIn ? 'ft' : $heightUnit, self::HEIGHT_ALIASES, self::HEIGHT_TO_CM);
+        $extra = $isFtIn
+            ? $this->parseMeasurement($request->input('height_inches'), 'in', self::HEIGHT_ALIASES, self::HEIGHT_TO_CM)
+            : null;
+
+        // false = unreadable text; leave it as typed so validation reports it.
+        if ($main !== false && $extra !== false && ($main !== null || $extra !== null)) {
+            $merge['height'] = round(($main ?? 0) + ($extra ?? 0), 2);
+        }
+
+        // Weight
+        $weightUnit = (string) $request->input('weight_unit', 'kg');
+        if (!isset(Tanod::WEIGHT_UNITS[$weightUnit])) {
+            $weightUnit = 'kg';
+        }
+
+        $weight = $this->parseMeasurement($request->input('weight'), $weightUnit, self::WEIGHT_ALIASES, self::WEIGHT_TO_KG);
+
+        if ($weight !== false && $weight !== null) {
+            $merge['weight'] = round($weight, 2);
+        }
+
+        $request->merge($merge);
+    }
+
+    /**
+     * Reads text like 170, 5'7", 5 ft 7 in, 12 st 4 lb and returns the total
+     * in the base unit (cm / kg). Returns null when empty, false when unreadable.
+     * A number with no unit uses $defaultUnit (or inches after feet, pounds after stone).
+     */
+    protected function parseMeasurement($raw, string $defaultUnit, array $aliases, array $factors): float|null|false
+    {
+        if ($raw === null || trim((string) $raw) === '') {
+            return null;
+        }
+
+        $text = strtolower(trim((string) $raw));
+        $text = str_replace(['′', '’', '‘', '`', '´'], "'", $text);
+        $text = str_replace(['″', '”', '“'], '"', $text);
+        $text = str_replace("''", '"', $text);
+
+        $pattern = '/(\d+(?:\.\d+)?|\.\d+)\s*([a-z]+|["\'])?\.?/';
+
+        if (!preg_match_all($pattern, $text, $matches, PREG_SET_ORDER)) {
+            return false;
+        }
+
+        // Anything left over (letters, minus signs...) means we can't trust it.
+        $leftover = preg_replace($pattern, '', $text);
+        $leftover = trim(str_replace(['and', ',', '&'], ' ', $leftover));
+        if ($leftover !== '') {
+            return false;
+        }
+
+        $total = 0.0;
+        $previous = null;
+
+        foreach ($matches as $match) {
+            $number = (float) $match[1];
+            $token = $match[2] ?? '';
+
+            if ($token === '') {
+                $unit = match ($previous) {
+                    'ft' => 'in',
+                    'st' => 'lb',
+                    default => $defaultUnit,
+                };
+            } else {
+                $unit = $aliases[$token] ?? null;
+            }
+
+            if ($unit === null || !isset($factors[$unit])) {
+                return false;
+            }
+
+            $total += $number * $factors[$unit];
+            $previous = $unit;
+        }
+
+        return $total;
     }
 
     public function destroy(Tanod $tanod)

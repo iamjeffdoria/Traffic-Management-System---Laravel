@@ -68,15 +68,33 @@
                     class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
             </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Height (cm) <span class="text-gray-400 font-normal">(optional)</span></label>
-                <input type="number" step="0.01" min="0" name="height"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            <div data-measure="height">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Height <span class="text-gray-400 font-normal">(optional)</span></label>
+                <div class="flex gap-2">
+                    <input type="text" inputmode="decimal" autocomplete="off" name="height" placeholder="e.g. 170 or 5'7&quot;" data-measure-main
+                        class="w-full min-w-0 rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <input type="text" inputmode="decimal" autocomplete="off" name="height_inches" placeholder="in" data-measure-inches
+                        class="hidden w-20 shrink-0 rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <select name="height_unit" data-measure-unit data-prev="cm"
+                        class="shrink-0 rounded-lg border border-gray-300 px-2 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        @foreach (\App\Models\Tanod::HEIGHT_UNITS as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Weight (kg) <span class="text-gray-400 font-normal">(optional)</span></label>
-                <input type="number" step="0.01" min="0" name="weight"
-                    class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+            <div data-measure="weight">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Weight <span class="text-gray-400 font-normal">(optional)</span></label>
+                <div class="flex gap-2">
+                    <input type="text" inputmode="decimal" autocomplete="off" name="weight" placeholder="e.g. 65 or 143 lbs" data-measure-main
+                        class="w-full min-w-0 rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <select name="weight_unit" data-measure-unit data-prev="kg"
+                        class="shrink-0 rounded-lg border border-gray-300 px-2 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600">
+                        @foreach (\App\Models\Tanod::WEIGHT_UNITS as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div>

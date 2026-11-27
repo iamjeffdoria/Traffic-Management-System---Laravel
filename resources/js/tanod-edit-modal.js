@@ -17,6 +17,9 @@ function openTanodEditModal(tanod) {
         if (input) input.value = tanod[name] ?? '';
     });
 
+    // Stored values are cm / kg, so show them in those units.
+    if (typeof resetTanodMeasureUnits === 'function') resetTanodMeasureUnits(form);
+
     openModal('edit-tanod-modal');
 }
 
