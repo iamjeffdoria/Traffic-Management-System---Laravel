@@ -1,0 +1,14 @@
+kind: wasmer.io/App.v0
+name: tms
+owner: iamjeffdoria
+package: .
+capabilities:
+  database:
+    engine: mysql
+scaling:
+  mode: single_concurrency
+volumes:
+  - name: uploads
+    mount: /uploads
+env:
+  PUBLIC_DISK_ROOT: /uploads
